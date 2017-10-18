@@ -6,7 +6,7 @@ public class TestInsert {
 		// TODO Auto-generated method stub
 		DatenbankVerbindung db = new DatenbankVerbindung();
 				
-		Benutzer b = new Benutzer(1, "vorname", "nachname", "email123", "password", "strasse", "hausnummer", 12345, "Stadt", "Herr");
+		Benutzer b = new Benutzer(1, "vorname", "nachname", "email@test.com", "password", "strasse", "hausnummer", "12345", "Stadt", "Herr");
 		
 		b = db.CreateBenutzerInDB(b);
 		

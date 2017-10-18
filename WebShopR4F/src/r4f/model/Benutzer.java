@@ -19,7 +19,7 @@ public class Benutzer {
 	private String password;
 	private String strasse;
 	private String hausnummer;
-	private int postleitzahl;
+	private String postleitzahl;
 	private String stadt;
 	private String anrede;
 
@@ -47,17 +47,17 @@ public class Benutzer {
 	 *            the anrede to set
 	 */
 	public Benutzer(int id, String vorname, String nachname, String email, String password, String strasse,
-			String hausnummer, int postleitzahl, String stadt, String anrede) {
-		this.id=id;
-		this.vorname=vorname;
-		this.nachname=nachname;
-		this.email=email;
-		this.password=password;
-		this.strasse=strasse;
-		this.hausnummer=hausnummer;
-		this.postleitzahl=postleitzahl;
-		this.stadt=stadt;
-		this.anrede=anrede;
+			String hausnummer, String postleitzahl, String stadt, String anrede) {
+		this.id = id;
+		this.vorname = vorname;
+		this.nachname = nachname;
+		setEmail(email);
+		this.password = password;
+		this.strasse = strasse;
+		this.hausnummer = hausnummer;
+		setPostleitzahl(postleitzahl);
+		this.stadt = stadt;
+		setAnrede(anrede);
 	}
 
 	/**
@@ -87,7 +87,12 @@ public class Benutzer {
 	 *            the email to set
 	 */
 	public void setEmail(String email) {
-		this.email = email;
+		if (checkEmail(email)) {
+			this.email = email;
+		} else {
+			this.email = null;
+		}
+
 	}
 
 	/**
@@ -168,7 +173,7 @@ public class Benutzer {
 	/**
 	 * @return the postleitzahl
 	 */
-	public int getPostleitzahl() {
+	public String getPostleitzahl() {
 		return postleitzahl;
 	}
 
@@ -176,8 +181,13 @@ public class Benutzer {
 	 * @param postleitzahl
 	 *            the postleitzahl to set
 	 */
-	public void setPostleitzahl(int postleitzahl) {
-		this.postleitzahl = postleitzahl;
+	public void setPostleitzahl(String postleitzahl) {
+		if (checkPostleitzahl(postleitzahl)) {
+			this.postleitzahl = postleitzahl;
+		} else {
+			this.postleitzahl = null;
+		}
+
 	}
 
 	/**
@@ -192,7 +202,12 @@ public class Benutzer {
 	 *            the anrede to set
 	 */
 	public void setAnrede(String anrede) {
-		this.anrede = anrede;
+		if (checkAnrede(anrede)) {
+			this.anrede = anrede;
+		} else {
+			this.anrede = null;
+		}
+
 	}
 
 	/**
@@ -223,6 +238,50 @@ public class Benutzer {
 	 */
 	public void setNachname(String nachname) {
 		this.nachname = nachname;
+	}
+
+	/**
+	 * 
+	 * @param email
+	 *            possible email that should be checked
+	 * @return returns true when the email matches the pattern returns false
+	 *         when the email does not match the pattern
+	 */
+	public boolean checkEmail(String email) {
+		if (email.matches("[\\w|-]+@\\w[\\w|-]*\\.[a-z]{2,3}")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * 
+	 * @param anrede
+	 *            Anrede String that should be checked
+	 * @return return true when the String anrede is either Herr or Frau return
+	 *         false when not
+	 */
+	public boolean checkAnrede(String anrede) {
+		if (anrede.equals("Herr") || anrede.equals("Frau")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * 
+	 * @param postleitzahl
+	 *            postleitzahl String that should be check
+	 * @return returns true when the String postleizahl only contains 5 digits
+	 */
+	public boolean checkPostleitzahl(String postleitzahl) {
+		if (postleitzahl.matches("\\d{5}")) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

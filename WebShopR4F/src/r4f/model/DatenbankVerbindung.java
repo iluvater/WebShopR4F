@@ -89,7 +89,7 @@ public class DatenbankVerbindung {
 				preparedStatement.setString(5, benutzer.getPassword());
 				preparedStatement.setString(6, benutzer.getStrasse());
 				preparedStatement.setString(7, benutzer.getHausnummer());
-				preparedStatement.setInt(8, benutzer.getPostleitzahl());
+				preparedStatement.setString(8, benutzer.getPostleitzahl());
 				preparedStatement.setString(9, benutzer.getStadt());
 				preparedStatement.setString(10, benutzer.getAnrede());
 
@@ -133,7 +133,7 @@ public class DatenbankVerbindung {
 		          String password = result.getString("password");
 		          String strasse = result.getString("strasse");
 		          String hausnummer = result.getString("hausnummer");
-		          int postleitzahl = result.getInt("postleitzahl");
+		          String postleitzahl = result.getString("postleitzahl");
 		          String stadt = result.getString("stadt");
 		          String anrede = result.getString("anrede");
 		          benutzer = new Benutzer(id, vorname, nachname, email, password, strasse, hausnummer, postleitzahl, stadt, anrede);
