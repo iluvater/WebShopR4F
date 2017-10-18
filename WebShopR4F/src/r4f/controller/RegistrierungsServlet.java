@@ -3,6 +3,7 @@ package r4f.controller;
 import java.io.IOException;
 import java.sql.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,6 +49,7 @@ public class RegistrierungsServlet extends HttpServlet {
 		Date geburtstdatum;
 		Benutzer benutzer;
 		RegistrierungsService registrierungsService;
+		RequestDispatcher dispatcher;
 
 		// Getting all data
 		vorname = request.getParameter("vorname");
@@ -68,6 +70,7 @@ public class RegistrierungsServlet extends HttpServlet {
 				|| stadt.equals("") || stadt == null || geburtstdatum_string.equals("") || geburtstdatum_string == null
 				|| anrede.equals("") || anrede == null) {
 			// errorhandling missing input...
+			return;
 		} else {
 			// check mail for format
 			if (Benutzer.checkEmail(email)) {
@@ -79,35 +82,43 @@ public class RegistrierungsServlet extends HttpServlet {
 						registrierungsService = new RegistrierungsService();
 						if (!registrierungsService.checkEmailExists(email)) {
 							//check date format
-							if(geburtstdatum_string.matches("\\d{2}.\\d{2}.\\d{4}")){
-								geburtstdatum = new Date(Integer.parseInt(geburtstdatum_string.substring(6, 9)),
-										Integer.parseInt(geburtstdatum_string.substring(3, 4)),
-										Integer.parseInt(geburtstdatum_string.substring(0, 1)));
+							if(geburtstdatum_string.matches("\\d{4}-\\d{2}-\\d{2}")){
+								geburtstdatum = new Date(Integer.parseInt(geburtstdatum_string.substring(0, 3)),
+										Integer.parseInt(geburtstdatum_string.substring(5, 6)),
+										Integer.parseInt(geburtstdatum_string.substring(8, 9)));
 
 								benutzer = new Benutzer(vorname, nachname, email, geburtstdatum, password, strasse,
 										hausnummer, postleitzahl, stadt, anrede);
 								
 								benutzer = registrierungsService.createBenutzerInDB(benutzer);
 								if(benutzer != null){
-									//Registraion was succesfull inform user
+									dispatcher = request.getRequestDispatcher("Willkommen.jsp");
+									dispatcher.forward(request, response);
+									return;
 								}else{
 									//Errorhandling something went wrong during registration
+									return;
 								}								
 							}else{
 								//errorhandling wrong date format
+								return;
 							}							
 						}else{
 							//errorhandling already user with this email
+							return;
 						}
 
 					} else {
 						// errorhandling wrong anrede
+						return;
 					}
 				} else {
 					// errorhandling wrong plz
+					return;
 				}
 			} else {
 				// errorhandling wrong mail
+				return;
 			}
 		}
 

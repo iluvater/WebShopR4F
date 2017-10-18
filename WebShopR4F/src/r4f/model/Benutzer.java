@@ -1,12 +1,11 @@
-/**
- *  Class that represents a user that is registred to the webshop.
- */
 package r4f.model;
 
 import java.sql.Date;
 
 /**
+ * Class that represents a user that is registred to the webshop.
  * @author Ture
+ *
  *
  */
 public class Benutzer {
@@ -288,7 +287,7 @@ public class Benutzer {
 	 *         when the email does not match the pattern
 	 */
 	public static boolean checkEmail(String email) {
-		if (email.matches("[\\w|-]+@\\w[\\w|-]*\\.[a-z]{2,3}")) {
+		if (email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
 			return true;
 		} else {
 			return false;
