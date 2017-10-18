@@ -4,6 +4,7 @@
 package r4f.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -71,7 +72,7 @@ public class DatenbankVerbindung {
 	 * @return Benutzer that is a parameter but the ID is filled. If benutzer is null
 	 *         Benutzer was not created in DB
 	 */
-	public Benutzer CreateBenutzerInDB(Benutzer benutzer) {
+	public void CreateBenutzerInDB(Benutzer benutzer) {
 
 		conn = getInstance();
 
@@ -101,8 +102,6 @@ public class DatenbankVerbindung {
 				e.printStackTrace();
 			}
 		}
-
-		return benutzer;
 	}
 	
 	/**
@@ -130,13 +129,14 @@ public class DatenbankVerbindung {
 		          int id = result.getInt("id"); 
 		          String vorname = result.getString("vorname");
 		          String nachname = result.getString("nachname");
+		          Date geburtstdatum = result.getDate("geburtstdatum");
 		          String password = result.getString("password");
 		          String strasse = result.getString("strasse");
 		          String hausnummer = result.getString("hausnummer");
 		          String postleitzahl = result.getString("postleitzahl");
 		          String stadt = result.getString("stadt");
 		          String anrede = result.getString("anrede");
-		          benutzer = new Benutzer(id, vorname, nachname, email, password, strasse, hausnummer, postleitzahl, stadt, anrede);
+		          benutzer = new Benutzer(id, vorname, nachname, email, geburtstdatum, password, strasse, hausnummer, postleitzahl, stadt, anrede);
 		        }
 		      } catch (SQLException e) {
 		        e.printStackTrace();

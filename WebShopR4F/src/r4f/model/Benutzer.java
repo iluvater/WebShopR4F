@@ -3,7 +3,7 @@
  */
 package r4f.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * @author Ture
@@ -24,6 +24,7 @@ public class Benutzer {
 	private String anrede;
 
 	/**
+	 * Constructor that should be used when the id is known
 	 * 
 	 * @param id
 	 *            the id to set
@@ -33,6 +34,8 @@ public class Benutzer {
 	 *            the nachname to set
 	 * @param email
 	 *            the email to set
+	 * @param geburtstdatum
+	 *            the geburtstdatum to set
 	 * @param password
 	 *            the password to set
 	 * @param strasse
@@ -46,9 +49,46 @@ public class Benutzer {
 	 * @param anrede
 	 *            the anrede to set
 	 */
-	public Benutzer(int id, String vorname, String nachname, String email, String password, String strasse,
-			String hausnummer, String postleitzahl, String stadt, String anrede) {
+	public Benutzer(int id, String vorname, String nachname, String email, Date geburtstdatum, String password,
+			String strasse, String hausnummer, String postleitzahl, String stadt, String anrede) {
 		this.id = id;
+		this.vorname = vorname;
+		this.nachname = nachname;
+		setEmail(email);
+		this.password = password;
+		this.strasse = strasse;
+		this.hausnummer = hausnummer;
+		setPostleitzahl(postleitzahl);
+		this.stadt = stadt;
+		setAnrede(anrede);
+	}
+
+	/**
+	 * Constructor that should be used when id is not created from db
+	 * 
+	 * @param vorname
+	 *            the vorname to set
+	 * @param nachname
+	 *            the nachname to set
+	 * @param email
+	 *            the email to set
+	 * @param geburtstdatum
+	 *            the geburtstdatum to set
+	 * @param password
+	 *            the password to set
+	 * @param strasse
+	 *            the strasse to set
+	 * @param hausnummer
+	 *            the hausnummer to set
+	 * @param postleitzahl
+	 *            the postleitzahl to set
+	 * @param stadt
+	 *            the stadt to set
+	 * @param anrede
+	 *            the anrede to set
+	 */
+	public Benutzer(String vorname, String nachname, String email, Date geburtstdatum, String password, String strasse,
+			String hausnummer, String postleitzahl, String stadt, String anrede) {
 		this.vorname = vorname;
 		this.nachname = nachname;
 		setEmail(email);
@@ -247,7 +287,7 @@ public class Benutzer {
 	 * @return returns true when the email matches the pattern returns false
 	 *         when the email does not match the pattern
 	 */
-	public boolean checkEmail(String email) {
+	public static boolean checkEmail(String email) {
 		if (email.matches("[\\w|-]+@\\w[\\w|-]*\\.[a-z]{2,3}")) {
 			return true;
 		} else {
@@ -262,7 +302,7 @@ public class Benutzer {
 	 * @return return true when the String anrede is either Herr or Frau return
 	 *         false when not
 	 */
-	public boolean checkAnrede(String anrede) {
+	public static boolean checkAnrede(String anrede) {
 		if (anrede.equals("Herr") || anrede.equals("Frau")) {
 			return true;
 		} else {
@@ -276,7 +316,7 @@ public class Benutzer {
 	 *            postleitzahl String that should be check
 	 * @return returns true when the String postleizahl only contains 5 digits
 	 */
-	public boolean checkPostleitzahl(String postleitzahl) {
+	public static boolean checkPostleitzahl(String postleitzahl) {
 		if (postleitzahl.matches("\\d{5}")) {
 			return true;
 		} else {
