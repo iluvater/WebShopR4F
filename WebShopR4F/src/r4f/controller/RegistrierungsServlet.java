@@ -1,7 +1,7 @@
 package r4f.controller;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +15,7 @@ import r4f.model.Benutzer;
 /**
  * Servlet implementation class RegistrierungsServlet
  */
-@WebServlet("/RegistrierungsServlet")
+@WebServlet("./RegistrierungsServlet")
 public class RegistrierungsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -40,6 +40,7 @@ public class RegistrierungsServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	//@SuppressWarnings("deprecation")
 	@SuppressWarnings("deprecation")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -50,6 +51,7 @@ public class RegistrierungsServlet extends HttpServlet {
 		Benutzer benutzer;
 		RegistrierungsService registrierungsService;
 		RequestDispatcher dispatcher;
+		
 
 		// Getting all data
 		vorname = request.getParameter("vorname");
@@ -70,6 +72,8 @@ public class RegistrierungsServlet extends HttpServlet {
 				|| stadt.equals("") || stadt == null || geburtstdatum_string.equals("") || geburtstdatum_string == null
 				|| anrede.equals("") || anrede == null) {
 			// errorhandling missing input...
+			dispatcher = request.getRequestDispatcher("Error.jsp");
+			dispatcher.forward(request, response);
 			return;
 		} else {
 			// check mail for format
@@ -86,6 +90,8 @@ public class RegistrierungsServlet extends HttpServlet {
 								geburtstdatum = new Date(Integer.parseInt(geburtstdatum_string.substring(0, 3)),
 										Integer.parseInt(geburtstdatum_string.substring(5, 6)),
 										Integer.parseInt(geburtstdatum_string.substring(8, 9)));
+								
+								
 
 								benutzer = new Benutzer(vorname, nachname, email, geburtstdatum, password, strasse,
 										hausnummer, postleitzahl, stadt, anrede);
@@ -100,7 +106,7 @@ public class RegistrierungsServlet extends HttpServlet {
 									return;
 								}								
 							}else{
-								//errorhandling wrong date format
+								//errorhandling wrong date format								
 								return;
 							}							
 						}else{

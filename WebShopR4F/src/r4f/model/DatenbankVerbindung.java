@@ -86,7 +86,7 @@ public class DatenbankVerbindung {
 				preparedStatement.setString(1, benutzer.getEmail());
 				preparedStatement.setString(2, benutzer.getVorname());
 				preparedStatement.setString(3, benutzer.getNachname());
-				preparedStatement.setString(4, "2017-07-01");
+				preparedStatement.setDate(4, benutzer.getGeburtstdatum());
 				preparedStatement.setString(5, benutzer.getPassword());
 				preparedStatement.setString(6, benutzer.getStrasse());
 				preparedStatement.setString(7, benutzer.getHausnummer());

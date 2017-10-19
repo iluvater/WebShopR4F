@@ -7,6 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%-- 	<%
+	String error = (String) session.getAttribute("error");
+	if(error!=null){
+		out.println(error);
+		session.removeAttribute("error");
+	}
+	%> --%>
 	<form action="./RegistrierungsServlet" method="post">
 		<table>
 			<tr>

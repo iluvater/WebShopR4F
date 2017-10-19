@@ -1,6 +1,6 @@
 package r4f.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Class that represents a user that is registred to the webshop.
