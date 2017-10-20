@@ -11,10 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
 import com.mysql.jdbc.Driver;
-
-
 
 /**
  * @author Ture
@@ -68,18 +65,19 @@ public class DatenbankVerbindung {
 	}
 
 	/**
+	 * This method creates a new Benutzer in the database
 	 * 
 	 * @param benutzer
 	 *            Benutzer that should be created in DB
-	 * @return Benutzer that is a parameter but the ID is filled. If benutzer is null
-	 *         Benutzer was not created in DB
+	 * @return Benutzer that is a parameter but the ID is filled. If benutzer is
+	 *         null Benutzer was not created in DB
 	 */
 	public void CreateBenutzerInDB(Benutzer benutzer) {
 
 		conn = getInstance();
 
-		if (conn!=null) {
-			
+		if (conn != null) {
+
 			try {
 
 				PreparedStatement preparedStatement = conn.prepareStatement(
@@ -98,7 +96,82 @@ public class DatenbankVerbindung {
 
 				preparedStatement.executeUpdate();
 
-				benutzer = getBenutzer(benutzer.getEmail());
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * This method select a Benutzer from the database selected by the email
+	 * @param email
+	 *            Email of the user that should be get from the database.
+	 * @return the user with all Attributes that are stored in the database
+	 */
+	public Benutzer getBenutzer(String email) {
+		Benutzer benutzer = null;
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			Statement query;
+			try {
+				query = conn.createStatement();
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT * FROM benutzer WHERE email='" + email + "'";
+				ResultSet result = query.executeQuery(sql);
+
+				// Ergebnissätze durchfahren.
+				while (result.next()) {
+					int id = result.getInt("id");
+					String vorname = result.getString("vorname");
+					String nachname = result.getString("nachname");
+					Date geburtstdatum = result.getDate("geburtstdatum");
+					String password = result.getString("password");
+					String strasse = result.getString("strasse");
+					String hausnummer = result.getString("hausnummer");
+					String postleitzahl = result.getString("postleitzahl");
+					String stadt = result.getString("stadt");
+					String anrede = result.getString("anrede");
+					benutzer = new Benutzer(id, vorname, nachname, email, geburtstdatum, password, strasse, hausnummer,
+							postleitzahl, stadt, anrede);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return benutzer;
+	}
+
+	/**
+	 * This method creates a new article in the database
+	 * @param artikel the article that should be created
+	 */
+	public void createArtikelInDB(Artikel artikel) {
+		conn = getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement preparedStatement = conn.prepareStatement(
+						"INSERT INTO `Artikel` (`id`, `bezeichung`, `beschreibung`, `groesse`, `preis`, `hersteller`, `farbe`, `erfassungsdatum`, `kategorie`) "
+						+ "VALUES (NULL, ?, ?, ?, ?, ?, ?, null, ?)");
+				 preparedStatement.setString(1, artikel.getBezeichnung());
+				 preparedStatement.setString(2, artikel.getBeschreibung());
+				 preparedStatement.setInt(3, artikel.getGroesse());
+				 preparedStatement.setDouble(4, artikel.getPreis());
+				 preparedStatement.setString(5, artikel.getHersteller());
+				 preparedStatement.setString(6, artikel.getFarbe());
+				 preparedStatement.setString(7, artikel.getKategorie());
+				
+				 preparedStatement.executeUpdate();		
+				 
+				
+				 
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -106,46 +179,8 @@ public class DatenbankVerbindung {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param email Email of the user that should be get from the database.
-	 * @return the user with all Attributes that are stored in the database
-	 */
-	public Benutzer getBenutzer(String email) {
-		Benutzer benutzer = null;
-		  conn = getInstance();
-		  
-		  if(conn != null)
-		    {
-		      // Anfrage-Statement erzeugen.
-		      Statement query;
-		      try {
-		        query = conn.createStatement();
-		 
-		        // Ergebnistabelle erzeugen und abholen.
-		        String sql = "SELECT * FROM benutzer WHERE email='" + email + "'";
-		        ResultSet result = query.executeQuery(sql);
-		 
-		        // Ergebnissätze durchfahren.
-		        while (result.next()) {
-		          int id = result.getInt("id"); 
-		          String vorname = result.getString("vorname");
-		          String nachname = result.getString("nachname");
-		          Date geburtstdatum = result.getDate("geburtstdatum");
-		          String password = result.getString("password");
-		          String strasse = result.getString("strasse");
-		          String hausnummer = result.getString("hausnummer");
-		          String postleitzahl = result.getString("postleitzahl");
-		          String stadt = result.getString("stadt");
-		          String anrede = result.getString("anrede");
-		          benutzer = new Benutzer(id, vorname, nachname, email, geburtstdatum, password, strasse, hausnummer, postleitzahl, stadt, anrede);
-		        }
-		      } catch (SQLException e) {
-		        e.printStackTrace();
-		      }
-		    }
-		  
-		  return benutzer;
+	public Artikel getArtikel(){
+		return null;
 	}
 
 }
