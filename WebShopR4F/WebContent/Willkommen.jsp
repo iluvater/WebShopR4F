@@ -8,5 +8,4 @@
 </head>
 <body>
 Registrierung war erflogreich.
-</body>
 </html>

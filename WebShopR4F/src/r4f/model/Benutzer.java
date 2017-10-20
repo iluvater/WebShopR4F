@@ -53,6 +53,7 @@ public class Benutzer {
 		this.id = id;
 		this.vorname = vorname;
 		this.nachname = nachname;
+		this.geburtstdatum=geburtstdatum;
 		setEmail(email);
 		this.password = password;
 		this.strasse = strasse;
@@ -91,6 +92,7 @@ public class Benutzer {
 		this.vorname = vorname;
 		this.nachname = nachname;
 		setEmail(email);
+		this.geburtstdatum=geburtstdatum;
 		this.password = password;
 		this.strasse = strasse;
 		this.hausnummer = hausnummer;

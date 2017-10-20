@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
+
+
 <!DOCTYPE html >
 <html>
 <head>
@@ -7,13 +10,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%-- 	<%
-	String error = (String) session.getAttribute("error");
-	if(error!=null){
-		out.println(error);
-		session.removeAttribute("error");
-	}
-	%> --%>
+	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
+	</jsp:useBean> 
+	
 	<form action="./RegistrierungsServlet" method="post">
 		<table>
 			<tr>
@@ -60,5 +59,8 @@
 		</table>
 		<br> <input type="submit" value="Registrieren" class="button">
 	</form>
+	<%if(error.getErrorMessage()!=null){ %>
+	<jsp:getProperty property="errorMessage" name="error"/>
+	<%} %>
 </body>
 </html>
