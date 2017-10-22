@@ -17,46 +17,46 @@ public class ErrorMessage {
 		this.setErrorCode(errorCode);
 		switch (errorCode) {
 		case 100:
-			this.errorMessage= "Bitte Geben Sie Ihren Vornamen ein.";
+			this.errorMessage= "Bitte geben Sie ihren Vornamen ein.";
 			break;
 		case 101:
-			this.errorMessage= "Es ist etwas während der Registrierung schiefgegangen. Bitte Versuchen Sie es erneut";
+			this.errorMessage= "Während der Registrierung ist ein Fehler aufgetreten. Bitte Versuchen Sie es erneut";
 			break;
 		case 102:
 			this.errorMessage= "Bitte Geben Sie das Datum im richtigen Format DD.MM.JJJJ oder JJJJ-MM-DD ein.";
 			break;
 		case 103:
-			this.errorMessage= "Diese Email ist bereits registriert. Melden Sie Sie an.";
+			this.errorMessage= "Diese E-Mail ist bereits registriert. Melden Sie sich an.";
 			break;
 		case 104:
-			this.errorMessage= "Bitte Wählen Sie eine gültige Anrede aus.";
+			this.errorMessage= "Bitte wählen Sie eine gültige Anrede aus.";
 			break;
 		case 105:
-			this.errorMessage= "Bitte Geben Sie eine gültige Postleitzahl ein.";
+			this.errorMessage= "Bitte geben Sie eine gültige Postleitzahl ein.";
 			break;
 		case 106:
-			this.errorMessage= "Bitte Geben Sie ein gültige Email ein.";
+			this.errorMessage= "Bitte geben Sie ein gültige Email ein.";
 			break;
 		case 107:
-			this.errorMessage= "Bitte Geben Sie ihren Nachnamen ein.";
+			this.errorMessage= "Bitte geben Sie ihren Nachnamen ein.";
 			break;
 		case 108:
-			this.errorMessage= "Bitte Geben Sie ihre Email ein.";
+			this.errorMessage= "Bitte geben Sie ihre Email ein.";
 			break;
 		case 109:
-			this.errorMessage= "Bitte Geben Sie ein Passwort ein.";
+			this.errorMessage= "Bitte geben Sie ein Passwort ein.";
 			break;
 		case 110:
-			this.errorMessage= "Bitte Geben Sie eine Straße ein.";
+			this.errorMessage= "Bitte geben Sie eine Straße ein.";
 			break;
 		case 111:
-			this.errorMessage= "Bitte Geben Sie eine Hausnummer ein.";
+			this.errorMessage= "Bitte geben Sie eine Hausnummer ein.";
 			break;
 		case 112:
-			this.errorMessage= "Bitte Geben Sie einen Ort ein.";
+			this.errorMessage= "Bitte geben Sie einen Ort ein.";
 			break;
 		case 113:
-			this.errorMessage= "Bitte Geben Sie ihr Geburtsdatum ein.";
+			this.errorMessage= "Bitte geben Sie ihr Geburtsdatum ein.";
 			break;
 		default:
 			this.errorMessage= "Unbekannter Fehler.";
