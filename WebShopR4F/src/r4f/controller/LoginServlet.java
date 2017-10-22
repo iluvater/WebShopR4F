@@ -67,7 +67,7 @@ public class LoginServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 			return;
 		}else{
-			ErrorMessage errorMessage = new ErrorMessage(101, "Falsches Password oder Emailaddresse");
+			ErrorMessage errorMessage = new ErrorMessage(114);
 			request.setAttribute("error", errorMessage);
 			dispatcher = request.getRequestDispatcher(errorURL);
 			dispatcher.forward(request, response);
