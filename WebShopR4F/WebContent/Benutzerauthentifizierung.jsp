@@ -8,7 +8,7 @@
 <link href="Design.css" rel="stylesheet">
 </head>
 <body>
-	<h2>Dein Konto für alles von Run 4 Fun</h2>
+	<!--  <h2>Dein Konto für alles von Run 4 Fun</h2>-->
 	<div id="seitenbereich">
 		<div class="inhalt_farbe_div">
 			<h4>Log-In Daten</h4>			
