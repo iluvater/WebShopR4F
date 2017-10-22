@@ -62,8 +62,8 @@ public class RegistrierungsServlet extends HttpServlet {
 		strasse = request.getParameter("strasse");
 		hausnummer = request.getParameter("hausnummer");
 		postleitzahl = request.getParameter("postleitzahl");
-		stadt = request.getParameter("stadt");
-		geburtstdatum_string = request.getParameter("geburtstdatum");
+		stadt = request.getParameter("stadt"); 
+		geburtstdatum_string = request.getParameter("geburtsdatum");
 		anrede = request.getParameter("anrede");
 
 		// check whether all input parameters are filled or not
