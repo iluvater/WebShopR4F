@@ -53,17 +53,26 @@ public class ArtikelErfassungsServlet extends HttpServlet {
 		String kategorie;
 		Artikel artikel;
 		RequestDispatcher dispatcher;
-		String errorURL="Error.jsp";
-		String successURL="Willkommen.jsp";
+		String errorURL = "Error.jsp";
+		String successURL = "Willkommen.jsp";
 
 		bezeichnung = request.getParameter("bezeichnung");
 		beschreibung = request.getParameter("beschreibung");
 		try {
-			groesse = Integer.parseInt(request.getParameter("groesse"));
 			preis = Double.parseDouble(request.getParameter("preis"));
 		} catch (Exception e) {
-			//error handling missing input
-			ErrorMessage errorMessage = new ErrorMessage(100, "Fehlende Eingabe");
+			// error handling missing input
+			ErrorMessage errorMessage = new ErrorMessage(115);
+			request.setAttribute("error", errorMessage);
+			dispatcher = request.getRequestDispatcher(errorURL);
+			dispatcher.forward(request, response);
+			return;
+		}
+		try {
+			groesse = Integer.parseInt(request.getParameter("groesse"));
+		} catch (Exception e) {
+			// error handling missing input
+			ErrorMessage errorMessage = new ErrorMessage(116);
 			request.setAttribute("error", errorMessage);
 			dispatcher = request.getRequestDispatcher(errorURL);
 			dispatcher.forward(request, response);
@@ -73,35 +82,69 @@ public class ArtikelErfassungsServlet extends HttpServlet {
 		farbe = request.getParameter("farbe");
 		kategorie = request.getParameter("kategorie");
 
-		if (bezeichnung != null && !bezeichnung.equals("") && beschreibung != null && !beschreibung.equals("")
-				&& hersteller != null && !hersteller.equals("") && farbe != null && !farbe.equals("")
-				&& kategorie != null && !kategorie.equals("")) {
-			artikel = new Artikel(bezeichnung, beschreibung, groesse, preis, hersteller, farbe, kategorie);
-			
-			ArtikelService artikelService = new ArtikelService();
-			artikel = artikelService.createArtikelInDB(artikel);
-			
-			if(artikel !=null){
-				dispatcher = request.getRequestDispatcher(successURL);
-				dispatcher.forward(request, response);
-				return;
-			}else{
-				//Errorhandling something wrong during creating
-				ErrorMessage errorMessage = new ErrorMessage(100,
-						"Es ist etwas während der Artikelerfassung schiefgegangen. Bitte probieren Sie es erneut.");
+		if (bezeichnung != null && !bezeichnung.equals("")) {
+			if (beschreibung != null && !beschreibung.equals("")) {
+				if (hersteller != null && !hersteller.equals("")) {
+					if (farbe != null && !farbe.equals("")) {
+						if (kategorie != null && !kategorie.equals("")) {
+							artikel = new Artikel(bezeichnung, beschreibung, groesse, preis, hersteller, farbe,
+									kategorie);
+
+							ArtikelService artikelService = new ArtikelService();
+							artikel = artikelService.createArtikelInDB(artikel);
+
+							if (artikel != null) {
+								dispatcher = request.getRequestDispatcher(successURL);
+								dispatcher.forward(request, response);
+								return;
+							} else {
+								// Errorhandling something wrong during creating
+								ErrorMessage errorMessage = new ErrorMessage(122);
+								request.setAttribute("error", errorMessage);
+								dispatcher = request.getRequestDispatcher(errorURL);
+								dispatcher.forward(request, response);
+								return;
+							}
+						} else {
+							// errorhandling missing input
+							ErrorMessage errorMessage = new ErrorMessage(121);
+							request.setAttribute("error", errorMessage);
+							dispatcher = request.getRequestDispatcher(errorURL);
+							dispatcher.forward(request, response);
+							return;
+						}
+					} else {
+						// errorhandling missing input
+						ErrorMessage errorMessage = new ErrorMessage(120);
+						request.setAttribute("error", errorMessage);
+						dispatcher = request.getRequestDispatcher(errorURL);
+						dispatcher.forward(request, response);
+						return;
+					}
+				} else {
+					// errorhandling missing input
+					ErrorMessage errorMessage = new ErrorMessage(119);
+					request.setAttribute("error", errorMessage);
+					dispatcher = request.getRequestDispatcher(errorURL);
+					dispatcher.forward(request, response);
+					return;
+				}
+			} else {
+				// errorhandling missing input
+				ErrorMessage errorMessage = new ErrorMessage(118);
 				request.setAttribute("error", errorMessage);
 				dispatcher = request.getRequestDispatcher(errorURL);
 				dispatcher.forward(request, response);
 				return;
-			}			
+			}
 		} else {
 			// errorhandling missing input
-			ErrorMessage errorMessage = new ErrorMessage(100, "Fehlende Eingabe");
+			ErrorMessage errorMessage = new ErrorMessage(117);
 			request.setAttribute("error", errorMessage);
 			dispatcher = request.getRequestDispatcher(errorURL);
 			dispatcher.forward(request, response);
+			return;
 		}
-
 	}
 
 }
