@@ -280,6 +280,14 @@ public class Benutzer {
 	public void setNachname(String nachname) {
 		this.nachname = nachname;
 	}
+	
+	public boolean checkPassword(String password){
+		if(this.password.equals(password)){
+			return true;
+		}else{
+			return false;
+		}
+	}
 
 	/**
 	 * 
@@ -324,5 +332,6 @@ public class Benutzer {
 			return false;
 		}
 	}
+	
 
 }
