@@ -35,13 +35,13 @@ public class ErrorMessage {
 			this.errorMessage= "Bitte geben Sie eine gültige Postleitzahl ein.";
 			break;
 		case 106:
-			this.errorMessage= "Bitte geben Sie ein gültige Email ein.";
+			this.errorMessage= "Bitte geben Sie ein gültige E-Mail ein.";
 			break;
 		case 107:
 			this.errorMessage= "Bitte geben Sie ihren Nachnamen ein.";
 			break;
 		case 108:
-			this.errorMessage= "Bitte geben Sie ihre Email ein.";
+			this.errorMessage= "Bitte geben Sie ihre E-Mail ein.";
 			break;
 		case 109:
 			this.errorMessage= "Bitte geben Sie ein Passwort ein.";
@@ -57,6 +57,9 @@ public class ErrorMessage {
 			break;
 		case 113:
 			this.errorMessage= "Bitte geben Sie ihr Geburtsdatum ein.";
+			break;
+		case 114:
+			this.errorMessage= "Das Passwort oder die E-Mail ist flasch.";
 			break;
 		default:
 			this.errorMessage= "Unbekannter Fehler.";
