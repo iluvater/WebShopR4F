@@ -28,6 +28,7 @@
 			</c:if>	
 		</div>
 	</div>
+	<hr />
 	<center>
 		<input type="submit" id="button" value="Login" />
 	</center> 
