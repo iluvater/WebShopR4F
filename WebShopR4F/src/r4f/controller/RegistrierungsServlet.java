@@ -53,6 +53,7 @@ public class RegistrierungsServlet extends HttpServlet {
 		RequestDispatcher dispatcher;
 		String errorURL = "Registrierungsmaske.jsp";
 		String successURL = "Willkommen.jsp";
+		int jahr, monat, tag;
 
 		// Getting all data
 		vorname = request.getParameter("vorname");
@@ -151,15 +152,29 @@ public class RegistrierungsServlet extends HttpServlet {
 															if (!registrierungsService.checkEmailExists(email)) {
 																// check date
 																// format
-																if (geburtstdatum_string
-																		.matches("\\d{4}-\\d{2}-\\d{2}")) {
-																	int jahr = Integer.parseInt(
-																			geburtstdatum_string.substring(0, 4))
-																			- 1900;
-																	int monat = Integer.parseInt(
-																			geburtstdatum_string.substring(5, 7)) - 1;
-																	int tag = Integer.parseInt(
-																			geburtstdatum_string.substring(8, 10));
+																if (geburtstdatum_string.matches("\\d{4}-\\d{2}-\\d{2}")
+																		|| geburtstdatum_string
+																				.matches("\\d{2}.\\d{2}.\\d{4}")) {
+																	if (geburtstdatum_string
+																			.matches("\\d{4}-\\d{2}-\\d{2}")) {
+																		jahr = Integer.parseInt(
+																				geburtstdatum_string.substring(0, 4))
+																				- 1900;
+																		monat = Integer.parseInt(
+																				geburtstdatum_string.substring(5, 7))
+																				- 1;
+																		tag = Integer.parseInt(
+																				geburtstdatum_string.substring(8, 10));
+																	} else {
+																		jahr = Integer.parseInt(
+																				geburtstdatum_string.substring(6, 10))
+																				- 1900;
+																		monat = Integer.parseInt(
+																				geburtstdatum_string.substring(3, 5))
+																				- 1;
+																		tag = Integer.parseInt(
+																				geburtstdatum_string.substring(0, 2));
+																	}
 																	geburtstdatum = new Date(jahr, monat, tag);
 
 																	benutzer = new Benutzer(vorname, nachname, email,
