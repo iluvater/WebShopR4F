@@ -1,5 +1,11 @@
 package r4f.model;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *  Class that represents a error Message
  * @author Ture
@@ -61,10 +67,56 @@ public class ErrorMessage {
 		case 114:
 			this.errorMessage= "Das Passwort oder die E-Mail ist flasch.";
 			break;
+		case 115:
+			this.errorMessage= "Bitte geben Sie einen Preis ein.";
+			break;
+		case 116:
+			this.errorMessage= "Bitte geben Sie eine Größe ein.";
+			break;
+		case 117:
+			this.errorMessage= "Bitte geben Sie eine Bezeichnung ein.";
+			break;
+		case 118:
+			this.errorMessage= "Bitte geben Sie eine Beschreibung ein.";
+			break;
+		case 119:
+			this.errorMessage= "Bitte geben Sie einen Hersteller ein.";
+			break;
+		case 120:
+			this.errorMessage= "Bitte geben Sie eine Farbe ein.";
+			break;
+		case 121:
+			this.errorMessage= "Bitte geben Sie eine Kategorie ein.";
+			break;
+		case 122:
+			this.errorMessage= "Es ist ein Fehler während der Artikelerfassung aufgetreten. Bitte versuchen Sie es später erneut.";
+			break;
 		default:
 			this.errorMessage= "Unbekannter Fehler.";
 			break;
 		}
+		
+		BufferedReader bReader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("./WebContent/erros.ini")));
+		String zeile="";
+		
+		
+		try {
+			while((zeile= bReader.readLine() )!= null){
+				String split[] = zeile.split(";");
+				if(split[0].equals(Integer.toString(errorCode))){
+					
+				}
+			}
+		} catch (IOException e) {
+			
+			this.errorMessage="Fehlermeldungen konnten nicht geladen werden.";
+		}
+		
+	}
+	
+	private ErrorMessage(int errorCode, String errorMessage){
+		this.errorCode=errorCode;
+		this.errorMessage=errorMessage;
 	}
 	
 	public ErrorMessage(){
@@ -98,4 +150,5 @@ public class ErrorMessage {
 	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
+
 }
