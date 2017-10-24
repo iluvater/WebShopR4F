@@ -51,9 +51,10 @@ public class ArtikelErfassungsServlet extends HttpServlet {
 		String hersteller;
 		String farbe;
 		String kategorie;
+		String sportart;
 		Artikel artikel;
 		RequestDispatcher dispatcher;
-		String errorURL = "Error.jsp";
+		String errorURL = "Artikeldatenerfassung.jsp";
 		String successURL = "Willkommen.jsp";
 
 		bezeichnung = request.getParameter("bezeichnung");
@@ -81,25 +82,36 @@ public class ArtikelErfassungsServlet extends HttpServlet {
 		hersteller = request.getParameter("hersteller");
 		farbe = request.getParameter("farbe");
 		kategorie = request.getParameter("kategorie");
+		sportart = request.getParameter("sportart");
 
 		if (bezeichnung != null && !bezeichnung.equals("")) {
 			if (beschreibung != null && !beschreibung.equals("")) {
-				if (hersteller != null && !hersteller.equals("")) {
+				if (hersteller != null && !hersteller.equals("") && Artikel.checkHersteller(hersteller)) {
 					if (farbe != null && !farbe.equals("")) {
-						if (kategorie != null && !kategorie.equals("")) {
-							artikel = new Artikel(bezeichnung, beschreibung, groesse, preis, hersteller, farbe,
-									kategorie);
+						if (kategorie != null && !kategorie.equals("") && Artikel.checkKategorie(kategorie)) {
+							if (sportart != null && !sportart.equals("") && Artikel.checkSportart(sportart)) {
+								artikel = new Artikel(bezeichnung, beschreibung, groesse, preis, hersteller, farbe,
+										kategorie, sportart);
 
-							ArtikelService artikelService = new ArtikelService();
-							artikel = artikelService.createArtikelInDB(artikel);
+								ArtikelService artikelService = new ArtikelService();
+								artikel = artikelService.createArtikelInDB(artikel);
 
-							if (artikel != null) {
-								dispatcher = request.getRequestDispatcher(successURL);
-								dispatcher.forward(request, response);
-								return;
+								if (artikel != null) {
+									dispatcher = request.getRequestDispatcher(successURL);
+									dispatcher.forward(request, response);
+									return;
+								} else {
+									// Errorhandling something wrong during
+									// creating
+									ErrorMessage errorMessage = new ErrorMessage(122);
+									request.setAttribute("error", errorMessage);
+									dispatcher = request.getRequestDispatcher(errorURL);
+									dispatcher.forward(request, response);
+									return;
+								}
 							} else {
-								// Errorhandling something wrong during creating
-								ErrorMessage errorMessage = new ErrorMessage(122);
+								// errorhandling missing input
+								ErrorMessage errorMessage = new ErrorMessage(123);
 								request.setAttribute("error", errorMessage);
 								dispatcher = request.getRequestDispatcher(errorURL);
 								dispatcher.forward(request, response);

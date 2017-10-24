@@ -162,8 +162,8 @@ public class DatenbankVerbindung {
 			try {
 
 				PreparedStatement preparedStatement = conn.prepareStatement(
-						"INSERT INTO `Artikel` (`id`, `bezeichnung`, `beschreibung`, `groesse`, `preis`, `hersteller`, `farbe`, `erfassungsdatum`, `kategorie`) "
-								+ "VALUES (NULL, ?, ?, ?, ?, ?, ?, null, ?)",
+						"INSERT INTO `Artikel` (`id`, `bezeichnung`, `beschreibung`, `groesse`, `preis`, `hersteller`, `farbe`, `erfassungsdatum`, `kategorie`, `sportart`) "
+								+ "VALUES (NULL, ?, ?, ?, ?, ?, ?, null, ?, ?)",
 						Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setString(1, artikel.getBezeichnung());
 				preparedStatement.setString(2, artikel.getBeschreibung());
@@ -172,6 +172,7 @@ public class DatenbankVerbindung {
 				preparedStatement.setInt(5, getHerstellerId(artikel.getHersteller()));
 				preparedStatement.setString(6, artikel.getFarbe());
 				preparedStatement.setInt(7, getKategorieId(artikel.getKategorie()));
+				preparedStatement.setInt(8, getSportartId(artikel.getSportart()));
 
 				int zeilen = preparedStatement.executeUpdate();
 
@@ -211,9 +212,9 @@ public class DatenbankVerbindung {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT a.id, a.bezeichnung, a.beschreibung, a.groesse, a.preis, h.bezeichnung as hersteller, a.farbe, a.erfassungsdatum, k.bezeichnung as kategorie"
-						+ " FROM artikel AS a INNER JOIN kategorien AS k INNER JOIN hersteller AS h"
-						+ " WHERE a.kategorie = k.id AND a.hersteller = h.id AND a.id = " + id;
+				String sql = "SELECT a.id, a.bezeichnung, a.beschreibung, a.groesse, a.preis, h.bezeichnung as hersteller, a.farbe, a.erfassungsdatum, k.bezeichnung as kategorie, s.bezeichnung as sportart "
+						+ " FROM artikel AS a INNER JOIN kategorien AS k INNER JOIN hersteller AS h INNER JOIN sportarten AS s"
+						+ " WHERE a.kategorie = k.id AND a.hersteller = h.id AND a.sportart = s.id AND a.id = " + id;
 				ResultSet result = query.executeQuery(sql);
 
 				// Ergebnissätze durchfahren.
@@ -227,8 +228,9 @@ public class DatenbankVerbindung {
 					String farbe = result.getString("farbe");
 					Date erfassungsdatum = result.getDate("erfassungsdatum");
 					String kategorie = result.getString("kategorie");
+					String sportart = result.getString("sportart");
 					
-					artikel = new Artikel(id, bezeichnung, beschreibung, groesse, preis, hersteller, farbe, erfassungsdatum, kategorie);
+					artikel = new Artikel(id, bezeichnung, beschreibung, groesse, preis, hersteller, farbe, erfassungsdatum, kategorie, sportart);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -290,6 +292,38 @@ public class DatenbankVerbindung {
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT id FROM hersteller WHERE bezeichnung='" + hersteller + "'";
+				ResultSet result = query.executeQuery(sql);
+
+				// Ergebnissätze durchfahren.
+				if (result.next()) {
+					id = result.getInt("id");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return id;
+	}
+	
+	
+	/**
+	 * This method selects the id of a sportart
+	 * @param sportart the sportart which id should be selected
+	 * @return returns the id of the sportart
+	 */
+	public int getSportartId(String sportart){
+		int id = -1;
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			Statement query;
+			try {
+				query = conn.createStatement();
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT id FROM sportarten WHERE bezeichnung='" + sportart + "'";
 				ResultSet result = query.executeQuery(sql);
 
 				// Ergebnissätze durchfahren.

@@ -6,7 +6,7 @@ public class TestInsert {
 		// TODO Auto-generated method stub
 		DatenbankVerbindung db = new DatenbankVerbindung();
 				
-		Artikel a = new Artikel("Bezeichung", "beschreibung", 45, 49.99, "Hummel", "farbe", "Herren");
+		Artikel a = new Artikel("Bezeichung", "beschreibung", 45, 49.99, "Hummel", "farbe", "Herren", "Laufen");
 		
 		int id = db.createArtikelInDB(a);
 		
