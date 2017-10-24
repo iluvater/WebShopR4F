@@ -23,14 +23,14 @@
 				</c:if>	
 			</c:if>
 			<p><label for="preis">Preis</label>
-			<input id="preis" name="preis" value="" type="number" step="0.01" /></p>
+			<input id="preis" name="preis" min="0" value="" type="number" step="0.01" /></p>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 115 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 				</c:if>	
 			</c:if>
 			<p><label for="groesse">Größe</label>
-			<input id="groesse" name="groesse" value="" type="number" /></p>
+			<input id="groesse" name="groesse" min="20" value="" type="number" /></p>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 116 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
@@ -97,7 +97,7 @@
 		</c:if>
 		<hr />
 		<center>
-			<input type="submit" id="button" value="Login" />
+			<input type="submit" id="button" value="Speichern" />
 		</center> 
 	</div>
 
