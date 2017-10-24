@@ -51,8 +51,9 @@ public class RegistrierungsServlet extends HttpServlet {
 		Benutzer benutzer;
 		RegistrierungsService registrierungsService;
 		RequestDispatcher dispatcher;
-		String errorURL = "TestRegistrierung.jsp";
+		String errorURL = "Registrierungsmaske.jsp";
 		String successURL = "Willkommen.jsp";
+		int jahr, monat, tag;
 
 		// Getting all data
 		vorname = request.getParameter("vorname");
@@ -63,98 +64,202 @@ public class RegistrierungsServlet extends HttpServlet {
 		hausnummer = request.getParameter("hausnummer");
 		postleitzahl = request.getParameter("postleitzahl");
 		stadt = request.getParameter("stadt");
-		geburtstdatum_string = request.getParameter("geburtstdatum");
+		geburtstdatum_string = request.getParameter("geburtsdatum");
 		anrede = request.getParameter("anrede");
 
 		// check whether all input parameters are filled or not
-		if (vorname.equals("") || vorname == null || nachname.equals("") || nachname == null || email.equals("")
-				|| email == null || password.equals("") || password == null || strasse.equals("") || strasse == null
-				|| hausnummer.equals("") || hausnummer == null || postleitzahl.equals("") || postleitzahl == null
-				|| stadt.equals("") || stadt == null || geburtstdatum_string.equals("") || geburtstdatum_string == null
-				|| anrede.equals("") || anrede == null) {
-			// errorhandling missing input...
-			ErrorMessage errorMessage = new ErrorMessage(100, "Fehlende Eingabe");
+		if (vorname == null || vorname.equals("")) {
+			ErrorMessage errorMessage = new ErrorMessage(100);
 			request.setAttribute("error", errorMessage);
 			dispatcher = request.getRequestDispatcher(errorURL);
 			dispatcher.forward(request, response);
 			return;
 		} else {
-			// check mail for format
-			if (Benutzer.checkEmail(email)) {
-				// check PLZ for format
-				if (Benutzer.checkPostleitzahl(postleitzahl)) {
-					// check value of anrede
-					if (Benutzer.checkAnrede(anrede)) {
-						// Check if email exists
-						registrierungsService = new RegistrierungsService();
-						if (!registrierungsService.checkEmailExists(email)) {
-							// check date format
-							if (geburtstdatum_string.matches("\\d{4}-\\d{2}-\\d{2}")) {
-								int jahr = Integer.parseInt(geburtstdatum_string.substring(0, 4)) - 1900;
-								int monat = Integer.parseInt(geburtstdatum_string.substring(5, 7)) -1;
-								int tag = Integer.parseInt(geburtstdatum_string.substring(8, 10));
-								geburtstdatum = new Date(jahr, monat, tag);
-
-								benutzer = new Benutzer(vorname, nachname, email, geburtstdatum, password, strasse,
-										hausnummer, postleitzahl, stadt, anrede);
-
-								benutzer = registrierungsService.createBenutzerInDB(benutzer);
-								if (benutzer != null) {
-									dispatcher = request.getRequestDispatcher(successURL);
-									dispatcher.forward(request, response);
-									return;
-								} else {
-									// Errorhandling something went wrong during
-									// registration
-									ErrorMessage errorMessage = new ErrorMessage(100,
-											"Es ist etwas während der Registrierung schiefgegangen. Bitte probieren Sie es erneut.");
-									request.setAttribute("error", errorMessage);
-									dispatcher = request.getRequestDispatcher(errorURL);
-									dispatcher.forward(request, response);
-									return;
-								}
-							} else {
-								// errorhandling wrong date format
-								ErrorMessage errorMessage = new ErrorMessage(100,
-										"Bitte geben Sie das DAtum im richtigen Format ein.");
-								request.setAttribute("error", errorMessage);
-								dispatcher = request.getRequestDispatcher(errorURL);
-								dispatcher.forward(request, response);
-								return;
-							}
-						} else {
-							// errorhandling already user with this email
-							ErrorMessage errorMessage = new ErrorMessage(100,
-									"Diese Email ist bereits registriert. Melden Sie sich an.");
-							request.setAttribute("error", errorMessage);
-							dispatcher = request.getRequestDispatcher(errorURL);
-							dispatcher.forward(request, response);
-							return;
-						}
-
-					} else {
-						// errorhandling wrong anrede
-						ErrorMessage errorMessage = new ErrorMessage(100, "Bitte Wählen Sie ein gültige Anrede aus.");
-						request.setAttribute("error", errorMessage);
-						dispatcher = request.getRequestDispatcher(errorURL);
-						dispatcher.forward(request, response);
-						return;
-					}
-				} else {
-					// errorhandling wrong plz
-					ErrorMessage errorMessage = new ErrorMessage(100, "Bitte Geben Sie eine gültige Postleitzahl ein.");
-					request.setAttribute("error", errorMessage);
-					dispatcher = request.getRequestDispatcher(errorURL);
-					dispatcher.forward(request, response);
-					return;
-				}
-			} else {
-				// errorhandling wrong mail
-				ErrorMessage errorMessage = new ErrorMessage(100, "Bitte Geben Sie ein gültige Email ein.");
+			if (nachname == null || nachname.equals("")) {
+				ErrorMessage errorMessage = new ErrorMessage(107);
 				request.setAttribute("error", errorMessage);
 				dispatcher = request.getRequestDispatcher(errorURL);
 				dispatcher.forward(request, response);
 				return;
+			} else {
+				if (email == null || email.equals("")) {
+					ErrorMessage errorMessage = new ErrorMessage(108);
+					request.setAttribute("error", errorMessage);
+					dispatcher = request.getRequestDispatcher(errorURL);
+					dispatcher.forward(request, response);
+					return;
+				} else {
+					if (password == null || password.equals("")) {
+						ErrorMessage errorMessage = new ErrorMessage(109);
+						request.setAttribute("error", errorMessage);
+						dispatcher = request.getRequestDispatcher(errorURL);
+						dispatcher.forward(request, response);
+						return;
+					} else {
+						if (strasse == null || strasse.equals("")) {
+							ErrorMessage errorMessage = new ErrorMessage(110);
+							request.setAttribute("error", errorMessage);
+							dispatcher = request.getRequestDispatcher(errorURL);
+							dispatcher.forward(request, response);
+							return;
+						} else {
+							if (hausnummer == null || hausnummer.equals("")) {
+								ErrorMessage errorMessage = new ErrorMessage(111);
+								request.setAttribute("error", errorMessage);
+								dispatcher = request.getRequestDispatcher(errorURL);
+								dispatcher.forward(request, response);
+								return;
+							} else {
+								if (postleitzahl.equals("") || postleitzahl == null) {
+									ErrorMessage errorMessage = new ErrorMessage(105);
+									request.setAttribute("error", errorMessage);
+									dispatcher = request.getRequestDispatcher(errorURL);
+									dispatcher.forward(request, response);
+									return;
+								} else {
+									if (stadt == null || stadt.equals("")) {
+										ErrorMessage errorMessage = new ErrorMessage(112);
+										request.setAttribute("error", errorMessage);
+										dispatcher = request.getRequestDispatcher(errorURL);
+										dispatcher.forward(request, response);
+										return;
+									} else {
+										if (geburtstdatum_string == null || geburtstdatum_string.equals("")) {
+											ErrorMessage errorMessage = new ErrorMessage(113);
+											request.setAttribute("error", errorMessage);
+											dispatcher = request.getRequestDispatcher(errorURL);
+											dispatcher.forward(request, response);
+											return;
+										} else {
+											if (anrede == null || anrede.equals("")) {
+
+												// errorhandling missing
+												ErrorMessage errorMessage = new ErrorMessage(104);
+												request.setAttribute("error", errorMessage);
+												dispatcher = request.getRequestDispatcher(errorURL);
+												dispatcher.forward(request, response);
+												return;
+											} else {
+												// check mail for format
+												if (Benutzer.checkEmail(email)) {
+													// check PLZ for format
+													if (Benutzer.checkPostleitzahl(postleitzahl)) {
+														// check value of anrede
+														if (Benutzer.checkAnrede(anrede)) {
+															// Check if email
+															// exists
+															registrierungsService = new RegistrierungsService();
+															if (!registrierungsService.checkEmailExists(email)) {
+																// check date
+																// format
+																if (geburtstdatum_string.matches("\\d{4}-\\d{2}-\\d{2}")
+																		|| geburtstdatum_string
+																				.matches("\\d{2}.\\d{2}.\\d{4}")) {
+																	if (geburtstdatum_string
+																			.matches("\\d{4}-\\d{2}-\\d{2}")) {
+																		jahr = Integer.parseInt(
+																				geburtstdatum_string.substring(0, 4))
+																				- 1900;
+																		monat = Integer.parseInt(
+																				geburtstdatum_string.substring(5, 7))
+																				- 1;
+																		tag = Integer.parseInt(
+																				geburtstdatum_string.substring(8, 10));
+																	} else {
+																		jahr = Integer.parseInt(
+																				geburtstdatum_string.substring(6, 10))
+																				- 1900;
+																		monat = Integer.parseInt(
+																				geburtstdatum_string.substring(3, 5))
+																				- 1;
+																		tag = Integer.parseInt(
+																				geburtstdatum_string.substring(0, 2));
+																	}
+																	geburtstdatum = new Date(jahr, monat, tag);
+
+																	benutzer = new Benutzer(vorname, nachname, email,
+																			geburtstdatum, password, strasse,
+																			hausnummer, postleitzahl, stadt, anrede);
+
+																	benutzer = registrierungsService
+																			.createBenutzerInDB(benutzer);
+																	if (benutzer != null) {
+																		dispatcher = request
+																				.getRequestDispatcher(successURL);
+																		dispatcher.forward(request, response);
+																		return;
+																	} else {
+																		// Errorhandling
+																		// something
+																		// went
+																		// wrong
+																		// during
+																		// registration
+																		ErrorMessage errorMessage = new ErrorMessage(
+																				101);
+																		request.setAttribute("error", errorMessage);
+																		dispatcher = request
+																				.getRequestDispatcher(errorURL);
+																		dispatcher.forward(request, response);
+																		return;
+																	}
+																} else {
+																	// errorhandling
+																	// wrong
+																	// date
+																	// format
+																	ErrorMessage errorMessage = new ErrorMessage(102);
+																	request.setAttribute("error", errorMessage);
+																	dispatcher = request.getRequestDispatcher(errorURL);
+																	dispatcher.forward(request, response);
+																	return;
+																}
+															} else {
+																// errorhandling
+																// already user
+																// with this
+																// email
+																ErrorMessage errorMessage = new ErrorMessage(103);
+																request.setAttribute("error", errorMessage);
+																dispatcher = request.getRequestDispatcher(errorURL);
+																dispatcher.forward(request, response);
+																return;
+															}
+
+														} else {
+															// errorhandling
+															// wrong anrede
+															ErrorMessage errorMessage = new ErrorMessage(104);
+															request.setAttribute("error", errorMessage);
+															dispatcher = request.getRequestDispatcher(errorURL);
+															dispatcher.forward(request, response);
+															return;
+														}
+													} else {
+														// errorhandling wrong
+														// plz
+														ErrorMessage errorMessage = new ErrorMessage(105);
+														request.setAttribute("error", errorMessage);
+														dispatcher = request.getRequestDispatcher(errorURL);
+														dispatcher.forward(request, response);
+														return;
+													}
+												} else {
+													// errorhandling wrong mail
+													ErrorMessage errorMessage = new ErrorMessage(106);
+													request.setAttribute("error", errorMessage);
+													dispatcher = request.getRequestDispatcher(errorURL);
+													dispatcher.forward(request, response);
+													return;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 
