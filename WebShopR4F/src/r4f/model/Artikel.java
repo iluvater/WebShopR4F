@@ -246,7 +246,7 @@ public class Artikel {
 	 * @return returns true if the sportart to check is a sportart
 	 */
 	public static boolean checkSportart(String sportart) {
-		if (sportart.equals("Laufen") || sportart.equals("Fuﬂball") || sportart.equals("Basketball")
+		if (sportart.equals("Laufen") || sportart.equals("Fussball") || sportart.equals("Basketball")
 				|| sportart.equals("Golf") || sportart.equals("Schwimmen") || sportart.equals("Fahrrad")) {
 			return true;
 		} else {
