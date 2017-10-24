@@ -17,7 +17,7 @@ public class ErrorMessage {
 		this.setErrorCode(errorCode);
 		switch (errorCode) {
 		case 100:
-			this.errorMessage= "Bitte geben Sie ihren Vornamen ein.";
+			this.errorMessage= "Bitte geben Sie Ihren Vornamen ein.";
 			break;
 		case 101:
 			this.errorMessage= "Während der Registrierung ist ein Fehler aufgetreten. Bitte Versuchen Sie es erneut";
@@ -38,7 +38,7 @@ public class ErrorMessage {
 			this.errorMessage= "Bitte geben Sie ein gültige E-Mail ein.";
 			break;
 		case 107:
-			this.errorMessage= "Bitte geben Sie ihren Nachnamen ein.";
+			this.errorMessage= "Bitte geben Sie Ihren Nachnamen ein.";
 			break;
 		case 108:
 			this.errorMessage= "Bitte geben Sie ihre E-Mail ein.";
