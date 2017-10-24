@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 		LoginService loginService;
 		RequestDispatcher dispatcher;
 		
-		String errorURL = "Error.jsp";
+		String errorURL = "Benutzerauthentifizierung.jsp";
 		String succesURL = "Willkommen.jsp";
 
 		email = request.getParameter("email");
