@@ -29,7 +29,7 @@
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 				</c:if>	
 			</c:if>
-			<p><label for="groesse">Grˆﬂe</label>
+			<p><label for="groesse">Gr√∂√üe</label>
 			<input id="groesse" name="groesse" value="" type="number" /></p>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 116 }">
@@ -45,13 +45,13 @@
 			</c:if>
  			<p><label for="hersteller">Hersteller</label> 
  			<select name="hersteller">
- 				<option value="">Bitte w‰hlen</option>
- 				<option value="nike">Nike</option>
- 				<option value="asics">Asics</option>
- 				<option value="kempa">Kempa</option>
- 				<option value="hummel">Hummel</option>
-				<option value="adidas">Adidas</option>
-				<option value="puma">Puma</option></select></p>
+ 				<option value="">Bitte w√§hlen</option>
+ 				<option value="Nike">Nike</option>
+ 				<option value="Asics">Asics</option>
+ 				<option value="Kempa">Kempa</option>
+ 				<option value="Hummel">Hummel</option>
+				<option value="Adidas">Adidas</option>
+				<option value="Puma">Puma</option></select></p>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 119 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
@@ -59,10 +59,10 @@
 			</c:if>
 			<p><label for="kategorie">Kategorie</label> 
 			<select name="kategorie">
-				<option value="">Bitte w‰hlen</option>
- 				<option value="herren">Herren</option>
-				<option value="damen">Damen</option>
-				<option value="kinder">Kinder</option></select></p>
+				<option value="">Bitte w√§hlen</option>
+ 				<option value="Herren">Herren</option>
+				<option value="Damen">Damen</option>
+				<option value="Kinder">Kinder</option></select></p>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 121 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
@@ -70,13 +70,13 @@
 			</c:if>
 			<p><label for="sportart">Sportart</label> 
  			<select name="sportart">
- 			<option value="">Bitte w‰hlen</option>
- 				<option value="laufen">Laufen</option>
- 				<option value="fuﬂball">Fuﬂball</option>
- 				<option value="basketball">Basketball</option>
- 				<option value="golf">Golf</option>
-				<option value="schwimmen">Schwimmen</option>
-				<option value="fahrrad">Fahrrad</option></select></p>	
+ 			<option value="">Bitte w√§hlen</option>
+ 				<option value="Laufen">Laufen</option>
+ 				<option value="Fu√üball">Fu√üball</option>
+ 				<option value="Basketball">Basketball</option>
+ 				<option value="Golf">Golf</option>
+				<option value="Schwimmen">Schwimmen</option>
+				<option value="Fahrrad">Fahrrad</option></select></p>	
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 123 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
