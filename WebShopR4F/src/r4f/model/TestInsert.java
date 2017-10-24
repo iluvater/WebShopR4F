@@ -1,11 +1,19 @@
 package r4f.model;
 
-import java.sql.Date;
-
 public class TestInsert {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+
+//		DatenbankVerbindung db = new DatenbankVerbindung();
+				
+//		Artikel a = new Artikel("Bezeichung", "beschreibung", 45, 49.99, "Hummel", "farbe", "Herren", "Laufen");
+		
+//		int id = db.createArtikelInDB(a);
+		
+//		a = db.getArtikel(id);
+//		System.out.println(a.getErfassungsdatum().toString());
+
 //		DatenbankVerbindung db = new DatenbankVerbindung();
 //				
 //		Benutzer b = new Benutzer(1, "vorname", "nachname", "email3@test.com", new Date(1),  "password", "strasse", "hausnummer", "12345", "Stadt", "Herr");
@@ -16,6 +24,7 @@ public class TestInsert {
 		
 		ErrorMessage error = new ErrorMessage(104);
 		System.out.println(error.getErrorMessage());
+
 		
 	}
 
