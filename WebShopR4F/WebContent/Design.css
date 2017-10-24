@@ -2,32 +2,18 @@
 
 h2 {
 	font-size:24pt; 
-	font-family:arial;
 	}
 	
 h3 {
 	font-size:18pt;
-	font-family:arial; 
 }
 
 h4 {
 	font-size:14pt;
-	font-family:arial; 
 }
 
 p {
-	font-size:10pt;
-	font-family:arial; 
-}
-
-table {
-	border-collapse: collapse;
-	border:none;
-}
-
-tr, td {
-	font-size:10pt;
-	font-family:arial;
+	font-size:10pt; 
 }
 
 label {
@@ -42,7 +28,7 @@ label {
 }
 
 body {
-	/* background: white; */
+	font-family:arial;
 	text-align: center; 
 }
 
@@ -108,15 +94,19 @@ p.fehler {
 	margin: 0 auto;
 }
 
+#textarea_fest {
+	resize:none;
+}
+
+/* 
 .Fehlermeldung_einfärben {
 	font-size:8pt;
 	font-family: arial;
 	color: #FF0000;
-	/* float:center;  */
+	float:center; 
 	display: flex; 
     justify-content: center; 
-
-}
+}  */
 
 /* #zentrieren {
 	text-align:center;
