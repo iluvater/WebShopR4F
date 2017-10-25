@@ -55,7 +55,7 @@ public class ArtikelErfassungsServlet extends HttpServlet {
 		Artikel artikel;
 		RequestDispatcher dispatcher;
 		String errorURL = "Artikeldatenerfassung.jsp";
-		String successURL = "Willkommen.jsp";
+		String successURL = "Artikeldatenerfassung.jsp";
 
 		bezeichnung = request.getParameter("bezeichnung");
 		beschreibung = request.getParameter("beschreibung");
@@ -97,6 +97,8 @@ public class ArtikelErfassungsServlet extends HttpServlet {
 								artikel = artikelService.createArtikelInDB(artikel);
 
 								if (artikel != null) {
+									ErrorMessage successMeldung = new ErrorMessage(600);
+									request.setAttribute("erfolg", successMeldung);
 									dispatcher = request.getRequestDispatcher(successURL);
 									dispatcher.forward(request, response);
 									return;
