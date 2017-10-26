@@ -83,6 +83,17 @@ p.fehler {
 	border: black;
 }
 
+.button_abmelden {
+	background: "abmeldebutton.png";
+	color: white;
+	border: black;
+	width: 200px;
+	height: 35px;
+	font-family: arial;
+	font-size: 10pt;
+	text-align: center;
+}
+
 .inhalt_farbe_div {
 	background: #EDEDED;
 }
