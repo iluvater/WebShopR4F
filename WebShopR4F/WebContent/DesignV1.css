@@ -1,0 +1,115 @@
+@CHARSET "ISO-8859-1";
+
+h2 {
+	font-size:24pt; 
+	}
+	
+h3 {
+	font-size:18pt;
+}
+
+h4 {
+	font-size:14pt;
+}
+
+p {
+	font-size:10pt; 
+}
+
+body {
+	font-family:arial;
+	text-align: center; 
+	/*background-color: #EDEDED;*/
+}
+
+label {
+/*  	display:-webkit-flex;
+	display:-flex;
+		-webkit-align-items: stretch; 
+	align-items: stretch;  */
+	width: 10em;
+	display: block;
+	float: left; 
+/* geändert von left*/
+}
+
+div {
+	padding-top: 2px;
+	padding-bottom: 5px;
+	padding-right:0px;
+	padding-left:43px;
+}
+
+hr {
+  background-color:white;
+  color:white;
+  border:white;
+  height:1px;
+}
+
+/* Formatierung der Fehlermeldungen */
+
+p.fehler {
+	font-size:8pt;
+	font-family: arial;
+	color: #FF0000;
+}
+
+/* Formatierung der placeholder für die Browser Firefox und Chrome (Rest ist ausgenommen) */
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-style:italic;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+  font-style:italic;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  font-style:italic;
+}
+
+/* Formatierung des Registrierungs-/Login-/Artikeldatenerfassungsbutton*/
+#button {
+	background-color: black;
+	color: white;
+	border: black;
+	width: 200px;
+	height: 35px;
+	font-family: arial;
+	font-size: 10pt;
+	text-align: center;
+}
+
+#button:hover {
+	background-color: #EDEDED;
+	color: black;
+	border: black;
+}
+
+/* .inhalt_farbe_div {
+	background: #EDEDED;
+}*/
+
+#seitenbereich {
+	width:500px;
+	background-color: white;
+	text-align:left;
+	margin: 0 auto;
+}
+
+#textarea_fest {
+	resize:none;
+}
+/* ersatz von inhalt_farbe_div*/
+#Feldnamen {
+	width: 150px;
+	float: left;
+	background-color:#EDEDED;
+}
+
+/*Erstatz von inhalt_farbe_div*/ 
+#Eingabefelder {
+	margin-left: 150px;
+	background-color: #EDEDED;
+}
