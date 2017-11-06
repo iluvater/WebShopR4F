@@ -11,7 +11,7 @@
 <body>
 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
 	</jsp:useBean> 
-	<form action="./RegistrierungsServlet" method="post">	
+	<form action="./RegistrationServlet" method="post">	
 		<h2>Neu bei Run4Fun? </h2>
 		<h3>Herzlich Willkommen! Noch ein paar Infos angeben, bevor es losgeht... </h3>
 		<div id="seitenbereich"> <!--  Farbe für den Hintergrund der Textfelder-->

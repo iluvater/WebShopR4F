@@ -9,7 +9,7 @@
 <link href="Design.css" rel="stylesheet">
 </head>
 <body>
-<form action="./ArtikelErfassungsServlet" method="post">
+<form action="./ArticleCreationServlet" method="post">
 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
 	</jsp:useBean> 
 	<div id="seitenbereich">

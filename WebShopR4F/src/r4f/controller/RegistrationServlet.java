@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.model.Benutzer;
+import r4f.model.User;
 import r4f.model.ErrorMessage;
 
 /**
- * Servlet implementation class RegistrierungsServlet
+ * Servlet implementation class RegistrationServlet
  */
-@WebServlet("/RegistrierungsServlet")
-public class RegistrierungsServlet extends HttpServlet {
+@WebServlet("/RegistrationServlet")
+public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public RegistrierungsServlet() {
+	public RegistrationServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -48,8 +48,8 @@ public class RegistrierungsServlet extends HttpServlet {
 		String vorname, nachname, email, password, strasse, hausnummer, postleitzahl, stadt, geburtstdatum_string,
 				anrede;
 		Date geburtstdatum;
-		Benutzer benutzer;
-		RegistrierungsService registrierungsService;
+		User benutzer;
+		RegistrationService registrierungsService;
 		RequestDispatcher dispatcher;
 		String errorURL = "Registrierungsmaske.jsp";
 		String successURL = "Willkommen.jsp";
@@ -141,14 +141,14 @@ public class RegistrierungsServlet extends HttpServlet {
 												return;
 											} else {
 												// check mail for format
-												if (Benutzer.checkEmail(email)) {
+												if (User.checkEmail(email)) {
 													// check PLZ for format
-													if (Benutzer.checkPostleitzahl(postleitzahl)) {
+													if (User.checkPostCode(postleitzahl)) {
 														// check value of anrede
-														if (Benutzer.checkAnrede(anrede)) {
+														if (User.checkSalutation(anrede)) {
 															// Check if email
 															// exists
-															registrierungsService = new RegistrierungsService();
+															registrierungsService = new RegistrationService();
 															if (!registrierungsService.checkEmailExists(email)) {
 																// check date
 																// format
@@ -177,7 +177,7 @@ public class RegistrierungsServlet extends HttpServlet {
 																	}
 																	geburtstdatum = new Date(jahr, monat, tag);
 
-																	benutzer = new Benutzer(vorname, nachname, email,
+																	benutzer = new User(vorname, nachname, email,
 																			geburtstdatum, password, strasse,
 																			hausnummer, postleitzahl, stadt, anrede);
 

@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.model.Artikel;
+import r4f.model.Article;
 import r4f.model.ErrorMessage;
 
 /**
- * Servlet implementation class ArtikelErfassungsServlet
+ * Servlet implementation class ArticleCreationServlet
  */
-@WebServlet("/ArtikelErfassungsServlet")
-public class ArtikelErfassungsServlet extends HttpServlet {
+@WebServlet("/ArticleCreationServlet")
+public class ArticleCreationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ArtikelErfassungsServlet() {
+	public ArticleCreationServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -52,7 +52,7 @@ public class ArtikelErfassungsServlet extends HttpServlet {
 		String farbe;
 		String kategorie;
 		String sportart;
-		Artikel artikel;
+		Article artikel;
 		RequestDispatcher dispatcher;
 		String errorURL = "Artikeldatenerfassung.jsp";
 		String successURL = "Artikeldatenerfassung.jsp";
@@ -86,14 +86,14 @@ public class ArtikelErfassungsServlet extends HttpServlet {
 
 		if (bezeichnung != null && !bezeichnung.equals("")) {
 			if (beschreibung != null && !beschreibung.equals("")) {
-				if (hersteller != null && !hersteller.equals("") && Artikel.checkHersteller(hersteller)) {
+				if (hersteller != null && !hersteller.equals("") && Article.checkManufacturer(hersteller)) {
 					if (farbe != null && !farbe.equals("")) {
-						if (kategorie != null && !kategorie.equals("") && Artikel.checkKategorie(kategorie)) {
-							if (sportart != null && !sportart.equals("") && Artikel.checkSportart(sportart)) {
-								artikel = new Artikel(bezeichnung, beschreibung, groesse, preis, hersteller, farbe,
+						if (kategorie != null && !kategorie.equals("") && Article.checkCategory(kategorie)) {
+							if (sportart != null && !sportart.equals("") && Article.checkSport(sportart)) {
+								artikel = new Article(bezeichnung, beschreibung, groesse, preis, hersteller, farbe,
 										kategorie, sportart);
 
-								ArtikelService artikelService = new ArtikelService();
+								ArticleService artikelService = new ArticleService();
 								artikel = artikelService.createArtikelInDB(artikel);
 
 								if (artikel != null) {

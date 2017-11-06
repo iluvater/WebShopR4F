@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.model.Benutzer;
-import r4f.model.DatenbankVerbindung;
+import r4f.model.User;
+import r4f.model.DatabaseConnection;
 import r4f.model.ErrorMessage;
 
 /**
@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String email;
 		String password;
-		Benutzer benutzer;
+		User benutzer;
 		LoginService loginService;
 		RequestDispatcher dispatcher;
 		

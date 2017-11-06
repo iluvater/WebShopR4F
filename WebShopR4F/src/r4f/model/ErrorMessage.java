@@ -45,7 +45,9 @@ public class ErrorMessage {
 		
 	}
 	
-	
+	/**
+	 * Constructor that is needed so this class is a java bean.
+	 */
 	public ErrorMessage(){
 		this.errorMessage=null;
 	}
