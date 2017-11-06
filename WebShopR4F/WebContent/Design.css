@@ -31,13 +31,13 @@ label {
 body {
 	font-family:arial;
 	text-align: center; 
+	background-image:url(https://heise.cloudimg.io/width/700/q75.webp-lossy-75.foil1/_www-heise-de_/foto/imgs/13/2/1/4/7/4/6/8/bilder-der-woche-8-schwarzer-kater_16-9-d9944b7218d8b7a9.jpeg);
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 div {
-	padding-top: 2px;
-	padding-bottom: 5px;
-	padding-right:0px;
-	padding-left:43px;
+	
 }
 
 hr {
@@ -104,21 +104,14 @@ p.fehler {
 .imageButton:hover {
         opacity:1; /* Firefox */
         filter:alpha(opacity:100); /* Internet Explorer */
-    } 
-    
-.PictureButtonSave {
-	padding:0;
-	margin:0;
-	border:1px solid #D9DDDE;
-	background-image:url( "C:\Users\Laura\Documents\WIP\TestButton1.png");
-	background-repeat:no-repeat;
-	font-size:12px;
-	background-position: 20px 20px;
-	width:400px;
-	}
+    }
     
 .inhalt_farbe_div {
 	background: #EDEDED;
+	padding-top: 2px;
+	padding-bottom: 5px;
+	padding-right:0px;
+	padding-left:43px;
 }
 
 #seitenbereich {
@@ -126,10 +119,20 @@ p.fehler {
 	background-color: white;
 	text-align:left;
 	margin: 0 auto;
+	padding-top: 2px;
+	padding-bottom: 5px;
+	padding-right:0px;
+	padding-left:43px;
 }
 
 #textarea_fest {
 	resize:none;
+}
+
+#fusszeile {
+  clear: both;
+  background-color:lightskyblue;
+  border-top:2px solid black;
 }
 
 /* 

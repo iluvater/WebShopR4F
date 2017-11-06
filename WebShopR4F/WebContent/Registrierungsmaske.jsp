@@ -8,11 +8,13 @@
 <title>Registrierungsmaske</title>
 <link href="Design.css" rel="stylesheet">
 </head>
-<body>
+<body background= "Hintergrundbild_Laeufer_Berge.jpeg">
 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
 	</jsp:useBean> 
 
 	<form action="./RegistrierungsServlet" method="post">	
+	
+	<div>
 	
 		<h2>Neu bei Run4Fun? </h2>
 		<h3>Herzlich Willkommen! Noch ein paar Infos angeben, bevor es losgeht... </h3>
@@ -114,6 +116,7 @@
 				<input type="submit" id="button" value="Registrieren" />
 			</center>
 		</div> 
+		</div>
 	</form>
 	
 </body>

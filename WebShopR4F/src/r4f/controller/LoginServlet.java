@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
 		if(loginService.checkLogin(email, password)){
 			benutzer = loginService.getBenutzer(email);
 			
-			request.getSession().setAttribute("bentuzer", benutzer);
+			request.getSession().setAttribute("benutzer", benutzer);
 			dispatcher = request.getRequestDispatcher(succesURL);
 			dispatcher.forward(request, response);
 			return;
