@@ -512,7 +512,7 @@ public class DatabaseConnection {
 
 				PreparedStatement preparedStatement = conn
 						.prepareStatement(
-								"INSERT INTO `shoppingBasket` (`id`, `user`) "
+								"INSERT INTO `shoppingbasket` (`id`, `user`) "
 										+ "VALUES (NULL, ?)",
 								Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, userId);
@@ -557,7 +557,7 @@ public class DatabaseConnection {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT * FROM shoppingBasketItem WHERE shoppingBasket='" + id + "'";
+				String sql = "SELECT * FROM shoppingbasketitem WHERE shoppingBasket='" + id + "'";
 				ResultSet result = query.executeQuery(sql);
 
 				// Ergebnissätze durchfahren.
@@ -593,7 +593,7 @@ public class DatabaseConnection {
 
 				PreparedStatement preparedStatement = conn
 						.prepareStatement(
-								"DELETE FROM `shoppingBasketItem` WHERE `shoppingBasket` = ?" ,
+								"DELETE FROM `shoppingbasketitem` WHERE `shoppingBasket` = ?" ,
 								Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, id);
 
@@ -619,7 +619,7 @@ public class DatabaseConnection {
 
 				PreparedStatement preparedStatement = conn
 						.prepareStatement(
-								"INSERT INTO `shoppingBasketItem` (`id`, `article`, `shoppingBasket`, àmount`) "
+								"INSERT INTO `shoppingbasketitem` (`id`, `article`, `shoppingBasket`, àmount`) "
 										+ "VALUES (NULL, ?, ? , ?)",
 								Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, shoppingBasketItem.getArticle().getId());
