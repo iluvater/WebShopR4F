@@ -1,4 +1,4 @@
-package r4f.controller;
+package r4f.controller.serlvets;
 
 import java.io.IOException;
 
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import r4f.controller.ArticleService;
 import r4f.model.Article;
 import r4f.model.ErrorMessage;
 

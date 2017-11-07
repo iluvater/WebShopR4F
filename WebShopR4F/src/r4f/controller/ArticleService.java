@@ -43,4 +43,13 @@ public class ArticleService {
 	public List<Article> getArticleList(){
 		return dbConnection.getArticleList();
 	}
+	
+	/**
+	 * This method selects an article from the database
+	 * @param id the id of the article that should be selected
+	 * @return returns the article return null if no article was selected
+	 */
+	public Article getArticle(int id){
+		return dbConnection.getArticle(id);
+	}
 }
