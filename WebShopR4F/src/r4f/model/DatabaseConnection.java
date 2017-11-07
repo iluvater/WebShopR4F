@@ -66,6 +66,7 @@ public class DatabaseConnection {
 		return conn;
 	}
 
+	
 	/**
 	 * This method creates a new User in the database
 	 * 
@@ -151,8 +152,9 @@ public class DatabaseConnection {
 					String postCode = result.getString("postCode");
 					String city = result.getString("city");
 					String salutation = result.getString("salutation");
+					int shoppingBasket = result.getInt("shoppingBasket");
 					user = new User(id, firstName, lastName, email, birthday, password, street, houseNumber, postCode,
-							city, salutation);
+							city, salutation, shoppingBasket);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -196,8 +198,9 @@ public class DatabaseConnection {
 					String postCode = result.getString("postCode");
 					String city = result.getString("city");
 					String salutation = result.getString("salutation");
+					int shoppingBasket = result.getInt("shoppingBasket");
 					user = new User(id, firstName, lastName, email, birthday, password, street, houseNumber, postCode,
-							city, salutation);
+							city, salutation, shoppingBasket);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -207,6 +210,47 @@ public class DatabaseConnection {
 		return user;
 	}
 
+	/**
+	 * This method updates a User in the database
+	 * the new values should be in the parameter user
+	 * @param user user that should be updated 
+	 */
+	public void updateUserInDB(User user) {
+		conn = getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement preparedStatement = conn
+						.prepareStatement(
+								"UPDATE `user` SET `email` = ?, `firstName` = ?, `lastName` = ?, "
+								+ "`birthday` = ?, `password` = ?, `street` = ?, `houseNumber` = ?, "
+								+ "`postCode` = ?, `city` = ?, `salutation` = ?, `shoppingBasket` = ?"
+								+ "WHERE `user`.`id` = ?",
+								Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setString(1, user.getEmail());
+				preparedStatement.setString(2, user.getFirstName());
+				preparedStatement.setString(3, user.getLastName());
+				preparedStatement.setDate(4, new Date(user.getBirthday().getTime()));
+				preparedStatement.setString(5, user.getPassword());
+				preparedStatement.setString(6, user.getStreet());
+				preparedStatement.setString(7, user.getHouseNumber());
+				preparedStatement.setString(8, user.getPostCode());
+				preparedStatement.setString(9, user.getCity());
+				preparedStatement.setString(10, user.getSalutation());
+				preparedStatement.setInt(11, user.getShoppingBasket());
+				preparedStatement.setInt(12, user.getId());
+
+				 preparedStatement.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} 		
+	}
+	
+	
 	
 	/**
 	 * This method creates a new article in the database
@@ -351,6 +395,8 @@ public class DatabaseConnection {
 		return articleList;
 	}
 
+	
+	
 	/**
 	 * This method gets the id to the string of a category
 	 * 
@@ -450,4 +496,158 @@ public class DatabaseConnection {
 		return id;
 	}
 
+	
+	
+	/**
+	 * This method creates a shopping Basket in the database
+	 * @param userId id of the user for who the shoppingBasket should be created
+	 * @return returns the id of the shopping basket
+	 */
+	public int createShoppingBasketInDB(int userId){
+		conn = getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement preparedStatement = conn
+						.prepareStatement(
+								"INSERT INTO `shoppingBasket` (`id`, `user`) "
+										+ "VALUES (NULL, ?)",
+								Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setInt(1, userId);
+
+				int lines = preparedStatement.executeUpdate();
+
+				if (lines != 0) {
+					ResultSet result = preparedStatement.getGeneratedKeys();
+					if (result.next()) {
+						return result.getInt(1);
+					} else {
+						return -1;
+					}
+				} else {
+					return -1;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return -1;
+			}
+		} else {
+			return -1;
+		}
+	}
+
+	
+	/**
+	 * 
+	 * @param id id of the  shopping basket that should be selected from the database
+	 * @return returns the shopping basket of the user or null if there is no shopping basket for the userId
+	 */
+	public ShoppingBasket getShoppingBasket(int id) {
+		// TODO Auto-generated method stub
+		ShoppingBasket shoppingBasket = new ShoppingBasket(id);
+		
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			Statement query;
+			try {
+				query = conn.createStatement();
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT * FROM shoppingBasketItem WHERE shoppingBasket='" + id + "'";
+				ResultSet result = query.executeQuery(sql);
+
+				// Ergebnissätze durchfahren.
+				if (result.next()) {
+					ShoppingBasketItem item = new ShoppingBasketItem();
+					item.setAmount(result.getInt("amount"));
+					item.setId(result.getInt("id"));
+					
+					int aritcleId = result.getInt("article");
+					item.setArticle(this.getArticle(aritcleId));
+					
+					shoppingBasket.getItems().add(item);
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return shoppingBasket;
+	}
+
+	/**
+	 * This method deletes all items of a shopping basket in the database
+	 * @param id id of the shopping basket for which all items should be deleted
+	 */
+	public void deleteAllItemsOfShoppingBasketInDB(int id) {
+		conn = getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement preparedStatement = conn
+						.prepareStatement(
+								"DELETE FROM `shoppingBasketItem` WHERE `shoppingBasket` = ?" ,
+								Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setInt(1, id);
+
+				preparedStatement.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}		
+	}
+
+
+	/**
+	 * This method creates a new entry in the database of an shopping basket item
+	 * @param shoppingBasketItem that should be created
+	 */
+	public int createShoppingBasketItem(ShoppingBasketItem shoppingBasketItem, int shoppingBasketId) {
+		conn = getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement preparedStatement = conn
+						.prepareStatement(
+								"INSERT INTO `shoppingBasketItem` (`id`, `article`, `shoppingBasket`, àmount`) "
+										+ "VALUES (NULL, ?, ? , ?)",
+								Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setInt(1, shoppingBasketItem.getArticle().getId());
+				preparedStatement.setInt(2, shoppingBasketId);
+				preparedStatement.setInt(3, shoppingBasketItem.getAmount());
+				
+
+				int lines = preparedStatement.executeUpdate();
+
+				if (lines != 0) {
+					ResultSet result = preparedStatement.getGeneratedKeys();
+					if (result.next()) {
+						return result.getInt(1);
+					} else {
+						return -1;
+					}
+				} else {
+					return -1;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return -1;
+			}
+		} else {
+			return -1;
+		}
+	}
+
+	
+	
 }

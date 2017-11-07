@@ -22,6 +22,7 @@ public class User {
 	private String postCode;
 	private String city;
 	private String salutation;
+	private int shoppingBasket;
 
 	/**
 	 * Constructor that should be used when the id is known
@@ -48,9 +49,11 @@ public class User {
 	 *            the city to set
 	 * @param salutation
 	 *            the salutation to set
+	 * @param shoppingBasket 
+	 * 			  the shoppingBasket to set
 	 */
 	public User(int id, String firstName, String lastName, String email, Date birthday, String password,
-			String street, String houseNumber, String postCode, String city, String salutation) {
+			String street, String houseNumber, String postCode, String city, String salutation, int shoppingBasket) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -62,6 +65,7 @@ public class User {
 		setPostCode(postCode);
 		this.city = city;
 		setSalutation(salutation);
+		this.shoppingBasket=shoppingBasket;
 	}
 
 	/**
@@ -332,6 +336,20 @@ public class User {
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * @return the shoppingBasket
+	 */
+	public int getShoppingBasket() {
+		return shoppingBasket;
+	}
+
+	/**
+	 * @param shoppingBasket the shoppingBasket to set
+	 */
+	public void setShoppingBasket(int shoppingBasket) {
+		this.shoppingBasket = shoppingBasket;
 	}
 
 }

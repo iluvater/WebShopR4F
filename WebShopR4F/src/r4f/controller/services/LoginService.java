@@ -1,18 +1,10 @@
-package r4f.controller;
+package r4f.controller.services;
 
-import r4f.model.DatabaseConnection;
 import r4f.model.User;
 
-public class LoginService {
+public class LoginService extends Service{
 	
-	DatabaseConnection dbConnection;
-	
-	/**
-	 * Constructor that creates a connection to the database
-	 */
-	public LoginService(){
-		dbConnection = new DatabaseConnection();
-	}
+
 	/**
 	 * 
 	 * @param email the possible email
@@ -23,7 +15,7 @@ public class LoginService {
 	public boolean checkLogin(String email, String password){
 		User benutzer;
 		if (!email.equals("") && email != null && !password.equals("") && password != null) {
-			benutzer = dbConnection.getUser(email);
+			benutzer = super.getDbConnection().getUser(email);
 			if(benutzer != null){
 				if(benutzer.checkPassword(password)){
 					return true;
@@ -44,6 +36,7 @@ public class LoginService {
 	 * @return return an object of the class User representing the user with the email adress of the input parameter
 	 */
 	public User getBenutzer(String email){
-		return dbConnection.getUser(email);
+		return super.getDbConnection().getUser(email);
 	}
+	
 }

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import r4f.model.User;
-import r4f.controller.RegistrationService;
+import r4f.controller.services.RegistrationService;
 import r4f.model.ErrorMessage;
 
 /**

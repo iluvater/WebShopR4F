@@ -1,4 +1,4 @@
-package r4f.controller;
+package r4f.controller.serlvets;
 
 import java.io.IOException;
 
@@ -8,6 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import r4f.controller.services.ShoppingBasketService;
+import r4f.model.ShoppingBasket;
+import r4f.model.User;
 
 /**
  * Servlet implementation class LogoutServlet
@@ -39,7 +43,15 @@ public class LogoutServlet extends HttpServlet {
 		
 		RequestDispatcher dispatcher;
 		String successURL = "Willkommen.jsp";
+		ShoppingBasketService shoppingBasketService = new ShoppingBasketService();
+		
+		ShoppingBasket shoppingBasket = (ShoppingBasket) request.getSession().getAttribute("shoppingBasket");
+		
+		shoppingBasketService.updateShoppingBasketInDB(shoppingBasket);
+				
+				
 		request.getSession().removeAttribute("user");
+		request.getSession().removeAttribute("shoppingBasket");
 		
 		dispatcher = request.getRequestDispatcher(successURL);
 		dispatcher.forward(request, response);
