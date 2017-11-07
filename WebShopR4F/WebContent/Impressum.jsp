@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -15,7 +15,7 @@
 <p>Run 4 Fun GmbH & Co. KG </p> 
 <br/>
  
-<h5>Persönlich haftender Gesellschafter: </h5>
+<h5>PersÃ¶nlich haftender Gesellschafter: </h5>
 <p>
 Run 4 Fun GmbH & Co. KG
 <br/>
@@ -23,9 +23,9 @@ Sitz: Paderbon/Deutschland
 </p>
 <br/>
 
-<h5>Geschäftsführer:</h5>
+<h5>GeschÃ¤ftsfÃ¼hrer:</h5>
 <p>
-Laura Birkheuer, Ture Küsener, Maike Polaszek
+Laura Birkheuer, Ture KÃ¼sener, Maike Polaszek
 </p>
 <br/>
 
@@ -33,7 +33,7 @@ Laura Birkheuer, Ture Küsener, Maike Polaszek
 <p>
 Run 4 Fun GmbH & Co. KG
 <br/>
-Fürstenallee 5
+FÃ¼rstenallee 5
 <br/>
 33102 Paderborn
 </p>
