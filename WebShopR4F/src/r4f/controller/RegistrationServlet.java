@@ -45,37 +45,37 @@ public class RegistrationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String vorname, nachname, email, password, strasse, hausnummer, postleitzahl, stadt, geburtstdatum_string,
-				anrede;
-		Date geburtstdatum;
-		User benutzer;
-		RegistrationService registrierungsService;
+		String firstName, lastName, email, password, street, houseNumber, postcode, city, birthday_string,
+				salutation;
+		Date birthday;
+		User user;
+		RegistrationService regigistrationService;
 		RequestDispatcher dispatcher;
 		String errorURL = "Registrierungsmaske.jsp";
 		String successURL = "Willkommen.jsp";
-		int jahr, monat, tag;
+		int year, month, day;
 
 		// Getting all data
-		vorname = request.getParameter("vorname");
-		nachname = request.getParameter("nachname");
+		firstName = request.getParameter("firstName");
+		lastName = request.getParameter("lastName");
 		email = request.getParameter("email");
 		password = request.getParameter("password");
-		strasse = request.getParameter("strasse");
-		hausnummer = request.getParameter("hausnummer");
-		postleitzahl = request.getParameter("postleitzahl");
-		stadt = request.getParameter("stadt");
-		geburtstdatum_string = request.getParameter("geburtsdatum");
-		anrede = request.getParameter("anrede");
+		street = request.getParameter("street");
+		houseNumber = request.getParameter("houseNumber");
+		postcode = request.getParameter("postCode");
+		city = request.getParameter("city");
+		birthday_string = request.getParameter("birthday");
+		salutation = request.getParameter("salutation");
 
 		// check whether all input parameters are filled or not
-		if (vorname == null || vorname.equals("")) {
+		if (firstName == null || firstName.equals("")) {
 			ErrorMessage errorMessage = new ErrorMessage(100);
 			request.setAttribute("error", errorMessage);
 			dispatcher = request.getRequestDispatcher(errorURL);
 			dispatcher.forward(request, response);
 			return;
 		} else {
-			if (nachname == null || nachname.equals("")) {
+			if (lastName == null || lastName.equals("")) {
 				ErrorMessage errorMessage = new ErrorMessage(107);
 				request.setAttribute("error", errorMessage);
 				dispatcher = request.getRequestDispatcher(errorURL);
@@ -96,42 +96,42 @@ public class RegistrationServlet extends HttpServlet {
 						dispatcher.forward(request, response);
 						return;
 					} else {
-						if (strasse == null || strasse.equals("")) {
+						if (street == null || street.equals("")) {
 							ErrorMessage errorMessage = new ErrorMessage(110);
 							request.setAttribute("error", errorMessage);
 							dispatcher = request.getRequestDispatcher(errorURL);
 							dispatcher.forward(request, response);
 							return;
 						} else {
-							if (hausnummer == null || hausnummer.equals("")) {
+							if (houseNumber == null || houseNumber.equals("")) {
 								ErrorMessage errorMessage = new ErrorMessage(111);
 								request.setAttribute("error", errorMessage);
 								dispatcher = request.getRequestDispatcher(errorURL);
 								dispatcher.forward(request, response);
 								return;
 							} else {
-								if (postleitzahl.equals("") || postleitzahl == null) {
+								if (postcode.equals("") || postcode == null) {
 									ErrorMessage errorMessage = new ErrorMessage(105);
 									request.setAttribute("error", errorMessage);
 									dispatcher = request.getRequestDispatcher(errorURL);
 									dispatcher.forward(request, response);
 									return;
 								} else {
-									if (stadt == null || stadt.equals("")) {
+									if (city == null || city.equals("")) {
 										ErrorMessage errorMessage = new ErrorMessage(112);
 										request.setAttribute("error", errorMessage);
 										dispatcher = request.getRequestDispatcher(errorURL);
 										dispatcher.forward(request, response);
 										return;
 									} else {
-										if (geburtstdatum_string == null || geburtstdatum_string.equals("")) {
+										if (birthday_string == null || birthday_string.equals("")) {
 											ErrorMessage errorMessage = new ErrorMessage(113);
 											request.setAttribute("error", errorMessage);
 											dispatcher = request.getRequestDispatcher(errorURL);
 											dispatcher.forward(request, response);
 											return;
 										} else {
-											if (anrede == null || anrede.equals("")) {
+											if (salutation == null || salutation.equals("")) {
 
 												// errorhandling missing
 												ErrorMessage errorMessage = new ErrorMessage(104);
@@ -143,47 +143,47 @@ public class RegistrationServlet extends HttpServlet {
 												// check mail for format
 												if (User.checkEmail(email)) {
 													// check PLZ for format
-													if (User.checkPostCode(postleitzahl)) {
+													if (User.checkPostCode(postcode)) {
 														// check value of anrede
-														if (User.checkSalutation(anrede)) {
+														if (User.checkSalutation(salutation)) {
 															// Check if email
 															// exists
-															registrierungsService = new RegistrationService();
-															if (!registrierungsService.checkEmailExists(email)) {
+															regigistrationService = new RegistrationService();
+															if (!regigistrationService.checkEmailExists(email)) {
 																// check date
 																// format
-																if (geburtstdatum_string.matches("\\d{4}-\\d{2}-\\d{2}")
-																		|| geburtstdatum_string
+																if (birthday_string.matches("\\d{4}-\\d{2}-\\d{2}")
+																		|| birthday_string
 																				.matches("\\d{2}.\\d{2}.\\d{4}")) {
-																	if (geburtstdatum_string
+																	if (birthday_string
 																			.matches("\\d{4}-\\d{2}-\\d{2}")) {
-																		jahr = Integer.parseInt(
-																				geburtstdatum_string.substring(0, 4))
+																		year = Integer.parseInt(
+																				birthday_string.substring(0, 4))
 																				- 1900;
-																		monat = Integer.parseInt(
-																				geburtstdatum_string.substring(5, 7))
+																		month = Integer.parseInt(
+																				birthday_string.substring(5, 7))
 																				- 1;
-																		tag = Integer.parseInt(
-																				geburtstdatum_string.substring(8, 10));
+																		day = Integer.parseInt(
+																				birthday_string.substring(8, 10));
 																	} else {
-																		jahr = Integer.parseInt(
-																				geburtstdatum_string.substring(6, 10))
+																		year = Integer.parseInt(
+																				birthday_string.substring(6, 10))
 																				- 1900;
-																		monat = Integer.parseInt(
-																				geburtstdatum_string.substring(3, 5))
+																		month = Integer.parseInt(
+																				birthday_string.substring(3, 5))
 																				- 1;
-																		tag = Integer.parseInt(
-																				geburtstdatum_string.substring(0, 2));
+																		day = Integer.parseInt(
+																				birthday_string.substring(0, 2));
 																	}
-																	geburtstdatum = new Date(jahr, monat, tag);
+																	birthday = new Date(year, month, day);
 
-																	benutzer = new User(vorname, nachname, email,
-																			geburtstdatum, password, strasse,
-																			hausnummer, postleitzahl, stadt, anrede);
+																	user = new User(firstName, lastName, email,
+																			birthday, password, street,
+																			houseNumber, postcode, city, salutation);
 
-																	benutzer = registrierungsService
-																			.createBenutzerInDB(benutzer);
-																	if (benutzer != null) {
+																	user = regigistrationService
+																			.createBenutzerInDB(user);
+																	if (user != null) {
 																		dispatcher = request
 																				.getRequestDispatcher(successURL);
 																		dispatcher.forward(request, response);

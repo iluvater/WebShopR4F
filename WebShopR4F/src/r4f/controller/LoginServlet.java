@@ -47,12 +47,12 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String email;
 		String password;
-		User benutzer;
+		User user;
 		LoginService loginService;
 		RequestDispatcher dispatcher;
 		
 		String errorURL = "Benutzerauthentifizierung.jsp";
-		String succesURL = "Willkommen.jsp";
+		String successURL = "Willkommen.jsp";
 
 		email = request.getParameter("email");
 		password = request.getParameter("password");
@@ -60,10 +60,10 @@ public class LoginServlet extends HttpServlet {
 		loginService = new LoginService();
 		
 		if(loginService.checkLogin(email, password)){
-			benutzer = loginService.getBenutzer(email);
+			user = loginService.getBenutzer(email);
 			
-			request.getSession().setAttribute("bentuzer", benutzer);
-			dispatcher = request.getRequestDispatcher(succesURL);
+			request.getSession().setAttribute("user", user);
+			dispatcher = request.getRequestDispatcher(successURL);
 			dispatcher.forward(request, response);
 			return;
 		}else{

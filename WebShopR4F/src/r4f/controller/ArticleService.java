@@ -3,6 +3,8 @@
  */
 package r4f.controller;
 
+import java.util.List;
+
 import r4f.model.Article;
 import r4f.model.DatabaseConnection;
 
@@ -12,13 +14,13 @@ import r4f.model.DatabaseConnection;
  */
 public class ArticleService {
 	
-	DatabaseConnection dbVerbindung;
+	DatabaseConnection dbConnection;
 	
 	/**
 	 * Constructor that establishes a connection to the database
 	 */
 	public ArticleService(){
-		dbVerbindung = new DatabaseConnection(); 
+		dbConnection = new DatabaseConnection(); 
 	}
 	
 	/**
@@ -29,8 +31,16 @@ public class ArticleService {
 	public Article createArtikelInDB(Article artikel){
 		int id;
 		
-		id = dbVerbindung.createArticleInDB(artikel);
+		id = dbConnection.createArticleInDB(artikel);
 		
-		return dbVerbindung.getArticle(id);
+		return dbConnection.getArticle(id);
+	}
+	
+	/**
+	 * this method selects all article that are stored in the database
+	 * @return returns a list with all article
+	 */
+	public List<Article> getArticleList(){
+		return dbConnection.getArticleList();
 	}
 }

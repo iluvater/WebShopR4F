@@ -1,17 +1,17 @@
 package r4f.controller;
 
-import r4f.model.User;
 import r4f.model.DatabaseConnection;
+import r4f.model.User;
 
 public class RegistrationService {
 	
-	DatabaseConnection dbVerbindung;
+	DatabaseConnection dbConnection;
 	
 	/**
 	 * Constructor that only initilazed a new Datenbank verbidnung
 	 */
 	public RegistrationService(){
-		dbVerbindung = new DatabaseConnection();
+		dbConnection = new DatabaseConnection();
 	}
 	
 	/**
@@ -21,7 +21,7 @@ public class RegistrationService {
 	 *         returns false when there is no user with this email
 	 */
 	public boolean checkEmailExists(String email){
-		User benutzer = dbVerbindung.getUser(email);
+		User benutzer = dbConnection.getUser(email);
 		if(benutzer == null){
 			return false;
 		}else{
@@ -30,9 +30,8 @@ public class RegistrationService {
 	}
 	
 	public User createBenutzerInDB(User benutzer){
-		dbVerbindung.createUserInDB(benutzer);
+		int id = dbConnection.createUserInDB(benutzer);
 		
-		benutzer = dbVerbindung.getUser(benutzer.getEmail());
-		return benutzer;
+		return dbConnection.getUser(id);
 	}
 }

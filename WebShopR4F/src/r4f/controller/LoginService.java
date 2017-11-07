@@ -1,17 +1,17 @@
 package r4f.controller;
 
-import r4f.model.User;
 import r4f.model.DatabaseConnection;
+import r4f.model.User;
 
 public class LoginService {
 	
-	DatabaseConnection dbVerbindung;
+	DatabaseConnection dbConnection;
 	
 	/**
 	 * Constructor that creates a connection to the database
 	 */
 	public LoginService(){
-		dbVerbindung = new DatabaseConnection();
+		dbConnection = new DatabaseConnection();
 	}
 	/**
 	 * 
@@ -23,7 +23,7 @@ public class LoginService {
 	public boolean checkLogin(String email, String password){
 		User benutzer;
 		if (!email.equals("") && email != null && !password.equals("") && password != null) {
-			benutzer = dbVerbindung.getUser(email);
+			benutzer = dbConnection.getUser(email);
 			if(benutzer != null){
 				if(benutzer.checkPassword(password)){
 					return true;
@@ -44,6 +44,6 @@ public class LoginService {
 	 * @return return an object of the class User representing the user with the email adress of the input parameter
 	 */
 	public User getBenutzer(String email){
-		return dbVerbindung.getUser(email);
+		return dbConnection.getUser(email);
 	}
 }
