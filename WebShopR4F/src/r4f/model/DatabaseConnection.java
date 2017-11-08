@@ -66,13 +66,13 @@ public class DatabaseConnection {
 		return conn;
 	}
 
-	
 	/**
 	 * This method creates a new User in the database
 	 * 
 	 * @param user
 	 *            User that should be created in DB
-	 * @return returns the id of the created user returns -1 if there was no user created
+	 * @return returns the id of the created user returns -1 if there was no
+	 *         user created
 	 */
 	public int createUserInDB(User user) {
 
@@ -96,7 +96,6 @@ public class DatabaseConnection {
 				preparedStatement.setString(8, user.getPostCode());
 				preparedStatement.setString(9, user.getCity());
 				preparedStatement.setString(10, user.getSalutation());
-
 
 				int lines = preparedStatement.executeUpdate();
 
@@ -137,7 +136,8 @@ public class DatabaseConnection {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT * FROM user WHERE email='" + email + "'";
+				String sql = "SELECT u.*, role.name  FROM user AS u INNER JOIN role AS r ON r.id = u.role WHERE email='"
+						+ email + "'";
 				ResultSet result = query.executeQuery(sql);
 
 				// Ergebnissätze durchfahren.
@@ -153,8 +153,9 @@ public class DatabaseConnection {
 					String city = result.getString("city");
 					String salutation = result.getString("salutation");
 					int shoppingBasket = result.getInt("shoppingBasket");
+					String role = result.getString("name");
 					user = new User(id, firstName, lastName, email, birthday, password, street, houseNumber, postCode,
-							city, salutation, shoppingBasket);
+							city, salutation, shoppingBasket, role);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -182,7 +183,8 @@ public class DatabaseConnection {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT * FROM user WHERE id='" + id + "'";
+				String sql = "SELECT u.*, role.name  FROM user AS u INNER JOIN role AS r ON r.id = u.role WHERE id='"
+						+ id + "'";
 				ResultSet result = query.executeQuery(sql);
 
 				// Ergebnissätze durchfahren.
@@ -199,8 +201,9 @@ public class DatabaseConnection {
 					String city = result.getString("city");
 					String salutation = result.getString("salutation");
 					int shoppingBasket = result.getInt("shoppingBasket");
+					String role = result.getString("name");
 					user = new User(id, firstName, lastName, email, birthday, password, street, houseNumber, postCode,
-							city, salutation, shoppingBasket);
+							city, salutation, shoppingBasket, role);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -211,9 +214,11 @@ public class DatabaseConnection {
 	}
 
 	/**
-	 * This method updates a User in the database
-	 * the new values should be in the parameter user
-	 * @param user user that should be updated 
+	 * This method updates a User in the database the new values should be in
+	 * the parameter user
+	 * 
+	 * @param user
+	 *            user that should be updated
 	 */
 	public void updateUserInDB(User user) {
 		conn = getInstance();
@@ -223,12 +228,10 @@ public class DatabaseConnection {
 			try {
 
 				PreparedStatement preparedStatement = conn
-						.prepareStatement(
-								"UPDATE `user` SET `email` = ?, `firstName` = ?, `lastName` = ?, "
+						.prepareStatement("UPDATE `user` SET `email` = ?, `firstName` = ?, `lastName` = ?, "
 								+ "`birthday` = ?, `password` = ?, `street` = ?, `houseNumber` = ?, "
 								+ "`postCode` = ?, `city` = ?, `salutation` = ?, `shoppingBasket` = ?"
-								+ "WHERE `user`.`id` = ?",
-								Statement.RETURN_GENERATED_KEYS);
+								+ "`role`= ? WHERE `user`.`id` = ?", Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setString(1, user.getEmail());
 				preparedStatement.setString(2, user.getFirstName());
 				preparedStatement.setString(3, user.getLastName());
@@ -240,18 +243,17 @@ public class DatabaseConnection {
 				preparedStatement.setString(9, user.getCity());
 				preparedStatement.setString(10, user.getSalutation());
 				preparedStatement.setInt(11, user.getShoppingBasket());
-				preparedStatement.setInt(12, user.getId());
+				preparedStatement.setInt(12, getRoleId(user.getRole()));
+				preparedStatement.setInt(13, user.getId());
 
-				 preparedStatement.executeUpdate();
+				preparedStatement.executeUpdate();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		} 		
+		}
 	}
-	
-	
-	
+
 	/**
 	 * This method creates a new article in the database
 	 * 
@@ -395,8 +397,39 @@ public class DatabaseConnection {
 		return articleList;
 	}
 
-	
-	
+	/**
+	 * This method selects the id of a role from the database
+	 * 
+	 * @param role
+	 *            name of the role for which the id should be selected
+	 * @return the id of the role, returns -1 if there is no role with this name
+	 */
+	public int getRoleId(String role) {
+		int id = -1;
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			Statement query;
+			try {
+				query = conn.createStatement();
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT id FROM role WHERE name='" + role + "'";
+				ResultSet result = query.executeQuery(sql);
+
+				// Ergebnissätze durchfahren.
+				if (result.next()) {
+					id = result.getInt("id");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return id;
+	}
+
 	/**
 	 * This method gets the id to the string of a category
 	 * 
@@ -496,25 +529,23 @@ public class DatabaseConnection {
 		return id;
 	}
 
-	
-	
 	/**
 	 * This method creates a shopping Basket in the database
-	 * @param userId id of the user for who the shoppingBasket should be created
+	 * 
+	 * @param userId
+	 *            id of the user for who the shoppingBasket should be created
 	 * @return returns the id of the shopping basket
 	 */
-	public int createShoppingBasketInDB(int userId){
+	public int createShoppingBasketInDB(int userId) {
 		conn = getInstance();
 
 		if (conn != null) {
 
 			try {
 
-				PreparedStatement preparedStatement = conn
-						.prepareStatement(
-								"INSERT INTO `shoppingbasket` (`id`, `user`) "
-										+ "VALUES (NULL, ?)",
-								Statement.RETURN_GENERATED_KEYS);
+				PreparedStatement preparedStatement = conn.prepareStatement(
+						"INSERT INTO `shoppingbasket` (`id`, `user`) " + "VALUES (NULL, ?)",
+						Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, userId);
 
 				int lines = preparedStatement.executeUpdate();
@@ -538,16 +569,18 @@ public class DatabaseConnection {
 		}
 	}
 
-	
 	/**
 	 * 
-	 * @param id id of the  shopping basket that should be selected from the database
-	 * @return returns the shopping basket of the user or null if there is no shopping basket for the userId
+	 * @param id
+	 *            id of the shopping basket that should be selected from the
+	 *            database
+	 * @return returns the shopping basket of the user or null if there is no
+	 *         shopping basket for the userId
 	 */
 	public ShoppingBasket getShoppingBasket(int id) {
 		// TODO Auto-generated method stub
 		ShoppingBasket shoppingBasket = new ShoppingBasket(id);
-		
+
 		conn = getInstance();
 
 		if (conn != null) {
@@ -565,24 +598,27 @@ public class DatabaseConnection {
 					ShoppingBasketItem item = new ShoppingBasketItem();
 					item.setAmount(result.getInt("amount"));
 					item.setId(result.getInt("id"));
-					
+
 					int aritcleId = result.getInt("article");
 					item.setArticle(this.getArticle(aritcleId));
-					
+
 					shoppingBasket.getItems().add(item);
-					
+
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return shoppingBasket;
 	}
 
 	/**
 	 * This method deletes all items of a shopping basket in the database
-	 * @param id id of the shopping basket for which all items should be deleted
+	 * 
+	 * @param id
+	 *            id of the shopping basket for which all items should be
+	 *            deleted
 	 */
 	public void deleteAllItemsOfShoppingBasketInDB(int id) {
 		conn = getInstance();
@@ -591,10 +627,8 @@ public class DatabaseConnection {
 
 			try {
 
-				PreparedStatement preparedStatement = conn
-						.prepareStatement(
-								"DELETE FROM `shoppingbasketitem` WHERE `shoppingBasket` = ?" ,
-								Statement.RETURN_GENERATED_KEYS);
+				PreparedStatement preparedStatement = conn.prepareStatement(
+						"DELETE FROM `shoppingbasketitem` WHERE `shoppingBasket` = ?", Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, id);
 
 				preparedStatement.executeUpdate();
@@ -602,13 +636,15 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}		
+		}
 	}
 
-
 	/**
-	 * This method creates a new entry in the database of an shopping basket item
-	 * @param shoppingBasketItem that should be created
+	 * This method creates a new entry in the database of an shopping basket
+	 * item
+	 * 
+	 * @param shoppingBasketItem
+	 *            that should be created
 	 */
 	public int createShoppingBasketItem(ShoppingBasketItem shoppingBasketItem, int shoppingBasketId) {
 		conn = getInstance();
@@ -617,15 +653,13 @@ public class DatabaseConnection {
 
 			try {
 
-				PreparedStatement preparedStatement = conn
-						.prepareStatement(
-								"INSERT INTO `shoppingbasketitem` (`id`, `article`, `shoppingBasket`, àmount`) "
-										+ "VALUES (NULL, ?, ? , ?)",
-								Statement.RETURN_GENERATED_KEYS);
+				PreparedStatement preparedStatement = conn.prepareStatement(
+						"INSERT INTO `shoppingbasketitem` (`id`, `article`, `shoppingBasket`, àmount`) "
+								+ "VALUES (NULL, ?, ? , ?)",
+						Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, shoppingBasketItem.getArticle().getId());
 				preparedStatement.setInt(2, shoppingBasketId);
 				preparedStatement.setInt(3, shoppingBasketItem.getAmount());
-				
 
 				int lines = preparedStatement.executeUpdate();
 
@@ -648,6 +682,45 @@ public class DatabaseConnection {
 		}
 	}
 
-	
-	
+	/**
+	 * This method checks whether an authorization is included in a role or not
+	 * 
+	 * @param roleId
+	 *            role in which the authorization should be included
+	 * @param authorization
+	 *            authorization to check
+	 * @return returns true if the authorization is in the role include and
+	 *         return false if not
+	 */
+	public boolean checkAuthorizationInDB(int roleId, String authorization) {
+		conn = getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement preparedStatement = conn.prepareStatement(
+						"SELECT m.role, a.authorization, a.name "
+								+ "FROM mappingroleauthorization AS m INNER JOIN authorization AS a "
+								+ "ON m.authorization = a.id" + " WHERE a.name = ? AND m.role = ?");
+				
+				preparedStatement.setString(1, authorization);
+				preparedStatement.setInt(2, roleId);
+
+				int lines = preparedStatement.executeUpdate();
+
+				if (lines != 0) {
+					return true;
+				} else {
+					return false;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
 }

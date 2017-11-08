@@ -23,6 +23,7 @@ public class User {
 	private String city;
 	private String salutation;
 	private int shoppingBasket;
+	private String role;
 
 	/**
 	 * Constructor that should be used when the id is known
@@ -49,11 +50,13 @@ public class User {
 	 *            the city to set
 	 * @param salutation
 	 *            the salutation to set
-	 * @param shoppingBasket 
-	 * 			  the shoppingBasket to set
+	 * @param shoppingBasket
+	 *            the shoppingBasket to set
+     * @param role
+	 *            the role to set
 	 */
-	public User(int id, String firstName, String lastName, String email, Date birthday, String password,
-			String street, String houseNumber, String postCode, String city, String salutation, int shoppingBasket) {
+	public User(int id, String firstName, String lastName, String email, Date birthday, String password, String street,
+			String houseNumber, String postCode, String city, String salutation, int shoppingBasket, String role) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -65,7 +68,8 @@ public class User {
 		setPostCode(postCode);
 		this.city = city;
 		setSalutation(salutation);
-		this.shoppingBasket=shoppingBasket;
+		this.shoppingBasket = shoppingBasket;
+		this.role = role;
 	}
 
 	/**
@@ -92,8 +96,8 @@ public class User {
 	 * @param salutation
 	 *            the salutation to set
 	 */
-	public User(String firstName, String lastName, String email, Date birthday, String password,
-			String street, String houseNumber, String postCode, String city, String salutation) {
+	public User(String firstName, String lastName, String email, Date birthday, String password, String street,
+			String houseNumber, String postCode, String city, String salutation) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthday = birthday;
@@ -313,8 +317,8 @@ public class User {
 	 * 
 	 * @param salutation
 	 *            salutation String that should be checked
-	 * @return return true when the String salutation is either Herr or Frau return
-	 *         false when not
+	 * @return return true when the String salutation is either Herr or Frau
+	 *         return false when not
 	 */
 	public static boolean checkSalutation(String salutation) {
 		if (salutation.equals("Herr") || salutation.equals("Frau")) {
@@ -346,10 +350,26 @@ public class User {
 	}
 
 	/**
-	 * @param shoppingBasket the shoppingBasket to set
+	 * @param shoppingBasket
+	 *            the shoppingBasket to set
 	 */
 	public void setShoppingBasket(int shoppingBasket) {
 		this.shoppingBasket = shoppingBasket;
+	}
+
+	/**
+	 * @return the role
+	 */
+	public String getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role
+	 *            the role to set
+	 */
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 }
