@@ -35,7 +35,7 @@ public class LoginService extends Service{
 	 * @param email email of the user that should be selected in the database
 	 * @return return an object of the class User representing the user with the email adress of the input parameter
 	 */
-	public User getBenutzer(String email){
+	public User getUser(String email){
 		return super.getDbConnection().getUser(email);
 	}
 	

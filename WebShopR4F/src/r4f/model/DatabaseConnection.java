@@ -3,6 +3,8 @@
  */
 package r4f.model;
 
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -112,6 +114,12 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return -1;
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		} else {
 			return -1;
@@ -159,6 +167,12 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -168,8 +182,8 @@ public class DatabaseConnection {
 	/**
 	 * This method selects an user from the database selected by the email
 	 * 
-	 * @param email
-	 *            Email of the user that should be get from the database.
+	 * @param id
+	 *            Id of the user that should be get from the database.
 	 * @return the user with all Attributes that are stored in the database
 	 */
 	public User getUser(int id) {
@@ -207,6 +221,12 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -250,6 +270,12 @@ public class DatabaseConnection {
 
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -298,6 +324,12 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return -1;
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		} else {
 			return -1;
@@ -346,6 +378,12 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		return article;
@@ -392,6 +430,12 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		return articleList;
@@ -424,6 +468,12 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -457,6 +507,12 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -490,6 +546,12 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -523,6 +585,12 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -563,6 +631,12 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return -1;
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		} else {
 			return -1;
@@ -578,7 +652,6 @@ public class DatabaseConnection {
 	 *         shopping basket for the userId
 	 */
 	public ShoppingBasket getShoppingBasket(int id) {
-		// TODO Auto-generated method stub
 		ShoppingBasket shoppingBasket = new ShoppingBasket(id);
 
 		conn = getInstance();
@@ -607,6 +680,12 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -635,6 +714,12 @@ public class DatabaseConnection {
 
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -645,6 +730,10 @@ public class DatabaseConnection {
 	 * 
 	 * @param shoppingBasketItem
 	 *            that should be created
+	 * @param shoppingBasketId
+	 *            the id of the shopping Basket the item belongs to
+	 * @return returns the id of the created item
+	 * 
 	 */
 	public int createShoppingBasketItem(ShoppingBasketItem shoppingBasketItem, int shoppingBasketId) {
 		conn = getInstance();
@@ -676,6 +765,12 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return -1;
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		} else {
 			return -1;
@@ -699,11 +794,10 @@ public class DatabaseConnection {
 
 			try {
 
-				PreparedStatement preparedStatement = conn.prepareStatement(
-						"SELECT m.role, a.authorization, a.name "
-								+ "FROM mappingroleauthorization AS m INNER JOIN authorization AS a "
-								+ "ON m.authorization = a.id" + " WHERE a.name = ? AND m.role = ?");
-				
+				PreparedStatement preparedStatement = conn.prepareStatement("SELECT m.role, a.authorization, a.name "
+						+ "FROM mappingroleauthorization AS m INNER JOIN authorization AS a "
+						+ "ON m.authorization = a.id" + " WHERE a.name = ? AND m.role = ?");
+
 				preparedStatement.setString(1, authorization);
 				preparedStatement.setInt(2, roleId);
 
@@ -717,10 +811,101 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return false;
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * This method creates an image in the database
+	 * 
+	 * @param inputStream
+	 *            the inputstream containing the image
+	 * @param contentType
+	 *            the contenttype of the image e.g. image/jpeg
+	 * @return returns true if the image was created in the database and false
+	 *         if not
+	 */
+	public boolean createImageInDB(InputStream inputStream, String contentType) {
+		int lines = -1;
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			try {
+				String sql = "INSERT INTO image (image, type) values (?, ?)";
+				PreparedStatement statement = conn.prepareStatement(sql);
+				statement.setString(2, contentType);
+
+				if (inputStream != null) {
+					// fetches input stream of the upload file for the blob
+					// column
+					statement.setBlob(1, inputStream);
+				}
+
+				lines = statement.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		if (lines != 1) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	/**
+	 * This method selects an image from the database
+	 * @param id id of the image that should be selected
+	 * @return returns the image returns null if no image was selected
+	 */
+	public Image getImage(int id) {
+		Image image = null;
+		
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			Statement query;
+			Blob blob = null;
+			try {
+				query = conn.createStatement();
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT * FROM image WHERE id='" + id + "'";
+				ResultSet result = query.executeQuery(sql);
+
+				// Ergebnissätze durchfahren.
+				if (result.next()) {
+					blob = result.getBlob("image");
+					image= new Image(id, blob, result.getString("type"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return image;
 	}
 
 }

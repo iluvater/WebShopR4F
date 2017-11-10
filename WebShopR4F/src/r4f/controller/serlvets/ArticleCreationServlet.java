@@ -8,10 +8,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.sql.Blob;
 
 import r4f.controller.services.ArticleService;
+import r4f.controller.services.ImageService;
 import r4f.model.Article;
 import r4f.model.ErrorMessage;
+import r4f.model.Image;
 
 /**
  * Servlet implementation class ArticleCreationServlet
@@ -54,6 +58,7 @@ public class ArticleCreationServlet extends HttpServlet {
 		String category;
 		String sport;
 		Article article;
+		Part imagePart;
 		RequestDispatcher dispatcher;
 		String errorURL = "Artikeldatenerfassung.jsp";
 		String successURL = "Artikeldatenerfassung.jsp";
@@ -84,6 +89,7 @@ public class ArticleCreationServlet extends HttpServlet {
 		color = request.getParameter("color");
 		category = request.getParameter("category");
 		sport = request.getParameter("sport");
+		imagePart = request.getPart("image");
 
 		if (name != null && !name.equals("")) {
 			if (description != null && !description.equals("")) {
@@ -91,22 +97,34 @@ public class ArticleCreationServlet extends HttpServlet {
 					if (color != null && !color.equals("")) {
 						if (category != null && !category.equals("") && Article.checkCategory(category)) {
 							if (sport != null && !sport.equals("") && Article.checkSport(sport)) {
-								article = new Article(name, description, size, price, manufacturer, color,
-										category, sport);
+								if (imagePart != null) {
+									article = new Article(name, description, size, price, manufacturer, color, category,
+											sport);
 
-								ArticleService artikelService = new ArticleService();
-								article = artikelService.createArtikelInDB(article);
+									ArticleService artikelService = new ArticleService();
+									article = artikelService.createArtikelInDB(article);
 
-								if (article != null) {
-									ErrorMessage successMessage = new ErrorMessage(600);
-									request.setAttribute("success", successMessage);
-									dispatcher = request.getRequestDispatcher(successURL);
-									dispatcher.forward(request, response);
-									return;
+									ImageService imageService = new ImageService();
+									boolean imageCreated = imageService.createImageInDB(imagePart);
+
+									if (article != null && imageCreated) {
+										ErrorMessage successMessage = new ErrorMessage(600);
+										request.setAttribute("success", successMessage);
+										dispatcher = request.getRequestDispatcher(successURL);
+										dispatcher.forward(request, response);
+										return;
+									} else {
+										// Errorhandling something wrong during
+										// creating
+										ErrorMessage errorMessage = new ErrorMessage(122);
+										request.setAttribute("error", errorMessage);
+										dispatcher = request.getRequestDispatcher(errorURL);
+										dispatcher.forward(request, response);
+										return;
+									}
 								} else {
-									// Errorhandling something wrong during
-									// creating
-									ErrorMessage errorMessage = new ErrorMessage(122);
+									// Errorhandling missing input
+									ErrorMessage errorMessage = new ErrorMessage(124);
 									request.setAttribute("error", errorMessage);
 									dispatcher = request.getRequestDispatcher(errorURL);
 									dispatcher.forward(request, response);
