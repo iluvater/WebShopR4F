@@ -10,9 +10,9 @@
 </head>
 <body>
 
-  <div id="fusszeile">
-    <p><a href="Test.jsp">AGB's</a> <a href="Test.jsp">Kontaktseite</a> <a href="Test.jsp">Impressum</a> <a href="Test.jsp">Hilfeseite</a> © 2017 Run4Fun, Inc. Alle Rechte vorbehalten</p>
-  </div>
+	<div id="fuss">
+		<p class="footer"><a class="footer" href="Test.jsp">AGB's</a> <a class="footer" href="Test.jsp">Kontaktseite</a> <a class="footer" href="Test.jsp">Impressum</a> <a class="footer" href="Test.jsp">Hilfeseite</a> © 2017 Run4Fun GmbH, Alle Rechte vorbehalten</p>
+	</div>
 
 </body>
 </html>

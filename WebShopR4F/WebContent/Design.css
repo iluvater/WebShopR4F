@@ -24,29 +24,54 @@ label {
 	align-items: stretch;  */
 	width: 10em;
 	display: block;
-	float: left; 
+	float: left;  
+	
+	
 /* geändert von left*/
 }
 
 body {
 	font-family:arial;
 	text-align: center; 
-	background-image:url(https://heise.cloudimg.io/width/700/q75.webp-lossy-75.foil1/_www-heise-de_/foto/imgs/13/2/1/4/7/4/6/8/bilder-der-woche-8-schwarzer-kater_16-9-d9944b7218d8b7a9.jpeg);
+ 	background-image:url("Hintergrundbild_Laeufer_Berge.JPG");
+ 	/* background-image:url(https://heise.cloudimg.io/width/700/q75.webp-lossy-75.foil1/_www-heise-de_/foto/imgs/13/2/1/4/7/4/6/8/bilder-der-woche-8-schwarzer-kater_16-9-d9944b7218d8b7a9.jpeg); */
 	background-repeat: no-repeat;
-	background-position: center;
+	background-position: center; 
+	background-size: cover; 
+	/* background-size: 100% 100%; */
+	background-attachment: fixed; 
+	height: 100%;
 }
 
-div {
-	
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
 }
 
 hr {
   background-color:white;
   color:white;
-  border:white;
+  border:white; 
   height:1px;
+  opacity: 0;
+}
+body.agb {
+	text-align: left;
+ 	padding-left: 15px;
+	padding-right: 15px; 
 }
 
+body.regis {
+	text-align: left;
+  	padding-left: 15px;
+	padding-right: 15px;  
+/* 	padding: 0, 15px;
+	margin: 0; */
+	height: 100%;
+/* 	border-color: yellow;
+	border-width: thick; */
+}
 p.fehler {
 	font-size:8pt;
 	font-family: arial;
@@ -108,31 +133,72 @@ p.fehler {
     
 .inhalt_farbe_div {
 	background: #EDEDED;
-	padding-top: 2px;
+  	padding-top: 2px;
 	padding-bottom: 5px;
 	padding-right:0px;
-	padding-left:43px;
+	padding-left:43px;  
+	width: 70%;
+	margin-left:13%;
+	margin-right: 13%;
+}
+
+/* in content umbenennen */
+
+.inhalt {
+	background: #EDEDED;
+	
+}
+
+/* in site umbenennen*/
+.whiteBlock {
+	background: white;
+	width: 70%;
+	padding-left:2%;
+	padding-right:2%;
+	position: relative;
+	min-height: 100%;
+	margin: 0 auto; /* auf 10% setzen statt auto für knie der frau*/
+	height: 100%;
+	/* position: absolute;  */ 
+	padding-bottom: 3em;
+	margin-bottom: 2em;
 }
 
 #seitenbereich {
 	width:500px;
-	background-color: white;
+	/* background-color: white; */
 	text-align:left;
 	margin: 0 auto;
-	padding-top: 2px;
+ 	padding-top: 2px;
 	padding-bottom: 5px;
 	padding-right:0px;
-	padding-left:43px;
+	padding-left:43px; 
 }
 
 #textarea_fest {
 	resize:none;
 }
 
+#fuss p {
+	width: 960px;
+	margin: auto;
+}
 #fusszeile {
-  clear: both;
+  clear: left;
   background-color:lightskyblue;
   border-top:2px solid black;
+  bottom: 0px;
+  left: 0px;
+  /* Ohne Größenangabe sollte es Bildschirmfüllend sein*/
+  text-align: center;
+ /*  position: absolute; */ 
+ position: absolute;
+ width:100%;
+	color: #000;
+	height: 2em; 
+	/* margin-left: auto;
+	margin-right: auto;*/ 
+	margin-top: 2em; 
 }
 
 /* 
@@ -246,3 +312,116 @@ p.fehler {
   margin-right: 10px;
 }
  */
+ 
+ 
+ 
+ /*/* Zweites Design File, soll nachher mal das erste ersetzen 
+h2 {
+	font-size:24pt; 
+	}
+	
+h3 {
+	font-size:18pt;
+}
+
+h4 {
+	font-size:14pt;
+}
+
+p {
+	font-size:10pt; 
+}
+
+body {
+	font-family:arial;
+	text-align: center; 
+
+}
+
+label {
+
+	width: 10em;
+	display: block;
+	float: left; 
+
+}
+
+div {
+	padding-top: 2px;
+	padding-bottom: 5px;
+	padding-right:0px;
+	padding-left:43px;
+}
+
+hr {
+  background-color:white;
+  color:white;
+  border:white;
+  height:1px;
+}
+
+
+
+p.fehler {
+	font-size:8pt;
+	font-family: arial;
+	color: #FF0000;
+}
+
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari 
+  font-style:italic;
+}
+
+::-moz-placeholder { /* Firefox 19+ 
+  font-style:italic;
+}
+
+:-moz-placeholder { /* Firefox 18- 
+  font-style:italic;
+}
+
+/* Formatierung des Registrierungs-/Login-/Artikeldatenerfassungsbutton
+#button {
+	background-color: black;
+	color: white;
+	border: black;
+	width: 200px;
+	height: 35px;
+	font-family: arial;
+	font-size: 10pt;
+	text-align: center;
+}
+
+#button:hover {
+	background-color: #EDEDED;
+	color: black;
+	border: black;
+}
+
+/* .inhalt_farbe_div {
+	background: #EDEDED;
+}
+
+#seitenbereich {
+	width:500px;
+	background-color: white;
+	text-align:left;
+	margin: 0 auto;
+}
+
+#textarea_fest {
+	resize:none;
+}
+/* ersatz von inhalt_farbe_div
+#Feldnamen {
+	width: 150px;
+	float: left;
+	background-color:#EDEDED;
+}
+
+/*Erstatz von inhalt_farbe_div
+#Eingabefelder {
+	margin-left: 150px;
+	background-color: #EDEDED;
+}*/

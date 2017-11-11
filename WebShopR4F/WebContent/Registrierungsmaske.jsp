@@ -1,50 +1,50 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Registrierungsmaske</title>
-<link href="Design.css" rel="stylesheet">
+<link href="DesignV1.css" rel="stylesheet">
 </head>
-<body background= "Hintergrundbild_Laeufer_Berge.jpeg">
+<body> <!-- class="regis" -->
 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
 	</jsp:useBean> 
-
-	<form action="./RegistrierungsServlet" method="post">	
 	
-	<div>
-	
+	<div id="kopf">
+		<h1>Ãœberschrift Test</h1>
+	</div>	
+	<div id="container">
 		<h2>Neu bei Run4Fun? </h2>
 		<h3>Herzlich Willkommen! Noch ein paar Infos angeben, bevor es losgeht... </h3>
-		<div id="seitenbereich"> <!--  Farbe für den Hintergrund der Textfelder-->
-			<div class="inhalt_farbe_div">
-				<h4>Log-In Daten</h4>			
-				<p><label for="email">E-Mailadresse</label>
-				<input id="email" placeholder="E-Mailadresse" name="email" value="" type="email" /><br /></p>
-				<c:if test ="${not empty error }">
-					<c:if test="${error.errorCode == 103 }">
-						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
-					</c:if>	
-					<c:if test="${error.errorCode == 106 }">
-						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
-					</c:if>	
-					<c:if test="${error.errorCode == 108 }">
-						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
-					</c:if>	
-				</c:if>
-				<p><label for="password">Passwort</label>
-				<input id="password" placeholder="Passwort" name="password"value="" type="password" /></p>
-				<c:if test ="${not empty error }">
-					<c:if test="${error.errorCode == 109 }">
-						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
-					</c:if>	
-				</c:if>
-			</div>
-			<hr/>
-			<div class="inhalt_farbe_div">
-				<h4>Persönliche Daten</h4>				
+		<form action="./RegistrierungsServlet" method="post">
+		<div id="inhalt">
+			<h4>Log-In Daten</h4>			
+			<p><label for="email">E-Mailadresse</label>
+			<input id="email" placeholder="E-Mailadresse" name="email" value="" type="email" /><br /></p>
+			<c:if test ="${not empty error }">
+				<c:if test="${error.errorCode == 103 }">
+					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+				</c:if>	
+				<c:if test="${error.errorCode == 106 }">
+					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+				</c:if>	
+				<c:if test="${error.errorCode == 108 }">
+					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+				</c:if>	
+			</c:if>
+			<p><label for="password">Passwort</label>
+			<input id="password" placeholder="Passwort" name="password"value="" type="password" /></p>
+			<c:if test ="${not empty error }">
+				<c:if test="${error.errorCode == 109 }">
+					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+				</c:if>	
+			</c:if>			
+		</div>
+		<hr/>
+		<div id="inhalt">
+			<h4>PersÃ¶nliche Daten</h4>				
  				<p><label for="anrede"> Anrede</label> 
  				<select name="anrede"><option value="Herr">Herr</option>
 					<option value="Frau">Frau</option></select></p>
@@ -105,7 +105,7 @@
 						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 					</c:if>	
 				</c:if>
-			</div>
+		</div>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 101 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
@@ -115,9 +115,10 @@
 			<center>
 				<input type="submit" id="button" value="Registrieren" />
 			</center>
-		</div> 
-		</div>
-	</form>
-	
+		</form>
+	</div>
+	<div id="fuss">
+		<p class="footer"><a class="footer" href="Test.jsp">AGB's</a> <a class="footer" href="Test.jsp">Kontaktseite</a> <a class="footer" href="Test.jsp">Impressum</a> <a class="footer" href="Test.jsp">Hilfeseite</a> Â© 2017 Run4Fun GmbH, Alle Rechte vorbehalten</p>
+	</div>
 </body>
 </html>
