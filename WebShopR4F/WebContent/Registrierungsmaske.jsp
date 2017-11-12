@@ -19,7 +19,7 @@
 	<div id="container">
 		<h2>Neu bei Run4Fun? </h2>
 		<h3>Herzlich Willkommen! Noch ein paar Infos angeben, bevor es losgeht... </h3>
-		<form action="./RegistrierungsServlet" method="post">
+		<form action="./RegistrationServlet" method="post">
 		<div id="inhalt">
 			<h4>Log-In Daten</h4>			
 			<p><label for="email">E-Mailadresse</label>
