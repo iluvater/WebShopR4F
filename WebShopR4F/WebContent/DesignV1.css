@@ -50,6 +50,30 @@ label {
 	/* margin-left: 26%; */
 }
 
+h2.agb {
+	padding-left: 15px; 
+	/* text-align: center;  */
+}
+
+h3.agb {
+	padding-left: 15px;
+}
+
+h4.agb {
+	padding-left: 15px;
+} 
+
+p.agb {
+	padding-left: 42px;
+	padding-right: 20px;
+}
+
+p.agb2 {
+	padding-left: 60px;
+	padding-right: 20px; 
+	margin-bottom: 0px;
+}
+
 p.footer {
 	margin-bottom: 0px;
 } 
@@ -121,6 +145,17 @@ a.footer {
 	margin-top: -3em;
 	text-align: center; 
 	line-height: 3em;
+}
+
+#containerAgb {
+	width: 960px;
+	margin: 0 auto;
+	min-height: 100%;
+	width: 70%;
+	background: white;
+	padding-bottom: 3em;
+	
+	/* padding-right: 43px; */
 }
 
 #button {
