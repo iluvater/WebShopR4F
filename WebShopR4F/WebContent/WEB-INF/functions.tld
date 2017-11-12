@@ -11,7 +11,7 @@
     <uri>http://run4fun.de/functions</uri>
 
     <function>
-        <name>testName</name>
+        <name>checkAuthorization</name>
         <function-class>r4f.controller.services.AuthorizationService</function-class>
         <function-signature>boolean authorityCheck(User , String )</function-signature>
     </function>
