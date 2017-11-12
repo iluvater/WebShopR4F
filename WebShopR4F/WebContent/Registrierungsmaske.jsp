@@ -11,7 +11,7 @@
 <body>
 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
 	</jsp:useBean> 
-	<form action="./RegistrierungsServlet" method="post">	
+	<form action="./RegistrationServlet" method="post">	
 		<h2>Neu bei Run4Fun? </h2>
 		<h3>Herzlich Willkommen! Noch ein paar Infos angeben, bevor es losgeht... </h3>
 		<div id="seitenbereich"> <!--  Farbe für den Hintergrund der Textfelder-->
@@ -42,7 +42,7 @@
 			<div class="inhalt_farbe_div">
 				<h4>Persönliche Daten</h4>				
  				<p><label for="anrede"> Anrede</label> 
- 				<select name="anrede"><option value="Herr">Herr</option>
+ 				<select name="salutation"><option value="Herr">Herr</option>
 					<option value="Frau">Frau</option></select></p>
 				<c:if test ="${not empty error }">
 					<c:if test="${error.errorCode == 104 }">
@@ -50,21 +50,21 @@
 					</c:if>	
 				</c:if>											
    				<p><label for="vorname1">Vorname</label>
-				<input id="vorname1" placeholder="Vorname" name="vorname" value="" type="text" /><br /> </p> 
+				<input id="vorname1" placeholder="Vorname" name="firstName" value="" type="text" /><br /> </p> 
 				<c:if test ="${not empty error }">
 					<c:if test="${error.errorCode == 100 }">
 						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 					</c:if>	
 				</c:if>
 				<p><label for="nachname1">Nachname</label>
-				<input id="nachname1" placeholder="Nachname" name="nachname" value="" type="text" /><br /></p>
+				<input id="nachname1" placeholder="Nachname" name="lastName" value="" type="text" /><br /></p>
 				<c:if test ="${not empty error }">
 					<c:if test="${error.errorCode == 107 }">
 						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 					</c:if>	
 				</c:if>
 				<p><label for="geburtsdatum1">Geburtsdatum</label>
-				<input id="geburtsdatum1" placeholder="DD.MM.JJJJ" name="geburtsdatum" value="" type="date" /><br /></p>
+				<input id="geburtsdatum1" placeholder="DD.MM.JJJJ" name="birthday" value="" type="date" /><br /></p>
 				<c:if test ="${not empty error }">
 					<c:if test="${error.errorCode == 113 }">
 						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
@@ -74,28 +74,28 @@
 					</c:if>						
 				</c:if>
 				<p><label for="strasse1">Strasse</label>
-				<input id="strasse1" placeholder="Strasse" name="strasse" value="" type="text" /><br /></p>
+				<input id="strasse1" placeholder="Strasse" name="street" value="" type="text" /><br /></p>
 				<c:if test ="${not empty error }">
 					<c:if test="${error.errorCode == 110 }">
 						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 					</c:if>	
 				</c:if>
 				<p><label for="hausnummer1">Hausnummer</label>
-				<input id="hausnummer1" placeholder="Hausnummer" name="hausnummer" value="" type="text" /><br /></p>
+				<input id="hausnummer1" placeholder="Hausnummer" name="houseNumber" value="" type="text" /><br /></p>
 				<c:if test ="${not empty error }">
 					<c:if test="${error.errorCode == 111 }">
 						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 					</c:if>	
 				</c:if>
 				<p><label for="postleitzahl1">Postleitzahl</label>
-				<input id="postleitzahl1" placeholder="Postleitzahl" name="postleitzahl" value="" type="text" /><br /></p>
+				<input id="postleitzahl1" placeholder="Postleitzahl" name="postCode" value="" type="text" /><br /></p>
 				<c:if test ="${not empty error }">
 					<c:if test="${error.errorCode == 105 }">
 						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 					</c:if>	
 				</c:if>
 				<p><label for="stadt1">Ort</label>
-				<input id="stadt1" placeholder="Ort" name="stadt" value="" type="text" /><br /></p>
+				<input id="stadt1" placeholder="Ort" name="city" value="" type="text" /><br /></p>
 				<c:if test ="${not empty error }">
 					<c:if test="${error.errorCode == 112 }">
 						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>

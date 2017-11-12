@@ -1,4 +1,4 @@
-package r4f.controller;
+package r4f.controller.serlvets;
 
 import java.io.IOException;
 
@@ -8,21 +8,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.sql.Blob;
 
-import r4f.model.Artikel;
+import r4f.controller.services.ArticleService;
+import r4f.controller.services.ImageService;
+import r4f.model.Article;
 import r4f.model.ErrorMessage;
+import r4f.model.Image;
 
 /**
- * Servlet implementation class ArtikelErfassungsServlet
+ * Servlet implementation class ArticleCreationServlet
  */
-@WebServlet("/ArtikelErfassungsServlet")
-public class ArtikelErfassungsServlet extends HttpServlet {
+@WebServlet("/ArticleCreationServlet")
+public class ArticleCreationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ArtikelErfassungsServlet() {
+	public ArticleCreationServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -44,23 +49,24 @@ public class ArtikelErfassungsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String bezeichnung;
-		String beschreibung;
-		int groesse;
-		double preis;
-		String hersteller;
-		String farbe;
-		String kategorie;
-		String sportart;
-		Artikel artikel;
+		String name;
+		String description;
+		int size;
+		double price;
+		String manufacturer;
+		String color;
+		String category;
+		String sport;
+		Article article;
+		Part imagePart;
 		RequestDispatcher dispatcher;
 		String errorURL = "Artikeldatenerfassung.jsp";
 		String successURL = "Artikeldatenerfassung.jsp";
 
-		bezeichnung = request.getParameter("bezeichnung");
-		beschreibung = request.getParameter("beschreibung");
+		name = request.getParameter("name");
+		description = request.getParameter("description");
 		try {
-			preis = Double.parseDouble(request.getParameter("preis"));
+			price = Double.parseDouble(request.getParameter("price"));
 		} catch (Exception e) {
 			// error handling missing input
 			ErrorMessage errorMessage = new ErrorMessage(115);
@@ -70,7 +76,7 @@ public class ArtikelErfassungsServlet extends HttpServlet {
 			return;
 		}
 		try {
-			groesse = Integer.parseInt(request.getParameter("groesse"));
+			size = Integer.parseInt(request.getParameter("size"));
 		} catch (Exception e) {
 			// error handling missing input
 			ErrorMessage errorMessage = new ErrorMessage(116);
@@ -79,33 +85,46 @@ public class ArtikelErfassungsServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 			return;
 		}
-		hersteller = request.getParameter("hersteller");
-		farbe = request.getParameter("farbe");
-		kategorie = request.getParameter("kategorie");
-		sportart = request.getParameter("sportart");
+		manufacturer = request.getParameter("manufacturer");
+		color = request.getParameter("color");
+		category = request.getParameter("category");
+		sport = request.getParameter("sport");
+		imagePart = request.getPart("image");
 
-		if (bezeichnung != null && !bezeichnung.equals("")) {
-			if (beschreibung != null && !beschreibung.equals("")) {
-				if (hersteller != null && !hersteller.equals("") && Artikel.checkHersteller(hersteller)) {
-					if (farbe != null && !farbe.equals("")) {
-						if (kategorie != null && !kategorie.equals("") && Artikel.checkKategorie(kategorie)) {
-							if (sportart != null && !sportart.equals("") && Artikel.checkSportart(sportart)) {
-								artikel = new Artikel(bezeichnung, beschreibung, groesse, preis, hersteller, farbe,
-										kategorie, sportart);
+		if (name != null && !name.equals("")) {
+			if (description != null && !description.equals("")) {
+				if (manufacturer != null && !manufacturer.equals("") && Article.checkManufacturer(manufacturer)) {
+					if (color != null && !color.equals("")) {
+						if (category != null && !category.equals("") && Article.checkCategory(category)) {
+							if (sport != null && !sport.equals("") && Article.checkSport(sport)) {
+								if (imagePart != null) {
+									article = new Article(name, description, size, price, manufacturer, color, category,
+											sport);
 
-								ArtikelService artikelService = new ArtikelService();
-								artikel = artikelService.createArtikelInDB(artikel);
+									ArticleService artikelService = new ArticleService();
+									article = artikelService.createArtikelInDB(article);
 
-								if (artikel != null) {
-									ErrorMessage successMeldung = new ErrorMessage(600);
-									request.setAttribute("erfolg", successMeldung);
-									dispatcher = request.getRequestDispatcher(successURL);
-									dispatcher.forward(request, response);
-									return;
+									ImageService imageService = new ImageService();
+									boolean imageCreated = imageService.createImageInDB(imagePart);
+
+									if (article != null && imageCreated) {
+										ErrorMessage successMessage = new ErrorMessage(600);
+										request.setAttribute("success", successMessage);
+										dispatcher = request.getRequestDispatcher(successURL);
+										dispatcher.forward(request, response);
+										return;
+									} else {
+										// Errorhandling something wrong during
+										// creating
+										ErrorMessage errorMessage = new ErrorMessage(122);
+										request.setAttribute("error", errorMessage);
+										dispatcher = request.getRequestDispatcher(errorURL);
+										dispatcher.forward(request, response);
+										return;
+									}
 								} else {
-									// Errorhandling something wrong during
-									// creating
-									ErrorMessage errorMessage = new ErrorMessage(122);
+									// Errorhandling missing input
+									ErrorMessage errorMessage = new ErrorMessage(124);
 									request.setAttribute("error", errorMessage);
 									dispatcher = request.getRequestDispatcher(errorURL);
 									dispatcher.forward(request, response);

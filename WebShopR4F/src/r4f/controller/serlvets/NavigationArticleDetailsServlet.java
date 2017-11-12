@@ -1,25 +1,26 @@
-package r4f.controller;
+package r4f.controller.serlvets;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import r4f.controller.services.ArticleService;
+import r4f.model.Article;
+
 /**
- * Servlet implementation class LogoutServlet
+ * Servlet implementation class NavigationArticleDetailsServlet
  */
-@WebServlet("/LogoutServlet")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/NavigationArticleDetailsServlet")
+public class NavigationArticleDetailsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public NavigationArticleDetailsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,21 +30,14 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher;
 		String successURL = "Willkommen.jsp";
-		request.getSession().removeAttribute("benutzer");
+		int id = Integer.parseInt(request.getParameter("article"));
 		
-		dispatcher = request.getRequestDispatcher(successURL);
-		dispatcher.forward(request, response);
+		ArticleService articleService = new ArticleService();
+		Article article = articleService.getArticle(id);
 		
+		request.setAttribute("article", article);
+		response.sendRedirect(successURL);
 		
 	}
 

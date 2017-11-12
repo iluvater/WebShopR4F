@@ -1,4 +1,4 @@
-package r4f.controller;
+package r4f.controller.serlvets;
 
 import java.io.IOException;
 
@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.model.Benutzer;
-import r4f.model.DatenbankVerbindung;
+import r4f.model.User;
+import r4f.controller.services.LoginService;
+import r4f.controller.services.ShoppingBasketService;
+import r4f.model.DatabaseConnection;
 import r4f.model.ErrorMessage;
+import r4f.model.ShoppingBasket;
 
 /**
  * Servlet implementation class LoginServlet
@@ -47,23 +50,28 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String email;
 		String password;
-		Benutzer benutzer;
+		User user;
+		ShoppingBasket shoppingBasket;
 		LoginService loginService;
+		ShoppingBasketService shoppingBasketService;
 		RequestDispatcher dispatcher;
 		
 		String errorURL = "Benutzerauthentifizierung.jsp";
-		String succesURL = "Willkommen.jsp";
+		String successURL = "Willkommen.jsp";
 
 		email = request.getParameter("email");
 		password = request.getParameter("password");
 		
 		loginService = new LoginService();
+		shoppingBasketService = new ShoppingBasketService();
 		
 		if(loginService.checkLogin(email, password)){
-			benutzer = loginService.getBenutzer(email);
+			user = loginService.getUser(email);
+			shoppingBasket = shoppingBasketService.getShoppingBasket(user.getId());
 			
-			request.getSession().setAttribute("bentuzer", benutzer);
-			dispatcher = request.getRequestDispatcher(succesURL);
+			request.getSession().setAttribute("user", user);
+			request.getSession().setAttribute("shoppingBasket", shoppingBasket);
+			dispatcher = request.getRequestDispatcher(successURL);
 			dispatcher.forward(request, response);
 			return;
 		}else{
