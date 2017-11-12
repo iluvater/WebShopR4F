@@ -9,43 +9,45 @@
 <link href="Design.css" rel="stylesheet">
 </head>
 <body>
-<form action="./ArtikelErfassungsServlet">
+<form action="./ArticleCreationServlet" method="post">
 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
 	</jsp:useBean> 
 	<div id="seitenbereich">
 		<div class="inhalt_farbe_div">
 			<h4>Artikeldaten einpflegen</h4>			
-			<p><label for="bezeichnung">Bezeichnung</label>
-			<input id="bezeichnung" name="bezeichnung" value="" type="text" /><br /></p>
+			<p><label for="bezeichnung1">Bezeichnung</label>
+			<input id="bezeichnung1" name="name" value="" type="text" /><br /></p>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 117 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 				</c:if>	
 			</c:if>
-			<p><label for="preis">Preis</label>
-			<input id="preis" name="preis" min="0" value="" type="number" step="0.01" /></p>
+
+			<p><label for="preis1">Preis</label>
+			<input id="preis1" name="price" min="0" value="" type="number" step="0.01" /></p>
+
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 115 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 				</c:if>	
 			</c:if>
-			<p><label for="groesse">Größe</label>
-			<input id="groesse" name="groesse" min="20" value="" type="number" /></p>
+			<p><label for="groesse1">Gr&ouml&szlige</label>
+			<input id="groesse1" name="size" min="20" value="" type="number" /></p>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 116 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 				</c:if>	
 			</c:if>
-			<p><label for="farbe">Farbe</label>
-			<input id="farbe" name="farbe" value="" type="text" /></p>
+			<p><label for="farbe1">Farbe</label>
+			<input id="farbe1" name="color" value="" type="text" /></p>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 120 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 				</c:if>	
 			</c:if>
  			<p><label for="hersteller">Hersteller</label> 
- 			<select name="hersteller">
- 				<option value="">Bitte wählen</option>
+ 			<select name="manufacturer">
+ 				<option value="">Bitte w&aumlhlen</option>
  				<option value="Nike">Nike</option>
  				<option value="Asics">Asics</option>
  				<option value="Kempa">Kempa</option>
@@ -58,8 +60,8 @@
 				</c:if>	
 			</c:if>
 			<p><label for="kategorie">Kategorie</label> 
-			<select name="kategorie">
-				<option value="">Bitte wählen</option>
+			<select name="category">
+				<option value="">Bitte w&aumlhlen</option>
  				<option value="Herren">Herren</option>
 				<option value="Damen">Damen</option>
 				<option value="Kinder">Kinder</option></select></p>
@@ -69,10 +71,10 @@
 				</c:if>	
 			</c:if>
 			<p><label for="sportart">Sportart</label> 
- 			<select name="sportart">
- 			<option value="">Bitte wählen</option>
+ 			<select name="sport">
+ 			<option value="">Bitte w&aumlhlen</option>
  				<option value="Laufen">Laufen</option>
- 				<option value="Fußball">Fußball</option>
+ 				<option value="Fussball">Fu&szligball</option>
  				<option value="Basketball">Basketball</option>
  				<option value="Golf">Golf</option>
 				<option value="Schwimmen">Schwimmen</option>
@@ -83,7 +85,7 @@
 				</c:if>	
 			</c:if>			
 			<p><label for="beschreibung">Beschreibung</label>
-			<textarea id="textarea_fest" name="beschreibung" cols=37></textarea>
+			<textarea id="textarea_fest" name="description" cols=37></textarea>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 118 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>

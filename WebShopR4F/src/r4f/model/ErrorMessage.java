@@ -1,8 +1,6 @@
 package r4f.model;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -45,7 +43,9 @@ public class ErrorMessage {
 		
 	}
 	
-	
+	/**
+	 * Constructor that is needed so this class is a java bean.
+	 */
 	public ErrorMessage(){
 		this.errorMessage=null;
 	}
