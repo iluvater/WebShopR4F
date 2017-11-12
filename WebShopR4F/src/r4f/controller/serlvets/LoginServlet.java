@@ -55,20 +55,20 @@ public class LoginServlet extends HttpServlet {
 		LoginService loginService;
 		ShoppingBasketService shoppingBasketService;
 		RequestDispatcher dispatcher;
-		
+
 		String errorURL = "Benutzerauthentifizierung.jsp";
 		String successURL = "Willkommen.jsp";
 
 		email = request.getParameter("email");
 		password = request.getParameter("password");
-		
+
 		loginService = new LoginService();
 		shoppingBasketService = new ShoppingBasketService();
-		
+
 		if(loginService.checkLogin(email, password)){
 			user = loginService.getUser(email);
 			shoppingBasket = shoppingBasketService.getShoppingBasket(user.getId());
-			
+
 			request.getSession().setAttribute("user", user);
 			request.getSession().setAttribute("shoppingBasket", shoppingBasket);
 			dispatcher = request.getRequestDispatcher(successURL);
