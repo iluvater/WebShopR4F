@@ -9,48 +9,67 @@
 <link href="Design.css" rel="stylesheet">
 </head>
 <body>
-<form action="./ArtikeldetailServlet" method="post">
-	<jsp:useBean id="artikel" class="r4f.model.Artikel" scope="request">
+	<jsp:useBean id="article" class="r4f.model.Artikel" scope="request">
 	</jsp:useBean> 
 	<div id="seitenbereich">
 		<div class="inhalt_farbe_div">
 			<h4>Artikeldetails</h4>			
-			<c:if übergebenerArtikel ="${not empty artikel}">
-				<h5><jsp:getProperty property="bezeichnung" name="artikel"/></h5>
-
-				<p><jsp:getProperty property="preis" name="artikel"/></p>
+			<c:if test ="${not empty article.name}">
+				<table>
+					<tr>
+						<td>
+							<img src="./ImageServlet/${article.image}">
+						</td>
 					
-				<p><label for="farbe">Farbe</label>
-				<p><jsp:getProperty property="farbe" name="artikel"/></p>
-
-				<p><label for="groesse">Größe</label> 
- 				<select name="groesse">
- 				<option value="">Bitte w&aumlhlen</option>
- 				<option value="37">37</option>
- 				<option value="38">38</option>
- 				<option value="39">39</option>
- 				<option value="40">40</option>
-				<option value="41">41</option>
-				<option value="42">42</option></select></p>
-
-				<p><jsp:getProperty property="farbe" name="artikel"/></p>
+						<td>
+							<h5><jsp:getProperty property="name" name="article"/></h5>
+							
+							<hr />
+							
+							<p><jsp:getProperty property="price" name="article"/></p>
+					
+							<hr />
+						
+							<p><label for="color">Farbe:</label>
+							<p><jsp:getProperty property="color" name="article"/></p>
+							
+							<hr />
+								
+							<p><label for="size">Größe:</label>
+							<p><jsp:getProperty property="size" name="article"/></p>
 				
-				<p><label for="beschreibung">Beschreibung:</label>
-				<p><jsp:getProperty property="beschreibung" name="artikel"/></p>
-				
-				<p><label for="hersteller">Hersteller:</label>
-				<p><jsp:getProperty property="hersteller" name="artikel"/></p>
+							<hr />
+							
+							<p><label for="manufacturer">Hersteller:</label>
+							<p><jsp:getProperty property="manufacturer" name="article"/></p>	
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="./NavigationOverviewServlet"><input type="submit" id="button" value="Weiter shoppen" /></a>
+							<input type="submit" id="button" value="In den Warenkorb" />
+						</td>
+						<td>
+						
+						</td>
+					</tr>		
+					<tr>
+						<p><label for="description">Beschreibung:</label>
+						<p><jsp:getProperty property="description" name="article"/></p>
+					</tr>
+				</table>
+			</c:if>
+			<c:if test ="${empty article.name}">
+				<p>
+				Leider ist der Artikel zur Zeit nicht vorhanden.
+				<hr />
+				Versuche es in ein paar Tagen nochmal, wenn der Bestand wieder aufgefüllt ist.
+				</p>
 			</c:if>
 		</div>
-		<c:if test ="${not empty error }">
-			<c:if test="${error.errorCode == 122 }">
-				<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
-			</c:if>	
-		</c:if>
 		<center>
-			<input type="submit" id="button" value="In den Warenkorb" />
+
 		</center>
 	</div>
-</form>
 </body>
 </html>
