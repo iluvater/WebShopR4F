@@ -14,7 +14,7 @@ public class AuthorizationService {
 	
 	/**
 	 * This method checks whether an user has an authorization or not
-	 * @param user user for which should be checked 
+	 * @param user user which should be checked 
 	 * @param authorization authorization that should be checked
 	 * @return returns false if the user is not logged in or has not the authorization
 	 * 			returns true if the user has the authorization
