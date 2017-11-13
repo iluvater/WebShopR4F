@@ -1,0 +1,176 @@
+@CHARSET "UTF-8";
+
+h2 {
+	font-size:24pt; 
+	}
+	
+h3 {
+	font-size:18pt;
+}
+
+h4 {
+	font-size:14pt;
+}
+
+p {
+	font-size:10pt; 
+	margin-bottom: 20px;
+}
+
+hr {
+  background-color:white;
+  color:white;
+  border:white; 
+  height:1px;
+  opacity: 0;
+}
+
+
+body {
+	font-family: arial; 
+	color: #000;
+	background-image:url("Hintergrundbild_Laeufer_Berge.JPG");
+	background-repeat: no-repeat;
+	background-position: center; 
+	background-size: 100% 100%;
+	background-attachment: fixed;
+}
+
+body, html {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+label {
+	width: 10em;
+	display: block;
+	float: left; 
+	align: center; 
+	/* margin-left: 26%; */
+}
+
+h2.agb {
+	padding-left: 15px; 
+	/* text-align: center;  */
+}
+
+h3.agb {
+	padding-left: 15px;
+}
+
+h4.agb {
+	padding-left: 15px;
+} 
+
+p.agb {
+	padding-left: 42px;
+	padding-right: 20px;
+}
+
+p.agb2 {
+	padding-left: 60px;
+	padding-right: 20px; 
+	margin-bottom: 0px;
+}
+
+p.footer {
+	margin-bottom: 0px;
+} 
+
+p.fehler {
+	font-size:8pt;
+	font-family: arial;
+	color: #FF0000;
+}
+
+a.footer {
+	margin-right: 2.5em;
+}
+
+/* Formatierung der placeholder für die Browser Firefox und Chrome (Rest ist ausgenommen) */
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-style:italic;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+  font-style:italic;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  font-style:italic;
+}
+
+#container {
+	width: 960px;
+	margin: 0 auto;
+	min-height: 100%;
+	width: 70%;
+	background: white;
+	padding-bottom: 3em;
+}
+
+#kopf {
+	font: 1.8em serif;
+	text-align: center;
+	background-color: #e3f5f3;
+	color: #000;
+	border-bottom: #6f7400 2px solid;
+	padding: 40px 0px;
+}
+
+#inhalt {
+	background: #EDEDED;
+	width: 70%; 
+	margin-left:15%;
+	margin-right: 15%;
+	padding-top: 2px;
+	/* padding-bottom: 5px; */
+	padding-right:0px;
+	padding-left:43px; 
+	padding-top: 2px;
+	padding-bottom: 5px;
+}
+
+#fuss {
+	background-color: #dad6b1;
+	/* padding: 40px; */
+	color: #000;
+	/* border-top: 1px solid #b08580; */
+	clear: left;
+	height: 3em; 
+	margin-left: auto;
+	margin-right: auto; 
+	margin-top: -3em;
+	text-align: center; 
+	line-height: 3em;
+}
+
+#containerAgb {
+	width: 960px;
+	margin: 0 auto;
+	min-height: 100%;
+	width: 70%;
+	background: white;
+	padding-bottom: 3em;
+	
+	/* padding-right: 43px; */
+}
+
+#button {
+	background-color: black;
+	color: white;
+	border: black;
+	width: 200px;
+	height: 35px;
+	font-family: arial;
+	font-size: 10pt;
+	text-align: center;
+}
+
+#button:hover {
+	background-color: #EDEDED;
+	color: black;
+	border: black;
+}
