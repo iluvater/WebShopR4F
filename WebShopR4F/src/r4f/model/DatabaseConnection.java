@@ -86,7 +86,7 @@ public class DatabaseConnection {
 
 				PreparedStatement preparedStatement = conn.prepareStatement(
 						"INSERT INTO `user` (`id`, `email`, `firstName`, `lastName`, `birthday`, `password`, `street`, "
-								+ "`houseNumber`, `postCode`, `city`, `salutation`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+								+ "`houseNumber`, `postCode`, `city`, `salutation`, `shoppingBasket`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, null)",
 						Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setString(1, user.getEmail());
 				preparedStatement.setString(2, user.getFirstName());
@@ -114,12 +114,6 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return -1;
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		} else {
 			return -1;
@@ -144,7 +138,7 @@ public class DatabaseConnection {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT u.*, role.name  FROM user AS u INNER JOIN role AS r ON r.id = u.role WHERE email='"
+				String sql = "SELECT u.*, r.name  FROM user AS u INNER JOIN role AS r ON r.id = u.role WHERE email='"
 						+ email + "'";
 				ResultSet result = query.executeQuery(sql);
 
@@ -167,13 +161,7 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			} 
 		}
 
 		return user;
@@ -197,7 +185,7 @@ public class DatabaseConnection {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT u.*, role.name  FROM user AS u INNER JOIN role AS r ON r.id = u.role WHERE id='"
+				String sql = "SELECT u.*, r.name  FROM user AS u INNER JOIN role AS r ON r.id = u.role WHERE u.id='"
 						+ id + "'";
 				ResultSet result = query.executeQuery(sql);
 
@@ -221,12 +209,6 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 
@@ -270,13 +252,7 @@ public class DatabaseConnection {
 
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			} 
 		}
 	}
 
@@ -324,13 +300,7 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return -1;
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			} 
 		} else {
 			return -1;
 		}
@@ -378,13 +348,7 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			} 
 		}
 		return article;
 	}
@@ -430,12 +394,6 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 		return articleList;
@@ -468,12 +426,6 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 
@@ -507,13 +459,7 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			} 
 		}
 
 		return id;
@@ -546,13 +492,7 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			} 
 		}
 
 		return id;
@@ -585,13 +525,7 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			} 
 		}
 
 		return id;
@@ -631,13 +565,7 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return -1;
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			} 
 		} else {
 			return -1;
 		}
@@ -680,13 +608,7 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			} 
 		}
 
 		return shoppingBasket;
@@ -714,13 +636,7 @@ public class DatabaseConnection {
 
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			} 
 		}
 	}
 
@@ -765,13 +681,7 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return -1;
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			} 
 		} else {
 			return -1;
 		}
@@ -811,12 +721,6 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return false;
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		} else {
 			return false;
@@ -854,13 +758,7 @@ public class DatabaseConnection {
 
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			} 
 		}
 		if (lines != 1) {
 			return false;
@@ -897,13 +795,7 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			} 
 		}
 		return image;
 	}

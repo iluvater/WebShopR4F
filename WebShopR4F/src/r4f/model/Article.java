@@ -88,6 +88,16 @@ public class Article {
 		this.category = category;
 		this.sport = sport;
 	}
+	
+	public Article(){
+		this.name = null;
+		this.description = null;
+		this.manufacturer = null;
+		this.color = null;
+		this.entryDate = null;
+		this.category = null;
+		this.sport = null;
+	}
 
 	/**
 	 * @return the id
