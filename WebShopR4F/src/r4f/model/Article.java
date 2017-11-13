@@ -20,6 +20,7 @@ public class Article {
 	private Date entryDate;
 	private String category;
 	private String sport;
+	private int image;
 
 	/**
 	 * Constructor that initializes all attributes
@@ -44,7 +45,7 @@ public class Article {
 	 *            category to set
 	 */
 	public Article(int id, String name, String description, int size, double price, String manufacturer,
-			String color, Date entryDate, String category, String sport) {
+			String color, Date entryDate, String category, String sport, int image) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -55,6 +56,7 @@ public class Article {
 		this.entryDate = entryDate;
 		this.category = category;
 		this.sport = sport;
+		this.image = image;
 	}
 
 	/**
@@ -292,6 +294,20 @@ public class Article {
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * @return the image
+	 */
+	public int getImage() {
+		return image;
+	}
+
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(int image) {
+		this.image = image;
 	}
 
 }

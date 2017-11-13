@@ -1,20 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Artikeldatenerfassung</title>
-<link href="Design.css" rel="stylesheet">
+<link href="DesignV1.css" rel="stylesheet">
 </head>
 <body>
-<form action="./ArticleCreationServlet" method="post">
+
 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
 	</jsp:useBean> 
-	<div id="seitenbereich">
-		<div class="inhalt_farbe_div">
-			<h4>Artikeldaten einpflegen</h4>			
+	
+	<div id="kopf">
+		<h1>Überschrift Test</h1>
+	</div>
+	
+	<div id="container">
+		<form action="./ArticleCreationServlet" method="post" enctype="multipart/form-data">
+		<h2>Artikeldatenerfassung</h2>
+		<div id="inhalt">
+			<h4>Artikeldaten einpflegen</h4>	
 			<p><label for="bezeichnung1">Bezeichnung</label>
 			<input id="bezeichnung1" name="name" value="" type="text" /><br /></p>
 			<c:if test ="${not empty error }">
@@ -83,7 +90,14 @@
 				<c:if test="${error.errorCode == 123 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 				</c:if>	
-			</c:if>			
+			</c:if>		
+			<p><label for="image1">Bild</label>
+			<input id="image1" name="image" type="file"/></p>
+			<c:if test ="${not empty error }">
+				<c:if test="${error.errorCode == 124 }">
+					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+				</c:if>	
+			</c:if>				
 			<p><label for="beschreibung">Beschreibung</label>
 			<textarea id="textarea_fest" name="description" cols=37></textarea>
 			<c:if test ="${not empty error }">
@@ -101,10 +115,13 @@
 		<center>
 			<input type="submit" id="button" value="Speichern" />
 		</center> 
+		</form>
 	</div>
 
+	<div id="fuss">
+		<p class="footer"><a class="footer" href="Test.jsp">AGB's</a> <a class="footer" href="Test.jsp">Kontaktseite</a> <a class="footer" href="Test.jsp">Impressum</a> <a class="footer" href="Test.jsp">Hilfeseite</a> © 2017 Run4Fun GmbH, Alle Rechte vorbehalten</p>
+	</div>
 
-</form>
 	
 </body>
 </html>

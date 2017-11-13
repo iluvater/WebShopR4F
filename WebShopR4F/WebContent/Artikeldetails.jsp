@@ -9,7 +9,7 @@
 <link href="Design.css" rel="stylesheet">
 </head>
 <body>
-	<jsp:useBean id="article" class="r4f.model.Artikel" scope="request">
+	<jsp:useBean id="article" class="r4f.model.Article" scope="request">
 	</jsp:useBean> 
 	<div id="seitenbereich">
 		<div class="inhalt_farbe_div">

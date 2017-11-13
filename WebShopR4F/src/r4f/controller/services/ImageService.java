@@ -16,17 +16,8 @@ import r4f.model.Image;
  */
 public class ImageService extends Service{
 
-	public boolean createImageInDB(Part part){
-		
-		InputStream inputStream;
-		try {
-			inputStream = part.getInputStream();
-			return super.getDbConnection().createImageInDB(inputStream, part.getContentType());		
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}		
+	public int createImageInDB(InputStream inputStream, String contentType){
+		return super.getDbConnection().createImageInDB(inputStream, contentType);		
 	}
 	
 	public Image getImage(int id){

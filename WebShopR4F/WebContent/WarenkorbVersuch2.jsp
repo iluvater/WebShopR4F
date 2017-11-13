@@ -9,10 +9,9 @@
 <link href="Design.css" rel="stylesheet">
 </head>
 <body>
-<!-- 
-<form action="./WarenkorbServlet" method="post">
+ <%-- <form action="./WarenkorbServlet" method="post">
 	<jsp:useBean id="artikel" class="r4f.model.Artikel" scope="request">
-	</jsp:useBean> 
+	</jsp:useBean>  --%>
 <!--<c:if übergebeneListe ="${empty error }">
 <div id="seitenbereich">
 		<div class="inhalt_farbe_div">

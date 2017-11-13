@@ -1,6 +1,9 @@
 package r4f.controller.serlvets;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,14 +11,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-import java.sql.Blob;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import r4f.controller.services.ArticleService;
 import r4f.controller.services.ImageService;
 import r4f.model.Article;
 import r4f.model.ErrorMessage;
-import r4f.model.Image;
 
 /**
  * Servlet implementation class ArticleCreationServlet
@@ -49,47 +55,94 @@ public class ArticleCreationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String name;
-		String description;
-		int size;
-		double price;
-		String manufacturer;
-		String color;
-		String category;
-		String sport;
+		String name = null;
+		String description = null;
+		int size = -1;
+		double price = -1;
+		String manufacturer = null;
+		String color = null;
+		String category = null;
+		String sport = null;
 		Article article;
-		Part imagePart;
+		InputStream imageStream = null;
+		String imageType = null;
 		RequestDispatcher dispatcher;
 		String errorURL = "Artikeldatenerfassung.jsp";
 		String successURL = "Artikeldatenerfassung.jsp";
+		
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		factory.setSizeThreshold(16777216);
 
-		name = request.getParameter("name");
-		description = request.getParameter("description");
+		// Create a new file upload handler
+		ServletFileUpload upload = new ServletFileUpload(factory);
+
+		// Set overall request size constraint
+		upload.setSizeMax(16777216);
+
+		// Parse the request
 		try {
-			price = Double.parseDouble(request.getParameter("price"));
-		} catch (Exception e) {
-			// error handling missing input
-			ErrorMessage errorMessage = new ErrorMessage(115);
+			List<FileItem> items = upload.parseRequest(request);
+			Iterator<FileItem> iter = items.iterator();
+			while (iter.hasNext()) {
+				FileItem item = iter.next();
+
+				if (item.isFormField()) {
+					switch (item.getFieldName()) {
+					case "name":
+						name = item.getString();
+						break;
+					case "description":
+						description = item.getString();
+						break;
+					case "price":
+						try {
+							price = Double.parseDouble(item.getString());
+						} catch (Exception e) {
+							// error handling missing input
+							ErrorMessage errorMessage = new ErrorMessage(115);
+							request.setAttribute("error", errorMessage);
+							dispatcher = request.getRequestDispatcher(errorURL);
+							dispatcher.forward(request, response);
+							return;
+						}
+						break;
+					case "size":
+						try {
+							size = Integer.parseInt(item.getString());
+						} catch (Exception e) {
+							// error handling missing input
+							ErrorMessage errorMessage = new ErrorMessage(116);
+							request.setAttribute("error", errorMessage);
+							dispatcher = request.getRequestDispatcher(errorURL);
+							dispatcher.forward(request, response);
+							return;
+						}
+						break;
+					case "manufacturer":
+						manufacturer = item.getString();
+						break;
+					case "color":
+						color = item.getString();
+						break;
+					case "category":
+						category = item.getString();
+						break;
+					case "sport":
+						sport = item.getString();
+						break;
+					}
+				} else {
+					imageType = item.getContentType();
+					imageStream = item.getInputStream();
+				}
+			}
+		} catch (FileUploadException e) {
+			ErrorMessage errorMessage = new ErrorMessage(125);
 			request.setAttribute("error", errorMessage);
 			dispatcher = request.getRequestDispatcher(errorURL);
 			dispatcher.forward(request, response);
 			return;
 		}
-		try {
-			size = Integer.parseInt(request.getParameter("size"));
-		} catch (Exception e) {
-			// error handling missing input
-			ErrorMessage errorMessage = new ErrorMessage(116);
-			request.setAttribute("error", errorMessage);
-			dispatcher = request.getRequestDispatcher(errorURL);
-			dispatcher.forward(request, response);
-			return;
-		}
-		manufacturer = request.getParameter("manufacturer");
-		color = request.getParameter("color");
-		category = request.getParameter("category");
-		sport = request.getParameter("sport");
-		imagePart = request.getPart("image");
 
 		if (name != null && !name.equals("")) {
 			if (description != null && !description.equals("")) {
@@ -97,17 +150,22 @@ public class ArticleCreationServlet extends HttpServlet {
 					if (color != null && !color.equals("")) {
 						if (category != null && !category.equals("") && Article.checkCategory(category)) {
 							if (sport != null && !sport.equals("") && Article.checkSport(sport)) {
-								if (imagePart != null) {
+								if (imageStream != null) {
 									article = new Article(name, description, size, price, manufacturer, color, category,
 											sport);
 
+									int imageId = -1;
 									ArticleService artikelService = new ArticleService();
 									article = artikelService.createArtikelInDB(article);
-
+									if(article != null){
 									ImageService imageService = new ImageService();
-									boolean imageCreated = imageService.createImageInDB(imagePart);
-
-									if (article != null && imageCreated) {
+									imageId = imageService.createImageInDB(imageStream, imageType);
+									if (imageId != -1) {
+										article.setImage(imageId);
+										artikelService.updateArticleInDB(article);
+									}
+									}
+									if (article != null && imageId != -1) {
 										ErrorMessage successMessage = new ErrorMessage(600);
 										request.setAttribute("success", successMessage);
 										dispatcher = request.getRequestDispatcher(successURL);
