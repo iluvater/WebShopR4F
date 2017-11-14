@@ -9,6 +9,7 @@
 <link href="DesignV1.css" rel="stylesheet">
 </head>
 <body>
+
 	<jsp:useBean id="ShoppingBasket" class="r4f.model.ShoppingBasket" scope="session">
 	</jsp:useBean> 
 <c:if test ="${empty ShoppingBasket.items}">
@@ -17,7 +18,7 @@
 		<h4>Warenkorb</h4>
 		<p>Dein Warenkorb ist noch leer. 
 		<br/>
-		Lege los und fülle ihn mit deinen neuen Lieblingsschuhen!</p>
+		Lege los und fÃ¼lle ihn mit deinen neuen Lieblingsschuhen!</p>
 		</div>
 		<hr />
 		<center>
@@ -33,7 +34,7 @@
 		<ul class="inline">
 			<li class="inline"><h4>Artikel</h4></li>
 			<li class="inline"><h4>Farbe</h4></li>
-			<li class="inline"><h4>Größe</h4></li>
+			<li class="inline"><h4>GrÃ¶ÃŸe</h4></li>
 			<li class="inline"><h4>Preis</h4></li>			
 		</ul>
 		<c:forEach items="${ShoppingBasket.items}" var="item">		

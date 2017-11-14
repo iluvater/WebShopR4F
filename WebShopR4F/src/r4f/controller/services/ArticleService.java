@@ -43,4 +43,12 @@ public class ArticleService extends Service{
 	public Article getArticle(int id){
 		return super.getDbConnection().getArticle(id);
 	}
+	
+	/**
+	 * this method updates an article in the database
+	 * @param article the article that should be update with all new values
+	 */
+	public void updateArticleInDB(Article article) {
+		super.getDbConnection().updateArticleInDB(article); 		
+	}
 }

@@ -1,6 +1,8 @@
 package r4f.controller.serlvets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,14 +32,22 @@ public class NavigationArticleDetailsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String successURL = "Willkommen.jsp";
-		int id = Integer.parseInt(request.getParameter("article"));
+		String successURL = "Artikeldetails.jsp";
+		RequestDispatcher dispatcher;
+		Article article;
+		try{
+			//int id = Integer.parseInt(request.getParameter("article"));
+			
+			ArticleService articleService = new ArticleService();
+			article = articleService.getArticle(8);
+		}catch(Exception e){
+			article = null;
+		}
 		
-		ArticleService articleService = new ArticleService();
-		Article article = articleService.getArticle(id);
 		
 		request.setAttribute("article", article);
-		response.sendRedirect(successURL);
+		dispatcher = request.getRequestDispatcher(successURL);
+		dispatcher.forward(request, response);
 		
 	}
 

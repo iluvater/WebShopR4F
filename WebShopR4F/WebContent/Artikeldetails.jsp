@@ -7,54 +7,56 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Artikeldetailseite</title>
 <link href="DesignV1.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<jsp:useBean id="article" class="r4f.model.Article" scope="request">
 	</jsp:useBean> 
-		<div id="container">
-		<c:if test ="${empty article.name}">
+	<div id="kopf">
+		<h1>Ãœberschrift Test</h1>
+	</div>
+	<div id="container">
 		<div class="inhalt">
-			<ul>
-				<!--<li> <img src="./ImageServlet/${article.image}"></li>-->
-				<li><h4><jsp:getProperty property="name" name="article"/></h4> <br/>
-					<p><jsp:getProperty property="price" name="article"/></p> <br/>
-					<input type="submit" id="button" value="Auf den Merkzettel" /> <br/>
-					<input type="submit" id="button" value="In den Warenkorb" />
-				</li>
-			</ul>
-		</div>
-		<div class="inhalt">
-			<h4>Produktinformationen</h4>
-			<br/>
-			<p><label for="size">Größe:</label>
-			<p><jsp:getProperty property="size" name="article"/></p>
-			<br/>
-			<p><label for="color">Farbe:</label>
-			<p><jsp:getProperty property="color" name="article"/></p>
-			<br/>
-			<p><label for="manufacturer">Hersteller:</label>
-			<p><jsp:getProperty property="manufacturer" name="article"/></p>	
-			<br/>
-			<p><label for="sport">Sportart:</label>
-			<p><jsp:getProperty property="sport" name="article"/></p>
-			<br/>
-			<p><label for="category">Kategorie:</label>
-			<p><jsp:getProperty property="category" name="article"/></p>
-		</div>
-		<div>
-			<h4>Beschreibung:</h4>
-			<p><label for="description">Beschreibung:</label>
-			<p><jsp:getProperty property="description" name="article"/></p>
+			<c:if test ="${not empty article.name}">
+				<div class="containerArtikelDetails">
+					<img id="ImgArtikelDetails" src="./ImageServlet/${article.image }" alt="Bild">
+					<h3 class="artikelDetails"><jsp:getProperty property="name" name="article"/></h3> 
+					<h4 class="artikelDetails">Preis: <jsp:getProperty property="price" name="article"/> &euro; </h4>
+					<hr />
+					<a href="Willkommen.jsp" id="button" class="btn btn-default btn-sm">
+          				<span class="glyphicon glyphicon-heart-empty"></span> Merkliste
+        			</a>
+        			<a href="Willkommen.jsp" id="button" class="btn btn-default btn-sm">
+          				<span class="glyphicon glyphicon-shopping-cart"></span> Warenkorb
+        			</a>
+				</div>
+				<div class="containerArtikelDetails">
+					<h4 class="artikelDetails">Produktioninformationen</h4>
+					<p class="artikelDetails">
+						<strong>GrÃ¶ÃŸe:</strong> <jsp:getProperty property="size" name="article"/><br />
+						<strong>Farbe: </strong><jsp:getProperty property="color" name="article"/><br />
+						<strong>Hersteller: </strong><jsp:getProperty property="manufacturer" name="article"/><br />
+						<strong>Sportart: </strong><jsp:getProperty property="sport" name="article"/><br />
+						<strong>Kategorie: </strong><jsp:getProperty property="category" name="article"/><br />
+					</p>
+				</div>
+				<div class="containerArtikelDetails">
+					<h4 class="artikelDetails">Beschreibung</h4>
+					<p class="artikelDetails">
+						<jsp:getProperty property="description" name="article"/>	
+					</p>				
+				</div>
+			</c:if>
+			<c:if test ="${empty article.name}">
+				<p class="fehler">
+					Es ist ein Fehler aufgetreten. Bitte Versuchen Sie es erneut.
+				</p>
+			</c:if>
 		</div>
 	</div>
-	</c:if>
-	<c:if test ="${empty article.name}">
-		<div class="inhalt">			
-			<p>Leider ist der Artikel zur Zeit nicht vorhanden.
-			<br />Versuche es in ein paar Tagen nochmal, wenn der Bestand wieder aufgefüllt ist.
-			</p>
-		</div>
-	</c:if>
+	<div id="fuss">
+		<p class="footer"><a class="footer" href="Test.jsp">AGB's</a> <a class="footer" href="Test.jsp">Kontaktseite</a> <a class="footer" href="Test.jsp">Impressum</a> <a class="footer" href="Test.jsp">Hilfeseite</a> Â© 2017 Run4Fun GmbH, Alle Rechte vorbehalten</p>
 	</div>
 </body>
 </html>
