@@ -48,7 +48,7 @@ public class Article {
 			String color, Date entryDate, String category, String sport, int image) {
 		this.id = id;
 		this.name = name;
-		this.description = description;
+		setDescription(description);
 		this.size = size;
 		this.price = price;
 		this.manufacturer = manufacturer;
@@ -81,7 +81,7 @@ public class Article {
 	public Article(String name, String description, int size, double price, String manufacturer,
 			String color,  String category, String sport) {
 		this.name = name;
-		this.description = description;
+		setDescription(description);
 		this.size = size;
 		this.price = price;
 		this.manufacturer = manufacturer;
@@ -143,7 +143,7 @@ public class Article {
 	 *            the description to set
 	 */
 	public void setDescription(String description) {
-		this.description = description;
+		this.description = description.replaceAll("\r\n", "<br>");
 	}
 
 	/**

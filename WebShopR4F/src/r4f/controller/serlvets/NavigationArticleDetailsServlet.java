@@ -36,10 +36,10 @@ public class NavigationArticleDetailsServlet extends HttpServlet {
 		RequestDispatcher dispatcher;
 		Article article;
 		try{
-			int id = Integer.parseInt(request.getParameter("article"));
+			//int id = Integer.parseInt(request.getParameter("article"));
 			
 			ArticleService articleService = new ArticleService();
-			article = articleService.getArticle(id);
+			article = articleService.getArticle(8);
 		}catch(Exception e){
 			article = null;
 		}
