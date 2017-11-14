@@ -109,7 +109,21 @@ public class User {
 		this.city = city;
 		setSalutation(salutation);
 	}
-
+/**
+ * constructor used for being a bean 
+ */
+	public User(){
+		this.firstName = null;
+		this.lastName = null;
+		this.birthday = null;
+		this.email = null;
+		this.password = null;
+		this.street = null;
+		this.houseNumber = null;
+		this.postCode = null;
+		this.city = null;
+		this.salutation = null;
+	}
 	/**
 	 * @return the id
 	 */
