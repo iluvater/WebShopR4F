@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>WarenkorbVersuch2</title>
+<title>Warenkorb</title>
 <link href="DesignV1.css" rel="stylesheet">
 </head>
 <body>
-	<jsp:useBean id="article" class="r4f.model.ShoppingBasket" scope="session">
+	<jsp:useBean id="ShoppingBasket" class="r4f.model.ShoppingBasket" scope="session">
 	</jsp:useBean> 
-<c:if test ="${empty ShoppingBasketItem.getArticle()}">
+<c:if test ="${empty ShoppingBasket.items}">
 <div id="container">
 		<div class="inhalt">
 		<h4>Warenkorb</h4>
@@ -26,31 +26,27 @@
 		</center>
 </div>
 </c:if>
-<!--<c:if test ="${not empty ShoppingBasketItem.getArticle()}">
-	var=totalprice;
-	totalprice=0;
+<c:if test ="${not empty ShoppingBasket.items}">
 	<div id="container">
 		<div class="inhalt">
 		<h4>Warenkorb</h4>
-		<ul>
-			<li><h4>Artikel</h4></li>
-			<li><h4>Farbe</h4></li>
-			<li><h4>Größe</h4></li>
-			<li><h4>Preis</h4></li>			
+		<ul class="inline">
+			<li class="inline"><h4>Artikel</h4></li>
+			<li class="inline"><h4>Farbe</h4></li>
+			<li class="inline"><h4>Größe</h4></li>
+			<li class="inline"><h4>Preis</h4></li>			
 		</ul>
-		while(test ="${not empty ShoppingBasketItem}){
+		<c:forEach items="${ShoppingBasket.items}" var="item">		
 		<ul>
-			<li><p><jsp:getProperty property="name" name="article"/></p></li>
-			<li><p><jsp:getProperty property="color" name="article"/></p></li>
-			<li><p><jsp:getProperty property="size" name="article"/></p></li>
-			<li><p><jsp:getProperty property="price" name="article"/></li>			
+			<li><p>${item.article.name}</p></li>
+			<li><p>${item.article.color}</p></li>
+			<li><p>${item.article.size}</p></li>
+			<li><p>${item.article.price}</p></li>			
 		</ul>
-		totalprice=totalprice+ShoppingBasketItem.getAmount();
-		ShoppingBasketItem.next();
-		}
+		</c:forEach>
 		<ul>
 		<li><h4>Gesamtpreis:</h4></li>
-		<li>echo(totalprice);</li>
+		<li><p><jsp:getProperty property="price" name="shoppingbasket"/></p></li>
 		</ul>		
 		</div>
 		<hr />
@@ -58,6 +54,6 @@
 			<input type="submit" id="button" value="Zur Kasse" />
 		</center>
 	</div>
-</c:if>-->
+</c:if>
 </body>
 </html>
