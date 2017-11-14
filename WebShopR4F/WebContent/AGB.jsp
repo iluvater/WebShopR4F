@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://run4fun.de/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>AGB's</title>
 <link href="DesignV1.css" rel="stylesheet">
 </head>
@@ -16,7 +17,7 @@
 	<h3 class="agb">Allgemeine Gesch&aumlftsbedingungen und Kundeninformationen der Run 4 Fun GmbH & Co.KG</h3>
 	
 	<h4 class="agb">&sect 1 Betreiber des Online-Shops und Geltung dieser Allgemeinen Gesch&aumlftsbedingungen</h4>
-	<p class="agb">1. Dieser Online-Shop wird von der Run 4 Fun GmbH & Co. KG, F&uumlrstenallee 5, 33102 in Paderborn betrieben. Die Run 4 Fun GmbH & Co. KG ist eingetragen beim Registergericht des Amtsgerichts Paderborn (HRA 1234). Pers&oumlnlich haftender Gesellschafter: Run 4 Fun GmbH & Co. KG, Sitz: Paderborn, UID: CHE-116.290.471, Gesch&aumlftsf&uumlhrer: Ture K&uumlsener, Maike Polaszek, Laura  Birkheuer</p>
+	<p class="agb">1. Dieser Online-Shop wird von der Run 4 Fun GmbH & Co. KG, F&uumlrstenallee 5, 33102 in Paderborn betrieben. Die Run 4 Fun GmbH & Co. KG ist eingetragen beim Registergericht des Amtsgerichts Paderborn (HRA 1234). Pers&oumlnlich haftender Gesellschafter: Run 4 Fun GmbH & Co. KG, Sitz: Paderborn, Gesch&aumlftsf&uumlhrer: Ture K&uumlsener, Maike Polaszek, Laura  Birkheuer</p>
 	<p class="agb">2. F&uumlr den Verkauf von Waren durch uns gelten ausschliesslich diese Gesch&aumlftsbedingungen. Andere Gesch&aumlftsbedingungen, insbesondere Gesch&aumlftsbedingungen von Kunden, gelten nur, wenn sie von uns anerkannt worden sind.</p>
 	<p class="agb">3. Wir verkaufen unsere Waren ausschliesslich an Verbraucher und nur in handelsueblichen Mengen.</p>
 	<p class="agb">4. Deutsch ist ausschliessliche Vertragssprache.</p>

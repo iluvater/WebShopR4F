@@ -101,9 +101,6 @@
 		<center>
 			<input type="submit" id="button" value="Speichern" />
 		</center> 
-	</div>
-
-
 </form>
 	
 </body>

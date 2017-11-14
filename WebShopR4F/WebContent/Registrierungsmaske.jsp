@@ -4,18 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Registrierungsmaske</title>
 <link href="DesignV1.css" rel="stylesheet">
 </head>
 <body> <!-- class="regis" -->
 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
 	</jsp:useBean> 
-
 	
-	<div id="kopf">
-		<h1>Überschrift Test</h1>
-	</div>	
 	<div id="container">
 		<h2>Neu bei Run4Fun? </h2>
 		<h3>Herzlich Willkommen! Noch ein paar Infos angeben, bevor es losgeht... </h3>
@@ -118,8 +114,16 @@
 			</center>
 		</form>
 	</div>
+	
 	<div id="fuss">
-		<p class="footer"><a class="footer" href="Test.jsp">AGB's</a> <a class="footer" href="Test.jsp">Kontaktseite</a> <a class="footer" href="Test.jsp">Impressum</a> <a class="footer" href="Test.jsp">Hilfeseite</a> © 2017 Run4Fun GmbH, Alle Rechte vorbehalten</p>
+		<ul>
+			<li><a class="footer" href="Test.jsp">AGB's</a></li>
+			<li><a class="footer" href="Test.jsp">Kontaktseite</a></li>
+			<li><a class="footer" href="Test.jsp">Impressum</a></li>
+			<li><a class="footer" href="Test.jsp">Hilfeseite</a></li>
+			<li> © 2017 Run4Fun GmbH, Alle Rechte vorbehalten</li>
+		</ul>	
 	</div>
+
 </body>
 </html>
