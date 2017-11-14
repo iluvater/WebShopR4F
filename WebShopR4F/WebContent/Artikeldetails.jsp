@@ -13,9 +13,8 @@
 <body>
 	<jsp:useBean id="article" class="r4f.model.Article" scope="request">
 	</jsp:useBean> 
-	
 	<div id="kopf">
-		<h1>Überschrift Test</h1>
+		<h1>Ãœberschrift Test</h1>
 	</div>
 	<div id="container">
 		<div class="inhalt">
@@ -35,7 +34,7 @@
 				<div class="containerArtikelDetails">
 					<h4 class="artikelDetails">Produktioninformationen</h4>
 					<p class="artikelDetails">
-						<strong>Größe:</strong> <jsp:getProperty property="size" name="article"/><br />
+						<strong>GrÃ¶ÃŸe:</strong> <jsp:getProperty property="size" name="article"/><br />
 						<strong>Farbe: </strong><jsp:getProperty property="color" name="article"/><br />
 						<strong>Hersteller: </strong><jsp:getProperty property="manufacturer" name="article"/><br />
 						<strong>Sportart: </strong><jsp:getProperty property="sport" name="article"/><br />
@@ -57,7 +56,7 @@
 		</div>
 	</div>
 	<div id="fuss">
-		<p class="footer"><a class="footer" href="Test.jsp">AGB's</a> <a class="footer" href="Test.jsp">Kontaktseite</a> <a class="footer" href="Test.jsp">Impressum</a> <a class="footer" href="Test.jsp">Hilfeseite</a> © 2017 Run4Fun GmbH, Alle Rechte vorbehalten</p>
+		<p class="footer"><a class="footer" href="Test.jsp">AGB's</a> <a class="footer" href="Test.jsp">Kontaktseite</a> <a class="footer" href="Test.jsp">Impressum</a> <a class="footer" href="Test.jsp">Hilfeseite</a> Â© 2017 Run4Fun GmbH, Alle Rechte vorbehalten</p>
 	</div>
 </body>
 </html>
