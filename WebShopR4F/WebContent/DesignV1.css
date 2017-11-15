@@ -126,7 +126,7 @@ a.footer {
 }
 
 a.header {
-	margin-right: 2.5em;
+	margin-left: 2.5em;
 	color: white; 
 }
 
@@ -147,7 +147,7 @@ input[type=text].header {
 }
 
 .headerWide{
-	margin-right: 55.8em;
+	margin-right: 35.6em;
 	color: white;
 }
 

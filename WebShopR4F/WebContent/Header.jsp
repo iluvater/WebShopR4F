@@ -50,10 +50,10 @@
     </c:if> 
     <hr />
     
-    <h4>
+    <h3>
      	<u><a class="header" href="Test.jsp">Herren</a></u>
     	<u><a class="header" href="Test.jsp">Damen</a></u>
-    	<u><a class="headerWide" href="Test.jsp">Kinder</a></u> 
+    	<u><a class="header headerWide" href="Test.jsp">Kinder</a></u> 
    
 <!--         <button type="button" class="btn btn-default btn-sm">
           <span class="glyphicon glyphicon-heart-empty"></span> Merkliste
@@ -75,7 +75,7 @@
         <button type="button" id="buttonHeader" class="btn btn-default btn-sm">
           <span class="glyphicon glyphicon-globe"></span> DE/EN
         </button>
-    </h4>
+    </h3>
 </header>
 </body>
 </html>
