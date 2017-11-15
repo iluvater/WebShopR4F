@@ -17,7 +17,7 @@
 		<h1>Überschrift Test</h1>
 	</div>
 	<div id="container">
-		<div class="inhalt">
+		<div>
 			<c:if test ="${not empty article.name}">
 				<div class="containerArtikelDetails">
 					<img id="ImgArtikelDetails" src="./ImageServlet/${article.image }" alt="Bild">

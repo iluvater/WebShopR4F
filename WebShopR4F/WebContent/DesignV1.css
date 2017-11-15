@@ -2,7 +2,7 @@
 
 h2 {
 	font-size:24pt; 
-	}
+}
 	
 h3 {
 	font-size:18pt;
@@ -98,6 +98,7 @@ h3.artikelDetails {
 h4.artikelDetails {
 	padding-left: 15px;
 	padding-top: 15px;
+}
 
 h4.impressum {
 	padding-left: 15px;
