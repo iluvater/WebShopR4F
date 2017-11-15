@@ -9,9 +9,6 @@
 <title>Header</title>
 <link href="DesignV1.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -63,12 +60,12 @@
         </button> -->
           
         <div class="dropdown">
-  		<button type="button" id="buttonHeader" class="btn btn-default btn-sm btnPaddingSm">
-          <span class="glyphicon glyphicon-user"></span> Mein Account
-        </button>
+  			<button type="button" id="buttonHeader" class="btn btn-default btn-sm btnPaddingSm">
+          		<span class="glyphicon glyphicon-user"></span> Mein Account
+        	</button>
   			<div class="dropdown-content">
-    		<a href="Test.jsp">Daten ändern</a><br /><br />
-    		<a href="Test.jsp">Meine Bestellungen</a>
+    			<a href="Test.jsp">Daten ändern</a><br /><br />
+    			<a href="Test.jsp">Meine Bestellungen</a>
   			</div>
 		</div>
         
