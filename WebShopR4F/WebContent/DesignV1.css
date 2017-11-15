@@ -2,7 +2,7 @@
 
 h2 {
 	font-size:24pt; 
-	}
+}
 	
 h3 {
 	font-size:18pt;
@@ -90,8 +90,19 @@ h4.agb {
 	padding-left: 15px;
 } 
 
+h3.artikelDetails {
+	padding-left: 15px;
+	padding-top: 20px;
+}
+
+h4.artikelDetails {
+	padding-left: 15px;
+	padding-top: 15px;
+}
+
 h4.impressum {
 	padding-left: 15px;
+
 }
 
 p.agb {
@@ -114,6 +125,10 @@ p.impressum{
 /* p.footer {
 	margin-bottom: 0px;
 }  */
+
+p.artikelDetails {
+	padding-left: 42px;
+}
 
 p.fehler {
 	font-size:8pt;
@@ -167,6 +182,22 @@ form.header {
 
 :-moz-placeholder { /* Firefox 18- */
   font-style:italic;
+}
+
+ul.inline {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li.inline {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
 }
 
 #container {
@@ -224,6 +255,9 @@ form.header {
 	
 	/* padding-right: 43px; */
 }
+div.containerArtikelDetails {
+	clear : left;
+}
 
 #button {
 	background-color: black;
@@ -241,7 +275,16 @@ form.header {
 	color: black;
 	border: black;
 }
-
+  
+#ImgArtikelDetails {
+	margin : 20px;
+	width : 35%;
+	float : left;
+	border-color: black;
+	border-width: 1px;
+	border-style: solid;
+}
+  
 #buttonHeader {
 /* 	background-color: white;
 	color: 2f528f; 
@@ -252,7 +295,6 @@ form.header {
 	font-size: 10pt; 
 	text-align: center;*/
 } 
-
 
 #logo{
 	float: left;

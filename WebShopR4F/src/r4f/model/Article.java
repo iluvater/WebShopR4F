@@ -20,6 +20,7 @@ public class Article {
 	private Date entryDate;
 	private String category;
 	private String sport;
+	private int image;
 
 	/**
 	 * Constructor that initializes all attributes
@@ -44,10 +45,10 @@ public class Article {
 	 *            category to set
 	 */
 	public Article(int id, String name, String description, int size, double price, String manufacturer,
-			String color, Date entryDate, String category, String sport) {
+			String color, Date entryDate, String category, String sport, int image) {
 		this.id = id;
 		this.name = name;
-		this.description = description;
+		setDescription(description);
 		this.size = size;
 		this.price = price;
 		this.manufacturer = manufacturer;
@@ -55,6 +56,7 @@ public class Article {
 		this.entryDate = entryDate;
 		this.category = category;
 		this.sport = sport;
+		this.image = image;
 	}
 
 	/**
@@ -79,7 +81,7 @@ public class Article {
 	public Article(String name, String description, int size, double price, String manufacturer,
 			String color,  String category, String sport) {
 		this.name = name;
-		this.description = description;
+		setDescription(description);
 		this.size = size;
 		this.price = price;
 		this.manufacturer = manufacturer;
@@ -87,6 +89,16 @@ public class Article {
 		this.entryDate = new Date();
 		this.category = category;
 		this.sport = sport;
+	}
+	
+	public Article(){
+		this.name = null;
+		this.description = null;
+		this.manufacturer = null;
+		this.color = null;
+		this.entryDate = null;
+		this.category = null;
+		this.sport = null;
 	}
 
 	/**
@@ -131,7 +143,7 @@ public class Article {
 	 *            the description to set
 	 */
 	public void setDescription(String description) {
-		this.description = description;
+		this.description = description.replaceAll("\r\n", "<br>");
 	}
 
 	/**
@@ -282,6 +294,20 @@ public class Article {
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * @return the image
+	 */
+	public int getImage() {
+		return image;
+	}
+
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(int image) {
+		this.image = image;
 	}
 
 }

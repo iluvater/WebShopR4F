@@ -86,7 +86,7 @@ public class DatabaseConnection {
 
 				PreparedStatement preparedStatement = conn.prepareStatement(
 						"INSERT INTO `user` (`id`, `email`, `firstName`, `lastName`, `birthday`, `password`, `street`, "
-								+ "`houseNumber`, `postCode`, `city`, `salutation`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+								+ "`houseNumber`, `postCode`, `city`, `salutation`, `shoppingBasket`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, null)",
 						Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setString(1, user.getEmail());
 				preparedStatement.setString(2, user.getFirstName());
@@ -114,12 +114,6 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return -1;
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		} else {
 			return -1;
@@ -144,7 +138,7 @@ public class DatabaseConnection {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT u.*, role.name  FROM user AS u INNER JOIN role AS r ON r.id = u.role WHERE email='"
+				String sql = "SELECT u.*, r.name  FROM user AS u INNER JOIN role AS r ON r.id = u.role WHERE email='"
 						+ email + "'";
 				ResultSet result = query.executeQuery(sql);
 
@@ -167,12 +161,6 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 
@@ -197,7 +185,7 @@ public class DatabaseConnection {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT u.*, role.name  FROM user AS u INNER JOIN role AS r ON r.id = u.role WHERE id='"
+				String sql = "SELECT u.*, r.name  FROM user AS u INNER JOIN role AS r ON r.id = u.role WHERE u.id='"
 						+ id + "'";
 				ResultSet result = query.executeQuery(sql);
 
@@ -221,12 +209,6 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 
@@ -270,12 +252,6 @@ public class DatabaseConnection {
 
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 	}
@@ -324,12 +300,6 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return -1;
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		} else {
 			return -1;
@@ -355,7 +325,7 @@ public class DatabaseConnection {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, a.color, a.entryDate, c.name as category, s.name as sport "
+				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, a.color, a.entryDate, a.image, c.name as category, s.name as sport "
 						+ " FROM article AS a INNER JOIN category AS c INNER JOIN manufacturer AS m INNER JOIN sport AS s"
 						+ " WHERE a.category = c.id AND a.manufacturer = m.id AND a.sport = s.id AND a.id = " + id;
 				ResultSet result = query.executeQuery(sql);
@@ -372,18 +342,13 @@ public class DatabaseConnection {
 					Date entryDate = result.getDate("entryDate");
 					String category = result.getString("category");
 					String sport = result.getString("sport");
+					int image = result.getInt("image");
 
 					article = new Article(id, name, description, size, price, manufacturer, color, entryDate, category,
-							sport);
+							sport, image);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 		return article;
@@ -405,7 +370,7 @@ public class DatabaseConnection {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, a.color, a.entryDate, c.name as category, s.name as sport "
+				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, a.color, a.entryDate, a.image, c.name as category, s.name as sport "
 						+ " FROM article AS a INNER JOIN category AS c INNER JOIN manufacturer AS m INNER JOIN sport AS s"
 						+ " WHERE a.category = c.id AND a.manufacturer = m.id AND a.sport = s.id";
 				ResultSet result = query.executeQuery(sql);
@@ -423,22 +388,53 @@ public class DatabaseConnection {
 					Date entryDate = result.getDate("entryDate");
 					String category = result.getString("category");
 					String sport = result.getString("sport");
+					int image = result.getInt("image");
 
 					article = new Article(id, name, description, size, price, manufacturer, color, entryDate, category,
-							sport);
+							sport, image);
 					articleList.add(article);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 		return articleList;
+	}
+
+	/**
+	 * This method updates an article in the database
+	 * @param article the article that should be updated it should contain all new values
+	 */
+	public void updateArticleInDB(Article article) {
+		conn = getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement preparedStatement = conn
+						.prepareStatement("UPDATE `article` SET `name` = ?, `description` = ?, `size` = ?, "
+								+ "`price` = ?, `manufacturer` = ?, `color` = ?, `category` = ?, "
+								+ "`sport` = ?, `image` = ?"
+								+ " WHERE `article`.`id` = ?", Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setString(1, article.getName());
+				preparedStatement.setString(2, article.getDescription());
+				preparedStatement.setInt(3, article.getSize());
+				preparedStatement.setDouble(4, article.getPrice());
+				preparedStatement.setInt(5, getManufacturerId(article.getManufacturer()));
+				preparedStatement.setString(6, article.getColor());
+				preparedStatement.setInt(7, getCategoryId(article.getCategory()));
+				preparedStatement.setInt(8, getSportId(article.getSport()));
+				preparedStatement.setInt(9, article.getImage());
+				
+				preparedStatement.setInt(10, article.getId());
+
+				preparedStatement.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**
@@ -468,12 +464,6 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 
@@ -507,12 +497,6 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 
@@ -546,12 +530,6 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 
@@ -585,12 +563,6 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 
@@ -631,12 +603,6 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return -1;
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		} else {
 			return -1;
@@ -680,12 +646,6 @@ public class DatabaseConnection {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 
@@ -714,12 +674,6 @@ public class DatabaseConnection {
 
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 	}
@@ -765,12 +719,6 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return -1;
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		} else {
 			return -1;
@@ -811,12 +759,6 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return false;
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		} else {
 			return false;
@@ -833,50 +775,53 @@ public class DatabaseConnection {
 	 * @return returns true if the image was created in the database and false
 	 *         if not
 	 */
-	public boolean createImageInDB(InputStream inputStream, String contentType) {
-		int lines = -1;
+	public int createImageInDB(InputStream inputStream, String contentType) {
 		conn = getInstance();
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
 			try {
 				String sql = "INSERT INTO image (image, type) values (?, ?)";
-				PreparedStatement statement = conn.prepareStatement(sql);
-				statement.setString(2, contentType);
+				PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setString(2, contentType);
 
 				if (inputStream != null) {
 					// fetches input stream of the upload file for the blob
 					// column
-					statement.setBlob(1, inputStream);
+					preparedStatement.setBlob(1, inputStream);
 				}
 
-				lines = statement.executeUpdate();
+				int lines = preparedStatement.executeUpdate();
 
+				if (lines != 0) {
+					ResultSet result = preparedStatement.getGeneratedKeys();
+					if (result.next()) {
+						return result.getInt(1);
+					} else {
+						return -1;
+					}
+				} else {
+					return -1;
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+				return -1;
 			}
-		}
-		if (lines != 1) {
-			return false;
 		} else {
-			return true;
+			return -1;
 		}
 	}
-	
+
 	/**
 	 * This method selects an image from the database
-	 * @param id id of the image that should be selected
+	 * 
+	 * @param id
+	 *            id of the image that should be selected
 	 * @return returns the image returns null if no image was selected
 	 */
 	public Image getImage(int id) {
 		Image image = null;
-		
+
 		conn = getInstance();
 
 		if (conn != null) {
@@ -893,16 +838,10 @@ public class DatabaseConnection {
 				// Ergebnissätze durchfahren.
 				if (result.next()) {
 					blob = result.getBlob("image");
-					image= new Image(id, blob, result.getString("type"));
+					image = new Image(id, blob, result.getString("type"));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 		return image;
