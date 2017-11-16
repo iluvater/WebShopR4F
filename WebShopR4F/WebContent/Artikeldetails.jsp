@@ -34,6 +34,7 @@
 				<div class="containerArtikelDetails">
 					<h4 class="artikelDetails">Produktioninformationen</h4>
 					<p class="artikelDetails">
+						<strong>Artikel-ID:</strong> <jsp:getProperty property="id" name="article"/> <br />
 						<strong>Gr&ouml;&szlig;e:</strong> <jsp:getProperty property="size" name="article"/><br />
 						<strong>Farbe: </strong><jsp:getProperty property="color" name="article"/><br />
 						<strong>Hersteller: </strong><jsp:getProperty property="manufacturer" name="article"/><br />
@@ -56,7 +57,13 @@
 		</div>
 	</div>
 	<div id="fuss">
-		<p class="footer"><a class="footer" href="Test.jsp">AGB's</a> <a class="footer" href="Test.jsp">Kontaktseite</a> <a class="footer" href="Test.jsp">Impressum</a> <a class="footer" href="Test.jsp">Hilfeseite</a> Â© 2017 Run4Fun GmbH, Alle Rechte vorbehalten</p>
+		<ul>
+			<li><a class="footer" href="Test.jsp">AGB's</a></li>
+			<li><a class="footer" href="Test.jsp">Kontaktseite</a></li>
+			<li><a class="footer" href="Test.jsp">Impressum</a></li>
+			<li><a class="footer" href="Test.jsp">Hilfeseite</a></li>
+			<li> © 2017 Run4Fun GmbH, Alle Rechte vorbehalten</li>
+		</ul>	
 	</div>
 </body>
 </html>
