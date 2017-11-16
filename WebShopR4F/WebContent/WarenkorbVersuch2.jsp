@@ -10,9 +10,9 @@
 </head>
 <body>
 
-	<jsp:useBean id="ShoppingBasket" class="r4f.model.ShoppingBasket" scope="session">
+	<jsp:useBean id="shoppingBasket" class="r4f.model.ShoppingBasket" scope="session">
 	</jsp:useBean> 
-<c:if test ="${empty ShoppingBasket.items}">
+<c:if test ="${empty shoppingBasket.items}">
 <div id="container">
 		<div class="inhalt">
 		<h4>Warenkorb</h4>
@@ -27,7 +27,7 @@
 		</center>
 </div>
 </c:if>
-<c:if test ="${not empty ShoppingBasket.items}">
+<c:if test ="${not empty shoppingBasket.items}">
 	<div id="container">
 		<div class="inhalt">
 		<h4>Warenkorb</h4>
@@ -37,17 +37,17 @@
 			<li class="inline"><h4>Größe</h4></li>
 			<li class="inline"><h4>Preis</h4></li>			
 		</ul>
-		<c:forEach items="${ShoppingBasket.items}" var="item">		
+		<c:forEach items="${shoppingBasket.items}" var="item">		
 		<ul>
 			<li><p>${item.article.name}</p></li>
 			<li><p>${item.article.color}</p></li>
 			<li><p>${item.article.size}</p></li>
-			<li><p>${item.article.price}</p></li>			
+			<li><p>${item.itemPrice}</p></li>			
 		</ul>
 		</c:forEach>
 		<ul>
 		<li><h4>Gesamtpreis:</h4></li>
-		<li><p><jsp:getProperty property="price" name="shoppingbasket"/></p></li>
+		<li><p><jsp:getProperty property="totalPrice" name="shoppingBasket"/></p></li>
 		</ul>		
 		</div>
 		<hr />
