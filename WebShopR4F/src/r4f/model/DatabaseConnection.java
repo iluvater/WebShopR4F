@@ -633,7 +633,7 @@ public class DatabaseConnection {
 				ResultSet result = query.executeQuery(sql);
 
 				// Ergebnissätze durchfahren.
-				if (result.next()) {
+				while (result.next()) {
 					ShoppingBasketItem item = new ShoppingBasketItem();
 					item.setAmount(result.getInt("amount"));
 					item.setId(result.getInt("id"));

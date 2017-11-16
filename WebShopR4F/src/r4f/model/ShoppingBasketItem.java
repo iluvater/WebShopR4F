@@ -85,5 +85,13 @@ public class ShoppingBasketItem {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	/**
+	 * This method return the price of this item
+	 * @return the items price rounded at two digits
+	 */
+	public double getItemPrice(){
+		return ((double)Math.round(amount * article.getPrice() * 100)) / 100.0 ;
+	}
 
 }

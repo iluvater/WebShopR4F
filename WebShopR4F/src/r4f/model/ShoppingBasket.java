@@ -68,5 +68,16 @@ public class ShoppingBasket {
 		this.items = items;
 	}
 	
+	/**
+	 * This method returns the total price of the shopping basket
+	 * @return the total price of the shopping basket. The price is rounded at two digits.
+	 */
+	public double getTotalPrice(){
+		double sum= 0;
+		for (ShoppingBasketItem shoppingBasketItem : items) {
+			sum += shoppingBasketItem.getItemPrice();
+		}		
+		return ((double) Math.round(sum * 100)) / 100.0;
+	}
 
 }

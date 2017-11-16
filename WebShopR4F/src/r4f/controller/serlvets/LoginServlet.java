@@ -67,7 +67,7 @@ public class LoginServlet extends HttpServlet {
 
 		if(loginService.checkLogin(email, password)){
 			user = loginService.getUser(email);
-			shoppingBasket = shoppingBasketService.getShoppingBasket(user.getId());
+			shoppingBasket = shoppingBasketService.getShoppingBasket(user.getShoppingBasket());
 
 			request.getSession().setAttribute("user", user);
 			request.getSession().setAttribute("shoppingBasket", shoppingBasket);
