@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import r4f.model.User;
+import r4f.controller.services.EmailService;
 import r4f.controller.services.RegistrationService;
 import r4f.model.ErrorMessage;
 
@@ -185,6 +186,8 @@ public class RegistrationServlet extends HttpServlet {
 																	user = regigistrationService
 																			.createBenutzerInDB(user);
 																	if (user != null) {
+																		EmailService emailService = new EmailService();
+																		emailService.sendRegistrationConfirmation(user);
 																		dispatcher = request
 																				.getRequestDispatcher(successURL);
 																		dispatcher.forward(request, response);

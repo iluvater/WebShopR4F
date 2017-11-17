@@ -19,12 +19,19 @@ public class RegistrationService extends Service{
 		}
 	}
 	
-	public User createBenutzerInDB(User benutzer){
-		int userId = super.getDbConnection().createUserInDB(benutzer);
+	/**
+	 * This method creates an user in the database
+	 * @param user the user that should be created
+	 * @return
+	 */
+	public User createBenutzerInDB(User user){
+		int addressId = super.getDbConnection().createAddressInDB(user.getStreet(), user.getHouseNumber(), user.getPostCode(), user.getCity(), true);
+		
+		int userId = super.getDbConnection().createUserInDB(user, addressId);
 		
 		int shoppingBasketId = super.getDbConnection().createShoppingBasketInDB(userId);
 		
-		User user = super.getDbConnection().getUser(userId);
+		user = super.getDbConnection().getUser(userId);
 		
 		user.setShoppingBasket(shoppingBasketId);
 		
