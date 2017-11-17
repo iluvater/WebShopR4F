@@ -47,7 +47,7 @@ public class AddToShoppingBasketServlet extends HttpServlet {
 		int articleId;
 		RequestDispatcher dispatcher;
 		ArticleService articleService = new ArticleService();
-		String successURL = "WarenborbVersuch2.jsp";
+		String successURL = "WarenkorbVersuch2.jsp";
 		ShoppingBasket shoppingBasket;
 		Article article;
 		
@@ -55,14 +55,19 @@ public class AddToShoppingBasketServlet extends HttpServlet {
 			articleId = Integer.parseInt(request.getParameter("articleId"));
 			shoppingBasket = (ShoppingBasket)request.getSession().getAttribute("shoppingBasket");
 			
-			article = articleService.getArticle(articleId);
-			shoppingBasket.addItem(article);			
+			if(shoppingBasket == null){
+				//Errorhandling not logged in
+			}else{
+				article = articleService.getArticle(articleId);
+				shoppingBasket.addItem(article);	
+			}					
 		} catch (NumberFormatException e) {
 			
 		}
 		
 		dispatcher = request.getRequestDispatcher(successURL);
 		dispatcher.forward(request, response);
+		return;
 	}
 
 }
