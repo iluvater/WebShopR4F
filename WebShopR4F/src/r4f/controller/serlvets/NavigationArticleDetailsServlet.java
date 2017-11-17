@@ -36,7 +36,7 @@ public class NavigationArticleDetailsServlet extends HttpServlet {
 		RequestDispatcher dispatcher;
 		Article article;
 		try{
-			int id = Integer.parseInt(request.getParameter("id"));
+			//int id = Integer.parseInt(request.getParameter("id"));
 			
 			ArticleService articleService = new ArticleService();
 			article = articleService.getArticle(8);
