@@ -3,6 +3,7 @@
  */
 package r4f.controller.services;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import r4f.model.Article;
@@ -49,6 +50,11 @@ public class ArticleService extends Service{
 	 * @param article the article that should be update with all new values
 	 */
 	public void updateArticleInDB(Article article) {
-		super.getDbConnection().updateArticleInDB(article); 		
+		try {
+			super.getDbConnection().updateArticleInDB(article);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 		
 	}
 }

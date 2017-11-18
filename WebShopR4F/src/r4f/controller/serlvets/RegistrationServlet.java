@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.model.User;
 import r4f.controller.services.EmailService;
-import r4f.controller.services.RegistrationService;
+import r4f.controller.services.UserService;
 import r4f.model.ErrorMessage;
+import r4f.model.User;
 
 /**
  * Servlet implementation class RegistrationServlet
@@ -51,7 +51,7 @@ public class RegistrationServlet extends HttpServlet {
 				salutation;
 		Date birthday;
 		User user;
-		RegistrationService regigistrationService;
+		UserService userService;
 		RequestDispatcher dispatcher;
 		String errorURL = "Registrierungsmaske.jsp";
 		String successURL = "Willkommen.jsp";
@@ -150,8 +150,8 @@ public class RegistrationServlet extends HttpServlet {
 														if (User.checkSalutation(salutation)) {
 															// Check if email
 															// exists
-															regigistrationService = new RegistrationService();
-															if (!regigistrationService.checkEmailExists(email)) {
+															userService = new UserService();
+															if (!userService.checkEmailExists(email)) {
 																// check date
 																// format
 																if (birthday_string.matches("\\d{4}-\\d{2}-\\d{2}")
@@ -183,7 +183,7 @@ public class RegistrationServlet extends HttpServlet {
 																			birthday, password, street,
 																			houseNumber, postcode, city, salutation);
 
-																	user = regigistrationService
+																	user = userService
 																			.createBenutzerInDB(user);
 																	if (user != null) {
 																		EmailService emailService = new EmailService();
