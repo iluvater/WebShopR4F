@@ -50,7 +50,7 @@ public class ChangeUserData extends HttpServlet {
 		User user;
 		UserService userService;
 		RequestDispatcher dispatcher;
-		String errorURL = "Registrierungsmaske.jsp";
+		String errorURL = "Test.jsp";
 		String successURL = "Willkommen.jsp";
 		int year, month, day;
 

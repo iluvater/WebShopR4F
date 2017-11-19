@@ -44,8 +44,8 @@ public class Article {
 	 * @param category
 	 *            category to set
 	 */
-	public Article(int id, String name, String description, int size, double price, String manufacturer,
-			String color, Date entryDate, String category, String sport, int image) {
+	public Article(int id, String name, String description, int size, double price, String manufacturer, String color,
+			Date entryDate, String category, String sport, int image) {
 		this.id = id;
 		this.name = name;
 		setDescription(description);
@@ -78,8 +78,8 @@ public class Article {
 	 * @param category
 	 *            category to set
 	 */
-	public Article(String name, String description, int size, double price, String manufacturer,
-			String color,  String category, String sport) {
+	public Article(String name, String description, int size, double price, String manufacturer, String color,
+			String category, String sport) {
 		this.name = name;
 		setDescription(description);
 		this.size = size;
@@ -90,8 +90,8 @@ public class Article {
 		this.category = category;
 		this.sport = sport;
 	}
-	
-	public Article(){
+
+	public Article() {
 		this.name = null;
 		this.description = null;
 		this.manufacturer = null;
@@ -259,8 +259,8 @@ public class Article {
 	 * @return returns true if the sport to check is a sport
 	 */
 	public static boolean checkSport(String sport) {
-		if (sport.equals("Laufen") || sport.equals("Fussball") || sport.equals("Basketball")
-				|| sport.equals("Golf") || sport.equals("Schwimmen") || sport.equals("Fahrrad")) {
+		if (sport.equals("Laufen") || sport.equals("Fussball") || sport.equals("Basketball") || sport.equals("Golf")
+				|| sport.equals("Schwimmen") || sport.equals("Fahrrad")) {
 			return true;
 		} else {
 			return false;
@@ -284,12 +284,31 @@ public class Article {
 
 	/**
 	 * checks whether a string is a manufacturer or not
-	 * @param manufacturer manufacturer to check
+	 * 
+	 * @param manufacturer
+	 *            manufacturer to check
 	 * @return returns true if the manufacturer to check is a manufacturer
 	 */
 	public static boolean checkManufacturer(String manufacturer) {
 		if (manufacturer.equals("Nike") || manufacturer.equals("Asics") || manufacturer.equals("Kempa")
 				|| manufacturer.equals("Hummel") || manufacturer.equals("Adidas") || manufacturer.equals("Puma")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * checks whether a String is a color or not
+	 * 
+	 * @param color
+	 *            color to check
+	 * @return returns true if the string is a color otherwise it will return
+	 *         false
+	 */
+	public static boolean checkColor(String color) {
+		if (color.equals("blau") || color.equals("gelb") || color.equals("grün") || color.equals("orange")
+				|| color.equals("pink") || color.equals("rot") || color.equals("schwarz") || color.equals("weiß")) {
 			return true;
 		} else {
 			return false;
@@ -304,7 +323,8 @@ public class Article {
 	}
 
 	/**
-	 * @param image the image to set
+	 * @param image
+	 *            the image to set
 	 */
 	public void setImage(int image) {
 		this.image = image;

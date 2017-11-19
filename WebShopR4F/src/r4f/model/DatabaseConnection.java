@@ -271,7 +271,7 @@ public class DatabaseConnection {
 				preparedStatement.setInt(3, artikel.getSize());
 				preparedStatement.setDouble(4, artikel.getPrice());
 				preparedStatement.setInt(5, getManufacturerId(artikel.getManufacturer()));
-				preparedStatement.setString(6, artikel.getColor());
+				preparedStatement.setInt(6, getColorId(artikel.getColor()));
 				preparedStatement.setInt(7, getCategoryId(artikel.getCategory()));
 				preparedStatement.setInt(8, getSportId(artikel.getSport()));
 
@@ -315,9 +315,9 @@ public class DatabaseConnection {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, a.color, a.entryDate, a.image, c.name as category, s.name as sport "
-						+ " FROM article AS a INNER JOIN category AS c INNER JOIN manufacturer AS m INNER JOIN sport AS s"
-						+ " WHERE a.category = c.id AND a.manufacturer = m.id AND a.sport = s.id AND a.id = " + id;
+				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, co.name as color, a.entryDate, a.image, ca.name as category, s.name as sport "
+						+ " FROM article AS a INNER JOIN category AS ca INNER JOIN manufacturer AS m INNER JOIN sport AS s INNER JOIN color as co"
+						+ " WHERE a.category = ca.id AND a.manufacturer = m.id AND a.sport = s.id AND a.color = co.id AND a.id = " + id;
 				ResultSet result = query.executeQuery(sql);
 
 				// Ergebnissätze durchfahren.
@@ -360,9 +360,9 @@ public class DatabaseConnection {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, a.color, a.entryDate, a.image, c.name as category, s.name as sport "
-						+ " FROM article AS a INNER JOIN category AS c INNER JOIN manufacturer AS m INNER JOIN sport AS s"
-						+ " WHERE a.category = c.id AND a.manufacturer = m.id AND a.sport = s.id";
+				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, co.name as color, a.entryDate, a.image, ca.name as category, s.name as sport "
+						+ " FROM article AS a INNER JOIN category AS ca INNER JOIN manufacturer AS m INNER JOIN sport AS s INNER JOIN color AS co"
+						+ " WHERE a.category = ca.id AND a.manufacturer = m.id AND a.sport = s.id AND a.color = co.id";
 				ResultSet result = query.executeQuery(sql);
 
 				// Ergebnissätze durchfahren.
@@ -413,7 +413,7 @@ public class DatabaseConnection {
 			preparedStatement.setInt(3, article.getSize());
 			preparedStatement.setDouble(4, article.getPrice());
 			preparedStatement.setInt(5, getManufacturerId(article.getManufacturer()));
-			preparedStatement.setString(6, article.getColor());
+			preparedStatement.setInt(6, getColorId(article.getColor()));
 			preparedStatement.setInt(7, getCategoryId(article.getCategory()));
 			preparedStatement.setInt(8, getSportId(article.getSport()));
 			preparedStatement.setInt(9, article.getImage());
@@ -543,6 +543,37 @@ public class DatabaseConnection {
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT id FROM sport WHERE name='" + sport + "'";
+				ResultSet result = query.executeQuery(sql);
+
+				// Ergebnissätze durchfahren.
+				if (result.next()) {
+					id = result.getInt("id");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return id;
+	}
+	
+	/**
+	 * This method selects the id of a color
+	 * @param color the color which´s id should be selected
+	 * @return returns the id of the color
+	 */
+	public int getColorId(String color){
+		int id = -1;
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			Statement query;
+			try {
+				query = conn.createStatement();
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT id FROM color WHERE name='" + color + "'";
 				ResultSet result = query.executeQuery(sql);
 
 				// Ergebnissätze durchfahren.
@@ -834,7 +865,34 @@ public class DatabaseConnection {
 		}
 		return image;
 	}
+	
+	/**
+	 * This method updates an image in the database
+	 * @param imageId the id of the image that should be updated
+	 * @param imageStream the new content
+	 * @param imageType the new content type of the image
+	 * @throws SQLException an SQLException will be thrown if any error occurred
+	 */
+	public void updateImageInDB(int imageId, InputStream imageStream, String imageType) throws SQLException {
+		conn = getInstance();
 
+		if (conn != null) {
+
+			PreparedStatement preparedStatement = conn.prepareStatement(
+					"UPDATE `image` SET `image` = ?, `type` = ? "
+							+ " WHERE `iamge`.`id` = ? ",
+					Statement.RETURN_GENERATED_KEYS);
+			preparedStatement.setBlob(1, imageStream);
+			preparedStatement.setString(2, imageType);
+			preparedStatement.setInt(3, imageId);
+			
+
+
+			preparedStatement.executeUpdate();
+
+		}	
+	}
+	
 	/**
 	 * This method create a new address in the database
 	 * 
@@ -887,8 +945,8 @@ public class DatabaseConnection {
 	}
 	
 	/**
-	 * This method updates the masterdata address of an user
-	 * @param userId the id of user whos address should be updatet
+	 * This method updates the master data address of an user
+	 * @param userId the id of user who's address should be updated
 	 * @param street the new street
 	 * @param houseNumber the new houseNumber
 	 * @param postCode the new postCode
@@ -916,5 +974,4 @@ public class DatabaseConnection {
 
 		}	
 	}
-
 }
