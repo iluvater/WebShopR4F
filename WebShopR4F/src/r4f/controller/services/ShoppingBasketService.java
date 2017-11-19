@@ -3,7 +3,6 @@
  */
 package r4f.controller.services;
 
-import java.util.Iterator;
 import java.util.List;
 
 import r4f.model.ShoppingBasket;

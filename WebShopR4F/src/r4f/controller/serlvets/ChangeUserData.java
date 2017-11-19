@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.controller.services.EmailService;
 import r4f.controller.services.UserService;
 import r4f.model.ErrorMessage;
 import r4f.model.User;
@@ -43,6 +42,7 @@ public class ChangeUserData extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@SuppressWarnings("deprecation")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String firstName, lastName, street, houseNumber, postcode, city, birthday_string, salutation;

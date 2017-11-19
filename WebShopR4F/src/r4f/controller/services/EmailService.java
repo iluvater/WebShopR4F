@@ -16,7 +16,6 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import r4f.model.ErrorMessage;
 import r4f.model.User;
 
 /**
@@ -105,7 +104,7 @@ public class EmailService {
 	 */
 	private void sendMail(String recipient, String subject, String emailBody) {
 		try {
-			// establishing Mailsession with recipient and subject
+			// establishing Mail session with recipient and subject
 			getMailSession = Session.getDefaultInstance(mailServerProperties, null);
 			generateMailMessage = new MimeMessage(getMailSession);
 			generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
