@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.omg.PortableInterceptor.USER_EXCEPTION;
+
 import r4f.controller.services.UserService;
 import r4f.model.ErrorMessage;
 import r4f.model.User;
@@ -142,7 +144,8 @@ public class ChangeUserData extends HttpServlet {
 														day = Integer.parseInt(birthday_string.substring(0, 2));
 													}
 													birthday = new Date(year, month, day);
-
+													
+													if(User.checkBirthday(birthday)){
 													//Set new data
 													user.setFirstName(firstName);
 													user.setLastName(lastName);
@@ -164,6 +167,14 @@ public class ChangeUserData extends HttpServlet {
 														return;
 													} else {
 														// Errorhandling something went wrong during registration
+														ErrorMessage errorMessage = new ErrorMessage(126);
+														request.setAttribute("error", errorMessage);
+														dispatcher = request.getRequestDispatcher(errorURL);
+														dispatcher.forward(request, response);
+														return;
+													}
+													}else{
+														// Errorhandling not old enough
 														ErrorMessage errorMessage = new ErrorMessage(126);
 														request.setAttribute("error", errorMessage);
 														dispatcher = request.getRequestDispatcher(errorURL);

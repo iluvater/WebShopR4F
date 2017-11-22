@@ -47,8 +47,7 @@ public class RegistrationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String firstName, lastName, email, password, street, houseNumber, postcode, city, birthday_string,
-				salutation;
+		String firstName, lastName, email, password, street, houseNumber, postcode, city, birthday_string, salutation;
 		Date birthday;
 		User user;
 		UserService userService;
@@ -160,11 +159,9 @@ public class RegistrationServlet extends HttpServlet {
 																	if (birthday_string
 																			.matches("\\d{4}-\\d{2}-\\d{2}")) {
 																		year = Integer.parseInt(
-																				birthday_string.substring(0, 4))
-																				- 1900;
+																				birthday_string.substring(0, 4)) - 1900;
 																		month = Integer.parseInt(
-																				birthday_string.substring(5, 7))
-																				- 1;
+																				birthday_string.substring(5, 7)) - 1;
 																		day = Integer.parseInt(
 																				birthday_string.substring(8, 10));
 																	} else {
@@ -172,35 +169,44 @@ public class RegistrationServlet extends HttpServlet {
 																				birthday_string.substring(6, 10))
 																				- 1900;
 																		month = Integer.parseInt(
-																				birthday_string.substring(3, 5))
-																				- 1;
+																				birthday_string.substring(3, 5)) - 1;
 																		day = Integer.parseInt(
 																				birthday_string.substring(0, 2));
 																	}
 																	birthday = new Date(year, month, day);
+																	if (User.checkBirthday(birthday)) {
+																		user = new User(firstName, lastName, email,
+																				birthday, password, street, houseNumber,
+																				postcode, city, salutation);
 
-																	user = new User(firstName, lastName, email,
-																			birthday, password, street,
-																			houseNumber, postcode, city, salutation);
-
-																	user = userService
-																			.createBenutzerInDB(user);
-																	if (user != null) {
-																		EmailService emailService = new EmailService();
-																		emailService.sendRegistrationConfirmation(user);
-																		dispatcher = request
-																				.getRequestDispatcher(successURL);
-																		dispatcher.forward(request, response);
-																		return;
+																		user = userService.createBenutzerInDB(user);
+																		if (user != null) {
+																			EmailService emailService = new EmailService();
+																			emailService
+																					.sendRegistrationConfirmation(user);
+																			dispatcher = request
+																					.getRequestDispatcher(successURL);
+																			dispatcher.forward(request, response);
+																			return;
+																		} else {
+																			// Errorhandling
+																			// something
+																			// went
+																			// wrong
+																			// during
+																			// registration
+																			ErrorMessage errorMessage = new ErrorMessage(
+																					101);
+																			request.setAttribute("error", errorMessage);
+																			dispatcher = request
+																					.getRequestDispatcher(errorURL);
+																			dispatcher.forward(request, response);
+																			return;
+																		}
 																	} else {
-																		// Errorhandling
-																		// something
-																		// went
-																		// wrong
-																		// during
-																		// registration
+																		// Error too young
 																		ErrorMessage errorMessage = new ErrorMessage(
-																				101);
+																				129);
 																		request.setAttribute("error", errorMessage);
 																		dispatcher = request
 																				.getRequestDispatcher(errorURL);

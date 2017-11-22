@@ -974,4 +974,129 @@ public class DatabaseConnection {
 
 		}	
 	}
+	
+	
+	public Address getAddress(int userId, boolean masterData) {
+		Address address = null;
+
+		conn = getInstance();
+
+		if (conn != null) {
+			try {
+				String sql = "SELECT * FROM address WHERE user=? AND masterData  =?";
+				PreparedStatement preparedStatement = conn.prepareStatement(sql);
+				
+				preparedStatement.setInt(1, userId);
+				preparedStatement.setBoolean(2, masterData);
+				
+				ResultSet result = preparedStatement.executeQuery(sql);
+
+				// Ergebnissätze durchfahren.
+				if (result.next()) {
+					String street = result.getString("street");
+					String houseNumber = result.getString("houseNumber");
+					String postCode = result.getString("postCode");
+					String city = result.getString("city");
+					int id = result.getInt("id");
+					
+					address = new Address(id, street, houseNumber, postCode, city);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return address;
+	}
+	
+	/**
+	 * This method creates an new order in the database
+	 * @param order the order that should be created
+	 * @return the id of the created order if an error occurred during the creation it will return -1
+	 */
+	public int createOrderInDB(Order order) {
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			try {
+				String sql = "INSERT INTO orders (id, entryDate, user, deliveryAddress, billingAddress, paymentMethod) values (null, null, ?, ?, ?, ?)";
+				PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setInt(1, order.getUser().getId());
+				preparedStatement.setInt(2, order.getDeliveryAddress().getId());
+				preparedStatement.setInt(3, order.getBillingAddress().getId());
+				preparedStatement.setInt(4, getPaymentMethodId(order.getPaymentMethod()));
+
+				int lines = preparedStatement.executeUpdate();
+
+				if (lines != 0) {
+					ResultSet result = preparedStatement.getGeneratedKeys();
+					if (result.next()) {
+						return result.getInt(1);
+					} else {
+						return -1;
+					}
+				} else {
+					return -1;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return -1;
+			}
+		} else {
+			return -1;
+		}
+	}
+	
+	/**
+	 * This method selects the id of an paymentMethod
+	 * @param paymentMethod the payment methods who´s id should be selected
+	 * @return the id of the payment method if no id was found it will return -1
+	 */
+	private int getPaymentMethodId(String paymentMethod) {
+		int id = -1;
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			Statement query;
+			try {
+				query = conn.createStatement();
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT id FROM paymentMethod WHERE name='" + paymentMethod + "'";
+				ResultSet result = query.executeQuery(sql);
+
+				// Ergebnissätze durchfahren.
+				if (result.next()) {
+					id = result.getInt("id");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return id;
+	}
+
+	public void createOrderItemInDB(int orderId, OrderItem item) {
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			try {
+				String sql = "INSERT INTO orderitem (order, position, amount, price, article) values (?, ?, ?, ?, ?)";
+				PreparedStatement preparedStatement = conn.prepareStatement(sql);
+				preparedStatement.setInt(1, orderId);
+				preparedStatement.setInt(2, item.getPosition());
+				preparedStatement.setInt(3, item.getAmount());
+				preparedStatement.setDouble(4, item.getArticle().getPrice());
+				preparedStatement.setInt(5, item.getArticle().getId());
+
+				preparedStatement.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			}
+		} 
+	}
 }

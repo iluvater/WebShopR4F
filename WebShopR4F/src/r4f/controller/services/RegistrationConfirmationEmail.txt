@@ -1,7 +1,7 @@
 <p>Hallo firstName lastName,</p>
 herzlich Willkommen bei Run4Fun, Ihrem Online-Shop für Sportschuhe.<br><br>
-Sie können sich nun auf <a href="localhost:8080/WebShopR4F/Benutzerauthentifizierung.jsp" > run4fun.de </a>!<br><br>
-Wenn Sie noch Fragen zum Webshop haben, dann können Sie unter <a href="localhost:8080/WebShopR4F/Hilfe.jsp" > run4fun.de/Hilfe </a> weiter Informationen erhalten
+Sie können sich nun auf <a href="localhost:8080/WebShopR4F/Benutzerauthentifizierung.jsp" > run4fun.de </a> anmelden!<br><br>
+Wenn Sie noch Fragen zum Webshop haben, dann können Sie unter <a href="localhost:8080/WebShopR4F/Hilfe.jsp" > run4fun.de/Hilfe </a> weiter Informationen erhalten 
 oder unter <a href="localhost:8080/WebShopR4F/Kontakt.jsp" > run4fun.de/Kontakt </a> sich direkt an uns wenden. <br> <br>
-Viele Grüße<br>
+Viele Gr&uuml;ße<br>
 Run4Fun

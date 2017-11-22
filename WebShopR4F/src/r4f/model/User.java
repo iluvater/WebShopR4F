@@ -313,7 +313,7 @@ public class User {
 	}
 
 	/**
-	 * 
+	 * This method checks whether an email has the right format or not
 	 * @param email
 	 *            possible email that should be checked
 	 * @return returns true when the email matches the pattern returns false
@@ -328,7 +328,7 @@ public class User {
 	}
 
 	/**
-	 * 
+	 * This mehtod checks whether a salutation ist correct or not
 	 * @param salutation
 	 *            salutation String that should be checked
 	 * @return return true when the String salutation is either Herr or Frau
@@ -343,7 +343,7 @@ public class User {
 	}
 
 	/**
-	 * 
+	 * This method checks whether a postCode has the right format or not
 	 * @param postCode
 	 *            postCode String that should be check
 	 * @return returns true when the String postCode contains only 5 digits
@@ -352,6 +352,21 @@ public class User {
 		if (postCode.matches("\\d{5}")) {
 			return true;
 		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * This method checks whether a date is valid or not
+	 * @param date the date to check
+	 * @return returns true if the date is older than 18 years
+	 */
+	public static boolean checkBirthday(Date date){
+		Date today = new Date();
+		today.setYear(today.getYear() - 18);
+		if(today.compareTo(date)>=0){
+			return true;
+		}else{
 			return false;
 		}
 	}
