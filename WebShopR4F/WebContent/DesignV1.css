@@ -105,6 +105,12 @@ h4.impressum {
 
 }
 
+h4.hilfe {
+	padding-left: 42px;
+	padding-right: 20px;
+
+}
+
 p.agb {
 	padding-left: 42px;
 	padding-right: 20px;
@@ -118,6 +124,16 @@ p.agb2 {
 
 p.impressum{
 	padding-left: 42px;
+	padding-right: 20px;
+}
+
+p.hilfeFrage {
+	padding-left: 42px;
+	padding-right: 20px;
+	font-weight: bold;
+}
+p.hilfeAntwort {
+	padding-left: 45px;
 	padding-right: 20px;
 }
 
@@ -231,6 +247,17 @@ li.inline {
 	padding-bottom: 5px;
 }
 
+div.warebkorb {
+	background: #EDEDED;
+	width: 70%; 
+	margin: auto;
+	padding-top: 4px;
+	padding-right:0px;
+	padding-left:45px; 
+	padding-top: 2px;
+	padding-bottom: 5px;
+}
+
 #fuss {
 	background-color: #dad6b1;
 	/* padding: 40px; */
@@ -255,6 +282,40 @@ li.inline {
 	
 	/* padding-right: 43px; */
 }
+
+.containerHilfeLinks {
+	width: 250px;
+	margin: left;
+	min-height: 100%;
+	width: 60%;
+	background: white;
+	padding-bottom: 3em;
+	
+	/* padding-right: 43px; */
+}
+
+.containerHilfeMitte {
+	width: 250px;
+	margin: 0 auto;
+	min-height: 100%;
+	width: 60%;
+	background: white;
+	padding-bottom: 3em;
+	
+	/* padding-right: 43px; */
+}
+
+.containerHilfeRechts {
+	width: 250px;
+	margin: right;
+	min-height: 100%;
+	width: 60%;
+	background: white;
+	padding-bottom: 3em;
+	
+	/* padding-right: 43px; */
+}
+
 div.containerArtikelDetails {
 	clear : left;
 }
@@ -283,6 +344,14 @@ div.containerArtikelDetails {
 	border-color: black;
 	border-width: 1px;
 	border-style: solid;
+}
+
+.hilfekacheln
+{
+float: left;
+width: 150px;
+padding: 2px;
+font-size: 0.7em;
 }
   
 #buttonHeader {
