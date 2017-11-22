@@ -231,6 +231,75 @@ li.inline {
 	padding-bottom: 5px;
 }
 
+#containerFilter{
+	float: left;
+	width: 20%;
+}
+
+#containerInhalt {
+	float: left;
+	width: 80%;
+}
+
+#containerArtikel {
+ 	width: 27%; 
+	float: left;  
+	border-color: black;
+	border-width: 1px;
+	border-style: solid;
+/* 	padding-left: 1em; 
+	padding-right: 1em; */
+ 	margin-right: 1em; 
+	margin-left: 1em;   
+	margin-bottom: 1em;
+	margin-top: 1em;
+}
+
+#containerButtonUebersicht {
+	padding-left: 4.5em; 
+}
+
+p.artikelUebersicht{
+	text-align: center;
+	line-heigth: 1px;
+}
+
+.linkButton { 
+     background: none;
+     border: none;
+     color: black;
+    /*  text-decoration: underline; */
+     cursor: pointer; 
+     width: 100%;
+     text-align: left; 
+     padding-left: 1em;
+}
+
+#centerButton {
+	 /* width: 33,33333%; */
+     align: center;  
+}
+
+.linkButton:active {
+	background:none;
+	border: none; 
+}
+
+#ImgArtikelUebersicht {
+	width : 80%;
+	/* float : left; */
+/* 	border-color: black;
+	border-width: 1px;
+	border-style: solid; */
+	display: block; 
+	margin-left: auto;
+	margin-right: auto; 
+}
+
+.clearLeft{
+	clear: left;
+}
+
 #fuss {
 	background-color: #dad6b1;
 	/* padding: 40px; */
@@ -243,6 +312,11 @@ li.inline {
 	margin-top: -3em;
 	text-align: center; 
 	line-height: 3em;
+}
+
+#paddingLeft {
+	padding-left: 15px;
+	margin-left: 15px;
 }
 
 #containerAgb {
@@ -294,7 +368,7 @@ div.containerArtikelDetails {
 	font-familiy: arial; 
 	font-size: 10pt; 
 	text-align: center;*/
-} 
+}
 
 #logo{
 	float: left;

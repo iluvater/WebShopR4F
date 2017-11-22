@@ -17,9 +17,8 @@
 		<h1>Überschrift Test</h1>
 	</div>
 	<div id="container">
-		<div>
 			<c:if test ="${not empty article.name}">
-				<div class="containerArtikelDetails">
+				<div>
 					<img id="ImgArtikelDetails" src="./ImageServlet/${article.image }" alt="Bild">
 					<h3 class="artikelDetails"><jsp:getProperty property="name" name="article"/></h3> 
 					<h4 class="artikelDetails">Preis: <jsp:getProperty property="price" name="article"/> &euro; </h4>
@@ -42,7 +41,7 @@
 						<strong>Kategorie: </strong><jsp:getProperty property="category" name="article"/><br />
 					</p>
 				</div>
-				<div class="containerArtikelDetails">
+				<div>
 					<h4 class="artikelDetails">Beschreibung</h4>
 					<p class="artikelDetails">
 						<jsp:getProperty property="description" name="article"/>	
@@ -54,7 +53,6 @@
 					Es ist ein Fehler aufgetreten. Bitte Versuchen Sie es erneut.
 				</p>
 			</c:if>
-		</div>
 	</div>
 	<div id="fuss">
 		<ul>
