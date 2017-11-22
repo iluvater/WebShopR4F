@@ -39,7 +39,7 @@ public class NavigationArticleDetailsServlet extends HttpServlet {
 			//int id = Integer.parseInt(request.getParameter("id"));
 			
 			ArticleService articleService = new ArticleService();
-			article = articleService.getArticle(8);
+			article = articleService.getArticle(12);
 		}catch(Exception e){
 			article = null;
 		}
