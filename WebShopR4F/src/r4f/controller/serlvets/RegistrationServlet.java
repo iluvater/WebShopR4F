@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.model.User;
-import r4f.controller.services.RegistrationService;
+import r4f.controller.services.EmailService;
+import r4f.controller.services.UserService;
 import r4f.model.ErrorMessage;
+import r4f.model.User;
 
 /**
  * Servlet implementation class RegistrationServlet
@@ -46,11 +47,10 @@ public class RegistrationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String firstName, lastName, email, password, street, houseNumber, postcode, city, birthday_string,
-				salutation;
+		String firstName, lastName, email, password, street, houseNumber, postcode, city, birthday_string, salutation;
 		Date birthday;
 		User user;
-		RegistrationService regigistrationService;
+		UserService userService;
 		RequestDispatcher dispatcher;
 		String errorURL = "Registrierungsmaske.jsp";
 		String successURL = "Willkommen.jsp";
@@ -149,8 +149,8 @@ public class RegistrationServlet extends HttpServlet {
 														if (User.checkSalutation(salutation)) {
 															// Check if email
 															// exists
-															regigistrationService = new RegistrationService();
-															if (!regigistrationService.checkEmailExists(email)) {
+															userService = new UserService();
+															if (!userService.checkEmailExists(email)) {
 																// check date
 																// format
 																if (birthday_string.matches("\\d{4}-\\d{2}-\\d{2}")
@@ -159,11 +159,9 @@ public class RegistrationServlet extends HttpServlet {
 																	if (birthday_string
 																			.matches("\\d{4}-\\d{2}-\\d{2}")) {
 																		year = Integer.parseInt(
-																				birthday_string.substring(0, 4))
-																				- 1900;
+																				birthday_string.substring(0, 4)) - 1900;
 																		month = Integer.parseInt(
-																				birthday_string.substring(5, 7))
-																				- 1;
+																				birthday_string.substring(5, 7)) - 1;
 																		day = Integer.parseInt(
 																				birthday_string.substring(8, 10));
 																	} else {
@@ -171,33 +169,44 @@ public class RegistrationServlet extends HttpServlet {
 																				birthday_string.substring(6, 10))
 																				- 1900;
 																		month = Integer.parseInt(
-																				birthday_string.substring(3, 5))
-																				- 1;
+																				birthday_string.substring(3, 5)) - 1;
 																		day = Integer.parseInt(
 																				birthday_string.substring(0, 2));
 																	}
 																	birthday = new Date(year, month, day);
+																	if (User.checkBirthday(birthday)) {
+																		user = new User(firstName, lastName, email,
+																				birthday, password, street, houseNumber,
+																				postcode, city, salutation);
 
-																	user = new User(firstName, lastName, email,
-																			birthday, password, street,
-																			houseNumber, postcode, city, salutation);
-
-																	user = regigistrationService
-																			.createBenutzerInDB(user);
-																	if (user != null) {
-																		dispatcher = request
-																				.getRequestDispatcher(successURL);
-																		dispatcher.forward(request, response);
-																		return;
+																		user = userService.createBenutzerInDB(user);
+																		if (user != null) {
+																			EmailService emailService = new EmailService();
+																			emailService
+																					.sendRegistrationConfirmation(user);
+																			dispatcher = request
+																					.getRequestDispatcher(successURL);
+																			dispatcher.forward(request, response);
+																			return;
+																		} else {
+																			// Errorhandling
+																			// something
+																			// went
+																			// wrong
+																			// during
+																			// registration
+																			ErrorMessage errorMessage = new ErrorMessage(
+																					101);
+																			request.setAttribute("error", errorMessage);
+																			dispatcher = request
+																					.getRequestDispatcher(errorURL);
+																			dispatcher.forward(request, response);
+																			return;
+																		}
 																	} else {
-																		// Errorhandling
-																		// something
-																		// went
-																		// wrong
-																		// during
-																		// registration
+																		// Error too young
 																		ErrorMessage errorMessage = new ErrorMessage(
-																				101);
+																				129);
 																		request.setAttribute("error", errorMessage);
 																		dispatcher = request
 																				.getRequestDispatcher(errorURL);

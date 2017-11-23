@@ -69,6 +69,25 @@ public class ShoppingBasket {
 	}
 	
 	/**
+	 * This method adds an article to the shopping basket if an article is already in the shopping basket the amount of this article will be increased
+	 * @param article The article that should be added to the shopping basket
+	 */
+	public void addItem(Article article) {
+		boolean notFound = true;
+		for(int i =0; i < items.size() && notFound; i++){
+			ShoppingBasketItem item = items.get(i);
+			if(item.getArticle().getId() == article.getId()){
+				notFound = false;
+				item.setAmount(item.getAmount()+1);
+			}
+		}
+		if(notFound){
+			ShoppingBasketItem item = new ShoppingBasketItem(1, article);
+			items.add(item);
+		}
+	}
+
+	 /**
 	 * This method returns the total price of the shopping basket
 	 * @return the total price of the shopping basket. The price is rounded at two digits.
 	 */
@@ -79,5 +98,4 @@ public class ShoppingBasket {
 		}		
 		return ((double) Math.round(sum * 100)) / 100.0;
 	}
-
 }

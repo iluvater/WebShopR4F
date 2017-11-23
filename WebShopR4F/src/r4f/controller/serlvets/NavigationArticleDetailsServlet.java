@@ -65,6 +65,7 @@ public class NavigationArticleDetailsServlet extends HttpServlet {
 			
 			ArticleService articleService = new ArticleService();
 			article = articleService.getArticle(id);
+
 		}catch(Exception e){
 			article = null;
 		}

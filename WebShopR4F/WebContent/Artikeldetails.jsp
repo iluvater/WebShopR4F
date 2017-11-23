@@ -26,9 +26,12 @@
 					<a href="Willkommen.jsp" id="button" class="btn btn-default btn-sm">
           				<span class="glyphicon glyphicon-heart-empty"></span> Merkliste
         			</a>
-        			<a href="Willkommen.jsp" id="button" class="btn btn-default btn-sm">
+        			<form action="./AddToShoppingBasketServlet" method="post">
+        			<input type="hidden" name="articleId" value="${article.id }" />
+        			<button id="button" class="btn btn-default btn-sm">
           				<span class="glyphicon glyphicon-shopping-cart"></span> Warenkorb
-        			</a>
+        			</button>
+        			</form>
 				</div>
 				<div class="containerArtikelDetails">
 					<h4 class="artikelDetails">Produktioninformationen</h4>

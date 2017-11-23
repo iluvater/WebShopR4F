@@ -1,5 +1,7 @@
 package r4f.model;
 
+import java.util.Date;
+
 public class TestInsert {
 
 	public static void main(String[] args) {
@@ -22,8 +24,11 @@ public class TestInsert {
 //		b = db.getBenutzer("email3@test.com");
 //		System.out.println(b.getId());
 		
-		ErrorMessage error = new ErrorMessage(104);
-		System.out.println(error.getErrorMessage());
+//		ErrorMessage error = new ErrorMessage(104);
+//		System.out.println(error.getErrorMessage());
+		
+		Date d = new Date(100, 3, 2);
+		System.out.println(User.checkBirthday(new Date()));
 
 		
 	}

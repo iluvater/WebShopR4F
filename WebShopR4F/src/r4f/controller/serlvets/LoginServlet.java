@@ -9,12 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.model.User;
-import r4f.controller.services.LoginService;
 import r4f.controller.services.ShoppingBasketService;
-import r4f.model.DatabaseConnection;
+import r4f.controller.services.UserService;
 import r4f.model.ErrorMessage;
 import r4f.model.ShoppingBasket;
+import r4f.model.User;
 
 /**
  * Servlet implementation class LoginServlet
@@ -52,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 		String password;
 		User user;
 		ShoppingBasket shoppingBasket;
-		LoginService loginService;
+		UserService userService;
 		ShoppingBasketService shoppingBasketService;
 		RequestDispatcher dispatcher;
 
@@ -62,11 +61,11 @@ public class LoginServlet extends HttpServlet {
 		email = request.getParameter("email");
 		password = request.getParameter("password");
 
-		loginService = new LoginService();
+		userService = new UserService();
 		shoppingBasketService = new ShoppingBasketService();
 
-		if(loginService.checkLogin(email, password)){
-			user = loginService.getUser(email);
+		if(userService.checkLogin(email, password)){
+			user = userService.getUser(email);
 			shoppingBasket = shoppingBasketService.getShoppingBasket(user.getShoppingBasket());
 
 			request.getSession().setAttribute("user", user);
