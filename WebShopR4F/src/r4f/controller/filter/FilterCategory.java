@@ -14,15 +14,15 @@ public class FilterCategory implements FilterInterface {
 		this.category = category;
 	}
 
-	/* (non-Javadoc)
+	/**
 	 * @see r4f.controller.filter.FilterInterface#getSQLFilter()
 	 */
 	@Override
-	public String getSQLFilter(String tableName) {
+	public String getSQLFilter(String tableArticle, String tableCategory, String tableManufacturer, String tableSport, String tableColor) {
 		if(category == null || category.equals("")){
 			return "";
 		}else{
-			return " AND " + tableName + ".category = \"" + category + "\"";
+			return " AND " + tableCategory + ".name = \"" + category + "\"";
 		}
 	}
 
@@ -38,6 +38,15 @@ public class FilterCategory implements FilterInterface {
 	 */
 	public void setCategory(String category) {
 		this.category = category;
+	}
+	
+	/**
+	 * @see r4f.controller.filter.FilterInterface#getType()
+	 */
+	@Override
+	public String getType() {
+		// TODO Auto-generated method stub
+		return "category";
 	}
 
 }
