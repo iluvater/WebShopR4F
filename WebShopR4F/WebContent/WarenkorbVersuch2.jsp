@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Warenkorb</title>
 <link href="DesignV1.css" rel="stylesheet">
 </head>
@@ -43,7 +43,7 @@
 					<tr>
 					<td><h4 align="left"><b>${item.article.name}</b></h4>
 					<p align="left"><b>Farbe: </b>${item.article.color}</p>
-					<p align="left"><b>Größe: </b>${item.article.size}</p>
+					<p align="left"><b>GrÃ¶ÃŸe: </b>${item.article.size}</p>
 					<p align="left"><b>Preis: </b><b>${item.article.price}</b></p>
 					</td>
 					</tr>
@@ -86,7 +86,7 @@
 			<li><a class="footer" href="Test.jsp">Kontaktseite</a></li>
 			<li><a class="footer" href="Test.jsp">Impressum</a></li>
 			<li><a class="footer" href="Test.jsp">Hilfeseite</a></li>
-			<li> © 2017 Run4Fun GmbH, Alle Rechte vorbehalten</li>
+			<li> Â© 2017 Run4Fun GmbH, Alle Rechte vorbehalten</li>
 		</ul>	
 	</div>
 </body>
