@@ -1,4 +1,4 @@
-package r4f.controller.serlvets;
+package r4f.controller.servlets;
 
 import java.io.IOException;
 
@@ -9,22 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.model.ErrorMessage;
 import r4f.model.Order;
 import r4f.model.ShoppingBasket;
 import r4f.model.User;
 
 /**
- * Servlet implementation class OrderPaymentToOverviewServlet
+ * Servlet implementation class OrderCheckoutServlet
  */
-@WebServlet("/OrderPaymentToOverviewServlet")
-public class OrderPaymentToOverviewServlet extends HttpServlet {
+@WebServlet("/OrderCheckoutServlet")
+public class OrderCheckoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OrderPaymentToOverviewServlet() {
+    public OrderCheckoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +32,8 @@ public class OrderPaymentToOverviewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -41,33 +41,30 @@ public class OrderPaymentToOverviewServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String successURL = "Test.jsp";
-		String errorURL = "Test.jsp";
-		String paymentMethod;
 		RequestDispatcher dispatcher;
 		
-		Order order = null;
+		ShoppingBasket shoppingBasket = null;
+		Order order;
+		User user = null;;
 		
-		order = (Order) request.getSession().getAttribute("order");
+		shoppingBasket = (ShoppingBasket)request.getAttribute("shoppingBasket");
+		user = (User)request.getAttribute("User");
 		
-		paymentMethod = request.getParameter("paymentMethod");
-		
-		if(paymentMethod != null && !paymentMethod.equals("") && Order.checkPaymentMethod(paymentMethod)){
-			order.setPaymentMethod(paymentMethod);
+		if(user == null || shoppingBasket == null){
+			// Errorhandling not logged in
+			return;
+		}else{
+			order = new Order();
+			order.setUser(user);
+			order.addShoppingBasket(shoppingBasket);
+			
 			request.getSession().setAttribute("order", order);
 			
 			dispatcher = request.getRequestDispatcher(successURL);
 			dispatcher.forward(request, response);
 			return;
-			
-			
-		}else{
-			//Errorhandling missing input
-			ErrorMessage errorMessage = new ErrorMessage(130);
-			request.setAttribute("error", errorMessage);
-			dispatcher = request.getRequestDispatcher(errorURL);
-			dispatcher.forward(request, response);
-			return;
 		}
+		
 		
 	}
 

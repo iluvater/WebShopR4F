@@ -1,4 +1,4 @@
-package r4f.controller.serlvets;
+package r4f.controller.servlets;
 
 import java.io.IOException;
 import java.io.InputStream;

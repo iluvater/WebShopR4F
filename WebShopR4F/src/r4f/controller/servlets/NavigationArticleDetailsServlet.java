@@ -1,4 +1,4 @@
-package r4f.controller.serlvets;
+package r4f.controller.servlets;
 
 import java.io.IOException;
 
@@ -9,54 +9,71 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.controller.filter.FilterList;
 import r4f.controller.services.ArticleService;
+import r4f.model.Article;
 
 /**
- * Servlet implementation class NavigationOverviewServlet
+ * Servlet implementation class NavigationArticleDetailsServlet
  */
-@WebServlet("/NavigationOverviewServlet")
-public class NavigationOverviewServlet extends HttpServlet {
+@WebServlet("/NavigationArticleDetailsServlet")
+public class NavigationArticleDetailsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NavigationOverviewServlet() {
+    public NavigationArticleDetailsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
-
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String successURL = "Uebersichtsseite.jsp";
-		
+		String successURL = "Artikeldetails.jsp";
 		RequestDispatcher dispatcher;
-		FilterList filterList = null; 
+		Article article;
+		try{
+			int id = Integer.parseInt((String) request.getSession().getAttribute("articleId"));
+			
+			ArticleService articleService = new ArticleService();
+			article = articleService.getArticle(id);
+		}catch(Exception e){
+			article = null;
+		}
 		
-		request.getSession().getAttribute("filterList");
-		if(filterList ==null){
-			filterList = new FilterList();
-		}		
 		
-		ArticleService articleService = new ArticleService();
-		request.setAttribute("articleList", articleService.getArticleList(filterList));
-		
+		request.setAttribute("article", article);
 		dispatcher = request.getRequestDispatcher(successURL);
 		dispatcher.forward(request, response);
-		return;
+		
 	}
-
+	
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String successURL = "Artikeldetails.jsp";
+		RequestDispatcher dispatcher;
+		Article article;
+		try{
+			int id = Integer.parseInt(request.getParameter("articleId"));
+			
+			ArticleService articleService = new ArticleService();
+			article = articleService.getArticle(id);
+
+		}catch(Exception e){
+			article = null;
+		}
+		
+		
+		request.setAttribute("article", article);
+		dispatcher = request.getRequestDispatcher(successURL);
+		dispatcher.forward(request, response);
 		
 	}
-
 }

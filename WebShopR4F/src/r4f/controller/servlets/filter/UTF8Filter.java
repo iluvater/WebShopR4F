@@ -1,4 +1,4 @@
-package r4f.controller.serlvets.filter;
+package r4f.controller.servlets.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;

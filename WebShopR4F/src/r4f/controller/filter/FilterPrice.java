@@ -24,17 +24,21 @@ public class FilterPrice implements FilterInterface {
 	@Override
 	public String getSQLFilter(String tableArticle, String tableCategory, String tableManufacturer, String tableSport,
 			String tableColor) {
-		String sql = "";
+		String sql = " ( ";
 
-		for (int priceSpan[] : prices) {
+		for (int i = 0; i<prices.size(); i++) {
+			int priceSpan[] = prices.get(i);
 			if(priceSpan[0] == -1){
-				sql = sql + " AND " + tableArticle + ".price >= " +  priceSpan[1];
+				sql = sql + tableArticle + ".price >= " +  priceSpan[1] + " ";
 			}else{
 				if(priceSpan[1] == -1){
-					sql = sql + " AND " + tableArticle + ".price <= " +  priceSpan[0];
+					sql = sql + tableArticle + ".price <= " +  priceSpan[0] + " ";
 				}else{
-					sql = sql + " AND " + tableArticle + ".price BETWEEN " + priceSpan[0] + " AND " + priceSpan[1];
+					sql = sql + tableArticle + ".price BETWEEN " + priceSpan[0] + " AND " + priceSpan[1] + " ";
 				}
+			}
+			if(i != prices.size() -1 ){
+				sql = sql + " OR ";
 			}
 		}
 

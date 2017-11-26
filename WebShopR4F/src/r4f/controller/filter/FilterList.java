@@ -42,6 +42,9 @@ public class FilterList {
 	 */
 	public String getSQLFilter(String tableArticle, String tableCategory, String tableManufacturer, String tableSport, String tableColor){
 		String filter = "";
+		if(!filters.isEmpty()){
+			filter = " WHERE ";
+		}
 		for (FilterInterface filterInterface : filters) {
 			filter = filter + filterInterface.getSQLFilter(tableArticle, tableCategory, tableManufacturer, tableSport, tableColor);
 		}
@@ -53,10 +56,14 @@ public class FilterList {
 	 * @param filterName the name of the filter that should be removed
 	 */
 	public void removeFilter(String filterName) {
+		List<FilterInterface> removeFilter = new ArrayList<FilterInterface>();
 		for (FilterInterface filterInterface : filters) {
 			if(filterInterface.getType().equals(filterName)){
-				filters.remove(filterInterface);
+				removeFilter.add(filterInterface);
 			}
+		}
+		for (FilterInterface filterInterface : removeFilter) {
+			filters.remove(filterInterface);
 		}
 	}
 	

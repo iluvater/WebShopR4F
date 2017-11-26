@@ -363,8 +363,10 @@ public class DatabaseConnection {
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, co.name as color, a.entryDate, a.image, ca.name as category, s.name as sport "
-						+ " FROM article AS a INNER JOIN category AS ca INNER JOIN manufacturer AS m INNER JOIN sport AS s INNER JOIN color AS co"
-						+ " WHERE a.category = ca.id AND a.manufacturer = m.id AND a.sport = s.id AND a.color = co.id" 
+						+ " FROM article AS a INNER JOIN category AS ca ON a.category = ca.id"
+						+ " INNER JOIN manufacturer AS m ON a.manufacturer = m.id"
+						+ " INNER JOIN sport AS s ON a.sport = s.id"
+						+ " INNER JOIN color AS co ON a.color = co.id" 
 						+ filter.getSQLFilter("a", "ca", "m", "s", "co");
 				ResultSet result = query.executeQuery(sql);
 
