@@ -1,4 +1,4 @@
-package r4f.controller.serlvets;
+package r4f.controller.servlets;
 
 import java.io.IOException;
 
@@ -43,9 +43,7 @@ public class NavigationOverviewCategoryServlet extends HttpServlet {
 		String category = null;
 		
 		RequestDispatcher dispatcher;
-		FilterList filterList = null; 
-		
-		request.getSession().getAttribute("filterList");
+		FilterList filterList = (FilterList)request.getSession().getAttribute("filterList");
 		if(filterList ==null){
 			filterList = new FilterList();
 		}

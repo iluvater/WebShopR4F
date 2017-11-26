@@ -29,11 +29,16 @@ public class FilterManufacturer implements FilterInterface {
 	@Override
 	public String getSQLFilter(String tableArticle, String tableCategory, String tableManufacturer, String tableSport,
 			String tableColor) {
-		String sql = "";
+		String sql = "( ";
 
-		for (String string : manufacturers) {
-			sql = sql + " AND " + tableManufacturer + ".name = \"" + string + "\"";
+		for (int i = 0; i< manufacturers.size(); i++) {
+			String string = manufacturers.get(i);
+			sql = sql + tableManufacturer + ".name = \"" + string + "\"";
+			if(i != manufacturers.size() -1 ){
+				sql = sql + " OR ";
+			}
 		}
+		sql = sql + " ) ";
 
 		return sql;
 	}
