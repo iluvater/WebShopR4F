@@ -70,6 +70,40 @@ li {
 	display: inline;
 }
 
+table.warenkorb{
+	width: 80%;
+	margin: 0 auto;
+	min-height: 100%;
+	border: 0;
+	text-align: center;
+	vertical-align: middle;
+	background-color: #ededed;
+}
+
+table.hilfe{
+	width: 100%;
+	margin: 0 auto;
+	min-height: 100%;
+	border: 0;
+	text-align: center;
+	vertical-align: top;
+}
+td.hilfe{
+	height: 200px;
+}
+
+td.warenkorb{
+	vertical-align: middle;
+	height: 50px;
+}
+
+input.warenkorb[type="text"] 
+{
+    width: 20px;
+    border: 1px solid black;
+    text-align: center;
+}
+
 h2.agb {
 	padding-left: 15px; 
 }
@@ -105,6 +139,12 @@ h4.impressum {
 
 }
 
+h4.hilfe {
+	padding-left: 42px;
+	padding-right: 20px;
+
+}
+
 p.agb {
 	padding-left: 42px;
 	padding-right: 20px;
@@ -118,6 +158,16 @@ p.agb2 {
 
 p.impressum{
 	padding-left: 42px;
+	padding-right: 20px;
+}
+
+p.hilfeFrage {
+	padding-left: 42px;
+	padding-right: 20px;
+	font-weight: bold;
+}
+p.hilfeAntwort {
+	padding-left: 45px;
 	padding-right: 20px;
 }
 
@@ -231,6 +281,32 @@ li.inline {
 	padding-bottom: 5px;
 }
 
+.inhaltWarenkorb {
+	background: #EDEDED;
+	width: 80%; 
+	margin-left:10%;
+	margin-right: 10%;
+	padding-top: 2px;
+	/* padding-bottom: 5px; */
+	padding-right:0px;
+	padding-left:0px; 
+	padding-top: 2px;
+	padding-bottom: 5px;
+}
+
+div.warenkorbLeer {
+	background: #EDEDED;
+	width: 70%; 
+	margin-left:15%;
+	margin-right: 15%;
+	padding-top: 2px;
+	/* padding-bottom: 5px; */
+	padding-right:0px;
+	padding-left:43px; 
+	padding-top: 2px;
+	padding-bottom: 5px;
+}
+
 #containerFilter{
 	float: left;
 	width: 20%;
@@ -329,6 +405,40 @@ p.artikelUebersicht{
 	
 	/* padding-right: 43px; */
 }
+
+.containerHilfeLinks {
+	width: 250px;
+	margin: left;
+	min-height: 100%;
+	width: 60%;
+	background: white;
+	padding-bottom: 3em;
+	
+	/* padding-right: 43px; */
+}
+
+.containerHilfeMitte {
+	width: 250px;
+	margin: 0 auto;
+	min-height: 100%;
+	width: 60%;
+	background: white;
+	padding-bottom: 3em;
+	
+	/* padding-right: 43px; */
+}
+
+.containerHilfeRechts {
+	width: 250px;
+	margin: right;
+	min-height: 100%;
+	width: 60%;
+	background: white;
+	padding-bottom: 3em;
+	
+	/* padding-right: 43px; */
+}
+
 div.containerArtikelDetails {
 	clear : left;
 }
@@ -357,6 +467,22 @@ div.containerArtikelDetails {
 	border-color: black;
 	border-width: 1px;
 	border-style: solid;
+}
+
+.ImgWarenkorb {
+	width: 200px;
+	height: 150px;
+/* 	border-color: black;
+	border-width: 1px;
+	border-style: solid; */
+}
+
+.hilfekacheln
+{
+float: left;
+width: 150px;
+padding: 2px;
+font-size: 0.7em;
 }
   
 #buttonHeader {
