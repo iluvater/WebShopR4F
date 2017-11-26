@@ -188,7 +188,7 @@ public class DatabaseConnection {
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT u.*, r.name , a.street, a.houseNumber, a.postCode, a.city "
 						+ "FROM user AS u INNER JOIN role AS r ON r.id = u.role INNER JOIN address AS a ON u.id = a.user "
-						+ "WHERE u.masterData='1' AND u.id='" + id + "'";
+						+ "WHERE a.masterData='1' AND u.id='" + id + "'";
 				ResultSet result = query.executeQuery(sql);
 
 				// Ergebnissätze durchfahren.
@@ -233,7 +233,7 @@ public class DatabaseConnection {
 			PreparedStatement preparedStatement = conn
 					.prepareStatement("UPDATE `user` SET `email` = ?, `firstName` = ?, `lastName` = ?, "
 							+ "`birthday` = ?, `password` = ?, `salutation` = ?, `shoppingBasket` = ?, "
-							+ "`role`= ? WHERE `user`.`id` = ?", Statement.RETURN_GENERATED_KEYS);
+							+ "`role`= ? WHERE `user`.`id` = ?");
 			preparedStatement.setString(1, user.getEmail());
 			preparedStatement.setString(2, user.getFirstName());
 			preparedStatement.setString(3, user.getLastName());

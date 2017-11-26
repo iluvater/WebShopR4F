@@ -52,19 +52,23 @@ public class UserService extends Service {
 
 		int shoppingBasketId = super.getDbConnection().createShoppingBasketInDB(userId);
 
-		user = super.getDbConnection().getUser(userId);
 		
-		super.getDbConnection().createAddressInDB(user.getId(), user.getStreet(), user.getHouseNumber(),
+		
+		super.getDbConnection().createAddressInDB(userId, user.getStreet(), user.getHouseNumber(),
 				user.getPostCode(), user.getCity(), true);
 
 		user.setShoppingBasket(shoppingBasketId);
+		user.setId(userId);
+		user.setRole("Kunde");
 
 		try {
 			super.getDbConnection().updateUserInDB(user);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		
+		user = super.getDbConnection().getUser(userId);
+		
 		return user;
 	}
 
