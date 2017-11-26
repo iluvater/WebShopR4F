@@ -17,6 +17,8 @@ import java.util.List;
 
 import com.mysql.jdbc.Driver;
 
+import r4f.controller.filter.FilterList;
+
 /**
  * @author Ture
  *
@@ -73,6 +75,8 @@ public class DatabaseConnection {
 	 * 
 	 * @param user
 	 *            User that should be created in DB
+	 * @param addressId
+	 *            Id of the address of the user
 	 * @return returns the id of the created user returns -1 if there was no
 	 *         user created
 	 */
@@ -85,19 +89,15 @@ public class DatabaseConnection {
 			try {
 
 				PreparedStatement preparedStatement = conn.prepareStatement(
-						"INSERT INTO `user` (`id`, `email`, `firstName`, `lastName`, `birthday`, `password`, `street`, "
-								+ "`houseNumber`, `postCode`, `city`, `salutation`, `shoppingBasket`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, null)",
+						"INSERT INTO `user` (`id`, `email`, `firstName`, `lastName`, `birthday`, `password`, `salutation`, `shoppingBasket`)"
+								+ " VALUES (NULL, ?, ?, ?, ?, ?, ?, null)",
 						Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setString(1, user.getEmail());
 				preparedStatement.setString(2, user.getFirstName());
 				preparedStatement.setString(3, user.getLastName());
 				preparedStatement.setDate(4, new Date(user.getBirthday().getTime()));
 				preparedStatement.setString(5, user.getPassword());
-				preparedStatement.setString(6, user.getStreet());
-				preparedStatement.setString(7, user.getHouseNumber());
-				preparedStatement.setString(8, user.getPostCode());
-				preparedStatement.setString(9, user.getCity());
-				preparedStatement.setString(10, user.getSalutation());
+				preparedStatement.setString(6, user.getSalutation());
 
 				int lines = preparedStatement.executeUpdate();
 
@@ -138,8 +138,9 @@ public class DatabaseConnection {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT u.*, r.name  FROM user AS u INNER JOIN role AS r ON r.id = u.role WHERE email='"
-						+ email + "'";
+				String sql = "SELECT u.*, r.name , a.street, a.houseNumber, a.postCode, a.city "
+						+ "FROM user AS u INNER JOIN role AS r ON r.id = u.role INNER JOIN address AS a ON a.user = u.id "
+						+ "WHERE a.masterData='1' AND email='" + email + "'";
 				ResultSet result = query.executeQuery(sql);
 
 				// Ergebnissätze durchfahren.
@@ -185,8 +186,9 @@ public class DatabaseConnection {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT u.*, r.name  FROM user AS u INNER JOIN role AS r ON r.id = u.role WHERE u.id='"
-						+ id + "'";
+				String sql = "SELECT u.*, r.name , a.street, a.houseNumber, a.postCode, a.city "
+						+ "FROM user AS u INNER JOIN role AS r ON r.id = u.role INNER JOIN address AS a ON u.id = a.user "
+						+ "WHERE a.masterData='1' AND u.id='" + id + "'";
 				ResultSet result = query.executeQuery(sql);
 
 				// Ergebnissätze durchfahren.
@@ -217,42 +219,32 @@ public class DatabaseConnection {
 
 	/**
 	 * This method updates a User in the database the new values should be in
-	 * the parameter user
+	 * the parameter user This method does not updates the address of the user.
+	 * you can use updateAddressInDb instead
 	 * 
 	 * @param user
 	 *            user that should be updated
 	 */
-	public void updateUserInDB(User user) {
+	public void updateUserInDB(User user) throws SQLException {
 		conn = getInstance();
 
 		if (conn != null) {
 
-			try {
+			PreparedStatement preparedStatement = conn
+					.prepareStatement("UPDATE `user` SET `email` = ?, `firstName` = ?, `lastName` = ?, "
+							+ "`birthday` = ?, `password` = ?, `salutation` = ?, `shoppingBasket` = ?, "
+							+ "`role`= ? WHERE `user`.`id` = ?");
+			preparedStatement.setString(1, user.getEmail());
+			preparedStatement.setString(2, user.getFirstName());
+			preparedStatement.setString(3, user.getLastName());
+			preparedStatement.setDate(4, new Date(user.getBirthday().getTime()));
+			preparedStatement.setString(5, user.getPassword());
+			preparedStatement.setString(6, user.getSalutation());
+			preparedStatement.setInt(7, user.getShoppingBasket());
+			preparedStatement.setInt(8, getRoleId(user.getRole()));
+			preparedStatement.setInt(9, user.getId());
 
-				PreparedStatement preparedStatement = conn
-						.prepareStatement("UPDATE `user` SET `email` = ?, `firstName` = ?, `lastName` = ?, "
-								+ "`birthday` = ?, `password` = ?, `street` = ?, `houseNumber` = ?, "
-								+ "`postCode` = ?, `city` = ?, `salutation` = ?, `shoppingBasket` = ?"
-								+ "`role`= ? WHERE `user`.`id` = ?", Statement.RETURN_GENERATED_KEYS);
-				preparedStatement.setString(1, user.getEmail());
-				preparedStatement.setString(2, user.getFirstName());
-				preparedStatement.setString(3, user.getLastName());
-				preparedStatement.setDate(4, new Date(user.getBirthday().getTime()));
-				preparedStatement.setString(5, user.getPassword());
-				preparedStatement.setString(6, user.getStreet());
-				preparedStatement.setString(7, user.getHouseNumber());
-				preparedStatement.setString(8, user.getPostCode());
-				preparedStatement.setString(9, user.getCity());
-				preparedStatement.setString(10, user.getSalutation());
-				preparedStatement.setInt(11, user.getShoppingBasket());
-				preparedStatement.setInt(12, getRoleId(user.getRole()));
-				preparedStatement.setInt(13, user.getId());
-
-				preparedStatement.executeUpdate();
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			preparedStatement.executeUpdate();
 		}
 	}
 
@@ -281,7 +273,7 @@ public class DatabaseConnection {
 				preparedStatement.setInt(3, artikel.getSize());
 				preparedStatement.setDouble(4, artikel.getPrice());
 				preparedStatement.setInt(5, getManufacturerId(artikel.getManufacturer()));
-				preparedStatement.setString(6, artikel.getColor());
+				preparedStatement.setInt(6, getColorId(artikel.getColor()));
 				preparedStatement.setInt(7, getCategoryId(artikel.getCategory()));
 				preparedStatement.setInt(8, getSportId(artikel.getSport()));
 
@@ -325,9 +317,9 @@ public class DatabaseConnection {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, a.color, a.entryDate, a.image, c.name as category, s.name as sport "
-						+ " FROM article AS a INNER JOIN category AS c INNER JOIN manufacturer AS m INNER JOIN sport AS s"
-						+ " WHERE a.category = c.id AND a.manufacturer = m.id AND a.sport = s.id AND a.id = " + id;
+				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, co.name as color, a.entryDate, a.image, ca.name as category, s.name as sport "
+						+ " FROM article AS a INNER JOIN category AS ca INNER JOIN manufacturer AS m INNER JOIN sport AS s INNER JOIN color as co"
+						+ " WHERE a.category = ca.id AND a.manufacturer = m.id AND a.sport = s.id AND a.color = co.id AND a.id = " + id;
 				ResultSet result = query.executeQuery(sql);
 
 				// Ergebnissätze durchfahren.
@@ -359,7 +351,7 @@ public class DatabaseConnection {
 	 * 
 	 * @return returns all ariticle in the database
 	 */
-	public List<Article> getArticleList() {
+	public List<Article> getArticleList(FilterList filter) {
 		List<Article> articleList = new ArrayList<Article>();
 
 		conn = getInstance();
@@ -370,9 +362,10 @@ public class DatabaseConnection {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, a.color, a.entryDate, a.image, c.name as category, s.name as sport "
-						+ " FROM article AS a INNER JOIN category AS c INNER JOIN manufacturer AS m INNER JOIN sport AS s"
-						+ " WHERE a.category = c.id AND a.manufacturer = m.id AND a.sport = s.id";
+				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, co.name as color, a.entryDate, a.image, ca.name as category, s.name as sport "
+						+ " FROM article AS a INNER JOIN category AS ca INNER JOIN manufacturer AS m INNER JOIN sport AS s INNER JOIN color AS co"
+						+ " WHERE a.category = ca.id AND a.manufacturer = m.id AND a.sport = s.id AND a.color = co.id" 
+						+ filter.getSQLFilter("a", "ca", "m", "s", "co");
 				ResultSet result = query.executeQuery(sql);
 
 				// Ergebnissätze durchfahren.
@@ -403,37 +396,35 @@ public class DatabaseConnection {
 
 	/**
 	 * This method updates an article in the database
-	 * @param article the article that should be updated it should contain all new values
+	 * 
+	 * @param article
+	 *            the article that should be updated it should contain all new
+	 *            values
 	 */
-	public void updateArticleInDB(Article article) {
+	public void updateArticleInDB(Article article) throws SQLException {
 		conn = getInstance();
 
 		if (conn != null) {
 
-			try {
+			PreparedStatement preparedStatement = conn.prepareStatement(
+					"UPDATE `article` SET `name` = ?, `description` = ?, `size` = ?, "
+							+ "`price` = ?, `manufacturer` = ?, `color` = ?, `category` = ?, "
+							+ "`sport` = ?, `image` = ?" + " WHERE `article`.`id` = ?",
+					Statement.RETURN_GENERATED_KEYS);
+			preparedStatement.setString(1, article.getName());
+			preparedStatement.setString(2, article.getDescription());
+			preparedStatement.setInt(3, article.getSize());
+			preparedStatement.setDouble(4, article.getPrice());
+			preparedStatement.setInt(5, getManufacturerId(article.getManufacturer()));
+			preparedStatement.setInt(6, getColorId(article.getColor()));
+			preparedStatement.setInt(7, getCategoryId(article.getCategory()));
+			preparedStatement.setInt(8, getSportId(article.getSport()));
+			preparedStatement.setInt(9, article.getImage());
 
-				PreparedStatement preparedStatement = conn
-						.prepareStatement("UPDATE `article` SET `name` = ?, `description` = ?, `size` = ?, "
-								+ "`price` = ?, `manufacturer` = ?, `color` = ?, `category` = ?, "
-								+ "`sport` = ?, `image` = ?"
-								+ " WHERE `article`.`id` = ?", Statement.RETURN_GENERATED_KEYS);
-				preparedStatement.setString(1, article.getName());
-				preparedStatement.setString(2, article.getDescription());
-				preparedStatement.setInt(3, article.getSize());
-				preparedStatement.setDouble(4, article.getPrice());
-				preparedStatement.setInt(5, getManufacturerId(article.getManufacturer()));
-				preparedStatement.setString(6, article.getColor());
-				preparedStatement.setInt(7, getCategoryId(article.getCategory()));
-				preparedStatement.setInt(8, getSportId(article.getSport()));
-				preparedStatement.setInt(9, article.getImage());
-				
-				preparedStatement.setInt(10, article.getId());
+			preparedStatement.setInt(10, article.getId());
 
-				preparedStatement.executeUpdate();
+			preparedStatement.executeUpdate();
 
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 
@@ -555,6 +546,37 @@ public class DatabaseConnection {
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT id FROM sport WHERE name='" + sport + "'";
+				ResultSet result = query.executeQuery(sql);
+
+				// Ergebnissätze durchfahren.
+				if (result.next()) {
+					id = result.getInt("id");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return id;
+	}
+	
+	/**
+	 * This method selects the id of a color
+	 * @param color the color which´s id should be selected
+	 * @return returns the id of the color
+	 */
+	public int getColorId(String color){
+		int id = -1;
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			Statement query;
+			try {
+				query = conn.createStatement();
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT id FROM color WHERE name='" + color + "'";
 				ResultSet result = query.executeQuery(sql);
 
 				// Ergebnissätze durchfahren.
@@ -846,5 +868,238 @@ public class DatabaseConnection {
 		}
 		return image;
 	}
+	
+	/**
+	 * This method updates an image in the database
+	 * @param imageId the id of the image that should be updated
+	 * @param imageStream the new content
+	 * @param imageType the new content type of the image
+	 * @throws SQLException an SQLException will be thrown if any error occurred
+	 */
+	public void updateImageInDB(int imageId, InputStream imageStream, String imageType) throws SQLException {
+		conn = getInstance();
 
+		if (conn != null) {
+
+			PreparedStatement preparedStatement = conn.prepareStatement(
+					"UPDATE `image` SET `image` = ?, `type` = ? "
+							+ " WHERE `iamge`.`id` = ? ",
+					Statement.RETURN_GENERATED_KEYS);
+			preparedStatement.setBlob(1, imageStream);
+			preparedStatement.setString(2, imageType);
+			preparedStatement.setInt(3, imageId);
+			
+
+
+			preparedStatement.executeUpdate();
+
+		}	
+	}
+	
+	/**
+	 * This method create a new address in the database
+	 * 
+	 * @param street
+	 *            street of the new address
+	 * @param houseNumber
+	 *            house number of the new address
+	 * @param postCode
+	 *            post code of the new address
+	 * @param city
+	 *            city of the new address
+	 * @return return the id of the created entry in the data base. returns -1
+	 *         if no entry was created
+	 */
+	public int createAddressInDB(int userId, String street, String houseNumber, String postCode, String city,
+			boolean masterData) {
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			try {
+				String sql = "INSERT INTO address (street, houseNumber, postCode, city, masterData, user) values (?, ?, ?, ?, ?, ?)";
+				PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setString(1, street);
+				preparedStatement.setString(2, houseNumber);
+				preparedStatement.setString(3, postCode);
+				preparedStatement.setString(4, city);
+				preparedStatement.setBoolean(5, masterData);
+				preparedStatement.setInt(6, userId);
+
+				int lines = preparedStatement.executeUpdate();
+
+				if (lines != 0) {
+					ResultSet result = preparedStatement.getGeneratedKeys();
+					if (result.next()) {
+						return result.getInt(1);
+					} else {
+						return -1;
+					}
+				} else {
+					return -1;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return -1;
+			}
+		} else {
+			return -1;
+		}
+	}
+	
+	/**
+	 * This method updates the master data address of an user
+	 * @param userId the id of user who's address should be updated
+	 * @param street the new street
+	 * @param houseNumber the new houseNumber
+	 * @param postCode the new postCode
+	 * @param city the new City
+	 * @throws SQLException
+	 */
+	public void updateAddressInDB(int userId, String street, String houseNumber, String postCode, String city) throws SQLException {
+		conn = getInstance();
+
+		if (conn != null) {
+
+			PreparedStatement preparedStatement = conn.prepareStatement(
+					"UPDATE `address` SET `street` = ?, `houseNumber` = ?, `postCode` = ?, "
+							+ "`city` = ? WHERE `address`.`user` = ? AND `masterData`= ?",
+					Statement.RETURN_GENERATED_KEYS);
+			preparedStatement.setString(1, street);
+			preparedStatement.setString(2, houseNumber);
+			preparedStatement.setString(3, postCode);
+			preparedStatement.setString(4, city);
+			preparedStatement.setInt(5, userId);
+			preparedStatement.setBoolean(6,true);
+
+
+			preparedStatement.executeUpdate();
+
+		}	
+	}
+	
+	
+	public Address getAddress(int userId, boolean masterData) {
+		Address address = null;
+
+		conn = getInstance();
+
+		if (conn != null) {
+			try {
+				String sql = "SELECT * FROM address WHERE user=? AND masterData  =?";
+				PreparedStatement preparedStatement = conn.prepareStatement(sql);
+				
+				preparedStatement.setInt(1, userId);
+				preparedStatement.setBoolean(2, masterData);
+				
+				ResultSet result = preparedStatement.executeQuery(sql);
+
+				// Ergebnissätze durchfahren.
+				if (result.next()) {
+					String street = result.getString("street");
+					String houseNumber = result.getString("houseNumber");
+					String postCode = result.getString("postCode");
+					String city = result.getString("city");
+					int id = result.getInt("id");
+					
+					address = new Address(id, street, houseNumber, postCode, city);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return address;
+	}
+	
+	/**
+	 * This method creates an new order in the database
+	 * @param order the order that should be created
+	 * @return the id of the created order if an error occurred during the creation it will return -1
+	 */
+	public int createOrderInDB(Order order) {
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			try {
+				String sql = "INSERT INTO orders (id, entryDate, user, deliveryAddress, billingAddress, paymentMethod) values (null, null, ?, ?, ?, ?)";
+				PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setInt(1, order.getUser().getId());
+				preparedStatement.setInt(2, order.getDeliveryAddress().getId());
+				preparedStatement.setInt(3, order.getBillingAddress().getId());
+				preparedStatement.setInt(4, getPaymentMethodId(order.getPaymentMethod()));
+
+				int lines = preparedStatement.executeUpdate();
+
+				if (lines != 0) {
+					ResultSet result = preparedStatement.getGeneratedKeys();
+					if (result.next()) {
+						return result.getInt(1);
+					} else {
+						return -1;
+					}
+				} else {
+					return -1;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return -1;
+			}
+		} else {
+			return -1;
+		}
+	}
+	
+	/**
+	 * This method selects the id of an paymentMethod
+	 * @param paymentMethod the payment methods who´s id should be selected
+	 * @return the id of the payment method if no id was found it will return -1
+	 */
+	private int getPaymentMethodId(String paymentMethod) {
+		int id = -1;
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			Statement query;
+			try {
+				query = conn.createStatement();
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT id FROM paymentMethod WHERE name='" + paymentMethod + "'";
+				ResultSet result = query.executeQuery(sql);
+
+				// Ergebnissätze durchfahren.
+				if (result.next()) {
+					id = result.getInt("id");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return id;
+	}
+
+	public void createOrderItemInDB(int orderId, OrderItem item) {
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			try {
+				String sql = "INSERT INTO orderitem (order, position, amount, price, article) values (?, ?, ?, ?, ?)";
+				PreparedStatement preparedStatement = conn.prepareStatement(sql);
+				preparedStatement.setInt(1, orderId);
+				preparedStatement.setInt(2, item.getPosition());
+				preparedStatement.setInt(3, item.getAmount());
+				preparedStatement.setDouble(4, item.getArticle().getPrice());
+				preparedStatement.setInt(5, item.getArticle().getId());
+
+				preparedStatement.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			}
+		} 
+	}
 }

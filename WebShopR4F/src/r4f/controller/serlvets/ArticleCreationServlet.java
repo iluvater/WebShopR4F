@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -54,7 +53,6 @@ public class ArticleCreationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String name = null;
 		String description = null;
 		int size = -1;
@@ -147,7 +145,7 @@ public class ArticleCreationServlet extends HttpServlet {
 		if (name != null && !name.equals("")) {
 			if (description != null && !description.equals("")) {
 				if (manufacturer != null && !manufacturer.equals("") && Article.checkManufacturer(manufacturer)) {
-					if (color != null && !color.equals("")) {
+					if (color != null && !color.equals("") && Article.checkColor(color)) {
 						if (category != null && !category.equals("") && Article.checkCategory(category)) {
 							if (sport != null && !sport.equals("") && Article.checkSport(sport)) {
 								if (imageStream != null) {
@@ -155,14 +153,14 @@ public class ArticleCreationServlet extends HttpServlet {
 											sport);
 
 									int imageId = -1;
-									ArticleService artikelService = new ArticleService();
-									article = artikelService.createArtikelInDB(article);
+									ArticleService articleService = new ArticleService();
+									article = articleService.createArtikelInDB(article);
 									if(article != null){
 									ImageService imageService = new ImageService();
 									imageId = imageService.createImageInDB(imageStream, imageType);
 									if (imageId != -1) {
 										article.setImage(imageId);
-										artikelService.updateArticleInDB(article);
+										articleService.updateArticleInDB(article);
 									}
 									}
 									if (article != null && imageId != -1) {

@@ -3,10 +3,11 @@
  */
 package r4f.controller.services;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import r4f.controller.filter.FilterList;
 import r4f.model.Article;
-import r4f.model.DatabaseConnection;
 
 /**
  * @author Ture
@@ -31,8 +32,8 @@ public class ArticleService extends Service{
 	 * this method selects all article that are stored in the database
 	 * @return returns a list with all article
 	 */
-	public List<Article> getArticleList(){
-		return super.getDbConnection().getArticleList();
+	public List<Article> getArticleList(FilterList filter){
+		return super.getDbConnection().getArticleList(filter);
 	}
 	
 	/**
@@ -49,6 +50,26 @@ public class ArticleService extends Service{
 	 * @param article the article that should be update with all new values
 	 */
 	public void updateArticleInDB(Article article) {
-		super.getDbConnection().updateArticleInDB(article); 		
+		try {
+			super.getDbConnection().updateArticleInDB(article);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 		
+	}
+	
+	/**
+	 * This method updates an article in the database
+	 * @param article the article that should be updated it should already contain the new values
+	 * @return return true if no error occurred during the update
+	 */
+	public boolean updateArticleinDB(Article article) {
+		try{
+			super.getDbConnection().updateArticleInDB(article);
+			return true;
+		}catch(SQLException e){
+			e.printStackTrace();
+			return false;
+		}
 	}
 }

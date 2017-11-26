@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import r4f.controller.services.ShoppingBasketService;
 import r4f.model.ShoppingBasket;
-import r4f.model.User;
 
 /**
  * Servlet implementation class LogoutServlet

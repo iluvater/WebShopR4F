@@ -36,10 +36,10 @@ public class NavigationArticleDetailsServlet extends HttpServlet {
 		RequestDispatcher dispatcher;
 		Article article;
 		try{
-			int id = Integer.parseInt(request.getParameter("id"));
+			int id = Integer.parseInt((String) request.getSession().getAttribute("articleId"));
 			
 			ArticleService articleService = new ArticleService();
-			article = articleService.getArticle(8);
+			article = articleService.getArticle(id);
 		}catch(Exception e){
 			article = null;
 		}
@@ -50,5 +50,30 @@ public class NavigationArticleDetailsServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 		
 	}
+	
+	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String successURL = "Artikeldetails.jsp";
+		RequestDispatcher dispatcher;
+		Article article;
+		try{
+			int id = Integer.parseInt(request.getParameter("articleId"));
+			
+			ArticleService articleService = new ArticleService();
+			article = articleService.getArticle(id);
 
+		}catch(Exception e){
+			article = null;
+		}
+		
+		
+		request.setAttribute("article", article);
+		dispatcher = request.getRequestDispatcher(successURL);
+		dispatcher.forward(request, response);
+		
+	}
 }
