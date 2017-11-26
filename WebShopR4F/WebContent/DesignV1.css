@@ -552,6 +552,14 @@ h4 {
     font-weight: bold;
 }
 
+p {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+
 /* #filter{
 	height: 100%;
 	width: 200px;

@@ -14,7 +14,6 @@
 </head>
 <body>
 <header>
-
 	<jsp:useBean id="user" class="r4f.model.User" scope="session">
 	</jsp:useBean> 
 
@@ -47,10 +46,31 @@
     </c:if> 
     <hr />
     
+    
+    
+    <form action="./NavigationOverviewCategoryServlet" method="post">
+		<input type="hidden" name="category" value="Herren" />
+		<button>Herren</button>
+	</form>
+	<form action="./NavigationOverviewCategoryServlet" method="post">
+		<input type="hidden" name="category" value="Damen" />
+		<button>Damen</button>
+	</form>
+	<form action="./NavigationOverviewCategoryServlet" method="post">
+		<input type="hidden" name="category" value="Kinder" />
+		<button>Kinder</button>
+	</form>
+    
     <h3>
-     	<u><a class="header" href="Test.jsp">Herren</a></u>
+    
+   
+    
+    
+<!--      	<u><a class="header" href="Test.jsp">Herren</a></u>
+     	
+     	
     	<u><a class="header" href="Test.jsp">Damen</a></u>
-    	<u><a class="header headerWide" href="Test.jsp">Kinder</a></u> 
+    	<u><a class="header headerWide" href="Test.jsp">Kinder</a></u>  -->
    
 <!--         <button type="button" class="btn btn-default btn-sm">
           <span class="glyphicon glyphicon-heart-empty"></span> Merkliste

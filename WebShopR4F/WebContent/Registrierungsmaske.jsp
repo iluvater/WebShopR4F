@@ -8,7 +8,7 @@
 <title>Registrierungsmaske</title>
 <link href="DesignV1.css" rel="stylesheet">
 </head>
-<body> <!-- class="regis" -->
+<body>
 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
 	</jsp:useBean> 
 	
@@ -72,7 +72,10 @@
 					</c:if>	
 					<c:if test="${error.errorCode == 102 }">
 						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
-					</c:if>						
+					</c:if>	
+					<c:if test="${error.errorCode == 129 }">
+						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+					</c:if>					
 				</c:if>
 				<p><label for="strasse1">Strasse</label>
 				<input id="strasse1" placeholder="Strasse" name="street" value="" type="text" /><br /></p>

@@ -15,12 +15,14 @@
 <body>
 	<jsp:useBean id="articleList" type="java.util.ArrayList<r4f.model.Article>" class="java.util.ArrayList" scope="request">
 	</jsp:useBean> 
+	<jsp:useBean id="filter" class="r4f.controller.filter.CheckboxStatus" scope="session">
+	</jsp:useBean> 
 
 	<div id="container">
 		<div id="containerFilter"> 
 		<form action="./NavigationOverviewFilterServlet" method="post">
 			<p><strong>Sportart</strong></p>
-			<input type="checkbox" id="paddingLeft" name="sport" value="1"> Laufen<br>
+			<input type="checkbox" id="paddingLeft" name="sport" value="1" onChange="submit();" <c:if test={filter.sport1}>checked</c:if>> Laufen<br>
 			<input type="checkbox" id="paddingLeft" name="sport" value="2"> Fußball<br>
 			<input type="checkbox" id="paddingLeft" name="sport" value="3"> Golf<br>
 			<input type="checkbox" id="paddingLeft" name="sport" value="4"> Basketball<br>
