@@ -17,6 +17,8 @@ import java.util.List;
 
 import com.mysql.jdbc.Driver;
 
+import r4f.controller.filter.FilterList;
+
 /**
  * @author Ture
  *
@@ -186,7 +188,7 @@ public class DatabaseConnection {
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT u.*, r.name , a.street, a.houseNumber, a.postCode, a.city "
 						+ "FROM user AS u INNER JOIN role AS r ON r.id = u.role INNER JOIN address AS a ON u.id = a.user "
-						+ "WHERE u.masterData='1' AND u.id='" + id + "'";
+						+ "WHERE a.masterData='1' AND u.id='" + id + "'";
 				ResultSet result = query.executeQuery(sql);
 
 				// Ergebnissätze durchfahren.
@@ -231,7 +233,7 @@ public class DatabaseConnection {
 			PreparedStatement preparedStatement = conn
 					.prepareStatement("UPDATE `user` SET `email` = ?, `firstName` = ?, `lastName` = ?, "
 							+ "`birthday` = ?, `password` = ?, `salutation` = ?, `shoppingBasket` = ?, "
-							+ "`role`= ? WHERE `user`.`id` = ?", Statement.RETURN_GENERATED_KEYS);
+							+ "`role`= ? WHERE `user`.`id` = ?");
 			preparedStatement.setString(1, user.getEmail());
 			preparedStatement.setString(2, user.getFirstName());
 			preparedStatement.setString(3, user.getLastName());
@@ -349,7 +351,7 @@ public class DatabaseConnection {
 	 * 
 	 * @return returns all ariticle in the database
 	 */
-	public List<Article> getArticleList() {
+	public List<Article> getArticleList(FilterList filter) {
 		List<Article> articleList = new ArrayList<Article>();
 
 		conn = getInstance();
@@ -362,7 +364,8 @@ public class DatabaseConnection {
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, co.name as color, a.entryDate, a.image, ca.name as category, s.name as sport "
 						+ " FROM article AS a INNER JOIN category AS ca INNER JOIN manufacturer AS m INNER JOIN sport AS s INNER JOIN color AS co"
-						+ " WHERE a.category = ca.id AND a.manufacturer = m.id AND a.sport = s.id AND a.color = co.id";
+						+ " WHERE a.category = ca.id AND a.manufacturer = m.id AND a.sport = s.id AND a.color = co.id" 
+						+ filter.getSQLFilter("a", "ca", "m", "s", "co");
 				ResultSet result = query.executeQuery(sql);
 
 				// Ergebnissätze durchfahren.

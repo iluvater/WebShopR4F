@@ -17,16 +17,16 @@ import r4f.model.ErrorMessage;
 import r4f.model.User;
 
 /**
- * Servlet implementation class ChangeUserData
+ * Servlet implementation class ChangeUserDataServlet
  */
-@WebServlet("/ChangeUserData")
-public class ChangeUserData extends HttpServlet {
+@WebServlet("/ChangeUserDataServlet")
+public class ChangeUserDataServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ChangeUserData() {
+	public ChangeUserDataServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
