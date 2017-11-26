@@ -48,24 +48,23 @@ public class NavigationOverviewFilterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String successURL = "Uebersichtsseite.jsp";
-		String sport = null;
-		String manufacturer = null;
-		String color = null;
-		String price = null;
-		String size = null;
+		String sport[] = null;
+		String manufacturer[] = null;
+		String color[] = null;
+		String price[] = null;
+		String size[] = null;
 
 		RequestDispatcher dispatcher;
-		FilterList filterList = null;
-
-		request.getSession().getAttribute("filterList");
+		FilterList filterList = (FilterList) request.getSession().getAttribute("filterList");
+		
 		if (filterList == null) {
 			filterList = new FilterList();
 		}
-		sport = request.getParameter("sport");
-		manufacturer = request.getParameter("manufacturer");
-		color = request.getParameter("color");
-		price = request.getParameter("price");
-		size = request.getParameter("size");
+		sport = request.getParameterValues("sport");
+		manufacturer = request.getParameterValues("manufacturer");
+		color = request.getParameterValues("color");
+		price = request.getParameterValues("price");
+		size = request.getParameterValues("size");
 		
 		if (sport != null && !sport.equals("")) {
 			FilterSport filterSport = (FilterSport) filterList.getFilter("sport");	
@@ -74,8 +73,7 @@ public class NavigationOverviewFilterServlet extends HttpServlet {
 			}
 			filterList.removeFilter("sport");
 			filterSport.getSports().clear();
-			String sports[] = sport.split(";");
-			for (String string : sports) {
+			for (String string : sport) {
 				switch (string) {
 				case "1":
 					filterSport.getSports().add("Laufen");
@@ -108,8 +106,7 @@ public class NavigationOverviewFilterServlet extends HttpServlet {
 			}
 			filterList.removeFilter("manufacturer");
 			filterManufacturer.getManufacturers().clear();
-			String manufacturers[] = manufacturer.split(";");
-			for (String string : manufacturers) {
+			for (String string : manufacturer) {
 				switch (string) {
 				case "1":
 					filterManufacturer.getManufacturers().add("Adidas");
@@ -142,8 +139,7 @@ public class NavigationOverviewFilterServlet extends HttpServlet {
 			}
 			filterList.removeFilter("manufacturer");
 			filterColor.getColors().clear();
-			String colors[] = color.split(";");
-			for (String string : colors) {
+			for (String string : color) {
 				switch (string) {
 				case "1":
 					filterColor.getColors().add("gelb");
@@ -182,8 +178,7 @@ public class NavigationOverviewFilterServlet extends HttpServlet {
 			}
 			filterList.removeFilter("price");
 			filterPrice.getPrices().clear();
-			String prices[] = price.split(";");
-			for (String string : prices) {
+			for (String string : price) {
 				int priceSpan[] = new int[2];
 				switch (string) {
 				case "1":
@@ -216,8 +211,7 @@ public class NavigationOverviewFilterServlet extends HttpServlet {
 			}
 			filterList.removeFilter("size");
 			filterSize.getSizes().clear();
-			String sizes[] = size.split(";");
-			for (String string : sizes) {
+			for (String string : size) {
 				switch (string) {
 				case "1":
 					filterSize.getSizes().add(36);
