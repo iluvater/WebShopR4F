@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Artikeldetailseite</title>
 <link href="DesignV1.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -13,7 +13,6 @@
 <body>
 	<jsp:useBean id="article" class="r4f.model.Article" scope="request">
 	</jsp:useBean> 
-
 	<div id="container">
 			<c:if test ="${not empty article.name}">
 				<div>
@@ -55,6 +54,5 @@
 				</p>
 			</c:if>
 	</div>
-
 </body>
 </html>

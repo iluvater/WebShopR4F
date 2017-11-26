@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Artikeldetailseite</title>
 <link href="DesignV1.css" rel="stylesheet">
 </head>
@@ -27,7 +27,7 @@
 			<h4>Produktinformationen</h4>
 			<br/>
 			
-			<p><label for="size">Größe:</label>
+			<p><label for="size">GrÃ¶ÃŸe:</label>
 			<p><jsp:getProperty property="size" name="article"/></p>
 			<br/>
 			<p><label for="color">Farbe:</label>
@@ -52,7 +52,7 @@
 	<c:if test ="${empty article.name}">
 		<div class="inhalt">			
 			<p>Leider ist der Artikel zur Zeit nicht vorhanden.
-			<br />Versuche es in ein paar Tagen nochmal, wenn der Bestand wieder aufgefüllt ist.
+			<br />Versuche es in ein paar Tagen nochmal, wenn der Bestand wieder aufgefÃ¼llt ist.
 			</p>
 		</div>
 	</c:if>

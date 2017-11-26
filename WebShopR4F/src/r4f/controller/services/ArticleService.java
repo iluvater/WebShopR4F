@@ -6,6 +6,7 @@ package r4f.controller.services;
 import java.sql.SQLException;
 import java.util.List;
 
+import r4f.controller.filter.FilterList;
 import r4f.model.Article;
 
 /**
@@ -31,8 +32,8 @@ public class ArticleService extends Service{
 	 * this method selects all article that are stored in the database
 	 * @return returns a list with all article
 	 */
-	public List<Article> getArticleList(){
-		return super.getDbConnection().getArticleList();
+	public List<Article> getArticleList(FilterList filter){
+		return super.getDbConnection().getArticleList(filter);
 	}
 	
 	/**
