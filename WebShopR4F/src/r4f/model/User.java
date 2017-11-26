@@ -363,7 +363,7 @@ public class User {
 	 */
 	public static boolean checkBirthday(Date date){
 		Date today = new Date();
-		today.setYear(today.getYear() - 18);
+		today.setYear(today.getYear() - 14);
 		if(today.compareTo(date)>=0){
 			return true;
 		}else{

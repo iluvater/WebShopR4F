@@ -125,5 +125,14 @@ public class EmailService {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * This method sends a mail to the r4f email address
+	 * @param subject the subject of the mail
+	 * @param emailBody the body of the mail
+	 */
+	public void sendContactMail(String subject, String emailBody){
+		sendMail(emailaddress, subject, emailBody);
+	}
 
 }

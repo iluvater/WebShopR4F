@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import r4f.controller.filter.FilterList;
 import r4f.controller.services.ArticleService;
 
 /**
@@ -35,9 +36,15 @@ public class NavigationOverviewServlet extends HttpServlet {
 		String successURL = "Uebersichtsseite.jsp";
 		
 		RequestDispatcher dispatcher;
+		FilterList filterList = null; 
+		
+		request.getSession().getAttribute("filterList");
+		if(filterList ==null){
+			filterList = new FilterList();
+		}		
 		
 		ArticleService articleService = new ArticleService();
-		request.setAttribute("articleList", articleService.getArticleList());
+		request.setAttribute("articleList", articleService.getArticleList(filterList));
 		
 		dispatcher = request.getRequestDispatcher(successURL);
 		dispatcher.forward(request, response);

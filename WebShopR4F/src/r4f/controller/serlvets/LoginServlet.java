@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import r4f.controller.services.ShoppingBasketService;
 import r4f.controller.services.UserService;
+import r4f.model.Article;
 import r4f.model.ErrorMessage;
 import r4f.model.ShoppingBasket;
 import r4f.model.User;
@@ -54,9 +55,11 @@ public class LoginServlet extends HttpServlet {
 		UserService userService;
 		ShoppingBasketService shoppingBasketService;
 		RequestDispatcher dispatcher;
+		Article article;
 
 		String errorURL = "Benutzerauthentifizierung.jsp";
 		String successURL = "Willkommen.jsp";
+		String shoppingBasketURL = "./AddToShoppingBasketServlet";
 
 		email = request.getParameter("email");
 		password = request.getParameter("password");
@@ -70,9 +73,18 @@ public class LoginServlet extends HttpServlet {
 
 			request.getSession().setAttribute("user", user);
 			request.getSession().setAttribute("shoppingBasket", shoppingBasket);
-			dispatcher = request.getRequestDispatcher(successURL);
-			dispatcher.forward(request, response);
-			return;
+			
+			article = (Article) request.getSession().getAttribute("articleForShoppingBasket");
+			if(article == null){
+				dispatcher = request.getRequestDispatcher(successURL);
+				dispatcher.forward(request, response);
+				return;
+			}else{
+				dispatcher = request.getRequestDispatcher(shoppingBasketURL);
+				dispatcher.forward(request, response);
+				return;
+			}
+			
 		}else{
 			ErrorMessage errorMessage = new ErrorMessage(114);
 			request.setAttribute("error", errorMessage);

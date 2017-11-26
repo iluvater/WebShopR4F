@@ -15,16 +15,16 @@ import r4f.model.Order;
 import r4f.model.ShoppingBasket;
 
 /**
- * Servlet implementation class OrderOverViewToDB
+ * Servlet implementation class OrderOverViewToDBServlet
  */
-@WebServlet("/OrderOverViewToDB")
-public class OrderOverViewToDB extends HttpServlet {
+@WebServlet("/OrderOverViewToDBServlet")
+public class OrderOverViewToDBServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OrderOverViewToDB() {
+    public OrderOverViewToDBServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
