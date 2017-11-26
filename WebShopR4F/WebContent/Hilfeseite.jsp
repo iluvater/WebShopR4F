@@ -12,27 +12,31 @@
 <div id="containerAgb">
 <h2 class="impressum">Kundenservice</h2>
 	
-	<div id="inhalt">
-		<div class="hilfekacheln">
-		<a href="#FAQs"><img width="150" height="150" border="1" src="./FAQ.png" alt="FAQ">FAQs</a>
-		</div>
-		<div class="hilfekacheln">
-		<a href="#Kontakt"><img width="150" height="150" border="1" src="./Kontakt.jpg" alt="Kontakt">Kontakt</a>
-		</div>
-		<div class="hilfekacheln">
-		<a href="#VersandundLieferung"><img width="150" height="150" border="1" src="./Versand.jpg" alt="Versand und Lieferung">Versand und Lieferung</a>
-		</div>
-	
-		<div class="hilfekacheln">
-		<a href="#MeinR4F"><img width="150" height="150" border="1" src="./Konto.jpg" alt="Mein R4F">Mein R4F</a>
-		</div>
-		<div class="hilfekacheln">
-		<a href="#Produkte"><img width="150" height="150" border="1" src="./Produkte.png" alt="Produkte">Produkte</a>
-		</div>
-		<div class="hilfekacheln">
-		<a href="#MeineKarrierebeiR4F"><img width="150" height="150" border="1" src="./Karriere.jpg" alt="Meine Karriere bei R4F">Meine Karriere bei R4F</a>
-		</div>	
-	</div>
+	<table class="hilfe">
+		
+		<tr>
+		<td class="hilfe">
+		<a href="#FAQs"><img width="150" height="150" border="1" src="./FAQ.png" alt="FAQ"><br/>FAQs</a>
+		</td>
+		<td class="hilfe">
+		<a href="#Kontakt"><img width="150" height="150" border="1" src="./Kontakt.jpg" alt="Kontakt"><br/>Kontakt</a>
+		</td>
+		<td class="hilfe">
+		<a href="#VersandundLieferung"><img width="150" height="150" border="1" src="./Versand.jpg" alt="Versand und Lieferung"><br/>Versand und Lieferung</a>
+		</td>
+		</tr>
+		<tr>
+		<td class="hilfe">
+		<a href="#MeinR4F"><img width="150" height="150" border="1" src="./Konto.jpg" alt="Mein R4F"><br/>Mein R4F</a>
+		</td>
+		<td class="hilfe">
+		<a href="#Produkte"><img width="150" height="150" border="1" src="./Produkte.png" alt="Produkte"><br/>Produkte</a>
+		</td>
+		<td class="hilfe">
+		<a href="#MeineKarrierebeiR4F"><img width="150" height="150" border="1" src="./Karriere.jpg" alt="Meine Karriere bei R4F"><br/>Meine Karriere bei R4F</a>
+		</td>	
+		</tr>
+	</table>
 
 	<div class="inhalt">
 	<h4 class="hilfe" id="FAQs" tabindex="-1">FAQs</h4>

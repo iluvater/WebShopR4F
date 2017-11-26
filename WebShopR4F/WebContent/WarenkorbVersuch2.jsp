@@ -14,9 +14,9 @@
 	</jsp:useBean> 
 <c:if test ="${empty shoppingBasket.items}">
 <div id="container">
-		<div class="warenkorb">
-		<h4>Warenkorb</h4>
-		<p>Dein Warenkorb ist noch leer. 
+		<h3 class="impressum">Warenkorb</h3>
+		<div class="warenkorbLeer">
+		<p class="impressum">Dein Warenkorb ist noch leer. 
 		<br/>
 		Lege los und f&uuml;lle ihn mit deinen neuen Lieblingsschuhen!</p>
 		</div>
@@ -29,24 +29,53 @@
 </c:if>
 <c:if test ="${not empty shoppingBasket.items}">
 	<div id="container">
-		<h4>Warenkorb</h4>
-		<div class="warenkorb">
- 			<div class="hilfekacheln"><h4>Artikel</h4></div>
-			<div class="hilfekacheln"><h4>Farbe</h4></div>
-			<div class="hilfekacheln"><h4>Gr&ouml;&szlig;e</h4></div>
-			<div class="hilfekacheln"><h4>Preis</h4></div>			
-		
-		<c:forEach items="${shoppingBasket.items}" var="item">
-			<div class="hilfekacheln"><p>${item.article.name}</p></div>
-			<div class="hilfekacheln"><p>${item.article.color}</p></div>
-			<div class="hilfekacheln"><p>${item.article.size}</p></div>
+		<h3 class="impressum">Warenkorb</h3>
+		<div class="inhaltWarenkorb">
+			<table class="warenkorb">		
+			<tr>
+			<td width="600px">
+				<table>
+				<c:forEach items="${shoppingBasket.items}" var="item">
+				<tr>
+				<td class="warenkorb"><img class="ImgWarenkorb" src="./ImageServlet/${item.article.image}" alt="Bild"></td>
+				<td class="warenkorb">
+				<table>
+					<tr>
+					<td><h4 align="left"><b>${item.article.name}</b></h4>
+					<p align="left"><b>Farbe: </b>${item.article.color}</p>
+					<p align="left"><b>Größe: </b>${item.article.size}</p>
+					<p align="left"><b>Preis: </b><b>${item.article.price}</b></p>
+					</td>
+					</tr>
+				</table>
+				<td>
+				</td>
+				<td>
+				<form action="./MengenServlet" method="post">
+				<p><b>Menge:</b>   <input class="warenkorb" placeholder="Menge" name="amount" value="${item.amount}" type="text" /></p>
+				</form>
+				</td>
+			</tr>
 		</c:forEach>
-		<div class="hilfekacheln"><h4>Gesamtpreis:</h4><p><jsp:getProperty property="totalPrice" name="shoppingBasket"/></p>	
-		</div"> 
-
-		<hr />
+		</table>
+		</td>
+		<td width="200px">
+		<div class="warenkorbGesamtpreis" >
 		<center>
+		<h4 text-align="right">Gesamtpreis:</h4><h5><jsp:getProperty property="totalPrice" name="shoppingBasket"/></h5>	
+		<hr />
+		<p>
 			<input type="submit" id="button" value="Zur Kasse" />
+		</p>
+		</center>
+		</div>
+		</td>
+		</tr>
+		</table>
+		<center><p>
+			<input type="submit" id="button" value="Weiter Einkaufen" />
+			<input type="submit" id="button" value="Zur Kasse" />
+			</p>
 		</center>
 		</div>
 	</div>
