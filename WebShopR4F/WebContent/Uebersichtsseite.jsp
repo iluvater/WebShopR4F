@@ -18,6 +18,7 @@
 
 	<div id="container">
 		<div id="containerFilter"> 
+		<form action="./NavigationOverviewFilterServlet" method="post">
 			<p><strong>Sportart</strong></p>
 			<input type="checkbox" id="paddingLeft" name="sport" value="1"> Laufen<br>
 			<input type="checkbox" id="paddingLeft" name="sport" value="2"> Fußball<br>
@@ -66,6 +67,10 @@
 			<input type="checkbox" id="paddingLeft" name="size" value="9"> 44<br>
 			<input type="checkbox" id="paddingLeft" name="size" value="10"> 45<br>
 			<br />
+			<center>
+				<input type="submit" id="button" value="Filter anwenden" />
+			</center>
+			</form>
 		</div>
 		<div id="containerInhalt">
 			<c:forEach items="${articleList}" var="article">

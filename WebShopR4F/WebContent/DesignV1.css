@@ -273,6 +273,7 @@ p.artikelUebersicht{
      width: 100%;
      text-align: left; 
      padding-left: 1em;
+     outline:none;
 }
 
 #centerButton {
@@ -294,6 +295,7 @@ p.artikelUebersicht{
 	display: block; 
 	margin-left: auto;
 	margin-right: auto; 
+	outline:none;
 }
 
 .clearLeft{
@@ -392,6 +394,36 @@ div.containerArtikelDetails {
 .dropdown {
     position: relative;
     display: inline-block;
+}
+
+h2 {
+    display: block;
+    font-size: 24pt;
+    -webkit-margin-before: 0.83em;
+    -webkit-margin-after: 0.83em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+
+h3 {
+    display: block;
+    font-size: 18pt;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+
+h4 {
+    display: block;
+    font-size: 14pt;
+    -webkit-margin-before: 1.33em;
+    -webkit-margin-after: 1.33em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
 }
 
 /* #filter{
