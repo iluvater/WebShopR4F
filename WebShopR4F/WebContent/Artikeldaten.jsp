@@ -20,7 +20,7 @@
 	</jsp:useBean> 
 
 	<div id="container">
-		<h2>Artikeldatenändeurng</h2>
+		<h2>Artikeldatenänderung</h2>
 		<h3>Bitte im Folgenden die Artikeldaten anpassen</h3>
 		<form action="./ChangeArticleServlet" method="post" enctype="multipart/form-data">
 		<div id="inhalt">
@@ -28,6 +28,7 @@
 				
 			<p><label for="id">ID:</label>
 			<input id="id" name="id" value="<jsp:getProperty property="id" name="article"/>" type="text" disabled/><br /></p>
+			<input type="hidden" name="id" value="${article.id }" />
 				
 			<p><label for="name">Bezeichnung:</label>
 			<input id="name" name="name" value="<jsp:getProperty property="name" name="article"/>" type="text" /><br /></p>
