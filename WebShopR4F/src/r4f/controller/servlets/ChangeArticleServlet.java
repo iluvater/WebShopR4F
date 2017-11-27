@@ -65,11 +65,11 @@ public class ChangeArticleServlet extends HttpServlet {
 		InputStream imageStream = null;
 		String imageType = null;
 		RequestDispatcher dispatcher;
-		String errorURL = "Test.jsp";
-		String successURL = "Test.jsp";
+    String errorURL = "Artikeldaten.jsp";
+		String successURL = "Artikeldaten.jsp";
 		ArticleService articleService = new ArticleService();
 		int errorCode = -1;
-		
+
 
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setSizeThreshold(16777216);

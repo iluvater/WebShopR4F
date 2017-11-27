@@ -22,15 +22,28 @@
 	<div id="container">
 		<h2>Deine Daten bei R4F</h2>
 		<h3>Hier muss noch ein guter Text hin... </h3>
+		<form action="./ChangeUserDataServlet" method="post">
 		<div id="inhalt">
 			<h4>Persönliche Daten</h4>
 			
 			<p><label for="id">ID:</label>
 			<input id="id" name="id" value="<jsp:getProperty property="id" name="user"/>" type="text" disabled/><br /></p>
 			
-			
-			--> Anrede			
-			
+  			<p><label for="salutation"> Anrede</label> 
+ 				<select id="salutation" name="salutation"><option><jsp:getProperty property="salutation" name="user"/></option>
+ 				<c:if test="${user.salutation == 'Herr' }">
+					<option value="Frau">Frau</option>
+				</c:if>
+				 <c:if test="${user.salutation == 'Frau' }">
+					<option value="Herr">Herr</option>
+				</c:if>
+				</select>
+			</p>				
+			<c:if test ="${not empty error }">
+				<c:if test="${error.errorCode == 104 }">
+					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+				</c:if>	
+			</c:if>	  							
 			<p><label for="firstName">Vorname:</label>
 			<input id="firstName" name="firstName" value="<jsp:getProperty property="firstName" name="user"/>" type="text" /><br /></p>
 			<c:if test ="${not empty error }">
@@ -97,6 +110,14 @@
 				<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 			</c:if>	
 		</c:if>
+		<hr />
+		<%-- <center> --%>
+		<input type="submit" id="button" value="Speichern" />
+		
+		</form>
+		
+		<input type="submit" id="button" value="Abbrechen" />
+		<%-- </center>  --%>
 	</div>
 </body>
 </html>

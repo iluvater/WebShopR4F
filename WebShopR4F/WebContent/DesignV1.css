@@ -25,7 +25,6 @@ hr {
   opacity: 0;
 }
 
-
 body {
 	font-family: arial; 
 	color: #000;
@@ -170,11 +169,6 @@ p.hilfeAntwort {
 	padding-left: 45px;
 	padding-right: 20px;
 }
-
-/* Bei neuem Footer unnötig */
-/* p.footer {
-	margin-bottom: 0px;
-}  */
 
 p.artikelDetails {
 	padding-left: 42px;
@@ -558,6 +552,11 @@ p {
     -webkit-margin-after: 1em;
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
+}
+
+#buttonVerwaltung{
+	height: 150;
+	width: 150;
 }
 
 /* #filter{
