@@ -81,27 +81,27 @@ public class NavigationOverviewFilterServlet extends HttpServlet {
 				switch (string) {
 				case "1":
 					filterSport.getSports().add("Laufen");
-					checkboxStatus.setSport1(true);
+					checkboxStatus.setSport1("checked");
 					break;
 				case "2":
 					filterSport.getSports().add("Fussball");
-					checkboxStatus.setSport2(true);
+					checkboxStatus.setSport2("checked");
 					break;
 				case "3":
 					filterSport.getSports().add("Golf");
-					checkboxStatus.setSport3(true);
+					checkboxStatus.setSport3("checked");
 					break;
 				case "4":
 					filterSport.getSports().add("Basketball");
-					checkboxStatus.setSport4(true);
+					checkboxStatus.setSport4("checked");
 					break;
 				case "5":
 					filterSport.getSports().add("Fahrrad");
-					checkboxStatus.setSport5(true);
+					checkboxStatus.setSport5("checked");
 					break;
 				case "6":
 					filterSport.getSports().add("Schwimmen");
-					checkboxStatus.setSport6(true);
+					checkboxStatus.setSport6("checked");
 					break;
 				}
 			}
@@ -120,27 +120,27 @@ public class NavigationOverviewFilterServlet extends HttpServlet {
 				switch (string) {
 				case "1":
 					filterManufacturer.getManufacturers().add("Adidas");
-					checkboxStatus.setManufacturer1(true);
+					checkboxStatus.setManufacturer1("checked");
 					break;
 				case "2":
 					filterManufacturer.getManufacturers().add("Asics");
-					checkboxStatus.setManufacturer2(true);
+					checkboxStatus.setManufacturer2("checked");
 					break;
 				case "3":
 					filterManufacturer.getManufacturers().add("Hummel");
-					checkboxStatus.setManufacturer3(true);
+					checkboxStatus.setManufacturer3("checked");
 					break;
 				case "4":
 					filterManufacturer.getManufacturers().add("Kempa");
-					checkboxStatus.setManufacturer4(true);
+					checkboxStatus.setManufacturer4("checked");
 					break;
 				case "5":
 					filterManufacturer.getManufacturers().add("Nike");
-					checkboxStatus.setManufacturer5(true);
+					checkboxStatus.setManufacturer5("checked");
 					break;
 				case "6":
 					filterManufacturer.getManufacturers().add("Puma");
-					checkboxStatus.setManufacturer6(true);
+					checkboxStatus.setManufacturer6("checked");
 					break;
 				}
 			}
@@ -159,35 +159,35 @@ public class NavigationOverviewFilterServlet extends HttpServlet {
 				switch (string) {
 				case "1":
 					filterColor.getColors().add("gelb");
-					checkboxStatus.setColor1(true);
+					checkboxStatus.setColor1("checked");
 					break;
 				case "2":
 					filterColor.getColors().add("orange");
-					checkboxStatus.setColor2(true);
+					checkboxStatus.setColor2("checked");
 					break;
 				case "3":
 					filterColor.getColors().add("rot");
-					checkboxStatus.setColor3(true);
+					checkboxStatus.setColor3("checked");
 					break;
 				case "4":
 					filterColor.getColors().add("pink");
-					checkboxStatus.setColor4(true);
+					checkboxStatus.setColor4("checked");
 					break;
 				case "5":
 					filterColor.getColors().add("grün");
-					checkboxStatus.setColor5(true);
+					checkboxStatus.setColor5("checked");
 					break;
 				case "6":
 					filterColor.getColors().add("blau");
-					checkboxStatus.setColor6(true);
+					checkboxStatus.setColor6("checked");
 					break;
 				case "7":
 					filterColor.getColors().add("schwarz");
-					checkboxStatus.setColor7(true);
+					checkboxStatus.setColor7("checked");
 					break;
 				case "8":
 					filterColor.getColors().add("weiß");
-					checkboxStatus.setColor8(true);
+					checkboxStatus.setColor8("checked");
 					break;
 				}
 			}
@@ -239,43 +239,43 @@ public class NavigationOverviewFilterServlet extends HttpServlet {
 				switch (string) {
 				case "1":
 					filterSize.getSizes().add(36);
-					checkboxStatus.setSize1(true);
+					checkboxStatus.setSize1("checked");
 					break;
 				case "2":
 					filterSize.getSizes().add(37);
-					checkboxStatus.setSize2(true);
+					checkboxStatus.setSize2("checked");
 					break;
 				case "3":
 					filterSize.getSizes().add(38);
-					checkboxStatus.setSize3(true);
+					checkboxStatus.setSize3("checked");
 					break;
 				case "4":
 					filterSize.getSizes().add(39);
-					checkboxStatus.setSize4(true);
+					checkboxStatus.setSize4("checked");
 					break;
 				case "5":
 					filterSize.getSizes().add(40);
-					checkboxStatus.setSize5(true);
+					checkboxStatus.setSize5("checked");
 					break;
 				case "6":
 					filterSize.getSizes().add(41);
-					checkboxStatus.setSize6(true);
+					checkboxStatus.setSize6("checked");
 					break;
 				case "7":
 					filterSize.getSizes().add(42);
-					checkboxStatus.setSize7(true);
+					checkboxStatus.setSize7("checked");
 					break;
 				case "8":
 					filterSize.getSizes().add(43);
-					checkboxStatus.setSize8(true);
+					checkboxStatus.setSize8("checked");
 					break;
 				case "9":
 					filterSize.getSizes().add(44);
-					checkboxStatus.setSize9(true);
+					checkboxStatus.setSize9("checked");
 					break;
 				case "10":
 					filterSize.getSizes().add(45);
-					checkboxStatus.setSize10(true);
+					checkboxStatus.setSize10("checked");
 					break;
 				}
 			}
@@ -285,6 +285,7 @@ public class NavigationOverviewFilterServlet extends HttpServlet {
 		}
 
 		request.getSession().setAttribute("filterList", filterList);
+		request.getSession().setAttribute("filter", checkboxStatus);
 
 		ArticleService articleService = new ArticleService();
 		request.setAttribute("articleList", articleService.getArticleList(filterList));

@@ -368,6 +368,7 @@ public class DatabaseConnection {
 						+ " INNER JOIN sport AS s ON a.sport = s.id"
 						+ " INNER JOIN color AS co ON a.color = co.id" 
 						+ filter.getSQLFilter("a", "ca", "m", "s", "co");
+				System.out.println(sql);
 				ResultSet result = query.executeQuery(sql);
 
 				// Ergebnissätze durchfahren.
@@ -396,6 +397,52 @@ public class DatabaseConnection {
 		return articleList;
 	}
 
+	public List<Article> getArticleListSearch(String searchPattern) {
+		List<Article> articleList = new ArrayList<Article>();
+
+		conn = getInstance();
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			Statement query;
+			try {
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, co.name as color, a.entryDate, a.image, ca.name as category, s.name as sport "
+						+ " FROM article AS a INNER JOIN category AS ca ON a.category = ca.id"
+						+ " INNER JOIN manufacturer AS m ON a.manufacturer = m.id"
+						+ " INNER JOIN sport AS s ON a.sport = s.id"
+						+ " INNER JOIN color AS co ON a.color = co.id" 
+						+ " WHERE LOWER(a.id) LIKE LOWER('%" + searchPattern + "%') OR LOWER(a.name) LIKE LOWER('%" + searchPattern + "%') Or LOWER(a.description) LIKE LOWER('%" + searchPattern + "%')";
+				System.out.println(sql);
+				PreparedStatement statement = conn.prepareStatement(sql);
+				
+				ResultSet result = statement.executeQuery(sql);
+
+				// Ergebnissätze durchfahren.
+				while (result.next()) {
+					Article article;
+					int id = result.getInt("id");
+					String name = result.getString("name");
+					String description = result.getString("description");
+					int size = result.getInt("size");
+					double price = result.getDouble("price");
+					String manufacturer = result.getString("manufacturer");
+					String color = result.getString("color");
+					Date entryDate = result.getDate("entryDate");
+					String category = result.getString("category");
+					String sport = result.getString("sport");
+					int image = result.getInt("image");
+
+					article = new Article(id, name, description, size, price, manufacturer, color, entryDate, category,
+							sport, image);
+					articleList.add(article);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return articleList;
+	}
+	
 	/**
 	 * This method updates an article in the database
 	 * 
@@ -1104,4 +1151,6 @@ public class DatabaseConnection {
 			}
 		} 
 	}
+
+
 }

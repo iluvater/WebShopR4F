@@ -72,4 +72,8 @@ public class ArticleService extends Service{
 			return false;
 		}
 	}
+
+	public List<Article> getArticleListSearch(String searchPattern) {
+		return super.getDbConnection().getArticleListSearch(searchPattern);
+	}
 }
