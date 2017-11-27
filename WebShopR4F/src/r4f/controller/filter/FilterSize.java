@@ -44,7 +44,7 @@ public class FilterSize implements FilterInterface {
 	@Override
 	public String getType() {
 		// TODO Auto-generated method stub
-		return "sze";
+		return "size";
 	}
 
 	/**

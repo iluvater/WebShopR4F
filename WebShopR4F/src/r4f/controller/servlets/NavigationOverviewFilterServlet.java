@@ -208,18 +208,22 @@ public class NavigationOverviewFilterServlet extends HttpServlet {
 				case "1":
 					priceSpan[0] = -1;
 					priceSpan[1] = 50;
+					checkboxStatus.setPrice1("checked");
 					break;
 				case "2":
 					priceSpan[0] = 50;
 					priceSpan[1] = 100;
+					checkboxStatus.setPrice2("checked");
 					break;
 				case "3":
 					priceSpan[0] = 100;
 					priceSpan[1] = 150;
+					checkboxStatus.setPrice3("checked");
 					break;
 				case "4":
 					priceSpan[0] = 150;
 					priceSpan[1] = -1;
+					checkboxStatus.setPrice4("checked");
 					break;
 				}
 				filterPrice.getPrices().add(priceSpan);
