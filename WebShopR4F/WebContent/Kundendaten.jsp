@@ -28,6 +28,7 @@
 			
 			<p><label for="id">ID:</label>
 			<input id="id" name="id" value="<jsp:getProperty property="id" name="user"/>" type="text" disabled/><br /></p>
+			<input type="hidden" name="id" value="${user.id }" />
 			
   			<p><label for="salutation"> Anrede</label> 
  				<select id="salutation" name="salutation"><option><jsp:getProperty property="salutation" name="user"/></option>
