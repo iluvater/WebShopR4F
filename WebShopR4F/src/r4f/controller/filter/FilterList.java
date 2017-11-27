@@ -45,8 +45,12 @@ public class FilterList {
 		if(!filters.isEmpty()){
 			filter = " WHERE ";
 		}
-		for (FilterInterface filterInterface : filters) {
+		for (int i = 0; i < filters.size(); i++) {
+			FilterInterface filterInterface = filters.get(i);
 			filter = filter + filterInterface.getSQLFilter(tableArticle, tableCategory, tableManufacturer, tableSport, tableColor);
+			if(i != filters.size() -1){
+				filter = filter + " AND ";
+			}
 		}
 		return filter;
 	}

@@ -28,7 +28,7 @@ public class FilterSize implements FilterInterface {
 
 		for (int i = 0; i< sizes.size(); i++) {
 			Integer size = sizes.get(i);
-			sql = sql + tableArticle + ".name = \"" + size + "\"";
+			sql = sql + tableArticle + ".size = \"" + size + "\"";
 			if(i != sizes.size() -1 ){
 				sql = sql + " OR ";
 			}

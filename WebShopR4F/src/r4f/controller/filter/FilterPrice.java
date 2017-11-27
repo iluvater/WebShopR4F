@@ -29,10 +29,10 @@ public class FilterPrice implements FilterInterface {
 		for (int i = 0; i<prices.size(); i++) {
 			int priceSpan[] = prices.get(i);
 			if(priceSpan[0] == -1){
-				sql = sql + tableArticle + ".price >= " +  priceSpan[1] + " ";
+				sql = sql + tableArticle + ".price <= " +  priceSpan[1] + " ";
 			}else{
 				if(priceSpan[1] == -1){
-					sql = sql + tableArticle + ".price <= " +  priceSpan[0] + " ";
+					sql = sql + tableArticle + ".price >= " +  priceSpan[0] + " ";
 				}else{
 					sql = sql + tableArticle + ".price BETWEEN " + priceSpan[0] + " AND " + priceSpan[1] + " ";
 				}
@@ -41,7 +41,7 @@ public class FilterPrice implements FilterInterface {
 				sql = sql + " OR ";
 			}
 		}
-
+		sql = sql + " ) ";
 		return sql;
 	}
 
