@@ -70,16 +70,6 @@ li {
 	display: inline;
 }
 
-table.warenkorb{
-	width: 80%;
-	margin: 0 auto;
-	min-height: 100%;
-	border: 0;
-	text-align: center;
-	vertical-align: middle;
-	background-color: #ededed;
-}
-
 table.hilfe{
 	width: 100%;
 	margin: 0 auto;
@@ -90,11 +80,6 @@ table.hilfe{
 }
 td.hilfe{
 	height: 200px;
-}
-
-td.warenkorb{
-	vertical-align: middle;
-	height: 50px;
 }
 
 input.warenkorb[type="text"] 
@@ -282,7 +267,7 @@ li.inline {
 }
 
 .inhaltWarenkorb {
-	background: #EDEDED;
+/* 	background: #EDEDED; */
 	width: 80%; 
 	margin-left:10%;
 	margin-right: 10%;
@@ -295,7 +280,7 @@ li.inline {
 }
 
 div.warenkorbLeer {
-	background: #EDEDED;
+/* 	background: #EDEDED; */
 	width: 70%; 
 	margin-left:15%;
 	margin-right: 15%;
@@ -550,6 +535,40 @@ h4 {
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
     font-weight: bold;
+}
+
+#gesamtpreis { 
+	position: fixed; 
+	top: 89px; 
+	right: 20%; 
+}
+
+#artikel{
+	position: absolute;
+	top: 100px;
+	left: 22%;
+	width: 500px;
+	
+}
+
+table.warenkorb{
+	border: 1px solid black;
+	width:600px;
+	margin-left: 0;
+	min-height: 100%;
+	text-align: center;
+	vertical-align: middle;
+	border-spacing: 5px;
+/* 	background-color: #ededed; */
+}
+
+tr.warenkorb{
+	border-bottom: thin solid;
+}
+
+td.warenkorb{
+	vertical-align: middle;
+	height: 50px;
 }
 
 /* #filter{
