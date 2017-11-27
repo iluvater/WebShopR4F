@@ -123,9 +123,9 @@ public class ChangeArticleServlet extends HttpServlet {
 					case "sport":
 						sport = item.getString();
 						break;
-					case "articleId":
+					case "id":
 						try {
-							size = Integer.parseInt(item.getString());
+							articleId = Integer.parseInt(item.getString());
 						} catch (Exception e) {
 							// error handling missing input
 							errorCode = 126;
