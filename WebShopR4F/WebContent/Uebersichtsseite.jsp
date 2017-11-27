@@ -23,51 +23,51 @@
 		<form action="./NavigationOverviewFilterServlet" method="post">
 			<p><strong>Sportart</strong></p>
 			<input type="checkbox" id="paddingLeft" name="sport" value="1" onChange="submit();" <c:if test={filter.sport1}>checked</c:if>> Laufen<br>
-			<input type="checkbox" id="paddingLeft" name="sport" value="2"> Fußball<br>
-			<input type="checkbox" id="paddingLeft" name="sport" value="3"> Golf<br>
-			<input type="checkbox" id="paddingLeft" name="sport" value="4"> Basketball<br>
-			<input type="checkbox" id="paddingLeft" name="sport" value="5"> Fahrrad<br>
-			<input type="checkbox" id="paddingLeft" name="sport" value="6"> Schwimmen<br>
+			<input type="checkbox" id="paddingLeft" name="sport" value="2" onChange="submit();" <c:if test={filter.sport2}>checked</c:if>> Fußball<br>
+			<input type="checkbox" id="paddingLeft" name="sport" value="3" onChange="submit();" <c:if test={filter.sport3}>checked</c:if>> Golf<br>
+			<input type="checkbox" id="paddingLeft" name="sport" value="4" onChange="submit();" <c:if test={filter.sport4}>checked</c:if>> Basketball<br>
+			<input type="checkbox" id="paddingLeft" name="sport" value="5" onChange="submit();" <c:if test={filter.sport5}>checked</c:if>> Fahrrad<br>
+			<input type="checkbox" id="paddingLeft" name="sport" value="6" onChange="submit();" <c:if test={filter.sport6}>checked</c:if>> Schwimmen<br>
 			<br />
 		
 			<p><strong>Hersteller/Marke</strong></p>
-			<input type="checkbox" id="paddingLeft" name="manufacturer" value="1"> Adidas<br>
-			<input type="checkbox" id="paddingLeft" name="manufacturer" value="2"> Asics<br>
-			<input type="checkbox" id="paddingLeft" name="manufacturer" value="3"> Hummel<br>
-			<input type="checkbox" id="paddingLeft" name="manufacturer" value="4"> Kempa<br>
-			<input type="checkbox" id="paddingLeft" name="manufacturer" value="5"> Nike<br>
-			<input type="checkbox" id="paddingLeft" name="manufacturer" value="6"> Puma<br>
+			<input type="checkbox" id="paddingLeft" name="manufacturer" value="1" onChange="submit();" <c:if test={filter.manufacturer1}>checked</c:if>> Adidas<br>
+			<input type="checkbox" id="paddingLeft" name="manufacturer" value="2" onChange="submit();" <c:if test={filter.manufacturer2}>checked</c:if>> Asics<br>
+			<input type="checkbox" id="paddingLeft" name="manufacturer" value="3" onChange="submit();" <c:if test={filter.manufacturer3}>checked</c:if>> Hummel<br>
+			<input type="checkbox" id="paddingLeft" name="manufacturer" value="4" onChange="submit();" <c:if test={filter.manufacturer4}>checked</c:if>> Kempa<br>
+			<input type="checkbox" id="paddingLeft" name="manufacturer" value="5" onChange="submit();" <c:if test={filter.manufacturer5}>checked</c:if>> Nike<br>
+			<input type="checkbox" id="paddingLeft" name="manufacturer" value="6" onChange="submit();" <c:if test={filter.manufacturer6}>checked</c:if>> Puma<br>
 			<br />
 		
 			<p><strong>Farbe</strong></p>
-			<input type="checkbox" id="paddingLeft" name="color" value="1"> Gelb<br>
-			<input type="checkbox" id="paddingLeft" name="color" value="2"> Orange<br>
-			<input type="checkbox" id="paddingLeft" name="color" value="3"> Rot<br>
-			<input type="checkbox" id="paddingLeft" name="color" value="4"> Pink<br>
-			<input type="checkbox" id="paddingLeft" name="color" value="5"> Grün<br>
-			<input type="checkbox" id="paddingLeft" name="color" value="6"> Blau<br>
-			<input type="checkbox" id="paddingLeft" name="color" value="7"> Schwarz<br>
-			<input type="checkbox" id="paddingLeft" name="color" value="8"> Weiß<br>
+			<input type="checkbox" id="paddingLeft" name="color" value="1" onChange="submit();" <c:if test={filter.color1}>checked</c:if>> Gelb<br>
+			<input type="checkbox" id="paddingLeft" name="color" value="2" onChange="submit();" <c:if test={filter.color2}>checked</c:if>> Orange<br>
+			<input type="checkbox" id="paddingLeft" name="color" value="3" onChange="submit();" <c:if test={filter.color3}>checked</c:if>> Rot<br>
+			<input type="checkbox" id="paddingLeft" name="color" value="4" onChange="submit();" <c:if test={filter.color4}>checked</c:if>> Pink<br>
+			<input type="checkbox" id="paddingLeft" name="color" value="5" onChange="submit();" <c:if test={filter.color5}>checked</c:if>> Grün<br>
+			<input type="checkbox" id="paddingLeft" name="color" value="6" onChange="submit();" <c:if test={filter.color6}>checked</c:if>> Blau<br>
+			<input type="checkbox" id="paddingLeft" name="color" value="7" onChange="submit();" <c:if test={filter.color7}>checked</c:if>> Schwarz<br>
+			<input type="checkbox" id="paddingLeft" name="color" value="8" onChange="submit();" <c:if test={filter.color8}>checked</c:if>> Weiß<br>
 			<br />
 		
 			<p><strong>Preis</strong></p>
-			<input type="checkbox" id="paddingLeft" name="price" value="1"> bis 50 &euro;<br>
-			<input type="checkbox" id="paddingLeft" name="price" value="2"> 50 &euro; bis 100 &euro;<br>
-			<input type="checkbox" id="paddingLeft" name="price" value="3"> 100 &euro; bis 150 &euro;<br>
-			<input type="checkbox" id="paddingLeft" name="price" value="4"> ab 150 &euro;<br>
+			<input type="checkbox" id="paddingLeft" name="price" value="1" onChange="submit();" <c:if test={filter.price1}>checked</c:if>> bis 50 &euro;<br>
+			<input type="checkbox" id="paddingLeft" name="price" value="2" onChange="submit();" <c:if test={filter.price2}>checked</c:if>> 50 &euro; bis 100 &euro;<br>
+			<input type="checkbox" id="paddingLeft" name="price" value="3" onChange="submit();" <c:if test={filter.price3}>checked</c:if>> 100 &euro; bis 150 &euro;<br>
+			<input type="checkbox" id="paddingLeft" name="price" value="4" onChange="submit();" <c:if test={filter.price4}>checked</c:if>> ab 150 &euro;<br>
 			<br />
 		
 			<p><strong>Gr&ouml;&szlig;e</strong></p>
-			<input type="checkbox" id="paddingLeft" name="size" value="1"> 36<br>
-			<input type="checkbox" id="paddingLeft" name="size" value="2"> 37<br>
-			<input type="checkbox" id="paddingLeft" name="size" value="3"> 38<br>
-			<input type="checkbox" id="paddingLeft" name="size" value="4"> 39<br>
-			<input type="checkbox" id="paddingLeft" name="size" value="5"> 40<br>
-			<input type="checkbox" id="paddingLeft" name="size" value="6"> 41<br>
-			<input type="checkbox" id="paddingLeft" name="size" value="7"> 42<br>
-			<input type="checkbox" id="paddingLeft" name="size" value="8"> 43<br>
-			<input type="checkbox" id="paddingLeft" name="size" value="9"> 44<br>
-			<input type="checkbox" id="paddingLeft" name="size" value="10"> 45<br>
+			<input type="checkbox" id="paddingLeft" name="size" value="1" onChange="submit();" <c:if test={filter.size1}>checked</c:if>> 36<br>
+			<input type="checkbox" id="paddingLeft" name="size" value="2" onChange="submit();" <c:if test={filter.size2}>checked</c:if>> 37<br>
+			<input type="checkbox" id="paddingLeft" name="size" value="3" onChange="submit();" <c:if test={filter.size3}>checked</c:if>> 38<br>
+			<input type="checkbox" id="paddingLeft" name="size" value="4" onChange="submit();" <c:if test={filter.size4}>checked</c:if>> 39<br>
+			<input type="checkbox" id="paddingLeft" name="size" value="5" onChange="submit();" <c:if test={filter.size5}>checked</c:if>> 40<br>
+			<input type="checkbox" id="paddingLeft" name="size" value="6" onChange="submit();" <c:if test={filter.size6}>checked</c:if>> 41<br>
+			<input type="checkbox" id="paddingLeft" name="size" value="7" onChange="submit();" <c:if test={filter.size7}>checked</c:if>> 42<br>
+			<input type="checkbox" id="paddingLeft" name="size" value="8" onChange="submit();" <c:if test={filter.size8}>checked</c:if>> 43<br>
+			<input type="checkbox" id="paddingLeft" name="size" value="9" onChange="submit();" <c:if test={filter.size9}>checked</c:if>> 44<br>
+			<input type="checkbox" id="paddingLeft" name="size" value="10" onChange="submit();" <c:if test={filter.size10}>checked</c:if>> 45<br>
 			<br />
 			<center>
 				<input type="submit" id="button" value="Filter anwenden" />

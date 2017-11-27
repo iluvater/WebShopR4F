@@ -40,14 +40,14 @@ public class SearchArticleForChangeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int articleId = -1;
-		String successURL = "";
-		String errorURL = "";
+		String successURL = "Artikeldaten.jsp";
+		String errorURL = "Artikelsuche.jsp";
 		RequestDispatcher dispatcher;
 		ArticleService articleService = new ArticleService();
 		Article article;
 		
 		try{
-			articleId = Integer.parseInt(request.getParameter("articleId"));
+			articleId = Integer.parseInt(request.getParameter("id"));
 		}catch(NumberFormatException e){
 			//Error wrong input format
 			ErrorMessage errorMessage = new ErrorMessage(127);
