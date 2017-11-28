@@ -559,6 +559,27 @@ p {
 	width: 150;
 }
 
+.block{
+	width: 15em;
+	height: 15em;
+	padding: 2em;
+	margin: 2em; 
+	background-color: #2f528f;
+	float: left;	
+	display: block;
+}
+
+.containerLink{
+	display: block;
+	height: 15em;
+	color: white;
+	/* height: 100%; */
+}
+
+.containerLink:hover{
+	color: white;
+}
+
 /* #filter{
 	height: 100%;
 	width: 200px;
