@@ -69,6 +69,7 @@ public class ChangeArticleServlet extends HttpServlet {
 		String successURL = "Artikeldaten.jsp";
 		ArticleService articleService = new ArticleService();
 		int errorCode = -1;
+		boolean newImage = true;
 
 
 		DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -133,8 +134,13 @@ public class ChangeArticleServlet extends HttpServlet {
 						break;
 					}
 				} else {
-					imageType = item.getContentType();
-					imageStream = item.getInputStream();
+					if(item.getFieldName().equals("image") && item.getSize()!= 0){
+						imageType = item.getContentType();
+						imageStream = item.getInputStream();
+					}
+					else{
+						newImage = false;
+					}
 				}
 			}
 		} catch (FileUploadException e) {
@@ -160,10 +166,16 @@ public class ChangeArticleServlet extends HttpServlet {
 									article.setSize(size);
 
 									boolean updateArticle = articleService.updateArticleinDB(article);
-
-									ImageService imageService = new ImageService();
-									boolean updateImage = imageService.updateImageInDB(article.getImage(), imageStream,
-											imageType);
+									
+									boolean updateImage;
+									if(newImage){
+										ImageService imageService = new ImageService();
+										updateImage = imageService.updateImageInDB(article.getImage(), imageStream,
+												imageType);
+									}else{
+										updateImage = true;
+									}
+									
 									if (updateArticle && updateImage) {
 										request.setAttribute("article", articleService.getArticle(articleId));
 										ErrorMessage successMessage = new ErrorMessage(600);
