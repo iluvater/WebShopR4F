@@ -1,4 +1,4 @@
-package r4f.controller.serlvets;
+package r4f.controller.servlets;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -65,8 +65,12 @@ public class ChangeArticleServlet extends HttpServlet {
 		InputStream imageStream = null;
 		String imageType = null;
 		RequestDispatcher dispatcher;
-		String errorURL = "Test.jsp";
-		String successURL = "Test.jsp";
+    String errorURL = "Artikeldaten.jsp";
+		String successURL = "Artikeldaten.jsp";
+		ArticleService articleService = new ArticleService();
+		int errorCode = -1;
+		boolean newImage = true;
+
 
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setSizeThreshold(16777216);
@@ -97,23 +101,15 @@ public class ChangeArticleServlet extends HttpServlet {
 							price = Double.parseDouble(item.getString());
 						} catch (Exception e) {
 							// error handling missing input
-							ErrorMessage errorMessage = new ErrorMessage(115);
-							request.setAttribute("error", errorMessage);
-							dispatcher = request.getRequestDispatcher(errorURL);
-							dispatcher.forward(request, response);
-							return;
+							errorCode = 115;
 						}
 						break;
 					case "size":
 						try {
 							size = Integer.parseInt(item.getString());
 						} catch (Exception e) {
-							// error handling missing input
-							ErrorMessage errorMessage = new ErrorMessage(116);
-							request.setAttribute("error", errorMessage);
-							dispatcher = request.getRequestDispatcher(errorURL);
-							dispatcher.forward(request, response);
-							return;
+							// error handling missing input		
+							errorCode = 116;
 						}
 						break;
 					case "manufacturer":
@@ -128,30 +124,27 @@ public class ChangeArticleServlet extends HttpServlet {
 					case "sport":
 						sport = item.getString();
 						break;
-					case "articleId":
+					case "id":
 						try {
-							size = Integer.parseInt(item.getString());
+							articleId = Integer.parseInt(item.getString());
 						} catch (Exception e) {
 							// error handling missing input
-							ErrorMessage errorMessage = new ErrorMessage(126);
-							request.setAttribute("error", errorMessage);
-							dispatcher = request.getRequestDispatcher(errorURL);
-							dispatcher.forward(request, response);
-							return;
+							errorCode = 126;
 						}
 						break;
 					}
 				} else {
-					imageType = item.getContentType();
-					imageStream = item.getInputStream();
+					if(item.getFieldName().equals("image") && item.getSize()!= 0){
+						imageType = item.getContentType();
+						imageStream = item.getInputStream();
+					}
+					else{
+						newImage = false;
+					}
 				}
 			}
 		} catch (FileUploadException e) {
-			ErrorMessage errorMessage = new ErrorMessage(125);
-			request.setAttribute("error", errorMessage);
-			dispatcher = request.getRequestDispatcher(errorURL);
-			dispatcher.forward(request, response);
-			return;
+			errorCode = 125;
 		}
 
 		if (name != null && !name.equals("")) {
@@ -161,8 +154,6 @@ public class ChangeArticleServlet extends HttpServlet {
 						if (category != null && !category.equals("") && Article.checkCategory(category)) {
 							if (sport != null && !sport.equals("") && Article.checkSport(sport)) {
 								if (imageStream != null) {
-
-									ArticleService articleService = new ArticleService();
 									article = articleService.getArticle(articleId);
 
 									article.setName(name);
@@ -175,11 +166,18 @@ public class ChangeArticleServlet extends HttpServlet {
 									article.setSize(size);
 
 									boolean updateArticle = articleService.updateArticleinDB(article);
-
-									ImageService imageService = new ImageService();
-									boolean updateImage = imageService.updateImageInDB(article.getImage(), imageStream,
-											imageType);
+									
+									boolean updateImage;
+									if(newImage){
+										ImageService imageService = new ImageService();
+										updateImage = imageService.updateImageInDB(article.getImage(), imageStream,
+												imageType);
+									}else{
+										updateImage = true;
+									}
+									
 									if (updateArticle && updateImage) {
+										request.setAttribute("article", articleService.getArticle(articleId));
 										ErrorMessage successMessage = new ErrorMessage(600);
 										request.setAttribute("success", successMessage);
 										dispatcher = request.getRequestDispatcher(successURL);
@@ -188,68 +186,42 @@ public class ChangeArticleServlet extends HttpServlet {
 									} else {
 										// Errorhandling something wrong during
 										// update
-										ErrorMessage errorMessage = new ErrorMessage(126);
-										request.setAttribute("error", errorMessage);
-										dispatcher = request.getRequestDispatcher(errorURL);
-										dispatcher.forward(request, response);
-										return;
+										errorCode = 126;
 									}
 								} else {
 									// Errorhandling missing input
-									ErrorMessage errorMessage = new ErrorMessage(124);
-									request.setAttribute("error", errorMessage);
-									dispatcher = request.getRequestDispatcher(errorURL);
-									dispatcher.forward(request, response);
-									return;
+									errorCode = 124;
 								}
 							} else {
 								// errorhandling missing input
-								ErrorMessage errorMessage = new ErrorMessage(123);
-								request.setAttribute("error", errorMessage);
-								dispatcher = request.getRequestDispatcher(errorURL);
-								dispatcher.forward(request, response);
-								return;
+								errorCode = 123;
 							}
 						} else {
 							// errorhandling missing input
-							ErrorMessage errorMessage = new ErrorMessage(121);
-							request.setAttribute("error", errorMessage);
-							dispatcher = request.getRequestDispatcher(errorURL);
-							dispatcher.forward(request, response);
-							return;
+							errorCode = 121;
 						}
 					} else {
 						// errorhandling missing input
-						ErrorMessage errorMessage = new ErrorMessage(120);
-						request.setAttribute("error", errorMessage);
-						dispatcher = request.getRequestDispatcher(errorURL);
-						dispatcher.forward(request, response);
-						return;
+						errorCode = 120;
 					}
 				} else {
 					// errorhandling missing input
-					ErrorMessage errorMessage = new ErrorMessage(119);
-					request.setAttribute("error", errorMessage);
-					dispatcher = request.getRequestDispatcher(errorURL);
-					dispatcher.forward(request, response);
-					return;
+					errorCode = 119;
 				}
 			} else {
 				// errorhandling missing input
-				ErrorMessage errorMessage = new ErrorMessage(118);
-				request.setAttribute("error", errorMessage);
-				dispatcher = request.getRequestDispatcher(errorURL);
-				dispatcher.forward(request, response);
-				return;
+				errorCode = 118;
 			}
 		} else {
 			// errorhandling missing input
-			ErrorMessage errorMessage = new ErrorMessage(117);
-			request.setAttribute("error", errorMessage);
-			dispatcher = request.getRequestDispatcher(errorURL);
-			dispatcher.forward(request, response);
-			return;
+			errorCode = 117;
 		}
+		request.setAttribute("article", articleService.getArticle(articleId));
+		ErrorMessage errorMessage = new ErrorMessage(errorCode);
+		request.setAttribute("error", errorMessage);
+		dispatcher = request.getRequestDispatcher(errorURL);
+		dispatcher.forward(request, response);
+		return;
 	}
 
 }

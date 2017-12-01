@@ -17,12 +17,17 @@ public class FilterSport implements FilterInterface {
 	@Override
 	public String getSQLFilter(String tableArticle, String tableCategory, String tableManufacturer, String tableSport,
 			String tableColor) {
-		String sql = "";
-		
-		for (String string : sports) {
-			sql = sql + " AND " + tableSport + ".name = \"" + string + "\"";
+		String sql = "( ";
+
+		for (int i = 0; i< sports.size(); i++) {
+			String string = sports.get(i);
+			sql = sql + tableSport + ".name = \"" + string + "\"";
+			if(i != sports.size() -1 ){
+				sql = sql + " OR ";
+			}
 		}
-		
+		sql = sql + " ) ";
+
 		return sql;
 	}
 	

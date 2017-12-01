@@ -24,11 +24,16 @@ public class FilterSize implements FilterInterface {
 	@Override
 	public String getSQLFilter(String tableArticle, String tableCategory, String tableManufacturer, String tableSport,
 			String tableColor) {
-		String sql = "";
+		String sql = "( ";
 
-		for (int size : sizes) {
-			sql = sql + " AND " + tableArticle + ".size = \"" + size + "\"";
+		for (int i = 0; i< sizes.size(); i++) {
+			Integer size = sizes.get(i);
+			sql = sql + tableArticle + ".size = \"" + size + "\"";
+			if(i != sizes.size() -1 ){
+				sql = sql + " OR ";
+			}
 		}
+		sql = sql + " ) ";
 
 		return sql;
 	}
@@ -39,7 +44,7 @@ public class FilterSize implements FilterInterface {
 	@Override
 	public String getType() {
 		// TODO Auto-generated method stub
-		return "sze";
+		return "size";
 	}
 
 	/**

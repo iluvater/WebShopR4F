@@ -14,6 +14,7 @@ public class ShoppingBasket {
 
 	private int id;
 	private List<ShoppingBasketItem> items;
+	private final double shippingPrice = 4.95;
 	
 	/**
 	 * Constructor for a new shopping basket that is not stored in the database yet
@@ -89,13 +90,33 @@ public class ShoppingBasket {
 
 	 /**
 	 * This method returns the total price of the shopping basket
-	 * @return the total price of the shopping basket. The price is rounded at two digits.
+	 * @return the total price of the shopping basket inc. the shippingPrice The price is rounded at two digits.
 	 */
 	public double getTotalPrice(){
 		double sum= 0;
 		for (ShoppingBasketItem shoppingBasketItem : items) {
 			sum += shoppingBasketItem.getItemPrice();
-		}		
+		}
+		sum += shippingPrice;
 		return ((double) Math.round(sum * 100)) / 100.0;
+	}
+	
+	/**
+	 * This method returns the price of all items of the shopping Basket
+	 * @return the total price of the shopping basket. The price is rounded at two digits.
+	 */
+	public double getOrderPrice(){
+		double sum= 0;
+		for (ShoppingBasketItem shoppingBasketItem : items) {
+			sum += shoppingBasketItem.getItemPrice();
+		}
+		return ((double) Math.round(sum * 100)) / 100.0;
+	}
+
+	/**
+	 * @return the shippingPrice
+	 */
+	public double getShippingPrice() {
+		return shippingPrice;
 	}
 }

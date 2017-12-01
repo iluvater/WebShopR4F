@@ -27,11 +27,16 @@ public class FilterColor implements FilterInterface {
 	@Override
 	public String getSQLFilter(String tableArticle, String tableCategory, String tableManufacturer, String tableSport,
 			String tableColor) {
-		String sql = "";
+		String sql = "( ";
 
-		for (String string : colors) {
-			sql = sql + " AND " + tableColor + ".name = \"" + string + "\"";
+		for (int i = 0; i< colors.size(); i++) {
+			String string = colors.get(i);
+			sql = sql + tableColor + ".name = \"" + string + "\"";
+			if(i != colors.size() -1 ){
+				sql = sql + " OR ";
+			}
 		}
+		sql = sql + " ) ";
 
 		return sql;
 	}
