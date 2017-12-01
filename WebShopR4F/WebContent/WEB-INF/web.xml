@@ -15,7 +15,4 @@
       <page-encoding>UTF-8</page-encoding>
     </jsp-property-group>
   </jsp-config>
-<!--   <error-page>
-        <location>/Error.html</location>
-    </error-page> -->
 </web-app>
