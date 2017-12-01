@@ -19,7 +19,36 @@
 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
 	</jsp:useBean> 
 	
-	<button id="buttonVerwaltung" type="button">Artikeldaten erfassen</button> <!-- onclick="alert('Hello world!')" -->
+	<div id="container">
+	
+		<div class="block">
+			<h4><a class="containerLink" href="#">Artikeldaten erfassen</a></h4>
+		</div>
+		
+		<div class="block">
+			<h4><a class="containerLink" href="#">Artikeldatenimport per CSV</a></h4>
+		</div>
+		
+		<div class="block">
+			<h4><a class="containerLink" href="#">Artikeldaten ändern</a></h4>
+		</div>
+		
+		<div class="block">
+			<h4><a class="containerLink" href="#">Artikeldaten löschen</a></h4>
+		</div>
+		
+		<div class="block">
+			<h4><a class="containerLink" href="#">Berechtigungen anpassen</a></h4>
+		</div>
+		
+		<div class="block">
+			<h4><a class="containerLink" href="#">Persönliche Daten ändern</a></h4>
+		</div>
+		
+		<div class="block">
+			<h4><a class="containerLink" href="#">Statistiken</a></h4>
+		</div>
+	</div>
 	
 </body>
 </html>
