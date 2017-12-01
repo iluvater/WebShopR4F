@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import r4f.controller.services.EmailService;
+import r4f.controller.services.HashService;
 import r4f.controller.services.UserService;
 import r4f.model.ErrorMessage;
 import r4f.model.User;
@@ -55,6 +56,7 @@ public class RegistrationServlet extends HttpServlet {
 		String errorURL = "Registrierungsmaske.jsp";
 		String successURL = "Willkommen.jsp";
 		int year, month, day;
+		HashService hashService;
 
 		// Getting all data
 		firstName = request.getParameter("firstName");
@@ -175,6 +177,11 @@ public class RegistrationServlet extends HttpServlet {
 																	}
 																	birthday = new Date(year, month, day);
 																	if (User.checkBirthday(birthday)) {
+																		//Hashing the password
+																		hashService = new HashService();
+																		password = hashService.encrypt(password);
+																		
+																		//create the new user object
 																		user = new User(firstName, lastName, email,
 																				birthday, password, street, houseNumber,
 																				postcode, city, salutation);

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import r4f.controller.services.HashService;
 import r4f.controller.services.ShoppingBasketService;
 import r4f.controller.services.UserService;
 import r4f.model.Article;
@@ -54,6 +55,7 @@ public class LoginServlet extends HttpServlet {
 		ShoppingBasket shoppingBasket;
 		UserService userService;
 		ShoppingBasketService shoppingBasketService;
+		HashService hashService;
 		RequestDispatcher dispatcher;
 		Article article;
 
@@ -66,6 +68,9 @@ public class LoginServlet extends HttpServlet {
 
 		userService = new UserService();
 		shoppingBasketService = new ShoppingBasketService();
+		hashService = new HashService();
+		
+		password = hashService.encrypt(password);
 
 		if(userService.checkLogin(email, password)){
 			user = userService.getUser(email);

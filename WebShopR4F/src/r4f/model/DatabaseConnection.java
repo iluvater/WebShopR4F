@@ -1129,7 +1129,12 @@ public class DatabaseConnection {
 
 		return id;
 	}
-
+	
+	/**
+	 * This methdo creates a new OrderItem for an order in the database
+	 * @param orderId the id of the order
+	 * @param item the item that should be created
+	 */
 	public void createOrderItemInDB(int orderId, OrderItem item) {
 		conn = getInstance();
 
@@ -1150,6 +1155,129 @@ public class DatabaseConnection {
 				
 			}
 		} 
+	}
+	
+	/**
+	 * This method selects all order for a certain user
+	 * @param userId the id of the user
+	 * @return returns a list of all orders from the user
+	 */
+	public List<Order> getOrderList(int userId) {
+		List<Order> orderList = new ArrayList<Order>();
+
+		conn = getInstance();
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			Statement query;
+			try {
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT o.*, p.name AS paymentMethod"
+						+ " FROM orders AS o INNER JOIN paymentmethod AS p ON o.paymentMethod = p.id"
+						+ " WHERE o.user = ?"
+						+ " ORDER BY entryDate";
+				System.out.println(sql);
+				PreparedStatement statement = conn.prepareStatement(sql);
+				
+				statement.setInt(1, userId);
+				
+				ResultSet result = statement.executeQuery(sql);
+
+				// Ergebnissätze durchfahren.
+				while (result.next()) {
+					Order order;
+					int id = result.getInt("id");
+					Date entryDate = result.getDate("entryDate");
+					Address deliveryAddress = getAddress(result.getInt("deliveryAddress"));
+					Address billingAddress = getAddress(result.getInt("billingAddress"));
+					String paymentMethod = result.getString("paymentMethod");
+					List<OrderItem> orderItems = getOrderItems(id);
+
+					order = new Order(id, entryDate, deliveryAddress, billingAddress, paymentMethod, orderItems);
+					orderList.add(order);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return orderList;
+	}
+	
+	/**
+	 * This method selects a list of items for a certain order
+	 * @param orderId the id of the order
+	 * @return returns the list with all items of the order
+	 */
+	public List<OrderItem> getOrderItems(int orderId) {
+		List<OrderItem> orderItems = new ArrayList<OrderItem>();
+
+		conn = getInstance();
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			Statement query;
+			try {
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT o.*"
+						+ " FROM orderitem AS o"
+						+ " WHERE o.orders = ? ORDER BY position";
+				System.out.println(sql);
+				PreparedStatement statement = conn.prepareStatement(sql);
+				
+				statement.setInt(1, orderId);
+				
+				ResultSet result = statement.executeQuery(sql);
+
+				// Ergebnissätze durchfahren.
+				while (result.next()) {
+					OrderItem orderItem;
+					int position = result.getInt("position");
+					int amount = result.getInt("amount");
+					double price = result.getDouble("price");
+					Article article = getArticle(result.getInt("article"));
+
+					orderItem = new OrderItem(position, amount, price, article);
+					orderItems.add(orderItem);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return orderItems;
+	}
+
+	/**
+	 * This method selects a address from the database
+	 * @param id the id of the address
+	 * @return returns the address with the id 
+	 */
+	public Address getAddress(int id) {
+		Address address = null;
+
+		conn = getInstance();
+
+		if (conn != null) {
+			try {
+				String sql = "SELECT * FROM address WHERE id= ?";
+				PreparedStatement preparedStatement = conn.prepareStatement(sql);
+				
+				preparedStatement.setInt(1, id);
+				
+				ResultSet result = preparedStatement.executeQuery(sql);
+
+				// Ergebnissätze durchfahren.
+				if (result.next()) {
+					String street = result.getString("street");
+					String houseNumber = result.getString("houseNumber");
+					String postCode = result.getString("postCode");
+					String city = result.getString("city");
+					id = result.getInt("id");
+					
+					address = new Address(id, street, houseNumber, postCode, city);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return address;
 	}
 
 
