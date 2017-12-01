@@ -768,7 +768,7 @@ public class DatabaseConnection {
 			try {
 
 				PreparedStatement preparedStatement = conn.prepareStatement(
-						"INSERT INTO `shoppingbasketitem` (`id`, `article`, `shoppingBasket`, àmount`) "
+						"INSERT INTO `shoppingbasketitem` (`id`, `article`, `shoppingBasket`, `amount`) "
 								+ "VALUES (NULL, ?, ? , ?)",
 						Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, shoppingBasketItem.getArticle().getId());

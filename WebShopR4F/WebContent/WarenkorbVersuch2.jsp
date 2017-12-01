@@ -69,8 +69,8 @@
 						<h5>Gesamtkosten:</h5>
 					</div>
 					<div class="preis">
-						<p><jsp:getProperty property="totalPrice" name="shoppingBasket"/>&euro;</p>
-						<p><jsp:getProperty property="totalPrice" name="shoppingBasket"/>&euro;</p>
+						<p><jsp:getProperty property="orderPrice" name="shoppingBasket"/>&euro;</p>
+						<p><jsp:getProperty property="shippingPrice" name="shoppingBasket"/>&euro;</p>
 						<h5><jsp:getProperty property="totalPrice" name="shoppingBasket"/>&euro;</h5>
 					</div>
  					<div id="weiterEinkaufen">
