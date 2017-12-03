@@ -119,4 +119,54 @@ public class ShoppingBasket {
 	public double getShippingPrice() {
 		return shippingPrice;
 	}
+	
+	/**
+	 * This method changes the amount of an article in the  shopping basket
+	 * @param articleId the id of the article which amount should be changed
+	 * @param amount the new amount
+	 */
+	public void setAmountOfArticle(int articleId, int amount){
+		if(amount <= 0){
+			removeItem(articleId); 
+		}else{
+			for (ShoppingBasketItem shoppingBasketItem : items) {
+				if(shoppingBasketItem.getArticle().getId() == articleId){
+					shoppingBasketItem.setAmount(amount);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * This method removes an article from the shopping basket
+	 * @param articleId the id of the article that should be removed
+	 */
+	public void removeItem(int articleId){
+		List<ShoppingBasketItem> deleteItems = new ArrayList<ShoppingBasketItem>();
+		for (ShoppingBasketItem shoppingBasketItem : items) {
+			if(shoppingBasketItem.getArticle().getId() == articleId){
+				deleteItems.add(shoppingBasketItem);
+			}
+		}
+		for (ShoppingBasketItem shoppingBasketItem : deleteItems) {
+			items.remove(shoppingBasketItem);
+		}
+	}
+	
+	/**
+	 * This method removes all items from the shopping Basket
+	 */
+	public void removeAllItems(){
+		items.clear();
+	}
+	
+	/**
+	 * This method adds a wishlist to the shopping basket
+	 * @param wishlist
+	 */
+	public void addWishlist(Wishlist wishlist){
+		for (Article item : wishlist.getList()) {
+			addItem(item);
+		}
+	}
 }

@@ -89,8 +89,8 @@ public class DatabaseConnection {
 			try {
 
 				PreparedStatement preparedStatement = conn.prepareStatement(
-						"INSERT INTO `user` (`id`, `email`, `firstName`, `lastName`, `birthday`, `password`, `salutation`, `shoppingBasket`)"
-								+ " VALUES (NULL, ?, ?, ?, ?, ?, ?, null)",
+						"INSERT INTO `user` (`id`, `email`, `firstName`, `lastName`, `birthday`, `password`, `salutation`, `shoppingBasket`, `wishlist`)"
+								+ " VALUES (NULL, ?, ?, ?, ?, ?, ?, null, null)",
 						Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setString(1, user.getEmail());
 				preparedStatement.setString(2, user.getFirstName());
@@ -156,9 +156,10 @@ public class DatabaseConnection {
 					String city = result.getString("city");
 					String salutation = result.getString("salutation");
 					int shoppingBasket = result.getInt("shoppingBasket");
+					int wishlist = result.getInt("wishlist");
 					String role = result.getString("name");
 					user = new User(id, firstName, lastName, email, birthday, password, street, houseNumber, postCode,
-							city, salutation, shoppingBasket, role);
+							city, salutation, shoppingBasket, role, wishlist);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -205,9 +206,10 @@ public class DatabaseConnection {
 					String city = result.getString("city");
 					String salutation = result.getString("salutation");
 					int shoppingBasket = result.getInt("shoppingBasket");
+					int wishlist = result.getInt("wishlist");
 					String role = result.getString("name");
 					user = new User(id, firstName, lastName, email, birthday, password, street, houseNumber, postCode,
-							city, salutation, shoppingBasket, role);
+							city, salutation, shoppingBasket, role, wishlist);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -233,7 +235,7 @@ public class DatabaseConnection {
 			PreparedStatement preparedStatement = conn
 					.prepareStatement("UPDATE `user` SET `email` = ?, `firstName` = ?, `lastName` = ?, "
 							+ "`birthday` = ?, `password` = ?, `salutation` = ?, `shoppingBasket` = ?, "
-							+ "`role`= ? WHERE `user`.`id` = ?");
+							+ "`role`= ?  `wishlist` = ? WHERE `user`.`id` = ?");
 			preparedStatement.setString(1, user.getEmail());
 			preparedStatement.setString(2, user.getFirstName());
 			preparedStatement.setString(3, user.getLastName());
@@ -242,7 +244,8 @@ public class DatabaseConnection {
 			preparedStatement.setString(6, user.getSalutation());
 			preparedStatement.setInt(7, user.getShoppingBasket());
 			preparedStatement.setInt(8, getRoleId(user.getRole()));
-			preparedStatement.setInt(9, user.getId());
+			preparedStatement.setInt(9, user.getWishlist());
+			preparedStatement.setInt(10, user.getId());
 
 			preparedStatement.executeUpdate();
 		}
@@ -1279,6 +1282,145 @@ public class DatabaseConnection {
 		}
 		return address;
 	}
+	
+	/**
+	 * This method creates a new wishlist item in the databse
+	 * @param article the article which should be the item
+	 * @param wishlistId the id of the wishlist
+	 * @return the id of the created item
+	 */
+	public int createWishlistItemInDB(Article article, int wishlistId){
+		conn = getInstance();
 
+		if (conn != null) {
 
+			try {
+
+				PreparedStatement preparedStatement = conn.prepareStatement(
+						"INSERT INTO `wishlistitem` (`id`, `article`, `wishlist`) "
+								+ "VALUES (NULL, ?, ?)",
+						Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setInt(1, article.getId());
+				preparedStatement.setInt(2, wishlistId);
+
+				int lines = preparedStatement.executeUpdate();
+
+				if (lines != 0) {
+					ResultSet result = preparedStatement.getGeneratedKeys();
+					if (result.next()) {
+						return result.getInt(1);
+					} else {
+						return -1;
+					}
+				} else {
+					return -1;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return -1;
+			}
+		} else {
+			return -1;
+		}
+	}
+	
+	/**
+	 * This method creates a wishlist for a user
+	 * @param userId the id of the user who´s wishlsit should be created
+	 * @return the id of the created wishlist
+	 */
+	public int createWishlistInDB(int userId){
+		conn = getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement preparedStatement = conn.prepareStatement(
+						"INSERT INTO `wishlist` (`id`, `user`) " + "VALUES (NULL, ?)",
+						Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setInt(1, userId);
+
+				int lines = preparedStatement.executeUpdate();
+
+				if (lines != 0) {
+					ResultSet result = preparedStatement.getGeneratedKeys();
+					if (result.next()) {
+						return result.getInt(1);
+					} else {
+						return -1;
+					}
+				} else {
+					return -1;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return -1;
+			}
+		} else {
+			return -1;
+		}
+	}
+	
+	/**
+	 * This method selects an wishlist from the database
+	 * @param wishlistId the id of the wishlist that should be selected
+	 * @return the wishlist
+	 */
+	public Wishlist getWishlist(int wishlistId){
+		Wishlist wishlist = new Wishlist(wishlistId);
+
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			PreparedStatement statement;
+			try {
+				
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT * FROM wishlistitem WHERE wishlist=?";
+				
+				statement = conn.prepareStatement(sql);
+				statement.setInt(1, wishlistId);
+				ResultSet result = statement.executeQuery(sql);
+
+				// Ergebnissätze durchfahren.
+				while (result.next()) {
+					Article item = getArticle(result.getInt("article"));
+					item.setId(result.getInt("id"));
+
+					wishlist.addItem(item);
+
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return wishlist;
+	}
+	
+	/**
+	 * This method deletes all items of a wishlist in the database
+	 * @param wishlistId the id of the wishlist which´s items should be deleted
+	 */
+	public void deleteAllItemsOfWishlistInDB(int wishlistId){
+		conn = getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement preparedStatement = conn.prepareStatement(
+						"DELETE FROM `wishlistitem` WHERE `wishlist` = ?");
+				preparedStatement.setInt(1, wishlistId);
+
+				preparedStatement.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
