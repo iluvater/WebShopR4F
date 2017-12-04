@@ -105,6 +105,15 @@
 						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 					</c:if>	
 				</c:if>
+		</div>	
+		<hr />
+		<div id="checkboxRegistrierung">
+			<p><input type="checkbox" id="" name="AGB" value="1"> Ja, ich habe die AGB's gelesen<br></p>
+			<c:if test ="${not empty error }">
+				<c:if test="${error.errorCode == 135 }">
+					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+				</c:if>	
+			</c:if>
 		</div>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 101 }">
