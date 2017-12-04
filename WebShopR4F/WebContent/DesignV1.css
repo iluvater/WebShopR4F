@@ -253,7 +253,17 @@ li.inline {
 	margin-left:15%;
 	margin-right: 15%;
 	padding-top: 2px;
-	/* padding-bottom: 5px; */
+	padding-right:0px;
+	padding-left:43px; 
+	padding-top: 2px;
+	padding-bottom: 5px;
+}
+
+#checkboxRegistrierung{
+	width: 70%; 
+	margin-left:15%;
+	margin-right: 15%;
+	padding-top: 2px;
 	padding-right:0px;
 	padding-left:43px; 
 	padding-top: 2px;
