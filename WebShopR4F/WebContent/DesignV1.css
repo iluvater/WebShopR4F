@@ -645,6 +645,15 @@ p {
 	color: white;
 }
 
+#buttonEntfernen{
+	 background: none;
+     border: none;
+     color: #0066ff;
+     text-decoration: underline;
+     cursor: pointer; 
+}
+
+
 /* #filter{
 	height: 100%;
 	width: 200px;
