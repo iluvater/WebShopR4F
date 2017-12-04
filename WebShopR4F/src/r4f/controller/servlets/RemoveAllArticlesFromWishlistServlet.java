@@ -9,21 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.model.Order;
-import r4f.model.ShoppingBasket;
-import r4f.model.User;
+import r4f.model.Wishlist;
 
 /**
- * Servlet implementation class OrderCheckoutServlet
+ * Servlet implementation class RemoveAllArticlesFromWishlistServlet
  */
-@WebServlet("/OrderCheckoutServlet")
-public class OrderCheckoutServlet extends HttpServlet {
+@WebServlet("/RemoveAllArticlesFromWishlistServlet")
+public class RemoveAllArticlesFromWishlistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OrderCheckoutServlet() {
+    public RemoveAllArticlesFromWishlistServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,32 +37,24 @@ public class OrderCheckoutServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String successURL = "Test.jsp";
 		RequestDispatcher dispatcher;
+		String successURL = "Merkzettel.jsp";
+		String errorURL = "Benutzerauthentifizierung.jsp";
+		Wishlist wishlist;
+
+		wishlist = (Wishlist) request.getSession().getAttribute("wishlist");
 		
-		ShoppingBasket shoppingBasket = null;
-		Order order;
-		User user = null;;
-		
-		shoppingBasket = (ShoppingBasket)request.getSession().getAttribute("shoppingBasket");
-		user = (User)request.getSession().getAttribute("User");
-		
-		if(user == null || shoppingBasket == null){
+		if (wishlist == null) {
 			// Errorhandling not logged in
-			return;
-		}else{
-			order = new Order();
-			order.setUser(user);
-			order.addShoppingBasket(shoppingBasket);
-			
-			request.getSession().setAttribute("order", order);
-			
-			dispatcher = request.getRequestDispatcher(successURL);
+			dispatcher = request.getRequestDispatcher(errorURL);
 			dispatcher.forward(request, response);
 			return;
+		} else {			
+				wishlist.removeAllItems();			
 		}
-		
-		
+		dispatcher = request.getRequestDispatcher(successURL);
+		dispatcher.forward(request, response);
+		return;
 	}
 
 }

@@ -3,6 +3,7 @@ package r4f.model;
 import java.util.Date;
 
 import r4f.controller.services.EmailService;
+import r4f.controller.services.HashService;
 
 public class TestInsert {
 
@@ -29,10 +30,17 @@ public class TestInsert {
 //		ErrorMessage error = new ErrorMessage(104);
 //		System.out.println(error.getErrorMessage());
 		
-		EmailService e = new EmailService();
-		e.sendContactMail("test", "hello");
+//		EmailService e = new EmailService();
+//		e.sendContactMail("test", "hello");
 
-		
+		HashService p = new HashService();
+		System.out.println(p.encrypt("1"));
+
+		System.out.println(p.encrypt("Test"));
+
+		System.out.println(p.encrypt("Tesfasdasdasdsadt"));
+
+		System.out.println(p.encrypt("Test"));
 	}
 
 }

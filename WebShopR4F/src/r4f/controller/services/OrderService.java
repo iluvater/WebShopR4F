@@ -3,9 +3,12 @@
  */
 package r4f.controller.services;
 
+import java.util.List;
+
 import r4f.model.Address;
 import r4f.model.Order;
 import r4f.model.OrderItem;
+import r4f.model.User;
 
 /**
  * @author Ture
@@ -34,6 +37,10 @@ public class OrderService extends Service {
 			super.getDbConnection().createOrderItemInDB(orderId, item);
 		}
 		return orderId;
+	}
+
+	public List<Order> getOrderList(User user) {
+		return super.getDbConnection().getOrderList(user.getId());
 	}
 
 }

@@ -23,6 +23,7 @@ public class User {
 	private String city;
 	private String salutation;
 	private int shoppingBasket;
+	private int wishlist;
 	private String role;
 
 	/**
@@ -56,7 +57,7 @@ public class User {
 	 *            the role to set
 	 */
 	public User(int id, String firstName, String lastName, String email, Date birthday, String password, String street,
-			String houseNumber, String postCode, String city, String salutation, int shoppingBasket, String role) {
+			String houseNumber, String postCode, String city, String salutation, int shoppingBasket, String role, int wishlist) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -69,6 +70,7 @@ public class User {
 		this.city = city;
 		setSalutation(salutation);
 		this.shoppingBasket = shoppingBasket;
+		this.wishlist = wishlist;
 		this.role = role;
 	}
 
@@ -361,6 +363,7 @@ public class User {
 	 * @param date the date to check
 	 * @return returns true if the date is older than 18 years
 	 */
+	@SuppressWarnings("deprecation")
 	public static boolean checkBirthday(Date date){
 		Date today = new Date();
 		today.setYear(today.getYear() - 14);
@@ -399,6 +402,20 @@ public class User {
 	 */
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	/**
+	 * @return the wishlist
+	 */
+	public int getWishlist() {
+		return wishlist;
+	}
+
+	/**
+	 * @param wishlist the wishlist to set
+	 */
+	public void setWishlist(int wishlist) {
+		this.wishlist = wishlist;
 	}
 
 }

@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import r4f.controller.services.ShoppingBasketService;
+import r4f.controller.services.WishlistService;
 import r4f.model.ShoppingBasket;
+import r4f.model.Wishlist;
 
 /**
  * Servlet implementation class LogoutServlet
@@ -43,14 +45,18 @@ public class LogoutServlet extends HttpServlet {
 		RequestDispatcher dispatcher;
 		String successURL = "Willkommen.jsp";
 		ShoppingBasketService shoppingBasketService = new ShoppingBasketService();
+		WishlistService wishlistService = new WishlistService();
 		
 		ShoppingBasket shoppingBasket = (ShoppingBasket) request.getSession().getAttribute("shoppingBasket");
+		Wishlist wishlist = (Wishlist) request.getSession().getAttribute("wishlist");
 		
 		shoppingBasketService.updateShoppingBasketInDB(shoppingBasket);
-				
+		wishlistService.updateWishlistInDB(wishlist);
+		
 				
 		request.getSession().removeAttribute("user");
 		request.getSession().removeAttribute("shoppingBasket");
+		request.getSession().removeAttribute("wishlist");
 		
 		dispatcher = request.getRequestDispatcher(successURL);
 		dispatcher.forward(request, response);
