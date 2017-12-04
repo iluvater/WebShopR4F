@@ -133,15 +133,18 @@ public class DatabaseConnection {
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
-			Statement query;
+			PreparedStatement preparedStatement;
 			try {
-				query = conn.createStatement();
+				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT u.*, r.name , a.street, a.houseNumber, a.postCode, a.city "
 						+ "FROM user AS u INNER JOIN role AS r ON r.id = u.role INNER JOIN address AS a ON a.user = u.id "
-						+ "WHERE a.masterData='1' AND email='" + email + "'";
-				ResultSet result = query.executeQuery(sql);
+						+ "WHERE a.masterData='1' AND email=?";
+				
+				preparedStatement = conn.prepareStatement(sql);
+				preparedStatement.setString(1, email);
+				ResultSet result = preparedStatement.executeQuery();
 
 				// Ergebnissätze durchfahren.
 				while (result.next()) {
@@ -182,15 +185,18 @@ public class DatabaseConnection {
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
-			Statement query;
+			PreparedStatement preparedStatement;
 			try {
-				query = conn.createStatement();
+
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT u.*, r.name , a.street, a.houseNumber, a.postCode, a.city "
-						+ "FROM user AS u INNER JOIN role AS r ON r.id = u.role INNER JOIN address AS a ON u.id = a.user "
-						+ "WHERE a.masterData='1' AND u.id='" + id + "'";
-				ResultSet result = query.executeQuery(sql);
+						+ "FROM user AS u INNER JOIN role AS r ON r.id = u.role INNER JOIN address AS a ON a.user = u.id "
+						+ "WHERE a.masterData='1' AND id=?";
+				
+				preparedStatement = conn.prepareStatement(sql);
+				preparedStatement.setInt(1, id);
+				ResultSet result = preparedStatement.executeQuery();
 
 				// Ergebnissätze durchfahren.
 				while (result.next()) {
@@ -315,15 +321,18 @@ public class DatabaseConnection {
 		conn = getInstance();
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
-			Statement query;
+			PreparedStatement preparedStatement;
 			try {
-				query = conn.createStatement();
+				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, co.name as color, a.entryDate, a.image, ca.name as category, s.name as sport "
 						+ " FROM article AS a INNER JOIN category AS ca INNER JOIN manufacturer AS m INNER JOIN sport AS s INNER JOIN color as co"
-						+ " WHERE a.category = ca.id AND a.manufacturer = m.id AND a.sport = s.id AND a.color = co.id AND a.id = " + id;
-				ResultSet result = query.executeQuery(sql);
+						+ " WHERE a.category = ca.id AND a.manufacturer = m.id AND a.sport = s.id AND a.color = co.id AND a.id = ?";
+				
+				preparedStatement = conn.prepareStatement(sql);
+				preparedStatement.setInt(1, id);
+				ResultSet result = preparedStatement.executeQuery();
 
 				// Ergebnissätze durchfahren.
 				while (result.next()) {
@@ -360,9 +369,9 @@ public class DatabaseConnection {
 		conn = getInstance();
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
-			Statement query;
+			PreparedStatement preparedStatement;
 			try {
-				query = conn.createStatement();
+				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, co.name as color, a.entryDate, a.image, ca.name as category, s.name as sport "
@@ -372,7 +381,9 @@ public class DatabaseConnection {
 						+ " INNER JOIN color AS co ON a.color = co.id" 
 						+ filter.getSQLFilter("a", "ca", "m", "s", "co");
 				System.out.println(sql);
-				ResultSet result = query.executeQuery(sql);
+				
+				preparedStatement = conn.prepareStatement(sql);
+				ResultSet result = preparedStatement.executeQuery();
 
 				// Ergebnissätze durchfahren.
 				while (result.next()) {
@@ -405,8 +416,6 @@ public class DatabaseConnection {
 
 		conn = getInstance();
 		if (conn != null) {
-			// Anfrage-Statement erzeugen.
-			Statement query;
 			try {
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, co.name as color, a.entryDate, a.image, ca.name as category, s.name as sport "
@@ -418,7 +427,7 @@ public class DatabaseConnection {
 				System.out.println(sql);
 				PreparedStatement statement = conn.prepareStatement(sql);
 				
-				ResultSet result = statement.executeQuery(sql);
+				ResultSet result = statement.executeQuery();
 
 				// Ergebnissätze durchfahren.
 				while (result.next()) {
@@ -493,13 +502,15 @@ public class DatabaseConnection {
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
-			Statement query;
+			PreparedStatement preparedStatement;
 			try {
-				query = conn.createStatement();
+				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT id FROM role WHERE name='" + role + "'";
-				ResultSet result = query.executeQuery(sql);
+				String sql = "SELECT id FROM role WHERE name=?";
+				preparedStatement = conn.prepareStatement(sql);
+				preparedStatement.setString(1, role);
+				ResultSet result = preparedStatement.executeQuery();
 
 				// Ergebnissätze durchfahren.
 				if (result.next()) {
@@ -526,13 +537,15 @@ public class DatabaseConnection {
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
-			Statement query;
+			PreparedStatement preparedStatement;
 			try {
-				query = conn.createStatement();
+				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT id FROM category WHERE name='" + category + "'";
-				ResultSet result = query.executeQuery(sql);
+				String sql = "SELECT id FROM category WHERE name=?";
+				preparedStatement = conn.prepareStatement(sql);
+				preparedStatement.setString(1, category);
+				ResultSet result = preparedStatement.executeQuery();
 
 				// Ergebnissätze durchfahren.
 				if (result.next()) {
@@ -559,13 +572,15 @@ public class DatabaseConnection {
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
-			Statement query;
+			PreparedStatement preparedStatement;
 			try {
-				query = conn.createStatement();
+				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT id FROM manufacturer WHERE name='" + manufacturer + "'";
-				ResultSet result = query.executeQuery(sql);
+				String sql = "SELECT id FROM manufacturer WHERE name=?";
+				preparedStatement = conn.prepareStatement(sql);
+				preparedStatement.setString(1, manufacturer);
+				ResultSet result = preparedStatement.executeQuery();
 
 				// Ergebnissätze durchfahren.
 				if (result.next()) {
@@ -592,13 +607,15 @@ public class DatabaseConnection {
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
-			Statement query;
+			PreparedStatement preparedStatement;
 			try {
-				query = conn.createStatement();
+				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT id FROM sport WHERE name='" + sport + "'";
-				ResultSet result = query.executeQuery(sql);
+				String sql = "SELECT id FROM sport WHERE name=?";
+				preparedStatement = conn.prepareStatement(sql);
+				preparedStatement.setString(1, sport);
+				ResultSet result = preparedStatement.executeQuery();
 
 				// Ergebnissätze durchfahren.
 				if (result.next()) {
@@ -623,13 +640,15 @@ public class DatabaseConnection {
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
-			Statement query;
+			PreparedStatement preparedStatement;
 			try {
-				query = conn.createStatement();
+				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT id FROM color WHERE name='" + color + "'";
-				ResultSet result = query.executeQuery(sql);
+				String sql = "SELECT id FROM color WHERE name=?";
+				preparedStatement = conn.prepareStatement(sql);
+				preparedStatement.setString(1, color);
+				ResultSet result = preparedStatement.executeQuery();
 
 				// Ergebnissätze durchfahren.
 				if (result.next()) {
@@ -698,13 +717,14 @@ public class DatabaseConnection {
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
-			Statement query;
+			PreparedStatement preparedStatement;
 			try {
-				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT * FROM shoppingbasketitem WHERE shoppingBasket='" + id + "'";
-				ResultSet result = query.executeQuery(sql);
+				String sql = "SELECT * FROM shoppingbasketitem WHERE shoppingBasket=?";
+				preparedStatement = conn.prepareStatement(sql);
+				preparedStatement.setInt(1, id);
+				ResultSet result = preparedStatement.executeQuery();
 
 				// Ergebnissätze durchfahren.
 				while (result.next()) {
@@ -900,14 +920,16 @@ public class DatabaseConnection {
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
-			Statement query;
+			PreparedStatement preparedStatement;
 			Blob blob = null;
 			try {
-				query = conn.createStatement();
+				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT * FROM image WHERE id='" + id + "'";
-				ResultSet result = query.executeQuery(sql);
+				String sql = "SELECT * FROM image WHERE id=?";
+				preparedStatement = conn.prepareStatement(sql);
+				preparedStatement.setInt(1, id);
+				ResultSet result = preparedStatement.executeQuery();
 
 				// Ergebnissätze durchfahren.
 				if (result.next()) {
@@ -1113,13 +1135,15 @@ public class DatabaseConnection {
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
-			Statement query;
+			PreparedStatement preparedStatement;
 			try {
-				query = conn.createStatement();
+				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT id FROM paymentMethod WHERE name='" + paymentMethod + "'";
-				ResultSet result = query.executeQuery(sql);
+				String sql = "SELECT id FROM paymentMethod WHERE name=?";
+				preparedStatement = conn.prepareStatement(sql);
+				preparedStatement.setString(1, paymentMethod);
+				ResultSet result = preparedStatement.executeQuery();
 
 				// Ergebnissätze durchfahren.
 				if (result.next()) {
@@ -1170,8 +1194,6 @@ public class DatabaseConnection {
 
 		conn = getInstance();
 		if (conn != null) {
-			// Anfrage-Statement erzeugen.
-			Statement query;
 			try {
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT o.*, p.name AS paymentMethod"
@@ -1215,8 +1237,6 @@ public class DatabaseConnection {
 
 		conn = getInstance();
 		if (conn != null) {
-			// Anfrage-Statement erzeugen.
-			Statement query;
 			try {
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT o.*"
@@ -1383,7 +1403,7 @@ public class DatabaseConnection {
 				
 				statement = conn.prepareStatement(sql);
 				statement.setInt(1, wishlistId);
-				ResultSet result = statement.executeQuery(sql);
+				ResultSet result = statement.executeQuery();
 
 				// Ergebnissätze durchfahren.
 				while (result.next()) {
@@ -1422,5 +1442,43 @@ public class DatabaseConnection {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	/**
+	 * This method selects a list of all roles from the database
+	 * @return returns a list of all roles
+	 */
+	public List<Role> getRoleList(){
+		List<Role> roles = new ArrayList<Role>() ;
+		
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			PreparedStatement statement;
+			try {
+				
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT * FROM role";
+				
+				statement = conn.prepareStatement(sql);
+				ResultSet result = statement.executeQuery();
+
+				// Ergebnissätze durchfahren.
+				while (result.next()) {
+					int id = result.getInt("id");
+					String name = result.getString("name");
+
+					Role role = new Role(id, name);
+					roles.add(role);
+
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return roles;
 	}
 }
