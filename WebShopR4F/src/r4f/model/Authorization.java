@@ -22,10 +22,12 @@ public class Authorization {
 	
 	/**
 	 * Constructor for an authorization that is stored in the database
+	 * @param id the id to set
 	 * @param name the name to set
 	 * @param description the description to set
 	 */
-	public Authorization(String name, String description){
+	public Authorization(int id, String name, String description){
+		this.id = id;
 		this.name = name;
 		this.description = description;
 	}

@@ -1481,4 +1481,187 @@ public class DatabaseConnection {
 		
 		return roles;
 	}
+	
+	/**
+	 * This method selects a list of all authorizations from the database
+	 * @return returns a list of all authorizations
+	 */
+	public List<Authorization> getAuthorizationList(){
+		List<Authorization> authorizations = new ArrayList<Authorization>() ;
+		
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			PreparedStatement statement;
+			try {
+				
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT * FROM authorization";
+				
+				statement = conn.prepareStatement(sql);
+				ResultSet result = statement.executeQuery();
+
+				// Ergebnissätze durchfahren.
+				while (result.next()) {
+					int id = result.getInt("id");
+					String name = result.getString("name");
+					String description = result.getString("description");
+
+					Authorization authorization = new Authorization(id, name, description);
+					authorizations.add(authorization);
+
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return authorizations;
+	}
+	
+	/**
+	 * This method returns a list of all mappings of roles and authorizations
+	 * @return returns a list of all mappings
+	 */
+	public List<AuthorizationMapping> getAuthorizationMapping(){
+		List<AuthorizationMapping> mappings = new ArrayList<AuthorizationMapping>() ;
+		
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			PreparedStatement statement;
+			try {
+				
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT m.id AS id, r.id AS r_id, r.name AS role, a.id AS a_id, a.name AS authorization, a.description AS description "
+						+ "FROM mappingroleauthorization AS m "
+						+ "INNER JOIN role AS r ON m.role = r.id "
+						+ "INNER JOIN authorization AS a ON m.authorization = a.id";
+				
+				statement = conn.prepareStatement(sql);
+				ResultSet result = statement.executeQuery();
+
+				// Ergebnissätze durchfahren.
+				while (result.next()) {
+					int id = result.getInt("id");
+					Role role = new Role(result.getInt("r_id"), result.getString("role"));
+					Authorization authorization = new Authorization(result.getInt("a_id"), result.getString("authorization"), result.getString("description"));
+					
+					AuthorizationMapping mapping = new AuthorizationMapping(id, role, authorization);
+					
+					mappings.add(mapping);
+
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return mappings;
+	}
+	
+	/**
+	 * This method creates a new role in the database
+	 * @param role the role that should be created
+	 * @return the id of the created role returns -1 if no role was created
+	 */
+	public int createRole(Role role){
+		conn = getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement preparedStatement = conn.prepareStatement(
+						"INSERT INTO `role` (`id`, `name`) " + "VALUES (NULL, ?)",
+						Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setString(1, role.getName());
+
+				int lines = preparedStatement.executeUpdate();
+
+				if (lines != 0) {
+					ResultSet result = preparedStatement.getGeneratedKeys();
+					if (result.next()) {
+						return result.getInt(1);
+					} else {
+						return -1;
+					}
+				} else {
+					return -1;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return -1;
+			}
+		} else {
+			return -1;
+		}
+	}
+	
+	/**
+	 * This method creates a new mapping in the database
+	 * @param mapping the mapping that should be created
+	 * @return returns the id of the new mapping returns -1 if no mapping was created
+	 */
+	public int createAuthorizationMapping(AuthorizationMapping mapping){
+		conn = getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement preparedStatement = conn.prepareStatement(
+						"INSERT INTO `role` (`id`, `authorization`, `role`) " + "VALUES (NULL, ?, ?)",
+						Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setInt(1, mapping.getAuthorization().getId());
+				preparedStatement.setInt(2, mapping.getRole().getId());
+
+				int lines = preparedStatement.executeUpdate();
+
+				if (lines != 0) {
+					ResultSet result = preparedStatement.getGeneratedKeys();
+					if (result.next()) {
+						return result.getInt(1);
+					} else {
+						return -1;
+					}
+				} else {
+					return -1;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return -1;
+			}
+		} else {
+			return -1;
+		}
+	}
+	
+	/**
+	 * This method deletes an mapping of a role and an authorization in the database
+	 * @param mapping the mapping that should be deleted
+	 */
+	public void deleteAuthorizationMapping(AuthorizationMapping mapping){
+		conn = getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement preparedStatement = conn.prepareStatement(
+						"DELETE FROM `mappingroleauthorization` WHERE `id` = ?");
+				preparedStatement.setInt(1, mapping.getId());
+
+				preparedStatement.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 }
