@@ -73,7 +73,7 @@ public class ShoppingBasket {
 	 * This method adds an article to the shopping basket if an article is already in the shopping basket the amount of this article will be increased
 	 * @param article The article that should be added to the shopping basket
 	 */
-	public void addItem(Article article) {
+	public void addItem(Article article, int size, String color) {
 		boolean notFound = true;
 		for(int i =0; i < items.size() && notFound; i++){
 			ShoppingBasketItem item = items.get(i);
@@ -83,7 +83,7 @@ public class ShoppingBasket {
 			}
 		}
 		if(notFound){
-			ShoppingBasketItem item = new ShoppingBasketItem(1, article);
+			ShoppingBasketItem item = new ShoppingBasketItem(1, article, size, color);
 			items.add(item);
 		}
 	}
@@ -165,8 +165,8 @@ public class ShoppingBasket {
 	 * @param wishlist
 	 */
 	public void addWishlist(Wishlist wishlist){
-		for (Article item : wishlist.getList()) {
-			addItem(item);
+		for (WishlistItem item : wishlist.getList()) {
+			addItem(item.getArticle(), item.getSize(), item.getColor());
 		}
 	}
 }

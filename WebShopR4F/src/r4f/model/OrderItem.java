@@ -12,6 +12,8 @@ public class OrderItem {
 	private int amount;
 	private double price;
 	private Article article;
+	private int size;
+	private String color;
 	
 	
 	/**
@@ -20,12 +22,16 @@ public class OrderItem {
 	 * @param amount the amount to set
 	 * @param price the price to set
 	 * @param the article to set
+	 * @param size the size to set
+	 * @param color color to set
 	 */
-	public OrderItem(int position, int amount, double price, Article article){
+	public OrderItem(int position, int amount, double price, Article article, int size, String color){
 		this.position = position;
 		this.amount = amount;
 		this.article = article;
 		this.price = price;
+		this.size = size;
+		this.color = color;
 	}
 	
 	/**
@@ -33,6 +39,7 @@ public class OrderItem {
 	 */
 	public OrderItem(){
 		article = null;
+		color = null;
 	}
 	
 	/**
@@ -82,6 +89,34 @@ public class OrderItem {
 	 */
 	public void setArticle(Article article) {
 		this.article = article;
+	}
+
+	/**
+	 * @return the size
+	 */
+	public int getSize() {
+		return size;
+	}
+
+	/**
+	 * @param size the size to set
+	 */
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	/**
+	 * @return the color
+	 */
+	public String getColor() {
+		return color;
+	}
+
+	/**
+	 * @param color the color to set
+	 */
+	public void setColor(String color) {
+		this.color = color;
 	}
 	
 }

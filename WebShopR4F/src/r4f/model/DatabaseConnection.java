@@ -274,17 +274,15 @@ public class DatabaseConnection {
 
 				PreparedStatement preparedStatement = conn
 						.prepareStatement(
-								"INSERT INTO `Article` (`id`, `name`, `description`, `size`, `price`, `manufacturer`, `color`, `entryDate`, `category`, `sport`) "
-										+ "VALUES (NULL, ?, ?, ?, ?, ?, ?, null, ?, ?)",
+								"INSERT INTO `Article` (`id`, `name`, `description`, `price`, `manufacturer`, `entryDate`, `category`, `sport`) "
+										+ "VALUES (NULL, ?, ?, ?, ?, null, ?, ?)",
 								Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setString(1, artikel.getName());
 				preparedStatement.setString(2, artikel.getDescription());
-				preparedStatement.setInt(3, artikel.getSize());
-				preparedStatement.setDouble(4, artikel.getPrice());
-				preparedStatement.setInt(5, getManufacturerId(artikel.getManufacturer()));
-				preparedStatement.setInt(6, getColorId(artikel.getColor()));
-				preparedStatement.setInt(7, getCategoryId(artikel.getCategory()));
-				preparedStatement.setInt(8, getSportId(artikel.getSport()));
+				preparedStatement.setDouble(3, artikel.getPrice());
+				preparedStatement.setInt(4, getManufacturerId(artikel.getManufacturer()));
+				preparedStatement.setInt(5, getCategoryId(artikel.getCategory()));
+				preparedStatement.setInt(6, getSportId(artikel.getSport()));
 
 				int lines = preparedStatement.executeUpdate();
 
@@ -326,9 +324,9 @@ public class DatabaseConnection {
 				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, co.name as color, a.entryDate, a.image, ca.name as category, s.name as sport "
-						+ " FROM article AS a INNER JOIN category AS ca INNER JOIN manufacturer AS m INNER JOIN sport AS s INNER JOIN color as co"
-						+ " WHERE a.category = ca.id AND a.manufacturer = m.id AND a.sport = s.id AND a.color = co.id AND a.id = ?";
+				String sql = "SELECT a.id, a.name, a.description, a.price, m.name as manufacturer, a.entryDate, a.image, ca.name as category, s.name as sport "
+						+ " FROM article AS a INNER JOIN category AS ca INNER JOIN manufacturer AS m INNER JOIN sport AS s"
+						+ " WHERE a.category = ca.id AND a.manufacturer = m.id AND a.sport = s.id AND a.id = ?";
 				
 				preparedStatement = conn.prepareStatement(sql);
 				preparedStatement.setInt(1, id);
@@ -339,16 +337,16 @@ public class DatabaseConnection {
 					id = result.getInt("id");
 					String name = result.getString("name");
 					String description = result.getString("description");
-					int size = result.getInt("size");
+					List<Integer> sizes = getSizeList(id);
 					double price = result.getDouble("price");
 					String manufacturer = result.getString("manufacturer");
-					String color = result.getString("color");
+					List<String> color = getColorList(id);
 					Date entryDate = result.getDate("entryDate");
 					String category = result.getString("category");
 					String sport = result.getString("sport");
 					int image = result.getInt("image");
 
-					article = new Article(id, name, description, size, price, manufacturer, color, entryDate, category,
+					article = new Article(id, name, description, sizes, price, manufacturer, color, entryDate, category,
 							sport, image);
 				}
 			} catch (SQLException e) {
@@ -374,11 +372,10 @@ public class DatabaseConnection {
 				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, co.name as color, a.entryDate, a.image, ca.name as category, s.name as sport "
+				String sql = "SELECT a.id, a.name, a.description, a.price, m.name as manufacturer, a.entryDate, a.image, ca.name as category, s.name as sport "
 						+ " FROM article AS a INNER JOIN category AS ca ON a.category = ca.id"
 						+ " INNER JOIN manufacturer AS m ON a.manufacturer = m.id"
 						+ " INNER JOIN sport AS s ON a.sport = s.id"
-						+ " INNER JOIN color AS co ON a.color = co.id" 
 						+ filter.getSQLFilter("a", "ca", "m", "s", "co");
 				System.out.println(sql);
 				
@@ -391,16 +388,16 @@ public class DatabaseConnection {
 					int id = result.getInt("id");
 					String name = result.getString("name");
 					String description = result.getString("description");
-					int size = result.getInt("size");
+					List<Integer> sizes = getSizeList(id);
 					double price = result.getDouble("price");
 					String manufacturer = result.getString("manufacturer");
-					String color = result.getString("color");
+					List<String> colors = getColorList(id);
 					Date entryDate = result.getDate("entryDate");
 					String category = result.getString("category");
 					String sport = result.getString("sport");
 					int image = result.getInt("image");
 
-					article = new Article(id, name, description, size, price, manufacturer, color, entryDate, category,
+					article = new Article(id, name, description, sizes, price, manufacturer, colors, entryDate, category,
 							sport, image);
 					articleList.add(article);
 				}
@@ -410,7 +407,12 @@ public class DatabaseConnection {
 		}
 		return articleList;
 	}
-
+	
+	/**
+	 * This method selects list of all articles that match with the search pattern
+	 * @param searchPattern the search pattern
+	 * @return returns a list of the articles that matches with the search pattern
+	 */
 	public List<Article> getArticleListSearch(String searchPattern) {
 		List<Article> articleList = new ArrayList<Article>();
 
@@ -418,11 +420,10 @@ public class DatabaseConnection {
 		if (conn != null) {
 			try {
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT a.id, a.name, a.description, a.size, a.price, m.name as manufacturer, co.name as color, a.entryDate, a.image, ca.name as category, s.name as sport "
+				String sql = "SELECT a.id, a.name, a.description, a.price, m.name as manufacturer, a.entryDate, a.image, ca.name as category, s.name as sport "
 						+ " FROM article AS a INNER JOIN category AS ca ON a.category = ca.id"
 						+ " INNER JOIN manufacturer AS m ON a.manufacturer = m.id"
-						+ " INNER JOIN sport AS s ON a.sport = s.id"
-						+ " INNER JOIN color AS co ON a.color = co.id" 
+						+ " INNER JOIN sport AS s ON a.sport = s.id" 
 						+ " WHERE LOWER(a.id) LIKE LOWER('%" + searchPattern + "%') OR LOWER(a.name) LIKE LOWER('%" + searchPattern + "%') Or LOWER(a.description) LIKE LOWER('%" + searchPattern + "%')";
 				System.out.println(sql);
 				PreparedStatement statement = conn.prepareStatement(sql);
@@ -435,16 +436,16 @@ public class DatabaseConnection {
 					int id = result.getInt("id");
 					String name = result.getString("name");
 					String description = result.getString("description");
-					int size = result.getInt("size");
+					List<Integer> sizes = getSizeList(id);
 					double price = result.getDouble("price");
 					String manufacturer = result.getString("manufacturer");
-					String color = result.getString("color");
+					List<String> colors = getColorList(id);
 					Date entryDate = result.getDate("entryDate");
 					String category = result.getString("category");
 					String sport = result.getString("sport");
 					int image = result.getInt("image");
 
-					article = new Article(id, name, description, size, price, manufacturer, color, entryDate, category,
+					article = new Article(id, name, description, sizes, price, manufacturer, colors, entryDate, category,
 							sport, image);
 					articleList.add(article);
 				}
@@ -468,21 +469,19 @@ public class DatabaseConnection {
 		if (conn != null) {
 
 			PreparedStatement preparedStatement = conn.prepareStatement(
-					"UPDATE `article` SET `name` = ?, `description` = ?, `size` = ?, "
-							+ "`price` = ?, `manufacturer` = ?, `color` = ?, `category` = ?, "
+					"UPDATE `article` SET `name` = ?, `description` = ?, "
+							+ "`price` = ?, `manufacturer` = ?, `category` = ?, "
 							+ "`sport` = ?, `image` = ?" + " WHERE `article`.`id` = ?",
 					Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, article.getName());
 			preparedStatement.setString(2, article.getDescription());
-			preparedStatement.setInt(3, article.getSize());
-			preparedStatement.setDouble(4, article.getPrice());
-			preparedStatement.setInt(5, getManufacturerId(article.getManufacturer()));
-			preparedStatement.setInt(6, getColorId(article.getColor()));
-			preparedStatement.setInt(7, getCategoryId(article.getCategory()));
-			preparedStatement.setInt(8, getSportId(article.getSport()));
-			preparedStatement.setInt(9, article.getImage());
+			preparedStatement.setDouble(3, article.getPrice());
+			preparedStatement.setInt(4, getManufacturerId(article.getManufacturer()));
+			preparedStatement.setInt(5, getCategoryId(article.getCategory()));
+			preparedStatement.setInt(6, getSportId(article.getSport()));
+			preparedStatement.setInt(7, article.getImage());
 
-			preparedStatement.setInt(10, article.getId());
+			preparedStatement.setInt(8, article.getId());
 
 			preparedStatement.executeUpdate();
 
@@ -731,6 +730,8 @@ public class DatabaseConnection {
 					ShoppingBasketItem item = new ShoppingBasketItem();
 					item.setAmount(result.getInt("amount"));
 					item.setId(result.getInt("id"));
+					item.setColor(result.getString("color"));
+					item.setSize(result.getInt("size"));
 
 					int aritcleId = result.getInt("article");
 					item.setArticle(this.getArticle(aritcleId));
@@ -791,12 +792,14 @@ public class DatabaseConnection {
 			try {
 
 				PreparedStatement preparedStatement = conn.prepareStatement(
-						"INSERT INTO `shoppingbasketitem` (`id`, `article`, `shoppingBasket`, `amount`) "
-								+ "VALUES (NULL, ?, ? , ?)",
+						"INSERT INTO `shoppingbasketitem` (`id`, `article`, `shoppingBasket`, `amount`, `size`, `color`) "
+								+ "VALUES (NULL, ?, ? , ?, ?, ?)",
 						Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, shoppingBasketItem.getArticle().getId());
 				preparedStatement.setInt(2, shoppingBasketId);
 				preparedStatement.setInt(3, shoppingBasketItem.getAmount());
+				preparedStatement.setInt(4, getSizeId(shoppingBasketItem.getSize()));
+				preparedStatement.setInt(5, getColorId(shoppingBasketItem.getColor()));
 
 				int lines = preparedStatement.executeUpdate();
 
@@ -1168,13 +1171,15 @@ public class DatabaseConnection {
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
 			try {
-				String sql = "INSERT INTO orderitem (order, position, amount, price, article) values (?, ?, ?, ?, ?)";
+				String sql = "INSERT INTO orderitem (order, position, amount, price, article, size, color) values (?, ?, ?, ?, ?, ?, ?)";
 				PreparedStatement preparedStatement = conn.prepareStatement(sql);
 				preparedStatement.setInt(1, orderId);
 				preparedStatement.setInt(2, item.getPosition());
 				preparedStatement.setInt(3, item.getAmount());
 				preparedStatement.setDouble(4, item.getArticle().getPrice());
 				preparedStatement.setInt(5, item.getArticle().getId());
+				preparedStatement.setInt(6, getSizeId(item.getSize()));
+				preparedStatement.setInt(7, getColorId(item.getColor()));
 
 				preparedStatement.executeUpdate();
 			} catch (SQLException e) {
@@ -1239,8 +1244,8 @@ public class DatabaseConnection {
 		if (conn != null) {
 			try {
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT o.*"
-						+ " FROM orderitem AS o"
+				String sql = "SELECT o.position, o.amount, o.price, o.article, c.name AS color, s.size AS name"
+						+ " FROM orderitem AS o INNER JOIN color AS c ON o.color = c.id INNER JOIN size AS s ON o.size = s.id"
 						+ " WHERE o.orders = ? ORDER BY position";
 				System.out.println(sql);
 				PreparedStatement statement = conn.prepareStatement(sql);
@@ -1256,8 +1261,10 @@ public class DatabaseConnection {
 					int amount = result.getInt("amount");
 					double price = result.getDouble("price");
 					Article article = getArticle(result.getInt("article"));
+					String color = result.getString("color");
+					int size = result.getInt("size");
 
-					orderItem = new OrderItem(position, amount, price, article);
+					orderItem = new OrderItem(position, amount, price, article, size, color);
 					orderItems.add(orderItem);
 				}
 			} catch (SQLException e) {
@@ -1304,12 +1311,12 @@ public class DatabaseConnection {
 	}
 	
 	/**
-	 * This method creates a new wishlist item in the databse
-	 * @param article the article which should be the item
+	 * This method creates a new wishlist item in the database
+	 * @param wishlistItem the article which should be the item
 	 * @param wishlistId the id of the wishlist
 	 * @return the id of the created item
 	 */
-	public int createWishlistItemInDB(Article article, int wishlistId){
+	public int createWishlistItemInDB(WishlistItem wishlistItem, int wishlistId){
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1317,11 +1324,13 @@ public class DatabaseConnection {
 			try {
 
 				PreparedStatement preparedStatement = conn.prepareStatement(
-						"INSERT INTO `wishlistitem` (`id`, `article`, `wishlist`) "
-								+ "VALUES (NULL, ?, ?)",
+						"INSERT INTO `wishlistitem` (`id`, `article`, `wishlist`, `size`, `color`) "
+								+ "VALUES (NULL, ?, ?, ?, ?)",
 						Statement.RETURN_GENERATED_KEYS);
-				preparedStatement.setInt(1, article.getId());
+				preparedStatement.setInt(1, wishlistItem.getId());
 				preparedStatement.setInt(2, wishlistId);
+				preparedStatement.setInt(3, getSizeId(wishlistItem.getSize()));
+				preparedStatement.setInt(4, getColorId(wishlistItem.getColor()));
 
 				int lines = preparedStatement.executeUpdate();
 
@@ -1399,7 +1408,10 @@ public class DatabaseConnection {
 				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT * FROM wishlistitem WHERE wishlist=?";
+				String sql = "SELECT w.id, w.article, s.size, c.name FROM wishlistitem AS w "
+						+ "INNER JOIN size AS s ON w.size = s.id "
+						+ "INNER JOIN color AS c ON w.color = c.id "
+						+ "WHERE wishlist=?";
 				
 				statement = conn.prepareStatement(sql);
 				statement.setInt(1, wishlistId);
@@ -1407,10 +1419,14 @@ public class DatabaseConnection {
 
 				// Ergebnissätze durchfahren.
 				while (result.next()) {
-					Article item = getArticle(result.getInt("article"));
-					item.setId(result.getInt("id"));
+					int id = result.getInt("id");
+					Article article = getArticle(result.getInt("article"));
+					int size = result.getInt("size");
+					String color = result.getString("color");
+					
+					WishlistItem wishlistitem = new WishlistItem(id, size, color, article);
 
-					wishlist.addItem(item);
+					wishlist.addItem(wishlistitem);
 
 				}
 			} catch (SQLException e) {
@@ -1615,7 +1631,7 @@ public class DatabaseConnection {
 			try {
 
 				PreparedStatement preparedStatement = conn.prepareStatement(
-						"INSERT INTO `role` (`id`, `authorization`, `role`) " + "VALUES (NULL, ?, ?)",
+						"INSERT INTO `mappingroleauthorization` (`id`, `authorization`, `role`) " + "VALUES (NULL, ?, ?)",
 						Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, mapping.getAuthorization().getId());
 				preparedStatement.setInt(2, mapping.getRole().getId());
@@ -1664,4 +1680,237 @@ public class DatabaseConnection {
 		}
 	}
 	
+	/**
+	 * This method selects all sizes for an article
+	 * @param articleId the id of the article which´s sizes should be selected
+	 * @return the list of sizes for that article
+	 */
+	public List<Integer> getSizeList(int articleId){
+		List<Integer> sizes = new ArrayList<Integer>() ;
+		
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			PreparedStatement statement;
+			try {
+				
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT s.size AS size FROM mappingarticlesize AS m INNER JOIN size AS s ON s.id = m.size WHERE article = ?";
+				
+				statement = conn.prepareStatement(sql);
+				statement.setInt(1, articleId);
+				ResultSet result = statement.executeQuery();
+
+				// Ergebnissätze durchfahren.
+				while (result.next()) {
+					int size = result.getInt("size");
+					
+					sizes.add(size);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return sizes;
+	}
+	
+	/**
+	 * This method selects all colors of an article
+	 * @param articleId the id of the article which´s color should be selected
+	 * @return the list of colors 
+	 */
+	public List<String> getColorList(int articleId){
+		List<String> colors = new ArrayList<String>() ;
+		
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			PreparedStatement statement;
+			try {
+				
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT c.name AS color FROM mappingarticlecolor AS m INNER JOIN color AS c ON c.id = m.color WHERE article = ?";
+				
+				statement = conn.prepareStatement(sql);
+				statement.setInt(1, articleId);
+				ResultSet result = statement.executeQuery();
+
+				// Ergebnissätze durchfahren.
+				while (result.next()) {
+					String size = result.getString("color");
+					
+					colors.add(size);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return colors;
+	}
+	
+	/**
+	 * This method selects the id for a size from the database
+	 * @param size the size which´s database should be selected
+	 * @return returns the id of the size or -1 if no size was selected
+	 */
+	public int getSizeId(int size){
+		int id = -1;
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			PreparedStatement preparedStatement;
+			try {
+				
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT id FROM size WHERE size=?";
+				preparedStatement = conn.prepareStatement(sql);
+				preparedStatement.setInt(1, size);
+				ResultSet result = preparedStatement.executeQuery();
+
+				// Ergebnissätze durchfahren.
+				if (result.next()) {
+					id = result.getInt("id");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return id;
+	}
+	
+	/**
+	 * This method creates a mapping of a size and an article
+	 * @param size the size
+	 * @param article the article
+	 * @return the id of the mapping entry that was created returns null if no entry was created
+	 */
+	public int createSizeMapping(int size, Article article){
+		conn = getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement preparedStatement = conn.prepareStatement(
+						"INSERT INTO `mappingarticlesize` (`id`, `size`, `article`) " + "VALUES (NULL, ?, ?)",
+						Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setInt(1, getSizeId(size));
+				preparedStatement.setInt(2, article.getId());
+
+				int lines = preparedStatement.executeUpdate();
+
+				if (lines != 0) {
+					ResultSet result = preparedStatement.getGeneratedKeys();
+					if (result.next()) {
+						return result.getInt(1);
+					} else {
+						return -1;
+					}
+				} else {
+					return -1;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return -1;
+			}
+		} else {
+			return -1;
+		}
+	}
+	
+	
+	/**
+	 * This method creates a mapping of a color and an article
+	 * @param color the color 
+	 * @param article the article
+	 * @return the id of the mapping entry that was created returns null if no entry was created 
+	 */
+	public int createColorMapping(String color, Article article){
+		conn = getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement preparedStatement = conn.prepareStatement(
+						"INSERT INTO `mappingarticlecolor` (`id`, `color`, `article`) " + "VALUES (NULL, ?, ?)",
+						Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setInt(1, getColorId(color));
+				preparedStatement.setInt(2, article.getId());
+
+				int lines = preparedStatement.executeUpdate();
+
+				if (lines != 0) {
+					ResultSet result = preparedStatement.getGeneratedKeys();
+					if (result.next()) {
+						return result.getInt(1);
+					} else {
+						return -1;
+					}
+				} else {
+					return -1;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return -1;
+			}
+		} else {
+			return -1;
+		}
+	}
+	
+	/**
+	 * This method deletes all mapping of that article to a size for a certain article
+	 * @param article the article which´s mappings should be deleted
+	 */
+	public void deleteSizeMapping(Article article){
+		conn = getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement preparedStatement = conn.prepareStatement(
+						"DELETE FROM `mappingarticlesize` WHERE `article` = ?");
+				preparedStatement.setInt(1, article.getId());
+
+				preparedStatement.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * This method deletes all mapping of that article to a color for a certain article
+	 * @param article the article which´s mappings should be deleted
+	 */
+	public void deleteColorMapping(Article article){
+		conn = getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement preparedStatement = conn.prepareStatement(
+						"DELETE FROM `mappingarticlecolor` WHERE `article` = ?");
+				preparedStatement.setInt(1, article.getId());
+
+				preparedStatement.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

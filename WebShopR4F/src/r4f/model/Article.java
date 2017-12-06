@@ -1,6 +1,7 @@
 package r4f.model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Class that represents an article
@@ -13,10 +14,10 @@ public class Article {
 	private int id;
 	private String name;
 	private String description;
-	private int size;
+	private List<Integer> size;
 	private double price;
 	private String manufacturer;
-	private String color;
+	private List<String> color;
 	private Date entryDate;
 	private String category;
 	private String sport;
@@ -44,7 +45,7 @@ public class Article {
 	 * @param category
 	 *            category to set
 	 */
-	public Article(int id, String name, String description, int size, double price, String manufacturer, String color,
+	public Article(int id, String name, String description, List<Integer> size, double price, String manufacturer, List<String> color,
 			Date entryDate, String category, String sport, int image) {
 		this.id = id;
 		this.name = name;
@@ -78,7 +79,7 @@ public class Article {
 	 * @param category
 	 *            category to set
 	 */
-	public Article(String name, String description, int size, double price, String manufacturer, String color,
+	public Article(String name, String description, List<Integer> size, double price, String manufacturer, List<String> color,
 			String category, String sport) {
 		this.name = name;
 		setDescription(description);
@@ -149,7 +150,7 @@ public class Article {
 	/**
 	 * @return the size
 	 */
-	public int getSize() {
+	public List<Integer> getSize() {
 		return size;
 	}
 
@@ -157,7 +158,7 @@ public class Article {
 	 * @param size
 	 *            the size to set
 	 */
-	public void setSize(int size) {
+	public void setSize(List<Integer> size) {
 		this.size = size;
 	}
 
@@ -194,7 +195,7 @@ public class Article {
 	/**
 	 * @return the color
 	 */
-	public String getColor() {
+	public List<String> getColor() {
 		return color;
 	}
 
@@ -202,7 +203,7 @@ public class Article {
 	 * @param color
 	 *            the color to set
 	 */
-	public void setColor(String color) {
+	public void setColor(List<String> color) {
 		this.color = color;
 	}
 

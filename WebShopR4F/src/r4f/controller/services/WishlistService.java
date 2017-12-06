@@ -5,6 +5,7 @@ package r4f.controller.services;
 
 import r4f.model.Article;
 import r4f.model.Wishlist;
+import r4f.model.WishlistItem;
 
 /**
  * @author Ture
@@ -28,7 +29,7 @@ public class WishlistService extends Service {
 	public void updateWishlistInDB(Wishlist wishlist){
 		super.getDbConnection().deleteAllItemsOfWishlistInDB(wishlist.getId());
 		
-		for (Article item : wishlist.getList()) {
+		for (WishlistItem item : wishlist.getList()) {
 			super.getDbConnection().createWishlistItemInDB(item, wishlist.getId());
 		}
 	}
