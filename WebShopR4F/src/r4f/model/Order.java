@@ -145,8 +145,8 @@ public class Order {
 	 * @param article the article to set
 	 * @param amount the amount of the article
 	 */
-	public void addOrderItem(Article article, int amount){
-		OrderItem item = new OrderItem(getLastPosition()+1, amount, article.getPrice(), article);
+	public void addOrderItem(Article article, int amount, int size, String color){
+		OrderItem item = new OrderItem(getLastPosition()+1, amount, article.getPrice(), article , size, color);
 		items.add(item);
 	}
 	
@@ -156,7 +156,7 @@ public class Order {
 	 */
 	public void addShoppingBasket(ShoppingBasket shoppingBasket){
 		for (ShoppingBasketItem item : shoppingBasket.getItems()) {
-			addOrderItem(item.getArticle(), item.getAmount());
+			addOrderItem(item.getArticle(), item.getAmount(), item.getSize(), item.getColor());
 		}
 	}
 	

@@ -12,13 +12,13 @@ import java.util.List;
  */
 public class Wishlist {
 	private int id;
-	private List<Article> list;
+	private List<WishlistItem> list;
 	
 	/**
 	 * This constructor can be used for a wish list that is not stored in the database
 	 */
 	public Wishlist(){
-		list = new ArrayList<Article>();
+		list = new ArrayList<WishlistItem>();
 	}
 	
 	/**
@@ -27,7 +27,7 @@ public class Wishlist {
 	 */
 	public Wishlist(int id){
 		this.id = id;
-		list = new ArrayList<Article>();
+		list = new ArrayList<WishlistItem>();
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public class Wishlist {
 	 * @param id
 	 * @param list
 	 */
-	public Wishlist(int id, List<Article> list){
+	public Wishlist(int id, List<WishlistItem> list){
 		this.id = id;
 		this.list = list;
 	}
@@ -43,14 +43,14 @@ public class Wishlist {
 	/**
 	 * @return the list
 	 */
-	public List<Article> getList() {
+	public List<WishlistItem> getList() {
 		return list;
 	}
 
 	/**
 	 * @param list the list to set
 	 */
-	public void setList(List<Article> list) {
+	public void setList(List<WishlistItem> list) {
 		this.list = list;
 	}
 
@@ -72,17 +72,35 @@ public class Wishlist {
 	 * This method adds an article to the wish list if the wish list already contains the article nothing will happen
 	 * @param articleId the article that should be added
 	 */
-	public void addItem(Article article){
+	public void addItem(Article article, int size, String color){
 		boolean found = false;
-		for (Article item : list) {
-			if(item.getId() == article.getId()){
+		for (WishlistItem item : list) {
+			if(item.getArticle().getId() == article.getId()){
 				found = true;
 			}
 		}
 		if(!found){
-			list.add(article);
+			list.add(new WishlistItem(size, color, article));
 		}
 	}
+	
+	/**
+	 * This method adds an article to the wish list if the wish list already contains the article nothing will happen
+	 * @param wishlistItem the item that should be added
+	 */
+	public void addItem(WishlistItem wishlistItem){
+		boolean found = false;
+		for (WishlistItem item : list) {
+			if(item.getId() == wishlistItem.getId()){
+				found = true;
+			}
+		}
+		if(!found){
+			list.add(wishlistItem);
+		}
+	}
+	
+	
 	/**
 	 * This method removes all articles from the wishlist
 	 */
@@ -91,17 +109,17 @@ public class Wishlist {
 	}
 	
 	/**
-	 * This method removes an article from the database
+	 * This method removes an article from the wishlist
 	 * @param articleId the id of the article that should be removed
 	 */
 	public void removeItem(int articleId){
-		List<Article> removeArticles = new ArrayList<Article>();
-		for (Article item : list) {
-			if(item.getId() == articleId){
+		List<WishlistItem> removeArticles = new ArrayList<WishlistItem>();
+		for (WishlistItem item : list) {
+			if(item.getArticle().getId() == articleId){
 				removeArticles.add(item);
 			}
 		}
-		for (Article item : removeArticles) {
+		for (WishlistItem item : removeArticles) {
 			list.remove(item);
 		}
 	}

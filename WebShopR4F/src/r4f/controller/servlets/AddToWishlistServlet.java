@@ -46,14 +46,22 @@ public class AddToWishlistServlet extends HttpServlet {
 		String errorURL = "Benutzerauthentifizierung.jsp";
 		String overviewURL = "./NavigationOverviewServlet";
 		Wishlist wishlist;
+		int size;
+		String color;
 		Article article;
 
 		try {
 			articleId = Integer.parseInt(request.getParameter("articleId"));
 			article = articleService.getArticle(articleId);
+			size = Integer.parseInt(request.getParameter("size"));
+			color = request.getParameter("color");			
 
 		} catch (NumberFormatException e) {
 			article = (Article)request.getSession().getAttribute("articleForWishlist");
+			size = (Integer) request.getSession().getAttribute("size");
+			color = (String) request.getSession().getAttribute("color");
+			request.getSession().removeAttribute("size");
+			request.getSession().removeAttribute("color");
 		}
 		wishlist = (Wishlist) request.getSession().getAttribute("wishlist");
 		
@@ -69,7 +77,7 @@ public class AddToWishlistServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 				return;
 			}else{
-				wishlist.addItem(article);
+				wishlist.addItem(article, size, color);
 				request.getSession().removeAttribute("articleForWishlist");
 			}			
 		}

@@ -86,16 +86,26 @@ public class AddToShoppingBasketServlet extends HttpServlet {
 		String errorURL = "Benutzerauthentifizierung.jsp";
 		String overviewURL = "./NavigationOverviewServlet";
 		ShoppingBasket shoppingBasket;
+		int size;
+		String color;
 		Article article;
 
 		try {
 			articleId = Integer.parseInt(request.getParameter("articleId"));
 			article = articleService.getArticle(articleId);
+			size = Integer.parseInt(request.getParameter("size"));
+			color = request.getParameter("color");
 
 		} catch (NumberFormatException e) {
 			article = (Article)request.getSession().getAttribute("articleForShoppingBasket");
+			size = (Integer) request.getSession().getAttribute("size");
+			color = (String) request.getSession().getAttribute("color");
+			request.getSession().removeAttribute("size");
+			request.getSession().removeAttribute("color");
+			
 		}
 		shoppingBasket = (ShoppingBasket) request.getSession().getAttribute("shoppingBasket");
+		
 		
 		if (shoppingBasket == null) {
 			// Errorhandling not logged in
@@ -103,13 +113,13 @@ public class AddToShoppingBasketServlet extends HttpServlet {
 			dispatcher = request.getRequestDispatcher(errorURL);
 			dispatcher.forward(request, response);
 			return;
-		} else {
-			if(article == null){
+		} else { 
+			if(article == null || size == -1 || color == null){
 				dispatcher = request.getRequestDispatcher(overviewURL);
 				dispatcher.forward(request, response);
 				return;
 			}else{
-				shoppingBasket.addItem(article);
+				shoppingBasket.addItem(article, size, color);
 				request.getSession().removeAttribute("articleForShoppingBasket");
 			}			
 		}

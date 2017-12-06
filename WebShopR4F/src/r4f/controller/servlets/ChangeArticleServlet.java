@@ -2,6 +2,7 @@ package r4f.controller.servlets;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -54,10 +55,12 @@ public class ChangeArticleServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String name = null;
 		String description = null;
-		int size = -1;
+		String sizes[] = null;
+		List<Integer> size = null;
 		double price = -1;
 		String manufacturer = null;
-		String color = null;
+		String colors[] = null;
+		List<String> color = null;
 		String category = null;
 		String sport = null;
 		Article article;
@@ -106,7 +109,11 @@ public class ChangeArticleServlet extends HttpServlet {
 						break;
 					case "size":
 						try {
-							size = Integer.parseInt(item.getString());
+							sizes = item.getString().split(";");
+							size = new ArrayList<Integer>();
+							for (int i = 0; i<sizes.length; i++) {
+								size.add(Integer.parseInt(sizes[i]));
+							}
 						} catch (Exception e) {
 							// error handling missing input		
 							errorCode = 116;
@@ -116,7 +123,11 @@ public class ChangeArticleServlet extends HttpServlet {
 						manufacturer = item.getString();
 						break;
 					case "color":
-						color = item.getString();
+						colors = item.getString().split(";");
+						color = new ArrayList<String>();
+						for (String string : colors) {
+							color.add(string);
+						}
 						break;
 					case "category":
 						category = item.getString();
@@ -150,7 +161,7 @@ public class ChangeArticleServlet extends HttpServlet {
 		if (name != null && !name.equals("")) {
 			if (description != null && !description.equals("")) {
 				if (manufacturer != null && !manufacturer.equals("") && Article.checkManufacturer(manufacturer)) {
-					if (color != null && !color.equals("") && Article.checkColor(color)) {
+					if (color != null && !color.equals("")) {
 						if (category != null && !category.equals("") && Article.checkCategory(category)) {
 							if (sport != null && !sport.equals("") && Article.checkSport(sport)) {
 								if (imageStream != null) {
