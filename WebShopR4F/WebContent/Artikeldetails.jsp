@@ -34,8 +34,8 @@
 					<h4 class="artikelDetails">Produktioninformationen</h4>
 					<p class="artikelDetails">
 						<strong>Artikel-ID:</strong> <jsp:getProperty property="id" name="article"/> <br />
-						<strong>Gr&ouml;&szlig;e:</strong> <jsp:getProperty property="size" name="article"/><br />
-						<strong>Farbe: </strong><jsp:getProperty property="color" name="article"/><br />
+<%-- 						<strong>Gr&ouml;&szlig;e:</strong> <jsp:getProperty property="size" name="article"/><br />
+						<strong>Farbe: </strong><jsp:getProperty property="color" name="article"/><br /> --%>
 						<strong>Hersteller: </strong><jsp:getProperty property="manufacturer" name="article"/><br />
 						<strong>Sportart: </strong><jsp:getProperty property="sport" name="article"/><br />
 						<strong>Kategorie: </strong><jsp:getProperty property="category" name="article"/><br />
