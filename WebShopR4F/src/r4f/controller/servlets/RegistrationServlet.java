@@ -55,7 +55,7 @@ public class RegistrationServlet extends HttpServlet {
 		UserService userService;
 		RequestDispatcher dispatcher;
 		String errorURL = "Registrierungsmaske.jsp";
-		String successURL = "Willkommen.jsp";
+		String successURL = "BestaetigungsCode.jsp";
 		int year, month, day;
 		HashService hashService;
 
@@ -70,7 +70,7 @@ public class RegistrationServlet extends HttpServlet {
 		city = request.getParameter("city");
 		birthday_string = request.getParameter("birthday");
 		salutation = request.getParameter("salutation");
-		agb = request.getParameter("agb");
+		agb = request.getParameter("AGB");
 
 		// check whether all input parameters are filled or not
 		if (agb == null || agb.equals("")) {
@@ -208,33 +208,19 @@ public class RegistrationServlet extends HttpServlet {
 																					houseNumber, postcode, city,
 																					salutation);
 
-																			user = userService.createBenutzerInDB(user);
-																			if (user != null) {
+																			
+																			
 																				EmailService emailService = new EmailService();
 																				emailService
 																						.sendRegistrationConfirmation(
 																								user);
+																				request.getSession().setAttribute("user", user);
 																				dispatcher = request
 																						.getRequestDispatcher(
 																								successURL);
 																				dispatcher.forward(request, response);
 																				return;
-																			} else {
-																				// Errorhandling
-																				// something
-																				// went
-																				// wrong
-																				// during
-																				// registration
-																				ErrorMessage errorMessage = new ErrorMessage(
-																						101);
-																				request.setAttribute("error",
-																						errorMessage);
-																				dispatcher = request
-																						.getRequestDispatcher(errorURL);
-																				dispatcher.forward(request, response);
-																				return;
-																			}
+																			
 																		} else {
 																			// Error
 																			// too

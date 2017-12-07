@@ -76,7 +76,7 @@
 			
 				<form action="./NavigationArticleDetailsServlet" method="post">
         			<input type="hidden" name="articleId" value="${article.id }" />
-					<input id="ImgArtikelUebersicht" type="image" src="./ImageServlet/${article.image}" alt="Bild">
+					<input id="ImgArtikelUebersicht" type="image" src="./ImageServlet/${article.mainImage}" alt="Bild">
 				</form> 
 				
 				<div id="containerButtonUebersicht" >

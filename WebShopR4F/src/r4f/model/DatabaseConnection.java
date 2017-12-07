@@ -192,7 +192,7 @@ public class DatabaseConnection {
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT u.*, r.name , a.street, a.houseNumber, a.postCode, a.city "
 						+ "FROM user AS u INNER JOIN role AS r ON r.id = u.role INNER JOIN address AS a ON a.user = u.id "
-						+ "WHERE a.masterData='1' AND id=?";
+						+ "WHERE a.masterData='1' AND u.id=?";
 				
 				preparedStatement = conn.prepareStatement(sql);
 				preparedStatement.setInt(1, id);
@@ -241,7 +241,7 @@ public class DatabaseConnection {
 			PreparedStatement preparedStatement = conn
 					.prepareStatement("UPDATE `user` SET `email` = ?, `firstName` = ?, `lastName` = ?, "
 							+ "`birthday` = ?, `password` = ?, `salutation` = ?, `shoppingBasket` = ?, "
-							+ "`role`= ?  `wishlist` = ? WHERE `user`.`id` = ?");
+							+ "`role`= ?,  `wishlist` = ? WHERE `user`.`id` = ? ");
 			preparedStatement.setString(1, user.getEmail());
 			preparedStatement.setString(2, user.getFirstName());
 			preparedStatement.setString(3, user.getLastName());
@@ -252,7 +252,7 @@ public class DatabaseConnection {
 			preparedStatement.setInt(8, getRoleId(user.getRole()));
 			preparedStatement.setInt(9, user.getWishlist());
 			preparedStatement.setInt(10, user.getId());
-
+			
 			preparedStatement.executeUpdate();
 		}
 	}
@@ -324,7 +324,7 @@ public class DatabaseConnection {
 				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT a.id, a.name, a.description, a.price, m.name as manufacturer, a.entryDate, a.image, ca.name as category, s.name as sport "
+				String sql = "SELECT a.id, a.name, a.description, a.price, m.name as manufacturer, a.entryDate, ca.name as category, s.name as sport "
 						+ " FROM article AS a INNER JOIN category AS ca INNER JOIN manufacturer AS m INNER JOIN sport AS s"
 						+ " WHERE a.category = ca.id AND a.manufacturer = m.id AND a.sport = s.id AND a.id = ?";
 				
@@ -344,10 +344,11 @@ public class DatabaseConnection {
 					Date entryDate = result.getDate("entryDate");
 					String category = result.getString("category");
 					String sport = result.getString("sport");
-					int image = result.getInt("image");
+					int mainImage = getImageId(id, true);
+					List<Integer> images = getImageIdList(id);
 
 					article = new Article(id, name, description, sizes, price, manufacturer, color, entryDate, category,
-							sport, image);
+							sport, mainImage, images);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -359,7 +360,7 @@ public class DatabaseConnection {
 	/**
 	 * This method selects all article in the Database
 	 * 
-	 * @return returns all ariticle in the database
+	 * @return returns all articles in the database
 	 */
 	public List<Article> getArticleList(FilterList filter) {
 		List<Article> articleList = new ArrayList<Article>();
@@ -372,7 +373,7 @@ public class DatabaseConnection {
 				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT a.id, a.name, a.description, a.price, m.name as manufacturer, a.entryDate, a.image, ca.name as category, s.name as sport "
+				String sql = "SELECT a.id, a.name, a.description, a.price, m.name as manufacturer, a.entryDate, ca.name as category, s.name as sport "
 						+ " FROM article AS a INNER JOIN category AS ca ON a.category = ca.id"
 						+ " INNER JOIN manufacturer AS m ON a.manufacturer = m.id"
 						+ " INNER JOIN sport AS s ON a.sport = s.id"
@@ -395,10 +396,11 @@ public class DatabaseConnection {
 					Date entryDate = result.getDate("entryDate");
 					String category = result.getString("category");
 					String sport = result.getString("sport");
-					int image = result.getInt("image");
+					int mainImage = getImageId(id, true);
+					List<Integer> images = getImageIdList(id);
 
 					article = new Article(id, name, description, sizes, price, manufacturer, colors, entryDate, category,
-							sport, image);
+							sport, mainImage, images);
 					articleList.add(article);
 				}
 			} catch (SQLException e) {
@@ -420,7 +422,7 @@ public class DatabaseConnection {
 		if (conn != null) {
 			try {
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT a.id, a.name, a.description, a.price, m.name as manufacturer, a.entryDate, a.image, ca.name as category, s.name as sport "
+				String sql = "SELECT a.id, a.name, a.description, a.price, m.name as manufacturer, a.entryDate, ca.name as category, s.name as sport "
 						+ " FROM article AS a INNER JOIN category AS ca ON a.category = ca.id"
 						+ " INNER JOIN manufacturer AS m ON a.manufacturer = m.id"
 						+ " INNER JOIN sport AS s ON a.sport = s.id" 
@@ -443,10 +445,11 @@ public class DatabaseConnection {
 					Date entryDate = result.getDate("entryDate");
 					String category = result.getString("category");
 					String sport = result.getString("sport");
-					int image = result.getInt("image");
+					int mainImage = getImageId(id, true);
+					List<Integer> images = getImageIdList(id);
 
 					article = new Article(id, name, description, sizes, price, manufacturer, colors, entryDate, category,
-							sport, image);
+							sport, mainImage, images);
 					articleList.add(article);
 				}
 			} catch (SQLException e) {
@@ -471,7 +474,7 @@ public class DatabaseConnection {
 			PreparedStatement preparedStatement = conn.prepareStatement(
 					"UPDATE `article` SET `name` = ?, `description` = ?, "
 							+ "`price` = ?, `manufacturer` = ?, `category` = ?, "
-							+ "`sport` = ?, `image` = ?" + " WHERE `article`.`id` = ?",
+							+ "`sport` = ?" + " WHERE `article`.`id` = ?",
 					Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, article.getName());
 			preparedStatement.setString(2, article.getDescription());
@@ -479,9 +482,8 @@ public class DatabaseConnection {
 			preparedStatement.setInt(4, getManufacturerId(article.getManufacturer()));
 			preparedStatement.setInt(5, getCategoryId(article.getCategory()));
 			preparedStatement.setInt(6, getSportId(article.getSport()));
-			preparedStatement.setInt(7, article.getImage());
 
-			preparedStatement.setInt(8, article.getId());
+			preparedStatement.setInt(7, article.getId());
 
 			preparedStatement.executeUpdate();
 
@@ -872,15 +874,16 @@ public class DatabaseConnection {
 	 * @return returns true if the image was created in the database and false
 	 *         if not
 	 */
-	public int createImageInDB(InputStream inputStream, String contentType) {
+	public int createImageInDB(InputStream inputStream, String contentType, boolean mainImage) {
 		conn = getInstance();
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
 			try {
-				String sql = "INSERT INTO image (image, type) values (?, ?)";
+				String sql = "INSERT INTO image (image, type, mainImage) values (?, ?, ?)";
 				PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setString(2, contentType);
+				preparedStatement.setBoolean(3, mainImage);
 
 				if (inputStream != null) {
 					// fetches input stream of the upload file for the blob
@@ -937,7 +940,7 @@ public class DatabaseConnection {
 				// Ergebnissätze durchfahren.
 				if (result.next()) {
 					blob = result.getBlob("image");
-					image = new Image(id, blob, result.getString("type"));
+					image = new Image(id, blob, result.getString("type"), result.getBoolean("mainImage"));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -953,18 +956,19 @@ public class DatabaseConnection {
 	 * @param imageType the new content type of the image
 	 * @throws SQLException an SQLException will be thrown if any error occurred
 	 */
-	public void updateImageInDB(int imageId, InputStream imageStream, String imageType) throws SQLException {
+	public void updateImageInDB(int imageId, InputStream imageStream, String imageType, boolean mainImage) throws SQLException {
 		conn = getInstance();
 
 		if (conn != null) {
 
 			PreparedStatement preparedStatement = conn.prepareStatement(
 					"UPDATE `image` SET `image` = ?, `type` = ? "
-							+ " WHERE `image`.`id` = ? ",
+							+ " WHERE `image`.`id` = ?, `mainImage`= ?",
 					Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setBlob(1, imageStream);
 			preparedStatement.setString(2, imageType);
 			preparedStatement.setInt(3, imageId);
+			preparedStatement.setBoolean(4, mainImage);
 			
 
 
@@ -1912,5 +1916,78 @@ public class DatabaseConnection {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	/**
+	 * This method selects a list of all images from the database
+	 * @param articleId the id of the article which´s images should be created
+	 * @return the list of the image ids
+	 */
+	public List<Integer> getImageIdList(int articleId){
+		List<Integer> images = new ArrayList<Integer>();
+		
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			PreparedStatement statement;
+			try {
+				
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT id FROM image WHERE article = ? AND mainImage = ?";
+				
+				statement = conn.prepareStatement(sql);
+				statement.setInt(1, articleId);
+				statement.setBoolean(2, false);
+				ResultSet result = statement.executeQuery();
+
+				// Ergebnissätze durchfahren.
+				while (result.next()) {
+					int size = result.getInt("id");
+					
+					images.add(size);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return images;
+	}
+	
+	/**
+	 * This method selects the id of an images from the database
+	 * @param articleId the id of the article which´s image id should be selected
+	 * @param mainImage boolean that specified whether the main image or not should be created
+	 * @return returns the id of the image or returns -1 if no images was selected
+	 */
+	public int getImageId(int articleId, boolean mainImage){
+		int id = -1;
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			PreparedStatement preparedStatement;
+			try {
+				
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT id FROM image WHERE article=? and mainImage=?";
+				preparedStatement = conn.prepareStatement(sql);
+				preparedStatement.setInt(1, articleId);
+				preparedStatement.setBoolean(2, mainImage);
+				ResultSet result = preparedStatement.executeQuery();
+
+				// Ergebnissätze durchfahren.
+				if (result.next()) {
+					id = result.getInt("id");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return id;
 	}
 }

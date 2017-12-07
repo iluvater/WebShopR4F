@@ -3,6 +3,8 @@
  */
 package r4f.controller.filter;
 
+import java.util.List;
+
 /**
  * @author Ture
  *
@@ -86,7 +88,7 @@ public class CheckboxStatus {
 		size9 = "unchecked";
 		size10 = "unchecked";
 	}
-
+	
 	/**
 	 * @return the sport1
 	 */

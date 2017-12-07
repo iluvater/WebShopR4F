@@ -14,6 +14,7 @@ public class Image {
 	private int id;
 	private Blob imageBlob;
 	private String type;
+	private boolean mainImage;
 	
 	
 	/**
@@ -22,10 +23,11 @@ public class Image {
 	 * @param imageBlob imageBlob to set
 	 * @param type type to set
 	 */
-	public Image(int id, Blob imageBlob, String type) {
+	public Image(int id, Blob imageBlob, String type, boolean mainImage) {
 		this.setId(id);
 		this.setImageBlob(imageBlob);
 		this.setType(type);
+		this.mainImage = mainImage;
 	}
 	
 	/**
@@ -78,6 +80,20 @@ public class Image {
 	 */
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	/**
+	 * @return the mainImage
+	 */
+	public boolean isMainImage() {
+		return mainImage;
+	}
+
+	/**
+	 * @param mainImage the mainImage to set
+	 */
+	public void setMainImage(boolean mainImage) {
+		this.mainImage = mainImage;
 	}
 
 }

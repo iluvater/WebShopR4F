@@ -49,8 +49,9 @@ public class EmailService {
 	public void sendRegistrationConfirmation(User user) {
 		try {
 			String emailBody = getEmailBody("registrationConfirmation");
-			emailBody = emailBody.replaceAll("firstName", user.getFirstName());
-			emailBody = emailBody.replaceAll("lastName", user.getLastName());
+			emailBody = emailBody.replaceAll("!firstName!", user.getFirstName());
+			emailBody = emailBody.replaceAll("!lastName!", user.getLastName());
+			emailBody = emailBody.replaceAll("!code!", user.getConfirmationCode());
 
 			sendMail(user.getEmail(), "Registrierung bei Run4Fun", emailBody);
 		} catch (IOException e) {

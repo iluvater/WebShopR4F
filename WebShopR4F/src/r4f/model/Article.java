@@ -1,5 +1,6 @@
 package r4f.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +22,9 @@ public class Article {
 	private Date entryDate;
 	private String category;
 	private String sport;
-	private int image;
+	private int mainImage;
+	private List<Integer> images;
+	private Date deliveryDate;
 
 	/**
 	 * Constructor that initializes all attributes
@@ -46,7 +49,7 @@ public class Article {
 	 *            category to set
 	 */
 	public Article(int id, String name, String description, List<Integer> size, double price, String manufacturer, List<String> color,
-			Date entryDate, String category, String sport, int image) {
+			Date entryDate, String category, String sport, int mainImage, List<Integer> images) {
 		this.id = id;
 		this.name = name;
 		setDescription(description);
@@ -57,7 +60,10 @@ public class Article {
 		this.entryDate = entryDate;
 		this.category = category;
 		this.sport = sport;
-		this.image = image;
+		this.mainImage = mainImage;
+		this.images = images;
+		this.deliveryDate = new Date();
+		deliveryDate.setTime(deliveryDate.getTime() + 604800000);
 	}
 
 	/**
@@ -90,6 +96,7 @@ public class Article {
 		this.entryDate = new Date();
 		this.category = category;
 		this.sport = sport;
+		this.images = new ArrayList<Integer>();
 	}
 
 	public Article() {
@@ -100,6 +107,8 @@ public class Article {
 		this.entryDate = null;
 		this.category = null;
 		this.sport = null;
+		this.images = new ArrayList<Integer>();
+		this.setDeliveryDate(null);
 	}
 
 	/**
@@ -317,18 +326,46 @@ public class Article {
 	}
 
 	/**
-	 * @return the image
+	 * @return the mainImage
 	 */
-	public int getImage() {
-		return image;
+	public int getMainImage() {
+		return mainImage;
 	}
 
 	/**
-	 * @param image
-	 *            the image to set
+	 * @param mainImage
+	 *            the mainImage to set
 	 */
-	public void setImage(int image) {
-		this.image = image;
+	public void setMainImage(int image) {
+		this.mainImage = image;
+	}
+
+	/**
+	 * @return the images
+	 */
+	public List<Integer> getImages() {
+		return images;
+	}
+
+	/**
+	 * @param images the images to set
+	 */
+	public void setImages(List<Integer> images) {
+		this.images = images;
+	}
+
+	/**
+	 * @return the deliveryDate
+	 */
+	public Date getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	/**
+	 * @param deliveryDate the deliveryDate to set
+	 */
+	public void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
 	}
 
 }

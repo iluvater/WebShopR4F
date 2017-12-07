@@ -25,6 +25,7 @@ public class User {
 	private int shoppingBasket;
 	private int wishlist;
 	private String role;
+	private String confirmationCode;
 
 	/**
 	 * Constructor that should be used when the id is known
@@ -53,11 +54,12 @@ public class User {
 	 *            the salutation to set
 	 * @param shoppingBasket
 	 *            the shoppingBasket to set
-     * @param role
+	 * @param role
 	 *            the role to set
 	 */
 	public User(int id, String firstName, String lastName, String email, Date birthday, String password, String street,
-			String houseNumber, String postCode, String city, String salutation, int shoppingBasket, String role, int wishlist) {
+			String houseNumber, String postCode, String city, String salutation, int shoppingBasket, String role,
+			int wishlist) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -72,6 +74,7 @@ public class User {
 		this.shoppingBasket = shoppingBasket;
 		this.wishlist = wishlist;
 		this.role = role;
+		confirmationCode = User.getConfirmationCode(6);
 	}
 
 	/**
@@ -110,11 +113,13 @@ public class User {
 		setPostCode(postCode);
 		this.city = city;
 		setSalutation(salutation);
+		confirmationCode = User.getConfirmationCode(6);
 	}
-/**
- * constructor used for being a bean 
- */
-	public User(){
+
+	/**
+	 * constructor used for being a bean
+	 */
+	public User() {
 		this.firstName = null;
 		this.lastName = null;
 		this.birthday = null;
@@ -125,7 +130,9 @@ public class User {
 		this.postCode = null;
 		this.city = null;
 		this.salutation = null;
+		confirmationCode = User.getConfirmationCode(6);
 	}
+
 	/**
 	 * @return the id
 	 */
@@ -316,6 +323,7 @@ public class User {
 
 	/**
 	 * This method checks whether an email has the right format or not
+	 * 
 	 * @param email
 	 *            possible email that should be checked
 	 * @return returns true when the email matches the pattern returns false
@@ -331,6 +339,7 @@ public class User {
 
 	/**
 	 * This mehtod checks whether a salutation ist correct or not
+	 * 
 	 * @param salutation
 	 *            salutation String that should be checked
 	 * @return return true when the String salutation is either Herr or Frau
@@ -346,6 +355,7 @@ public class User {
 
 	/**
 	 * This method checks whether a postCode has the right format or not
+	 * 
 	 * @param postCode
 	 *            postCode String that should be check
 	 * @return returns true when the String postCode contains only 5 digits
@@ -357,19 +367,21 @@ public class User {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * This method checks whether a date is valid or not
-	 * @param date the date to check
+	 * 
+	 * @param date
+	 *            the date to check
 	 * @return returns true if the date is older than 18 years
 	 */
 	@SuppressWarnings("deprecation")
-	public static boolean checkBirthday(Date date){
+	public static boolean checkBirthday(Date date) {
 		Date today = new Date();
 		today.setYear(today.getYear() - 14);
-		if(today.compareTo(date)>=0){
+		if (today.compareTo(date) >= 0) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
@@ -412,10 +424,31 @@ public class User {
 	}
 
 	/**
-	 * @param wishlist the wishlist to set
+	 * @param wishlist
+	 *            the wishlist to set
 	 */
 	public void setWishlist(int wishlist) {
 		this.wishlist = wishlist;
+	}
+
+	/**
+	 * @return the confirmationCode
+	 */
+	public String getConfirmationCode() {
+		return confirmationCode;
+	}
+	
+	/**
+	 * This method generates a new confirmation string 
+	 * @param length the length of the confirmation code
+	 * @return the code
+	 */
+	public static String getConfirmationCode(int length) {
+		String sb = "";
+		for (int i = 0; i < length; i++) {
+			sb = sb + (Integer.toString( ((int) (Math.random() * 10 - 1))));
+		}
+		return sb.toString();
 	}
 
 }
