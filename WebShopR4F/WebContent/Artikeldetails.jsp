@@ -16,7 +16,7 @@
 	<div id="container">
 			<c:if test ="${not empty article.name}">
 				<div>
-					<img id="ImgArtikelDetails" src="./ImageServlet/${article.image }" alt="Bild">
+					<img id="ImgArtikelDetails" src="./ImageServlet/${article.mainImage }" alt="Bild">
 					<h3 class="artikelDetails"><jsp:getProperty property="name" name="article"/></h3> 
 					<h4 class="artikelDetails">Preis: <jsp:getProperty property="price" name="article"/> &euro; </h4>
 					<hr />
