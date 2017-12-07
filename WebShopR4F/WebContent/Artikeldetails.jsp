@@ -13,6 +13,10 @@
 <body>
 	<jsp:useBean id="article" class="r4f.model.Article" scope="request">
 	</jsp:useBean> 
+<%-- 	<jsp:useBean id="size" class="java.lang.Integer" scope="session">
+	</jsp:useBean>
+	<jsp:useBean id="color" class="java.lang.String" scope="session">
+	</jsp:useBean> --%>
 	<div id="container">
 			<c:if test ="${not empty article.name}">
 				<div>
@@ -34,6 +38,21 @@
 					<h4 class="artikelDetails">Produktioninformationen</h4>
 					<p class="artikelDetails">
 						<strong>Artikel-ID:</strong> <jsp:getProperty property="id" name="article"/> <br />
+						
+						
+						
+						
+						<c:if test="${empty size }">
+							<label for="size">Größe:</label>
+							<select id="size" name="size">
+							<c:forEach items="${article.size}" var="articleSize" begin="0" end="0">
+								<option selected value="${articleSize}">${articleSize}</option>
+							</c:forEach>
+							</select>
+						</c:if>
+						
+						
+						
 <%-- 						<strong>Gr&ouml;&szlig;e:</strong> <jsp:getProperty property="size" name="article"/><br />
 						<strong>Farbe: </strong><jsp:getProperty property="color" name="article"/><br /> --%>
 						<strong>Hersteller: </strong><jsp:getProperty property="manufacturer" name="article"/><br />

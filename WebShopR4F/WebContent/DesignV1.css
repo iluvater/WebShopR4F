@@ -49,6 +49,15 @@ label {
 	/* margin-left: 26%; */
 }
 
+label.artikel{
+	width: 3em;
+	border: none;
+	align: left; 
+	/* margin-bottom: 1em; */
+	/* clear:left; */
+	/* display: inline; */
+}
+
 header {
 	background-color: #2f528f;
 	width: 100%;
@@ -163,6 +172,18 @@ p.fehler {
 	font-size:8pt;
 	font-family: arial;
 	color: #FF0000;
+}
+
+p.erfolg {
+	font-size:8pt;
+	font-family: arial;
+	color: #64FE2E;
+}
+
+fieldset{
+	border:none;
+	margin: auto; 
+	padding: auto;
 }
 
 a.footer {
