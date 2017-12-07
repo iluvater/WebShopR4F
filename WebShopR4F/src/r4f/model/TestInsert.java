@@ -2,6 +2,8 @@ package r4f.model;
 
 import java.util.Date;
 
+import r4f.controller.services.EmailService;
+
 public class TestInsert {
 
 	public static void main(String[] args) {
@@ -27,8 +29,8 @@ public class TestInsert {
 //		ErrorMessage error = new ErrorMessage(104);
 //		System.out.println(error.getErrorMessage());
 		
-		Date d = new Date(100, 3, 2);
-		System.out.println(User.checkBirthday(new Date()));
+		EmailService e = new EmailService();
+		e.sendContactMail("test", "hello");
 
 		
 	}

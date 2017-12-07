@@ -1,4 +1,4 @@
-package r4f.controller.serlvets;
+package r4f.controller.servlets;
 
 import java.io.IOException;
 
@@ -16,16 +16,16 @@ import r4f.model.Order;
 import r4f.model.User;
 
 /**
- * Servlet implementation class OrderAddressesToPaymentServlet
+ * Servlet implementation class OrderInputToOverview
  */
-@WebServlet("/OrderAddressesToPaymentServlet")
-public class OrderAddressesToPaymentServlet extends HttpServlet {
+@WebServlet("/OrderInputToOverview")
+public class OrderInputToOverview extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OrderAddressesToPaymentServlet() {
+    public OrderInputToOverview() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +34,7 @@ public class OrderAddressesToPaymentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 	}
 
 	/**
@@ -44,6 +44,7 @@ public class OrderAddressesToPaymentServlet extends HttpServlet {
 		String successURL = "Test.jsp";
 		String errorURL = "Test.jsp";
 		String matchingAddresses;
+		String paymentMethod;
 		RequestDispatcher dispatcher;
 		AddressService addressService;
 		
@@ -54,6 +55,7 @@ public class OrderAddressesToPaymentServlet extends HttpServlet {
 		user = (User) request.getSession().getAttribute("user");
 		
 		matchingAddresses = request.getParameter("matchingAddresses");
+		paymentMethod = request.getParameter("paymentMethod");
 		
 		if(matchingAddresses != null && !matchingAddresses.equals("matching")){
 			addressService= new AddressService();			
@@ -61,12 +63,12 @@ public class OrderAddressesToPaymentServlet extends HttpServlet {
 			
 			order.setBillingAddress(address);
 			order.setDeliveryAddress(address);
-			
-			request.getSession().setAttribute("order", order);
-			
-			dispatcher = request.getRequestDispatcher(successURL);
-			dispatcher.forward(request, response);
-			return;
+//			
+//			request.getSession().setAttribute("order", order);
+//			
+//			dispatcher = request.getRequestDispatcher(successURL);
+//			dispatcher.forward(request, response);
+//			return;
 		}else{
 			//deliveryAddress does not match billingAddress
 			String street;
@@ -90,11 +92,11 @@ public class OrderAddressesToPaymentServlet extends HttpServlet {
 							order.setBillingAddress(billingAddress);
 							order.setDeliveryAddress(deliveryAddress);
 							
-							request.getSession().setAttribute("order", order);
-							
-							dispatcher = request.getRequestDispatcher(successURL);
-							dispatcher.forward(request, response);
-							return;
+//							request.getSession().setAttribute("order", order);
+//							
+//							dispatcher = request.getRequestDispatcher(successURL);
+//							dispatcher.forward(request, response);
+//							return;
 						}else{
 							//Errorhandling missing input
 							ErrorMessage errorMessage = new ErrorMessage(112);
@@ -128,6 +130,25 @@ public class OrderAddressesToPaymentServlet extends HttpServlet {
 				return;
 			}
 		}
+		
+		if(paymentMethod != null && !paymentMethod.equals("") && Order.checkPaymentMethod(paymentMethod)){
+			order.setPaymentMethod(paymentMethod);
+			request.getSession().setAttribute("order", order);
+			
+			dispatcher = request.getRequestDispatcher(successURL);
+			dispatcher.forward(request, response);
+			return;
+			
+			
+		}else{
+			//Errorhandling missing input
+			ErrorMessage errorMessage = new ErrorMessage(130);
+			request.setAttribute("error", errorMessage);
+			dispatcher = request.getRequestDispatcher(errorURL);
+			dispatcher.forward(request, response);
+			return;
+		}
+		
 	}
 
 }
