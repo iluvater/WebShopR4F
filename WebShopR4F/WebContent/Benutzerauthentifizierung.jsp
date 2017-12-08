@@ -11,7 +11,6 @@
 </head>
 <body>
 <form action="./LoginServlet" method="post">
-<<<<<<< HEAD
  	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
 	</jsp:useBean>
 

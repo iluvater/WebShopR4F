@@ -41,8 +41,8 @@ public class OrderInputToOverviewServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String successURL = "Test.jsp";
-		String errorURL = "Test.jsp";
+		String successURL = "Bestelluebersicht.jsp";
+		String errorURL = "Bestellung.jsp";
 		String matchingAddresses;
 		String paymentMethod;
 		RequestDispatcher dispatcher;
