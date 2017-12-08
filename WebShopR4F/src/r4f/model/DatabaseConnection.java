@@ -1412,7 +1412,7 @@ public class DatabaseConnection {
 				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT w.id, w.article, s.size, c.name FROM wishlistitem AS w "
+				String sql = "SELECT w.id, w.article, s.size AS size, c.name AS color FROM wishlistitem AS w "
 						+ "INNER JOIN size AS s ON w.size = s.id "
 						+ "INNER JOIN color AS c ON w.color = c.id "
 						+ "WHERE wishlist=?";

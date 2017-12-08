@@ -180,6 +180,11 @@ p.erfolg {
 	color: #64FE2E;
 }
 
+p.deliveryDate{
+	font-size: 10pt;
+	color: green;
+}
+
 fieldset{
 	border:none;
 	margin: auto; 
@@ -389,9 +394,12 @@ p.artikelUebersicht{
 	line-height: 3em;
 }
 
-#paddingLeft {
-	padding-left: 15px;
+.paddingLeft1{
 	margin-left: 15px;
+}
+
+#paddingLeft2 {
+	margin-left: 30px;
 }
 
 #containerAgb {
