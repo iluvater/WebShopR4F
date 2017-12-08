@@ -79,25 +79,13 @@
 					<input id="ImgArtikelUebersicht" type="image" src="./ImageServlet/${article.mainImage}" alt="Bild">
 				</form> 
 				
-				<div id="containerButtonUebersicht" >
-				<button type="button" class="btn btn-default btn-sm">
-          			<span class="glyphicon glyphicon-eye-open"></span>
-       			</button>
-				<button type="button" class="btn btn-default btn-sm">
-          			<span class="glyphicon glyphicon-heart-empty"></span>
-       			</button>
-       			<button type="button" class="btn btn-default btn-sm btnPadding">
-          			<span class="glyphicon glyphicon-shopping-cart"></span>
-        		</button> 
-				</div>
-				
 				<form action="./NavigationArticleDetailsServlet" method="post">
 					<input type="hidden" name="articleId" value="${article.id }" />
-					<button type="submit" class="linkButton"><strong>Name: </strong> ${article.name}</button>
+					<button type="submit" class="linkButton"><h4 class="center">${article.name}</h4></button>
 				</form>
 				<form action="./NavigationArticleDetailsServlet" method="post">
 					<input type="hidden" name="articleId" value="${article.id }" />
-					<button type="submit" class="linkButton"><strong>Preis: </strong> ${article.price} &euro;</button>
+					<button type="submit" class="linkButton"><h4 class="center">${article.price} &euro;</h4></button>
 				</form>
 <%-- 				<form action="./NavigationArticleDetailsServlet" method="post">
 					<input type="hidden" name="articleId" value="${article.id }" />
@@ -107,6 +95,18 @@
 					<input type="hidden" name="articleId" value="${article.id }" />
 					<button type="submit" class="linkButton"><strong>Sportart: </strong>${article.sport}</button>
 				</form> --%>
+				<div id="containerButtonUebersicht" >
+				<button type="button" class="btn btn-default btn-sm">
+          			<span class="glyphicon glyphicon-eye-open"></span>
+       			</button>
+				<button type="button" class="btn btn-default btn-sm">
+          			<span class="glyphicon glyphicon-heart-empty"></span>
+       			</button>
+       			<button type="button" class="btn btn-default btn-sm">
+          			<span class="glyphicon glyphicon-shopping-cart"></span>
+        		</button> 
+				</div>
+				<br />
 			</div> 
 			</c:forEach> 
 		</div>

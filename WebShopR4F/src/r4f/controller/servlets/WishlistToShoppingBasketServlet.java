@@ -47,7 +47,7 @@ public class WishlistToShoppingBasketServlet extends HttpServlet {
 		User user = null;;
 		
 		wishlist = (Wishlist)request.getSession().getAttribute("wishlist");
-		user = (User)request.getSession().getAttribute("User");
+		user = (User)request.getSession().getAttribute("user");
 		shoppingBasket = (ShoppingBasket) request.getSession().getAttribute("shoppingBasket");
 		
 		if(user == null || wishlist == null || shoppingBasket == null){

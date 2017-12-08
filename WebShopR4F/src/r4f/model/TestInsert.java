@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import r4f.controller.services.AddressService;
 import r4f.controller.services.EmailService;
 import r4f.controller.services.HashService;
+import r4f.controller.services.UserService;
 
 public class TestInsert {
 
@@ -14,12 +16,12 @@ public class TestInsert {
 
 //		DatabaseConnection db = new DatabaseConnection();
 				
-		List<Integer> size = new ArrayList<Integer>();
-		List<String> color = new ArrayList<String>();
-	Article a = new Article(12, "Bezeichung", "beschreibung", size, 49.99, "Hummel", color, new Date(), "Herren", "Laufen", 3, size);
-	
-	System.out.println(a.getEntryDate());
-	System.out.println(a.getDeliveryDate());
+//		List<Integer> size = new ArrayList<Integer>();
+//		List<String> color = new ArrayList<String>();
+//	Article a = new Article(12, "Bezeichung", "beschreibung", size, 49.99, "Hummel", color, new Date(), "Herren", "Laufen", 3, size);
+//	
+//	System.out.println(a.getEntryDate());
+//	System.out.println(a.getDeliveryDate());
 		
 //		int id = db.createArtikelInDB(a);
 		
@@ -49,6 +51,14 @@ public class TestInsert {
 //
 //		System.out.println(p.encrypt("Test"));
 		
+		AddressService a = new AddressService();
+		UserService u = new UserService();
+		
+		User user = u.getUser("t@f.com");
+		
+		Address address = a.getAddress(user);
+		
+		System.out.println(address.getCity());
 		
 		
 	}

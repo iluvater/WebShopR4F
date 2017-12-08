@@ -19,7 +19,10 @@ public class Order {
 	private Address billingAddress;
 	private String paymentMethod;
 	private List<OrderItem> items;
-
+	private final double shippingPrice = 4.95;
+	private Date deliveryDate;
+	
+	
 	/**
 	 * Constructor that can be used if the order is already stored in the
 	 * database
@@ -38,13 +41,14 @@ public class Order {
 	 *            the order items to set
 	 */
 	public Order(int id, Date entryDate, Address deliveryAddress, Address billingAddress, String paymentMethod,
-			List<OrderItem> items) {
+			List<OrderItem> items, Date deliveryDate) {
 		this.id = id;
 		this.entryDate = entryDate;
 		this.deliveryAddress = deliveryAddress;
 		this.billingAddress = billingAddress;
 		this.paymentMethod = paymentMethod;
 		this.items = items;
+		this.deliveryDate = deliveryDate;
 	}
 
 	/**
@@ -57,6 +61,8 @@ public class Order {
 		billingAddress = null;
 		paymentMethod = null;
 		items = new ArrayList<OrderItem>();
+		this.deliveryDate = new Date();
+		deliveryDate.setTime(deliveryDate.getTime() + 604800000);
 	}
 
 	/**
@@ -234,4 +240,51 @@ public class Order {
 			item.setPosition(i);
 		}
 	}
+
+	/**
+	 * @return the shippingPrice
+	 */
+	public double getShippingPrice() {
+		return shippingPrice;
+	}
+	
+	/**
+	 * This method return the total price of the order incl. the shipping Price
+	 * @return the total price
+	 */
+	public double getTotalPrice(){
+		double sum= 0;
+		for (OrderItem orderItem : items) {
+			sum += orderItem.getPrice() * orderItem.getAmount();
+		}
+		sum += shippingPrice;
+		return ((double) Math.round(sum * 100)) / 100.0;
+	}
+	
+	/**
+	 * This method returns the price of all items of the order
+	 * @return the total price of the order The price is rounded at two digits.
+	 */
+	public double getOrderPrice(){
+		double sum= 0;
+		for (OrderItem orderItem : items) {
+			sum += orderItem.getPrice() * orderItem.getAmount();
+		}
+		return ((double) Math.round(sum * 100)) / 100.0;
+	}
+
+	/**
+	 * @return the deliveryDate
+	 */
+	public Date getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	/**
+	 * @param deliveryDate the deliveryDate to set
+	 */
+	public void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+	
 }
