@@ -48,8 +48,8 @@ public class RegistrationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String firstName, lastName, email, password, street, houseNumber, postcode, city, birthday_string, salutation,
-				agb;
+		String firstName, lastName, email, password, password_wdh, street, houseNumber, postcode, city, birthday_string,
+				salutation, agb;
 		Date birthday;
 		User user;
 		UserService userService;
@@ -64,6 +64,7 @@ public class RegistrationServlet extends HttpServlet {
 		lastName = request.getParameter("lastName");
 		email = request.getParameter("email");
 		password = request.getParameter("password");
+		password_wdh = request.getParameter("password2");
 		street = request.getParameter("street");
 		houseNumber = request.getParameter("houseNumber");
 		postcode = request.getParameter("postCode");
@@ -108,138 +109,197 @@ public class RegistrationServlet extends HttpServlet {
 							dispatcher.forward(request, response);
 							return;
 						} else {
-							if (street == null || street.equals("")) {
-								ErrorMessage errorMessage = new ErrorMessage(110);
+							if (password_wdh == null || password_wdh.equals("")) {
+								ErrorMessage errorMessage = new ErrorMessage(138);
 								request.setAttribute("error", errorMessage);
 								dispatcher = request.getRequestDispatcher(errorURL);
 								dispatcher.forward(request, response);
 								return;
 							} else {
-								if (houseNumber == null || houseNumber.equals("")) {
-									ErrorMessage errorMessage = new ErrorMessage(111);
+								if (!password.equals(password_wdh)) {
+									ErrorMessage errorMessage = new ErrorMessage(138);
 									request.setAttribute("error", errorMessage);
 									dispatcher = request.getRequestDispatcher(errorURL);
 									dispatcher.forward(request, response);
 									return;
 								} else {
-									if (postcode.equals("") || postcode == null) {
-										ErrorMessage errorMessage = new ErrorMessage(105);
+									if (street == null || street.equals("")) {
+										ErrorMessage errorMessage = new ErrorMessage(110);
 										request.setAttribute("error", errorMessage);
 										dispatcher = request.getRequestDispatcher(errorURL);
 										dispatcher.forward(request, response);
 										return;
 									} else {
-										if (city == null || city.equals("")) {
-											ErrorMessage errorMessage = new ErrorMessage(112);
+										if (houseNumber == null || houseNumber.equals("")) {
+											ErrorMessage errorMessage = new ErrorMessage(111);
 											request.setAttribute("error", errorMessage);
 											dispatcher = request.getRequestDispatcher(errorURL);
 											dispatcher.forward(request, response);
 											return;
 										} else {
-											if (birthday_string == null || birthday_string.equals("")) {
-												ErrorMessage errorMessage = new ErrorMessage(113);
+											if (postcode.equals("") || postcode == null) {
+												ErrorMessage errorMessage = new ErrorMessage(105);
 												request.setAttribute("error", errorMessage);
 												dispatcher = request.getRequestDispatcher(errorURL);
 												dispatcher.forward(request, response);
 												return;
 											} else {
-												if (salutation == null || salutation.equals("")) {
-
-													// errorhandling missing
-													ErrorMessage errorMessage = new ErrorMessage(104);
+												if (city == null || city.equals("")) {
+													ErrorMessage errorMessage = new ErrorMessage(112);
 													request.setAttribute("error", errorMessage);
 													dispatcher = request.getRequestDispatcher(errorURL);
 													dispatcher.forward(request, response);
 													return;
 												} else {
-													// check mail for format
-													if (User.checkEmail(email)) {
-														// check PLZ for format
-														if (User.checkPostCode(postcode)) {
-															// check value of
-															// anrede
-															if (User.checkSalutation(salutation)) {
-																// Check if
-																// email
-																// exists
-																userService = new UserService();
-																if (!userService.checkEmailExists(email)) {
+													if (birthday_string == null || birthday_string.equals("")) {
+														ErrorMessage errorMessage = new ErrorMessage(113);
+														request.setAttribute("error", errorMessage);
+														dispatcher = request.getRequestDispatcher(errorURL);
+														dispatcher.forward(request, response);
+														return;
+													} else {
+														if (salutation == null || salutation.equals("")) {
+
+															// errorhandling
+															// missing
+															ErrorMessage errorMessage = new ErrorMessage(104);
+															request.setAttribute("error", errorMessage);
+															dispatcher = request.getRequestDispatcher(errorURL);
+															dispatcher.forward(request, response);
+															return;
+														} else {
+															// check mail for
+															// format
+															if (User.checkEmail(email)) {
+																// check PLZ for
+																// format
+																if (User.checkPostCode(postcode)) {
 																	// check
-																	// date
-																	// format
-																	if (birthday_string.matches("\\d{4}-\\d{2}-\\d{2}")
-																			|| birthday_string
-																					.matches("\\d{2}.\\d{2}.\\d{4}")) {
-																		if (birthday_string
-																				.matches("\\d{4}-\\d{2}-\\d{2}")) {
-																			year = Integer.parseInt(
-																					birthday_string.substring(0, 4))
-																					- 1900;
-																			month = Integer.parseInt(
-																					birthday_string.substring(5, 7))
-																					- 1;
-																			day = Integer.parseInt(
-																					birthday_string.substring(8, 10));
-																		} else {
-																			year = Integer.parseInt(
-																					birthday_string.substring(6, 10))
-																					- 1900;
-																			month = Integer.parseInt(
-																					birthday_string.substring(3, 5))
-																					- 1;
-																			day = Integer.parseInt(
-																					birthday_string.substring(0, 2));
-																		}
-																		birthday = new Date(year, month, day);
-																		if (User.checkBirthday(birthday)) {
-																			// Hashing
-																			// the
-																			// password
-																			hashService = new HashService();
-																			password = hashService.encrypt(password);
+																	// value of
+																	// anrede
+																	if (User.checkSalutation(salutation)) {
+																		// Check
+																		// if
+																		// email
+																		// exists
+																		userService = new UserService();
+																		if (!userService.checkEmailExists(email)) {
+																			// check
+																			// date
+																			// format
+																			if (birthday_string
+																					.matches("\\d{4}-\\d{2}-\\d{2}")
+																					|| birthday_string.matches(
+																							"\\d{2}.\\d{2}.\\d{4}")) {
+																				if (birthday_string.matches(
+																						"\\d{4}-\\d{2}-\\d{2}")) {
+																					year = Integer
+																							.parseInt(birthday_string
+																									.substring(0, 4))
+																							- 1900;
+																					month = Integer
+																							.parseInt(birthday_string
+																									.substring(5, 7))
+																							- 1;
+																					day = Integer
+																							.parseInt(birthday_string
+																									.substring(8, 10));
+																				} else {
+																					year = Integer
+																							.parseInt(birthday_string
+																									.substring(6, 10))
+																							- 1900;
+																					month = Integer
+																							.parseInt(birthday_string
+																									.substring(3, 5))
+																							- 1;
+																					day = Integer
+																							.parseInt(birthday_string
+																									.substring(0, 2));
+																				}
+																				birthday = new Date(year, month, day);
+																				if (User.checkBirthday(birthday)) {
+																					// Hashing
+																					// the
+																					// password
+																					hashService = new HashService();
+																					password = hashService
+																							.encrypt(password);
 
-																			// create
-																			// the
-																			// new
-																			// user
-																			// object
-																			user = new User(firstName, lastName, email,
-																					birthday, password, street,
-																					houseNumber, postcode, city,
-																					salutation);
+																					// create
+																					// the
+																					// new
+																					// user
+																					// object
+																					user = new User(firstName, lastName,
+																							email, birthday, password,
+																							street, houseNumber,
+																							postcode, city, salutation);
 
-																			
-																			
-																				EmailService emailService = new EmailService();
-																				emailService
-																						.sendRegistrationConfirmation(
-																								user);
-																				request.getSession().setAttribute("user", user);
+																					EmailService emailService = new EmailService();
+																					emailService
+																							.sendRegistrationConfirmation(
+																									user);
+																					request.getSession()
+																							.setAttribute("user", user);
+																					dispatcher = request
+																							.getRequestDispatcher(
+																									successURL);
+																					dispatcher.forward(request,
+																							response);
+																					return;
+
+																				} else {
+																					// Error
+																					// too
+																					// young
+																					ErrorMessage errorMessage = new ErrorMessage(
+																							129);
+																					request.setAttribute("error",
+																							errorMessage);
+																					dispatcher = request
+																							.getRequestDispatcher(
+																									errorURL);
+																					dispatcher.forward(request,
+																							response);
+																					return;
+																				}
+																			} else {
+																				// errorhandling
+																				// wrong
+																				// date
+																				// format
+																				ErrorMessage errorMessage = new ErrorMessage(
+																						102);
+																				request.setAttribute("error",
+																						errorMessage);
 																				dispatcher = request
-																						.getRequestDispatcher(
-																								successURL);
+																						.getRequestDispatcher(errorURL);
 																				dispatcher.forward(request, response);
 																				return;
-																			
+																			}
 																		} else {
-																			// Error
-																			// too
-																			// young
+																			// errorhandling
+																			// already
+																			// user
+																			// with
+																			// this
+																			// email
 																			ErrorMessage errorMessage = new ErrorMessage(
-																					129);
+																					103);
 																			request.setAttribute("error", errorMessage);
 																			dispatcher = request
 																					.getRequestDispatcher(errorURL);
 																			dispatcher.forward(request, response);
 																			return;
 																		}
+
 																	} else {
 																		// errorhandling
 																		// wrong
-																		// date
-																		// format
+																		// anrede
 																		ErrorMessage errorMessage = new ErrorMessage(
-																				102);
+																				104);
 																		request.setAttribute("error", errorMessage);
 																		dispatcher = request
 																				.getRequestDispatcher(errorURL);
@@ -248,44 +308,25 @@ public class RegistrationServlet extends HttpServlet {
 																	}
 																} else {
 																	// errorhandling
-																	// already
-																	// user
-																	// with this
-																	// email
-																	ErrorMessage errorMessage = new ErrorMessage(103);
+																	// wrong
+																	// plz
+																	ErrorMessage errorMessage = new ErrorMessage(105);
 																	request.setAttribute("error", errorMessage);
 																	dispatcher = request.getRequestDispatcher(errorURL);
 																	dispatcher.forward(request, response);
 																	return;
 																}
-
 															} else {
 																// errorhandling
-																// wrong anrede
-																ErrorMessage errorMessage = new ErrorMessage(104);
+																// wrong
+																// mail
+																ErrorMessage errorMessage = new ErrorMessage(106);
 																request.setAttribute("error", errorMessage);
 																dispatcher = request.getRequestDispatcher(errorURL);
 																dispatcher.forward(request, response);
 																return;
 															}
-														} else {
-															// errorhandling
-															// wrong
-															// plz
-															ErrorMessage errorMessage = new ErrorMessage(105);
-															request.setAttribute("error", errorMessage);
-															dispatcher = request.getRequestDispatcher(errorURL);
-															dispatcher.forward(request, response);
-															return;
 														}
-													} else {
-														// errorhandling wrong
-														// mail
-														ErrorMessage errorMessage = new ErrorMessage(106);
-														request.setAttribute("error", errorMessage);
-														dispatcher = request.getRequestDispatcher(errorURL);
-														dispatcher.forward(request, response);
-														return;
 													}
 												}
 											}
