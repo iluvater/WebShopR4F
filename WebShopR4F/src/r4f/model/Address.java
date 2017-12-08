@@ -13,6 +13,9 @@ public class Address {
 	private String houseNumber;
 	private String postCode;
 	private String city;
+	private String firstName;
+	private String lastName;
+	private String salutation;
 	
 	/**
 	 * This Constructor can be used if the address is already stored in the database
@@ -22,12 +25,15 @@ public class Address {
 	 * @param postCode
 	 * @param city
 	 */
-	public Address(int id, String street, String houseNumber, String postCode, String city){
+	public Address(int id, String firstName, String lastName, String street, String houseNumber, String postCode, String city, String salutation){
 		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.street = street;
 		this.houseNumber = houseNumber;
 		this.postCode = postCode;
 		this.city = city;
+		this.salutation = salutation;
 	}
 	
 	/**
@@ -37,11 +43,14 @@ public class Address {
 	 * @param postCode
 	 * @param city
 	 */
-	public Address(String street, String houseNumber, String postCode, String city){
+	public Address(String firstName, String lastName, String street, String houseNumber, String postCode, String city, String salutation){
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.street = street;
 		this.houseNumber = houseNumber;
 		this.postCode = postCode;
 		this.city = city;
+		this.salutation = salutation;
 	}
 	
 	/**
@@ -113,6 +122,48 @@ public class Address {
 	 */
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	/**
+	 * @return the firstName
+	 */
+	public String getFirstName() {
+		return firstName;
+	}
+
+	/**
+	 * @param firstName the firstName to set
+	 */
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	/**
+	 * @return the lastName
+	 */
+	public String getLastName() {
+		return lastName;
+	}
+
+	/**
+	 * @param lastName the lastName to set
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	/**
+	 * @return the salutation
+	 */
+	public String getSalutation() {
+		return salutation;
+	}
+
+	/**
+	 * @param salutation the salutation to set
+	 */
+	public void setSalutation(String salutation) {
+		this.salutation = salutation;
 	}
 	
 }

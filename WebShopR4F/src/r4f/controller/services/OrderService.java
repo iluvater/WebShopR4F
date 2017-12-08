@@ -27,8 +27,8 @@ public class OrderService extends Service {
 		if (order.getDeliveryAddress().getId() == -1) {
 			Address deliveryAddress = order.getDeliveryAddress();
 			int deliveryAddressId = super.getDbConnection().createAddressInDB(order.getUser().getId(),
-					deliveryAddress.getStreet(), deliveryAddress.getHouseNumber(), deliveryAddress.getPostCode(),
-					deliveryAddress.getCity(), false);
+					deliveryAddress.getFirstName(), deliveryAddress.getLastName(), deliveryAddress.getStreet(),
+					deliveryAddress.getHouseNumber(), deliveryAddress.getPostCode(), deliveryAddress.getCity(), false, deliveryAddress.getSalutation());
 			order.getDeliveryAddress().setId(deliveryAddressId);
 		}
 		int orderId = super.getDbConnection().createOrderInDB(order);
