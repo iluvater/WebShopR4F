@@ -121,7 +121,7 @@ h4.agb {
 	padding-left: 15px;
 }
 p.erlaeuterung {
-	padding-left: 15px;
+	padding-right: 15px;
 	color: gray;
 }
  
@@ -292,6 +292,15 @@ li.inline {
 	padding-left:43px; 
 	padding-top: 2px;
 	padding-bottom: 5px;
+}
+#uebersicht {
+	width: 100%; 
+	margin-left:4%;
+/* 	margin-right: 0%;
+	padding-top: 2px;
+	padding-right:0px; 
+	padding-top: 2px;
+	padding-bottom: 5px; */
 }
 
 #checkboxRegistrierung{
@@ -580,6 +589,16 @@ h4 {
 	top: 60px; 
 	width: 15%;
 	right: 17%; 
+
+}
+
+.gesamtpreisUebersicht { 
+	position: relative; 
+	float: right;
+	margin-top: 2%; 
+	width: 15%;
+	right: 5%;
+	 
 
 }
 

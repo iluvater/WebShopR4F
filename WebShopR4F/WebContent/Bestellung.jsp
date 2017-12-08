@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Bestelldetails</title>
 <link href="DesignV1.css" rel="stylesheet">
+<link href="JavaScipt.js" rel="stylesheet">
 </head>
 <body>
 
@@ -20,35 +21,75 @@
 		<form action="./OrderInputToOverviewServlet" method="post">
 		<div id="inhalt">
 			<h4>Versandadresse</h4>		
-				<p><input type="radio" id="alte" name="Versandadresse" value="alte"> Die Versandadresse entspricht der Adresse aus dem Benutzerprofil.</p>	
-				<p><input type="radio" id="neue" name="Versandadresse" value="neue"> Die Versandadresse ist abweichend von der Adresse aus dem Benutzerprofil.</p>	
-				
+				<p><input type="radio" id="matchingAdresses" name="matchingAdresses" value="matchingAdresses"> Die Versandadresse entspricht der Adresse aus dem Benutzerprofil.</p>	
+				<p><input type="radio" id="matchingAdresses" name="matchingAdresses" value="notmatching"> Die Versandadresse ist abweichend von der Adresse aus dem Benutzerprofil.</p>
+				<div id="uebersicht">
+ 				<p><label for="anrede"> Anrede</label> 
+ 				<select name="salutation">
+ 					<option value="Herr">Herr</option>
+					<option value="Frau">Frau</option></select></p>
+				<c:if test ="${not empty error }">
+					<c:if test="${error.errorCode == 104 }">
+						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+					</c:if>	
+				</c:if>											
+   				<p><label for="vorname1">Vorname</label>
+				<input id="vorname1" placeholder="Vorname" name="firstName" value="" type="text" /><br /> </p> 
+				<c:if test ="${not empty error }">
+					<c:if test="${error.errorCode == 100 }">
+						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+					</c:if>	
+				</c:if>
+				<p><label for="nachname1">Nachname</label>
+				<input id="nachname1" placeholder="Nachname" name="lastName" value="" type="text" /><br /></p>
+				<c:if test ="${not empty error }">
+					<c:if test="${error.errorCode == 107 }">
+						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+					</c:if>	
+				</c:if>
 				<p><label for="strasse1">Strasse</label>
-				<input id="strasse1" placeholder="${user.street}" name="street" value="" type="text" /></p>
-				
+				<input id="strasse1" placeholder="Strasse" name="street" value="" type="text" /><br /></p>
+				<c:if test ="${not empty error }">
+					<c:if test="${error.errorCode == 110 }">
+						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+					</c:if>	
+				</c:if>
 				<p><label for="hausnummer1">Hausnummer</label>
-				<input id="hausnummer1" placeholder="${user.houseNumber}" name="houseNumber" value="" type="text" /></p>
-				
+				<input id="hausnummer1" placeholder="Hausnummer" name="houseNumber" value="" type="text" /><br /></p>
+				<c:if test ="${not empty error }">
+					<c:if test="${error.errorCode == 111 }">
+						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+					</c:if>	
+				</c:if>
 				<p><label for="postleitzahl1">Postleitzahl</label>
-				<input id="postleitzahl1" placeholder="${user.postCode}" name="postCode" value="" type="text" /><br /></p>
-				
+				<input id="postleitzahl1" placeholder="Postleitzahl" name="postCode" value="" type="text" /><br /></p>
+				<c:if test ="${not empty error }">
+					<c:if test="${error.errorCode == 105 }">
+						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+					</c:if>	
+				</c:if>
 				<p><label for="stadt1">Ort</label>
-				<input id="stadt1" placeholder="${user.city}" name="city" value="" type="text" /><br /></p>
+				<input id="stadt1" placeholder="Ort" name="city" value="" type="text" /><br /></p>
+				<c:if test ="${not empty error }">
+					<c:if test="${error.errorCode == 112 }">
+						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+					</c:if>	
+				</c:if>
+				</div>
 		</div>
 			<hr />
 			
 		<div id="inhalt">
 			<h4>Bezahlart</h4>				
-				<p><input type="radio" id="vorkasse" name="Zahlmethode" value="Vorkasse"> Vorkasse</p>
-				<p class="erlaeuterung">Wählen Sie die Variante "Vorkasse" bekommen Sie mit der Bestätigungmail unsere Bankdaten. 
-				Nach Eingang der Bezahlung wird Ihre Bestellung versendet.<p>
-    			<p><input type="radio" id="nachname" name="Zahlmethode" value="Nachname"> Nachname</p>
-    			<p class="erlaeuterung">Wählen Sie die Variante "Nachname" zahlen Sie erst, nachdem die Bestellung bei Ihnen eingetroffen ist.</p>
-
-	
+				<p><input type="radio" id="vorkasse" name="paymentMethod" value="Vorkasse"> Vorkasse</p>
+				<div id="uebersicht"><p class="erlaeuterung">Wählen Sie die Variante "Vorkasse" bekommen Sie mit der Bestätigungmail unsere Bankdaten. 
+				Nach Eingang der Bezahlung wird Ihre Bestellung versendet.<p></div>
+    			<p><input type="radio" id="nachnahme" name="paymentMethod" value="Nachnahme"> Nachnahme</p>
+    			<div id="uebersicht"><p class="erlaeuterung">Wählen Sie die Variante "Nachnahme" zahlen Sie erst, nachdem die Bestellung bei Ihnen eingetroffen ist.</p></div>
 		</div>
 		<hr/>
 			<center>
+				<input type="submit" id="button" value="Zurück zum Warenkorb" />
 				<input type="submit" id="button" value="Weiter zur Bestellübersicht" />
 			</center>
 		</form>
