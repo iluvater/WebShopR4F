@@ -89,15 +89,12 @@ public class DatabaseConnection {
 			try {
 
 				PreparedStatement preparedStatement = conn.prepareStatement(
-						"INSERT INTO `user` (`id`, `email`, `firstName`, `lastName`, `birthday`, `password`, `salutation`, `shoppingBasket`, `wishlist`)"
-								+ " VALUES (NULL, ?, ?, ?, ?, ?, ?, null, null)",
+						"INSERT INTO `user` (`id`, `email`, `birthday`, `password`, `shoppingBasket`, `wishlist`)"
+								+ " VALUES (NULL, ?, ?, ?, null, null)",
 						Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setString(1, user.getEmail());
-				preparedStatement.setString(2, user.getFirstName());
-				preparedStatement.setString(3, user.getLastName());
-				preparedStatement.setDate(4, new Date(user.getBirthday().getTime()));
-				preparedStatement.setString(5, user.getPassword());
-				preparedStatement.setString(6, user.getSalutation());
+				preparedStatement.setDate(2, new Date(user.getBirthday().getTime()));
+				preparedStatement.setString(3, user.getPassword());
 
 				int lines = preparedStatement.executeUpdate();
 
@@ -138,7 +135,7 @@ public class DatabaseConnection {
 				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT u.*, r.name , a.street, a.houseNumber, a.postCode, a.city "
+				String sql = "SELECT u.*, r.name , a.salutation, a.firstName, a.lastName, a.street, a.houseNumber, a.postCode, a.city "
 						+ "FROM user AS u INNER JOIN role AS r ON r.id = u.role INNER JOIN address AS a ON a.user = u.id "
 						+ "WHERE a.masterData='1' AND email=?";
 				
@@ -190,7 +187,7 @@ public class DatabaseConnection {
 
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT u.*, r.name , a.street, a.houseNumber, a.postCode, a.city "
+				String sql = "SELECT u.*, r.name, a.salutation, a.firstName, a.lastName, a.street, a.houseNumber, a.postCode, a.city "
 						+ "FROM user AS u INNER JOIN role AS r ON r.id = u.role INNER JOIN address AS a ON a.user = u.id "
 						+ "WHERE a.masterData='1' AND u.id=?";
 				
@@ -239,19 +236,16 @@ public class DatabaseConnection {
 		if (conn != null) {
 
 			PreparedStatement preparedStatement = conn
-					.prepareStatement("UPDATE `user` SET `email` = ?, `firstName` = ?, `lastName` = ?, "
-							+ "`birthday` = ?, `password` = ?, `salutation` = ?, `shoppingBasket` = ?, "
+					.prepareStatement("UPDATE `user` SET `email` = ?, "
+							+ "`birthday` = ?, `password` = ?, `shoppingBasket` = ?, "
 							+ "`role`= ?,  `wishlist` = ? WHERE `user`.`id` = ? ");
 			preparedStatement.setString(1, user.getEmail());
-			preparedStatement.setString(2, user.getFirstName());
-			preparedStatement.setString(3, user.getLastName());
-			preparedStatement.setDate(4, new Date(user.getBirthday().getTime()));
-			preparedStatement.setString(5, user.getPassword());
-			preparedStatement.setString(6, user.getSalutation());
-			preparedStatement.setInt(7, user.getShoppingBasket());
-			preparedStatement.setInt(8, getRoleId(user.getRole()));
-			preparedStatement.setInt(9, user.getWishlist());
-			preparedStatement.setInt(10, user.getId());
+			preparedStatement.setDate(2, new Date(user.getBirthday().getTime()));
+			preparedStatement.setString(3, user.getPassword());
+			preparedStatement.setInt(4, user.getShoppingBasket());
+			preparedStatement.setInt(5, getRoleId(user.getRole()));
+			preparedStatement.setInt(6, user.getWishlist());
+			preparedStatement.setInt(7, user.getId());
 			
 			preparedStatement.executeUpdate();
 		}
@@ -991,21 +985,26 @@ public class DatabaseConnection {
 	 * @return return the id of the created entry in the data base. returns -1
 	 *         if no entry was created
 	 */
-	public int createAddressInDB(int userId, String street, String houseNumber, String postCode, String city,
-			boolean masterData) {
+	public int createAddressInDB(int userId, String firstName, String lastName, String street, String houseNumber, String postCode, String city,
+			boolean masterData, String salutation) {
 		conn = getInstance();
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
 			try {
-				String sql = "INSERT INTO address (street, houseNumber, postCode, city, masterData, user) values (?, ?, ?, ?, ?, ?)";
+				String sql = "INSERT INTO address (firstName, lastName, street, houseNumber, postCode, city, masterData, user, salutation)"
+						+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-				preparedStatement.setString(1, street);
-				preparedStatement.setString(2, houseNumber);
-				preparedStatement.setString(3, postCode);
-				preparedStatement.setString(4, city);
-				preparedStatement.setBoolean(5, masterData);
-				preparedStatement.setInt(6, userId);
+				preparedStatement.setString(1, firstName);
+				preparedStatement.setString(2, lastName);
+				preparedStatement.setString(3, street);
+				preparedStatement.setString(4, houseNumber);
+				preparedStatement.setString(5, postCode);
+				preparedStatement.setString(6, city);
+				preparedStatement.setBoolean(7, masterData);
+				preparedStatement.setInt(8, userId);
+				preparedStatement.setString(9, salutation);
+				
 
 				int lines = preparedStatement.executeUpdate();
 
@@ -1037,21 +1036,24 @@ public class DatabaseConnection {
 	 * @param city the new City
 	 * @throws SQLException
 	 */
-	public void updateAddressInDB(int userId, String street, String houseNumber, String postCode, String city) throws SQLException {
+	public void updateAddressInDB(int userId, String firstName, String lastName, String street, String houseNumber, String postCode, String city, String salutation) throws SQLException {
 		conn = getInstance();
 
 		if (conn != null) {
 
 			PreparedStatement preparedStatement = conn.prepareStatement(
 					"UPDATE `address` SET `street` = ?, `houseNumber` = ?, `postCode` = ?, "
-							+ "`city` = ? WHERE `address`.`user` = ? AND `masterData`= ?",
+							+ "`city` = ?, `firstname` = ?, `lastname` = ?, `salutation` = ? WHERE `address`.`user` = ? AND `masterData`= ?",
 					Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, street);
 			preparedStatement.setString(2, houseNumber);
 			preparedStatement.setString(3, postCode);
 			preparedStatement.setString(4, city);
-			preparedStatement.setInt(5, userId);
-			preparedStatement.setBoolean(6,true);
+			preparedStatement.setString(5, firstName);
+			preparedStatement.setString(6, lastName);
+			preparedStatement.setString(7, salutation);
+			preparedStatement.setInt(8, userId);
+			preparedStatement.setBoolean(9,true);
 
 
 			preparedStatement.executeUpdate();
@@ -1073,17 +1075,20 @@ public class DatabaseConnection {
 				preparedStatement.setInt(1, userId);
 				preparedStatement.setBoolean(2, masterData);
 				
-				ResultSet result = preparedStatement.executeQuery(sql);
+				ResultSet result = preparedStatement.executeQuery();
 
 				// Ergebnissätze durchfahren.
 				if (result.next()) {
+					String salutation = result.getString("salutation");
+					String firstName = result.getString("firstName");
+					String lastName = result.getString("lastName");
 					String street = result.getString("street");
 					String houseNumber = result.getString("houseNumber");
 					String postCode = result.getString("postCode");
 					String city = result.getString("city");
 					int id = result.getInt("id");
 					
-					address = new Address(id, street, houseNumber, postCode, city);
+					address = new Address(id, firstName, lastName, street, houseNumber, postCode, city, salutation);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -1103,12 +1108,13 @@ public class DatabaseConnection {
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
 			try {
-				String sql = "INSERT INTO orders (id, entryDate, user, deliveryAddress, billingAddress, paymentMethod) values (null, null, ?, ?, ?, ?)";
+				String sql = "INSERT INTO orders (id, entryDate, user, deliveryAddress, billingAddress, paymentMethod, deliveryDate) values (null, null, ?, ?, ?, ?, ?)";
 				PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, order.getUser().getId());
 				preparedStatement.setInt(2, order.getDeliveryAddress().getId());
 				preparedStatement.setInt(3, order.getBillingAddress().getId());
 				preparedStatement.setInt(4, getPaymentMethodId(order.getPaymentMethod()));
+				preparedStatement.setDate(5, new Date(order.getDeliveryDate().getTime()));
 
 				int lines = preparedStatement.executeUpdate();
 
@@ -1223,10 +1229,11 @@ public class DatabaseConnection {
 					Date entryDate = result.getDate("entryDate");
 					Address deliveryAddress = getAddress(result.getInt("deliveryAddress"));
 					Address billingAddress = getAddress(result.getInt("billingAddress"));
+					Date deliveryDate = result.getDate("deliveryDate");
 					String paymentMethod = result.getString("paymentMethod");
 					List<OrderItem> orderItems = getOrderItems(id);
 
-					order = new Order(id, entryDate, deliveryAddress, billingAddress, paymentMethod, orderItems);
+					order = new Order(id, entryDate, deliveryAddress, billingAddress, paymentMethod, orderItems, deliveryDate);
 					orderList.add(order);
 				}
 			} catch (SQLException e) {
@@ -1299,13 +1306,16 @@ public class DatabaseConnection {
 
 				// Ergebnissätze durchfahren.
 				if (result.next()) {
+					String salutation = result.getString("salutation");
+					String firstName = result.getString("firstName");
+					String lastName = result.getString("lastName");
 					String street = result.getString("street");
 					String houseNumber = result.getString("houseNumber");
 					String postCode = result.getString("postCode");
 					String city = result.getString("city");
 					id = result.getInt("id");
 					
-					address = new Address(id, street, houseNumber, postCode, city);
+					address = new Address(id, firstName, lastName, street, houseNumber, postCode, city, salutation);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

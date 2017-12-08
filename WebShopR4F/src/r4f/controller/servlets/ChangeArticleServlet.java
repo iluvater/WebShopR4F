@@ -276,7 +276,7 @@ public class ChangeArticleServlet extends HttpServlet {
 											}
 										}
 										request.setAttribute("filter", checkboxStatus);
-										ErrorMessage successMessage = new ErrorMessage(600);
+										ErrorMessage successMessage = new ErrorMessage(602);
 										request.setAttribute("success", successMessage);
 										dispatcher = request.getRequestDispatcher(successURL);
 										dispatcher.forward(request, response);

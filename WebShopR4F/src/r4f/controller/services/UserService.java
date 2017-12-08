@@ -14,11 +14,12 @@ import r4f.model.User;
 public class UserService extends Service {
 
 	public boolean updateUserInDB(User user) {
-		try{
+		try {
 			super.getDbConnection().updateUserInDB(user);
-			super.getDbConnection().updateAddressInDB(user.getId(), user.getStreet(), user.getHouseNumber(), user.getPostCode(), user.getCity());
+			super.getDbConnection().updateAddressInDB(user.getId(), user.getFirstName(), user.getLastName(),
+					user.getStreet(), user.getHouseNumber(), user.getPostCode(), user.getCity(), user.getSalutation());
 			return true;
-		}catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
@@ -53,9 +54,9 @@ public class UserService extends Service {
 		int shoppingBasketId = super.getDbConnection().createShoppingBasketInDB(userId);
 
 		int wishlistId = super.getDbConnection().createWishlistInDB(userId);
-		
-		super.getDbConnection().createAddressInDB(userId, user.getStreet(), user.getHouseNumber(),
-				user.getPostCode(), user.getCity(), true);
+
+		super.getDbConnection().createAddressInDB(userId, user.getFirstName(), user.getLastName(), user.getStreet(),
+				user.getHouseNumber(), user.getPostCode(), user.getCity(), true, user.getSalutation());
 
 		user.setShoppingBasket(shoppingBasketId);
 		user.setId(userId);
@@ -67,9 +68,9 @@ public class UserService extends Service {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		user = super.getDbConnection().getUser(userId);
-		
+
 		return user;
 	}
 
