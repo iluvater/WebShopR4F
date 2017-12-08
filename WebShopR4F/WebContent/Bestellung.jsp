@@ -20,8 +20,8 @@
 		<form action="./OrderInputToOverviewServlet" method="post">
 		<div id="inhalt">
 			<h4>Versandadresse</h4>		
-				<p><input type="radio" id="alte" name="Versandadresse" value="alte"> Die Versandadresse entspricht der Adresse aus dem Benutzerprofil.</p>	
-				<p><input type="radio" id="neue" name="Versandadresse" value="neue"> Die Versandadresse ist abweichend von der Adresse aus dem Benutzerprofil.</p>	
+				<p><input type="radio" id="alte" name="Versandadresse" value="matching" onchange=""> Die Versandadresse entspricht der Adresse aus dem Benutzerprofil.</p>	
+				<p><input type="radio" id="neue" name="Versandadresse" value="notmatching"> Die Versandadresse ist abweichend von der Adresse aus dem Benutzerprofil.</p>	
 				
 				<p><label for="strasse1">Strasse</label>
 				<input id="strasse1" placeholder="${user.street}" name="street" value="" type="text" /></p>
@@ -39,10 +39,10 @@
 			
 		<div id="inhalt">
 			<h4>Bezahlart</h4>				
-				<p><input type="radio" id="vorkasse" name="Zahlmethode" value="Vorkasse"> Vorkasse</p>
+				<p><input type="radio" id="vorkasse" name="paymentMethod" value="Vorkasse"> Vorkasse</p>
 				<p class="erlaeuterung">Wählen Sie die Variante "Vorkasse" bekommen Sie mit der Bestätigungmail unsere Bankdaten. 
 				Nach Eingang der Bezahlung wird Ihre Bestellung versendet.<p>
-    			<p><input type="radio" id="nachname" name="Zahlmethode" value="Nachname"> Nachname</p>
+    			<p><input type="radio" id="nachname" name="paymentMethod" value="Nachname"> Nachname</p>
     			<p class="erlaeuterung">Wählen Sie die Variante "Nachname" zahlen Sie erst, nachdem die Bestellung bei Ihnen eingetroffen ist.</p>
 
 	

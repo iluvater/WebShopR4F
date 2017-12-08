@@ -539,6 +539,16 @@ h4 {
 
 }
 
+.gesamtpreisUebersicht { 
+	position: relative; 
+	float: right;
+	margin-top: 2%; 
+	width: 15%;
+	right: 5%;
+	 
+
+}
+
 #weiterEinkaufen { 
 	position:relative;
 	top: 2%;
