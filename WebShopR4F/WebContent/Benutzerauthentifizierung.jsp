@@ -20,7 +20,7 @@
 			<p><label for="email">E-Mailadresse</label>
 			<input id="email" placeholder="E-Mailadresse" name="email" value="" type="email" /><br /></p>
 			<p><label for="password">Passwort</label>
-			<input id="password" placeholder="Passwort" name="password"value="" type="password" /></p>
+			<input id="password" placeholder="Passwort" name="password" value="" type="password" /></p>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 114 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
