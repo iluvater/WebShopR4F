@@ -20,8 +20,8 @@ public class ImageService extends Service{
 	 * @param contentType the content type of the image
 	 * @return returns the id of the created image
 	 */
-	public int createImageInDB(InputStream inputStream, String contentType){
-		return super.getDbConnection().createImageInDB(inputStream, contentType);		
+	public int createImageInDB(InputStream inputStream, String contentType, boolean mainImage){
+		return super.getDbConnection().createImageInDB(inputStream, contentType, mainImage);		
 	}
 	
 	/**
@@ -40,9 +40,9 @@ public class ImageService extends Service{
 	 * @param imageType the new content type
 	 * @return returns true if no error occurred during the update
 	 */
-	public boolean updateImageInDB(int imageId, InputStream imageStream, String imageType) {
+	public boolean updateImageInDB(int imageId, InputStream imageStream, String imageType, boolean mainImage) {
 		try{
-			super.getDbConnection().updateImageInDB(imageId, imageStream, imageType);
+			super.getDbConnection().updateImageInDB(imageId, imageStream, imageType, mainImage);
 			return true;
 		}catch(SQLException e){
 			e.printStackTrace();

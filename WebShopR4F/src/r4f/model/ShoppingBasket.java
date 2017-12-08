@@ -73,7 +73,7 @@ public class ShoppingBasket {
 	 * This method adds an article to the shopping basket if an article is already in the shopping basket the amount of this article will be increased
 	 * @param article The article that should be added to the shopping basket
 	 */
-	public void addItem(Article article) {
+	public void addItem(Article article, int size, String color) {
 		boolean notFound = true;
 		for(int i =0; i < items.size() && notFound; i++){
 			ShoppingBasketItem item = items.get(i);
@@ -83,7 +83,7 @@ public class ShoppingBasket {
 			}
 		}
 		if(notFound){
-			ShoppingBasketItem item = new ShoppingBasketItem(1, article);
+			ShoppingBasketItem item = new ShoppingBasketItem(1, article, size, color);
 			items.add(item);
 		}
 	}
@@ -118,5 +118,55 @@ public class ShoppingBasket {
 	 */
 	public double getShippingPrice() {
 		return shippingPrice;
+	}
+	
+	/**
+	 * This method changes the amount of an article in the  shopping basket
+	 * @param articleId the id of the article which amount should be changed
+	 * @param amount the new amount
+	 */
+	public void setAmountOfArticle(int articleId, int amount){
+		if(amount <= 0){
+			removeItem(articleId); 
+		}else{
+			for (ShoppingBasketItem shoppingBasketItem : items) {
+				if(shoppingBasketItem.getArticle().getId() == articleId){
+					shoppingBasketItem.setAmount(amount);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * This method removes an article from the shopping basket
+	 * @param articleId the id of the article that should be removed
+	 */
+	public void removeItem(int articleId){
+		List<ShoppingBasketItem> deleteItems = new ArrayList<ShoppingBasketItem>();
+		for (ShoppingBasketItem shoppingBasketItem : items) {
+			if(shoppingBasketItem.getArticle().getId() == articleId){
+				deleteItems.add(shoppingBasketItem);
+			}
+		}
+		for (ShoppingBasketItem shoppingBasketItem : deleteItems) {
+			items.remove(shoppingBasketItem);
+		}
+	}
+	
+	/**
+	 * This method removes all items from the shopping Basket
+	 */
+	public void removeAllItems(){
+		items.clear();
+	}
+	
+	/**
+	 * This method adds a wishlist to the shopping basket
+	 * @param wishlist
+	 */
+	public void addWishlist(Wishlist wishlist){
+		for (WishlistItem item : wishlist.getList()) {
+			addItem(item.getArticle(), item.getSize(), item.getColor());
+		}
 	}
 }

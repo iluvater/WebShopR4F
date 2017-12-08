@@ -12,6 +12,7 @@
 <body>
 	<jsp:useBean id="shoppingBasket" class="r4f.model.ShoppingBasket" scope="session">
 	</jsp:useBean>
+	
 <c:if test ="${empty shoppingBasket.items}">
 <div class="container">
 	<h3 class="impressum">Warenkorb</h3>
@@ -31,17 +32,19 @@
 		<h3 class="impressum">Warenkorb</h3>
  			<c:forEach items="${shoppingBasket.items}" var="item">
 				<div class="artikel">
-						<div class="bild"><img class="ImgWarenkorb" src="./ImageServlet/${item.article.image}" alt="Bild"></div> 
+						<div class="bild"><img class="ImgWarenkorb" src="./ImageServlet/${item.article.mainImage}" alt="Bild"></div> 
 						<div class="daten">
 							<p><b>${item.article.name}</b></p>
-							<p><b>Farbe: </b>${item.article.color}</p>
-							<p><b>Größe: </b>${item.article.size}</p>
+							<p><b>Farbe: </b>${item.color}</p>
+							<p><b>Größe: </b>${item.size}</p>
 							<p><b>Preis: </b><b>${item.article.price}&euro;</b></p>
 						</div> 
 						<div class="menge">					
-							<p> <b>Menge</b>
- 								<select name="amount" value="${item.amount}">
- 									<option value="current">${item.amount}</option>
+							<p><b>Menge</b>
+							<form action="./ChangeAmountShoppingBasketServlet" method="post">
+								<input type="hidden" name="articleId" value="${item.article.id }" />
+ 								<select name="amount" onChange="submit();">
+ 									<option value="${item.amount}">${item.amount}</option>
  									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -53,8 +56,13 @@
 									<option value="9">9</option>
 									<option value="10">10</option>
 								</select>
+							</form>
 							</p>
-							<p><a href>entfernen</a></p>
+							<form action="./RemoveArticleFromShoppingBasket" method="post">
+								<input type="hidden" name="articleId" value="${item.article.id }" />
+								<p><input type="submit" id="buttonEntfernen" value="entfernen" /></p>
+								<!-- <p><a href="WarenkorbVersuch2.jsp" >entfernen</a></p> -->
+							</form>
 						</div> 
 					</div>
 				</c:forEach>
@@ -69,7 +77,8 @@
 						<h5>Gesamtkosten:</h5>
 					</div>
 					<div class="preis">
-						<p><jsp:getProperty property="totalPrice" name="shoppingBasket"/>&euro;</p>
+
+						<p><jsp:getProperty property="orderPrice" name="shoppingBasket"/>&euro;</p>
 						<p><jsp:getProperty property="shippingPrice" name="shoppingBasket"/>&euro;</p>
 						<h5><jsp:getProperty property="totalPrice" name="shoppingBasket"/>&euro;</h5>
 					</div>

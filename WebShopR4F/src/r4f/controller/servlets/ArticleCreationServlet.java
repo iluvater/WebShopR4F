@@ -2,6 +2,7 @@ package r4f.controller.servlets;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import r4f.controller.services.ArticleService;
 import r4f.controller.services.ImageService;
 import r4f.model.Article;
 import r4f.model.ErrorMessage;
+import r4f.model.InputStreamStringHelpClass;
 
 /**
  * Servlet implementation class ArticleCreationServlet
@@ -55,19 +57,23 @@ public class ArticleCreationServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String name = null;
 		String description = null;
-		int size = -1;
+		String sizes[] = null;
+		List<Integer> size = new ArrayList<Integer>();
 		double price = -1;
 		String manufacturer = null;
-		String color = null;
+		String colors[] = null;
+		List<String> color = new ArrayList<String>();
 		String category = null;
 		String sport = null;
 		Article article;
-		InputStream imageStream = null;
-		String imageType = null;
+		InputStream mainImageStream = null;
+		String mainImageType = null;
+		List<InputStreamStringHelpClass> imagesHelper = new ArrayList<InputStreamStringHelpClass>();
+		List<Integer> images = new ArrayList<Integer>();
 		RequestDispatcher dispatcher;
 		String errorURL = "Artikeldatenerfassung.jsp";
 		String successURL = "Artikeldatenerfassung.jsp";
-		
+
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setSizeThreshold(16777216);
 
@@ -106,7 +112,11 @@ public class ArticleCreationServlet extends HttpServlet {
 						break;
 					case "size":
 						try {
-							size = Integer.parseInt(item.getString());
+							sizes = item.getString().split(";");
+							size = new ArrayList<Integer>();
+							for (int i = 0; i < sizes.length; i++) {
+								size.add(Integer.parseInt(sizes[i]));
+							}
 						} catch (Exception e) {
 							// error handling missing input
 							ErrorMessage errorMessage = new ErrorMessage(116);
@@ -120,7 +130,11 @@ public class ArticleCreationServlet extends HttpServlet {
 						manufacturer = item.getString();
 						break;
 					case "color":
-						color = item.getString();
+						colors = item.getString().split(";");
+						color = new ArrayList<String>();
+						for (String string : colors) {
+							color.add(string);
+						}
 						break;
 					case "category":
 						category = item.getString();
@@ -130,8 +144,18 @@ public class ArticleCreationServlet extends HttpServlet {
 						break;
 					}
 				} else {
-					imageType = item.getContentType();
-					imageStream = item.getInputStream();
+					switch (item.getName()) {
+					case "mainImage":
+						mainImageType = item.getContentType();
+						mainImageStream = item.getInputStream();
+						break;
+					case "images":
+						InputStream inputStream = item.getInputStream();
+						String imageType = item.getContentType();
+						InputStreamStringHelpClass helpItem = new InputStreamStringHelpClass(inputStream, imageType);
+						imagesHelper.add(helpItem);
+						break;
+					}
 				}
 			}
 		} catch (FileUploadException e) {
@@ -145,23 +169,30 @@ public class ArticleCreationServlet extends HttpServlet {
 		if (name != null && !name.equals("")) {
 			if (description != null && !description.equals("")) {
 				if (manufacturer != null && !manufacturer.equals("") && Article.checkManufacturer(manufacturer)) {
-					if (color != null && !color.equals("") && Article.checkColor(color)) {
+					if (!color.isEmpty()) {
 						if (category != null && !category.equals("") && Article.checkCategory(category)) {
 							if (sport != null && !sport.equals("") && Article.checkSport(sport)) {
-								if (imageStream != null) {
+								if (mainImageStream != null) {
 									article = new Article(name, description, size, price, manufacturer, color, category,
 											sport);
 
 									int imageId = -1;
 									ArticleService articleService = new ArticleService();
 									article = articleService.createArtikelInDB(article);
-									if(article != null){
-									ImageService imageService = new ImageService();
-									imageId = imageService.createImageInDB(imageStream, imageType);
-									if (imageId != -1) {
-										article.setImage(imageId);
-										articleService.updateArticleInDB(article);
-									}
+									if (article != null) {
+										ImageService imageService = new ImageService();
+										imageId = imageService.createImageInDB(mainImageStream, mainImageType, true);
+										
+										for (InputStreamStringHelpClass item : imagesHelper) {
+											int imgId = imageService.createImageInDB(item.getInputStream(), item.getImageType(), false);
+											images.add(imgId);
+										}
+										
+										if (imageId != -1) {
+											article.setMainImage(imageId);
+											article.setImages(images);
+											articleService.updateArticleInDB(article);
+										}
 									}
 									if (article != null && imageId != -1) {
 										ErrorMessage successMessage = new ErrorMessage(600);

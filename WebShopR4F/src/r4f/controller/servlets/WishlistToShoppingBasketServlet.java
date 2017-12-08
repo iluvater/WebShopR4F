@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.model.Order;
 import r4f.model.ShoppingBasket;
 import r4f.model.User;
+import r4f.model.Wishlist;
 
 /**
- * Servlet implementation class OrderCheckoutServlet
+ * Servlet implementation class WishlistToShoppingBasketServlet
  */
-@WebServlet("/OrderCheckoutServlet")
-public class OrderCheckoutServlet extends HttpServlet {
+@WebServlet("/WishlistToShoppingBasketServlet")
+public class WishlistToShoppingBasketServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OrderCheckoutServlet() {
+    public WishlistToShoppingBasketServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,39 +32,36 @@ public class OrderCheckoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String successURL = "Bestellung.jsp";
+		String successURL = "Test.jsp";
 		RequestDispatcher dispatcher;
 		
-		ShoppingBasket shoppingBasket = null;
-		Order order;
+		Wishlist wishlist = null;
+		ShoppingBasket shoppingBasket;
 		User user = null;;
 		
-		shoppingBasket = (ShoppingBasket)request.getSession().getAttribute("shoppingBasket");
+		wishlist = (Wishlist)request.getSession().getAttribute("wishlist");
 		user = (User)request.getSession().getAttribute("User");
+		shoppingBasket = (ShoppingBasket) request.getSession().getAttribute("shoppingBasket");
 		
-		if(user == null || shoppingBasket == null){
+		if(user == null || wishlist == null || shoppingBasket == null){
 			// Errorhandling not logged in
 			return;
 		}else{
-			order = new Order();
-			order.setUser(user);
-			order.addShoppingBasket(shoppingBasket);
-			
-			request.getSession().setAttribute("order", order);
+			shoppingBasket.addWishlist(wishlist);
+			request.getSession().removeAttribute("shoppingBasket");
+			request.getSession().setAttribute("shoppingBasket", shoppingBasket);
 			
 			dispatcher = request.getRequestDispatcher(successURL);
 			dispatcher.forward(request, response);
 			return;
 		}
-		
-		
 	}
 
 }

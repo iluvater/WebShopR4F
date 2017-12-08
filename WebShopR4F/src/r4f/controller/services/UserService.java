@@ -52,13 +52,14 @@ public class UserService extends Service {
 
 		int shoppingBasketId = super.getDbConnection().createShoppingBasketInDB(userId);
 
-		
+		int wishlistId = super.getDbConnection().createWishlistInDB(userId);
 		
 		super.getDbConnection().createAddressInDB(userId, user.getStreet(), user.getHouseNumber(),
 				user.getPostCode(), user.getCity(), true);
 
 		user.setShoppingBasket(shoppingBasketId);
 		user.setId(userId);
+		user.setWishlist(wishlistId);
 		user.setRole("Kunde");
 
 		try {

@@ -1,8 +1,11 @@
 package r4f.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import r4f.controller.services.EmailService;
+import r4f.controller.services.HashService;
 
 public class TestInsert {
 
@@ -11,7 +14,12 @@ public class TestInsert {
 
 //		DatabaseConnection db = new DatabaseConnection();
 				
-//		Article a = new Article("Bezeichung", "beschreibung", 45, 49.99, "Hummel", "farbe", "Herren", "Laufen");
+		List<Integer> size = new ArrayList<Integer>();
+		List<String> color = new ArrayList<String>();
+	Article a = new Article(12, "Bezeichung", "beschreibung", size, 49.99, "Hummel", color, new Date(), "Herren", "Laufen", 3, size);
+	
+	System.out.println(a.getEntryDate());
+	System.out.println(a.getDeliveryDate());
 		
 //		int id = db.createArtikelInDB(a);
 		
@@ -29,9 +37,19 @@ public class TestInsert {
 //		ErrorMessage error = new ErrorMessage(104);
 //		System.out.println(error.getErrorMessage());
 		
-		EmailService e = new EmailService();
-		e.sendContactMail("test", "hello");
-
+//		EmailService e = new EmailService();
+//		e.sendContactMail("test", "hello");
+//
+//		HashService p = new HashService();
+//		System.out.println(p.encrypt("1"));
+//
+//		System.out.println(p.encrypt("Test"));
+//
+//		System.out.println(p.encrypt("Tesfasdasdasdsadt"));
+//
+//		System.out.println(p.encrypt("Test"));
+		
+		
 		
 	}
 

@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.omg.PortableInterceptor.USER_EXCEPTION;
-
 import r4f.controller.services.UserService;
 import r4f.model.ErrorMessage;
 import r4f.model.User;

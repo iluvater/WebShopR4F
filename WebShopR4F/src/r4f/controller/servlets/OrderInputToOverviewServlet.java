@@ -16,16 +16,16 @@ import r4f.model.Order;
 import r4f.model.User;
 
 /**
- * Servlet implementation class OrderInputToOverview
+ * Servlet implementation class OrderInputToOverviewServlet
  */
-@WebServlet("/OrderInputToOverview")
-public class OrderInputToOverview extends HttpServlet {
+@WebServlet("/OrderInputToOverviewServlet")
+public class OrderInputToOverviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OrderInputToOverview() {
+    public OrderInputToOverviewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

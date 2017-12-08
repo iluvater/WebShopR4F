@@ -9,21 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.model.Order;
 import r4f.model.ShoppingBasket;
-import r4f.model.User;
 
 /**
- * Servlet implementation class OrderCheckoutServlet
+ * Servlet implementation class RemoveAllArticleFromShoppingBasketServlet
  */
-@WebServlet("/OrderCheckoutServlet")
-public class OrderCheckoutServlet extends HttpServlet {
+@WebServlet("/RemoveAllArticleFromShoppingBasketServlet")
+public class RemoveAllArticleFromShoppingBasketServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OrderCheckoutServlet() {
+    public RemoveAllArticleFromShoppingBasketServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,39 +30,31 @@ public class OrderCheckoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String successURL = "Bestellung.jsp";
 		RequestDispatcher dispatcher;
+		String successURL = "WarenkorbVersuch2.jsp";
+		String errorURL = "Benutzerauthentifizierung.jsp";
+		ShoppingBasket shoppingBasket;
+
+		shoppingBasket = (ShoppingBasket) request.getSession().getAttribute("shoppingBasket");
 		
-		ShoppingBasket shoppingBasket = null;
-		Order order;
-		User user = null;;
-		
-		shoppingBasket = (ShoppingBasket)request.getSession().getAttribute("shoppingBasket");
-		user = (User)request.getSession().getAttribute("User");
-		
-		if(user == null || shoppingBasket == null){
+		if (shoppingBasket == null) {
 			// Errorhandling not logged in
-			return;
-		}else{
-			order = new Order();
-			order.setUser(user);
-			order.addShoppingBasket(shoppingBasket);
-			
-			request.getSession().setAttribute("order", order);
-			
-			dispatcher = request.getRequestDispatcher(successURL);
+			dispatcher = request.getRequestDispatcher(errorURL);
 			dispatcher.forward(request, response);
 			return;
+		} else {			
+				shoppingBasket.removeAllItems();			
 		}
-		
-		
+		dispatcher = request.getRequestDispatcher(successURL);
+		dispatcher.forward(request, response);
+		return;
 	}
 
 }

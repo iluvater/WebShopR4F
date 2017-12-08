@@ -49,6 +49,15 @@ label {
 	/* margin-left: 26%; */
 }
 
+label.artikel{
+	width: 3em;
+	border: none;
+	align: left; 
+	/* margin-bottom: 1em; */
+	/* clear:left; */
+	/* display: inline; */
+}
+
 header {
 	background-color: #2f528f;
 	width: 100%;
@@ -170,6 +179,23 @@ p.fehler {
 	color: #FF0000;
 }
 
+p.erfolg {
+	font-size:8pt;
+	font-family: arial;
+	color: #64FE2E;
+}
+
+p.deliveryDate{
+	font-size: 10pt;
+	color: green;
+}
+
+fieldset{
+	border:none;
+	margin: auto; 
+	padding: auto;
+}
+
 a.footer {
 	margin-right: 2.5em;
 }
@@ -258,7 +284,17 @@ li.inline {
 	margin-left:15%;
 	margin-right: 15%;
 	padding-top: 2px;
-	/* padding-bottom: 5px; */
+	padding-right:0px;
+	padding-left:43px; 
+	padding-top: 2px;
+	padding-bottom: 5px;
+}
+
+#checkboxRegistrierung{
+	width: 70%; 
+	margin-left:15%;
+	margin-right: 15%;
+	padding-top: 2px;
 	padding-right:0px;
 	padding-left:43px; 
 	padding-top: 2px;
@@ -363,9 +399,12 @@ p.artikelUebersicht{
 	line-height: 3em;
 }
 
-#paddingLeft {
-	padding-left: 15px;
+.paddingLeft1{
 	margin-left: 15px;
+}
+
+#paddingLeft2 {
+	margin-left: 30px;
 }
 
 #containerAgb {
@@ -657,6 +696,15 @@ p {
 
 .containerLink:hover{
 	color: white;
+}
+
+
+#buttonEntfernen{
+	 background: none;
+     border: none;
+     color: #0066ff;
+     text-decoration: underline;
+     cursor: pointer; 
 }
 
 
