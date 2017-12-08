@@ -23,12 +23,6 @@
 				<p><input type="radio" id="alte" name="Versandadresse" value="alte"> Die Versandadresse entspricht der Adresse aus dem Benutzerprofil.</p>	
 				<p><input type="radio" id="neue" name="Versandadresse" value="neue"> Die Versandadresse ist abweichend von der Adresse aus dem Benutzerprofil.</p>	
 				
-				<p><label for="vorname1">Vorname</label>
-				<input id="vorname1" placeholder="${user.firstName}" name="firstName" value="" type="text" /><br /> </p>
-					
-				<p><label for="nachname1">Nachname</label>
-				<input id="nachname1" placeholder="${user.lastName}" name="lastName" value="" type="text" /><br /></p>
-				
 				<p><label for="strasse1">Strasse</label>
 				<input id="strasse1" placeholder="${user.street}" name="street" value="" type="text" /></p>
 				
