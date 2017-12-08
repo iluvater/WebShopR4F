@@ -82,7 +82,9 @@
 						<h5><jsp:getProperty property="totalPrice" name="shoppingBasket"/>&euro;</h5>
 					</div>
  					<div id="weiterEinkaufen">
+ 					<form action="./OrderCheckoutServlet" method="post">
 						<p><input type="submit" id="button" value="Zur Kasse" /></p>
+					</form>
 					</div>
 				</div>
 			</div>
