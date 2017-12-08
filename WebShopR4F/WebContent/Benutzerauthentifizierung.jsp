@@ -11,8 +11,8 @@
 </head>
 <body>
 <form action="./LoginServlet" method="post">
-	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
-	</jsp:useBean> 
+<%-- 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
+	</jsp:useBean>  --%>
 	<!--  <h2>Dein Konto für alles von Run 4 Fun</h2>-->
 	<div id="seitenbereich">
 		<div class="inhalt_farbe_div">

@@ -32,11 +32,11 @@
 		<h3 class="impressum">Warenkorb</h3>
  			<c:forEach items="${shoppingBasket.items}" var="item">
 				<div class="artikel">
-						<div class="bild"><img class="ImgWarenkorb" src="./ImageServlet/${item.article.image}" alt="Bild"></div> 
+						<div class="bild"><img class="ImgWarenkorb" src="./ImageServlet/${item.article.mainImage}" alt="Bild"></div> 
 						<div class="daten">
 							<p><b>${item.article.name}</b></p>
-							<p><b>Farbe: </b>${item.article.color}</p>
-							<p><b>Größe: </b>${item.article.size}</p>
+							<p><b>Farbe: </b>${item.color}</p>
+							<p><b>Größe: </b>${item.size}</p>
 							<p><b>Preis: </b><b>${item.article.price}&euro;</b></p>
 						</div> 
 						<div class="menge">					

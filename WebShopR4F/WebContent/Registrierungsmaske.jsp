@@ -13,7 +13,7 @@
 	</jsp:useBean> 
 	
 	<div id="container">
-		<h2>Neu bei Run4Fun? </h2>
+		<h3>Neu bei Run4Fun? </h3>
 		<h3>Herzlich Willkommen! Noch ein paar Infos angeben, bevor es losgeht... </h3>
 		<form action="./RegistrationServlet" method="post">
 		<div id="inhalt">
