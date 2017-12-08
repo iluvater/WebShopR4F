@@ -47,7 +47,7 @@ public class OrderCheckoutServlet extends HttpServlet {
 		User user = null;;
 		
 		shoppingBasket = (ShoppingBasket)request.getSession().getAttribute("shoppingBasket");
-		user = (User)request.getSession().getAttribute("User");
+		user = (User)request.getSession().getAttribute("user");
 		
 		if(user == null || shoppingBasket == null){
 			// Errorhandling not logged in
