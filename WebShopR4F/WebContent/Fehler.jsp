@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
@@ -9,12 +9,17 @@
 <title>Bestellabschluss</title>
 <link href="DesignV1.css" rel="stylesheet">
 </head>
-<body>
+<body> --%>
+<%@ include file="Head.jspf" %>
+<title>Fehler</title>
+<%@ include file="Header.jspf" %>
+
 	<div id="container">
-			<center>
+		<center>
 			<hr/>
 			<h4>Ups.. es ist ein Fehler aufgetreten!</h4>
 			<p>Bitte versuche es später erneut.</p>
+		
 	</div>
 </body>
 </html>

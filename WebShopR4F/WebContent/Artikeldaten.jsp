@@ -1,19 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="f" uri="http://run4fun.de/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Artikeldaten</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link href="DesignV1.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
-</head>
-<body>
+<%@ include file="Head.jspf" %>
+<title>Artikeldatenbearbeitung</title>
+<%@ include file="Header.jspf" %>
+
 	<jsp:useBean id="article" class="r4f.model.Article" scope="request">
 	</jsp:useBean> 
 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
@@ -24,11 +12,11 @@
 	</jsp:useBean> 
 
 	<div id="container">
-		<h2>ArtikeldatenÃ¤nderung</h2>
+		<h2>Artikeldatenänderung</h2>
 		<h3>Bitte im Folgenden die Artikeldaten anpassen</h3>
 		<form action="./ChangeArticleServlet" method="post" enctype="multipart/form-data">
 		<div id="inhalt">
-			<h4>Artikeldaten Ã¤ndern</h4>
+			<h4>Artikeldaten ändern</h4>
 				
 			<p><label for="id">ID:</label>
 			<input id="id" name="id" value="<jsp:getProperty property="id" name="article"/>" type="text" disabled/><br />
@@ -91,10 +79,10 @@
            		<input type="checkbox" id="color" name="color" value="2" ${filter.color2}> Orange<br />
           		<input type="checkbox" id="color" name="color" value="3" ${filter.color3}> Rot<br />
           		<input type="checkbox" id="color" name="color" value="4" ${filter.color4}> Pink<br />
-          		<input type="checkbox" id="color" name="color" value="5" ${filter.color5}> GrÃ¼n<br />
+          		<input type="checkbox" id="color" name="color" value="5" ${filter.color5}> Grün<br />
           		<input type="checkbox" id="color" name="color" value="6" ${filter.color6}> Blau<br />
           		<input type="checkbox" id="color" name="color" value="7" ${filter.color7}> Schwarz<br />
-          		<input type="checkbox" id="color" name="color" value="8" ${filter.color8}> WeiÃŸ<br />
+          		<input type="checkbox" id="color" name="color" value="8" ${filter.color8}> Weiß<br />
   			</fieldset>
   			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 120 }">

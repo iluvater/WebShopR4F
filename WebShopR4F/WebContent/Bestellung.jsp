@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -9,7 +9,10 @@
 <link href="DesignV1.css" rel="stylesheet">
 <link href="JavaScipt.js" rel="stylesheet">
 </head>
-<body>
+<body> --%>
+<%@ include file="Head.jspf" %>
+<title>Bestelldetails</title>
+<%@ include file="Header.jspf" %>
 
 	<jsp:useBean id="shoppingBasket" class="r4f.model.ShoppingBasket" scope="session">
 	</jsp:useBean>

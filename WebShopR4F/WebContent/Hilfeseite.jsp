@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -8,7 +8,11 @@
 <title>Hilfeseite</title>
 <link href="DesignV1.css" rel="stylesheet">
 </head>
-<body>
+<body> --%>
+<%@ include file="Head.jspf" %>
+<title>Hilfeseite</title>
+<%@ include file="Header.jspf" %>
+
 <div id="containerAgb">
 <h2 class="impressum">Kundenservice</h2>
 	

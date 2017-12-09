@@ -1,17 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Artikeldetailseite</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link href="DesignV1.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>
+<%@ include file="Head.jspf" %>
+<title>Artikeldetails</title>
+<%@ include file="Header.jspf" %>
+
 	<jsp:useBean id="article" class="r4f.model.Article" scope="request">
 	</jsp:useBean> 
 <%-- 	<jsp:useBean id="size" class="java.lang.Integer" scope="session">
@@ -24,7 +14,7 @@
 					<img id="ImgArtikelDetails" src="./ImageServlet/${article.mainImage }" alt="Bild">
 					<h3 class="artikelDetails"><jsp:getProperty property="name" name="article"/></h3> 
 					<h4 class="artikelDetails">Preis: <jsp:getProperty property="price" name="article"/> &euro; </h4>
-					<p class="deliveryDate">Lieferbar bis spÃ¤testens: <fmt:formatDate pattern = "dd.MM.yyyy" value = "${article.deliveryDate}" /></p>
+					<p class="deliveryDate">Lieferbar bis spätestens: <fmt:formatDate pattern = "dd.MM.yyyy" value = "${article.deliveryDate}" /></p>
 					
 					<%-- <jsp:getProperty property="deliveryDate" name="article"/></p> --%>
 					<hr />
@@ -49,7 +39,7 @@
 					<form action="./ChangeSizeColorServlet" method="post">
 						<input type="hidden" name="articleId" value="${article.id }" />
  						<c:if test="${empty size }">
-							<p class="artikelDetails"><b>GrÃ¶ÃŸe: </b>
+							<p class="artikelDetails"><b>Größe: </b>
 							<select id="size" name="size" onChange="submit();">
 								<c:forEach items="${article.size}" var="articleSize" begin="0" end="0">
 									<option selected value="${articleSize}">${articleSize}</option>
@@ -61,7 +51,7 @@
 							</p>
 						</c:if> 
 						<c:if test="${not empty size }">
-							<p class="artikelDetails"><b>GrÃ¶ÃŸe: </b>
+							<p class="artikelDetails"><b>Größe: </b>
 							<select id="size" name="size" onChange="submit();">
 								<c:forEach items="${article.size}" var="articleSize">
 									<c:if test="${articleSize eq size}">

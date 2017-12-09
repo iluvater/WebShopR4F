@@ -1,15 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<%@ include file="Head.jspf" %>
 <title>Artikeldatenerfassung</title>
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-<link href="DesignV1.css" rel="stylesheet">
-</head>
-<body>
+<%@ include file="Header.jspf" %>
+
 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
 	</jsp:useBean>
 	<jsp:useBean id="success" class="r4f.model.ErrorMessage" scope="request">
@@ -78,10 +70,10 @@
            		<input type="checkbox" id="color" name="color" value="2" ${filter.color2}> Orange<br />
           		<input type="checkbox" id="color" name="color" value="3" ${filter.color3}> Rot<br />
           		<input type="checkbox" id="color" name="color" value="4" ${filter.color4}> Pink<br />
-          		<input type="checkbox" id="color" name="color" value="5" ${filter.color5}> GrÃ¼n<br />
+          		<input type="checkbox" id="color" name="color" value="5" ${filter.color5}> Grün<br />
           		<input type="checkbox" id="color" name="color" value="6" ${filter.color6}> Blau<br />
           		<input type="checkbox" id="color" name="color" value="7" ${filter.color7}> Schwarz<br />
-          		<input type="checkbox" id="color" name="color" value="8" ${filter.color8}> WeiÃŸ<br />
+          		<input type="checkbox" id="color" name="color" value="8" ${filter.color8}> Weiß<br />
   			</fieldset>
   			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 120 }">

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
@@ -10,7 +10,11 @@
 <link href="DesignV1.css" rel="stylesheet">
 
 </head>
-<body>
+<body> --%>
+<%@ include file="Head.jspf" %>
+<title>Bestellübersicht</title>
+<%@ include file="Header.jspf" %>
+
 	<jsp:useBean id="shoppingBasket" class="r4f.model.ShoppingBasket" scope="session">
 	</jsp:useBean>
 	<jsp:useBean id="order" class="r4f.model.Order" scope="session">
