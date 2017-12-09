@@ -61,7 +61,7 @@ public class OrderInputToOverviewServlet extends HttpServlet {
 		matchingAddresses = request.getParameter("matchingAddresses");
 		paymentMethod = request.getParameter("paymentMethod");
 
-		if (matchingAddresses != null && !matchingAddresses.equals("matchingAddresses")) {
+		if (matchingAddresses != null && matchingAddresses.equals("matchingAddresses")) {
 			addressService = new AddressService();
 			Address address = addressService.getAddress(user);
 

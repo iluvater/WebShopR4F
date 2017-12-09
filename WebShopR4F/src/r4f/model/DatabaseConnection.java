@@ -1180,16 +1180,17 @@ public class DatabaseConnection {
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
 			try {
-				String sql = "INSERT INTO orderitem (order, position, amount, price, article, size, color) values (?, ?, ?, ?, ?, ?, ?)";
+				String sql = "INSERT INTO `orderitem` (`orders`, `position`, `article`, `amount`, `price`, `color`, `size`) "
+						+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 				PreparedStatement preparedStatement = conn.prepareStatement(sql);
 				preparedStatement.setInt(1, orderId);
 				preparedStatement.setInt(2, item.getPosition());
-				preparedStatement.setInt(3, item.getAmount());
-				preparedStatement.setDouble(4, item.getArticle().getPrice());
-				preparedStatement.setInt(5, item.getArticle().getId());
+				preparedStatement.setInt(3, item.getArticle().getId());
+				preparedStatement.setInt(4, item.getAmount());
+				preparedStatement.setDouble(5, item.getArticle().getPrice());
 				preparedStatement.setInt(6, getSizeId(item.getSize()));
 				preparedStatement.setInt(7, getColorId(item.getColor()));
-
+				
 				preparedStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -1524,7 +1525,7 @@ public class DatabaseConnection {
 				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT DISTINCT r.name AS role FROM mappinguserrole AS m INNER JOIN role AS R ON m.role = r.id WHERE m.user = ?";
+				String sql = "SELECT r.* FROM mappinguserrole AS m INNER JOIN role AS R ON m.role = r.id WHERE m.user = ?";
 				
 				statement = conn.prepareStatement(sql);
 				statement.setInt(1, userId);
