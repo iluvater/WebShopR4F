@@ -1,7 +1,6 @@
 package r4f.controller.servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,21 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.controller.services.OrderService;
-import r4f.model.Order;
-import r4f.model.User;
+import r4f.controller.services.AuthorizationService;
+import r4f.model.ErrorMessage;
 
 /**
- * Servlet implementation class NavigationOrderListServlet
+ * Servlet implementation class DeleteUserRoleMappingServlet
  */
-@WebServlet("/NavigationOrderListServlet")
-public class NavigationOrderListServlet extends HttpServlet {
+@WebServlet("/DeleteUserRoleMappingServlet")
+public class DeleteUserRoleMappingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NavigationOrderListServlet() {
+    public DeleteUserRoleMappingServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,33 +31,37 @@ public class NavigationOrderListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String successURL = "Test.jsp";
-		String errorURL = "Test.jsp";
+		int roleId;
+		int userId;
 		RequestDispatcher dispatcher;
-		OrderService orderService = new OrderService();
-		User user;
+		String errorURL = "Test.jsp";
+		String successURL = "TEst.jsp";
+		AuthorizationService authorizationService = new AuthorizationService();
 		
-		user = (User) request.getSession().getAttribute("user");
-		
-		if(user != null){
-			List<Order> orderList = orderService.getOrderList(user);
-			
-			request.setAttribute("orderList", orderList);
-			
+		try {
+			roleId = Integer.parseInt(request.getParameter("roleId"));
+			userId = Integer.parseInt(request.getParameter("userId"));
+			authorizationService.deleteUserRoleMapping(userId, roleId);
+			//success
+			ErrorMessage successMessage = new ErrorMessage(605);
+			request.setAttribute("success", successMessage);
 			dispatcher = request.getRequestDispatcher(successURL);
 			dispatcher.forward(request, response);
 			return;
-		}else{
-			//Errorhandling please login			
+		} catch (NumberFormatException e) {
+			//Error missing roleId
+			ErrorMessage errorMessage = new ErrorMessage();
+			request.setAttribute("error", errorMessage);
 			dispatcher = request.getRequestDispatcher(errorURL);
 			dispatcher.forward(request, response);
+			return;
 		}
 	}
 

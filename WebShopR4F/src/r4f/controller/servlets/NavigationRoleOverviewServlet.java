@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.controller.services.OrderService;
-import r4f.model.Order;
+import r4f.controller.services.AuthorizationService;
+import r4f.model.Role;
 import r4f.model.User;
 
 /**
- * Servlet implementation class NavigationOrderListServlet
+ * Servlet implementation class NavigationRoleOverviewServlet
  */
-@WebServlet("/NavigationOrderListServlet")
-public class NavigationOrderListServlet extends HttpServlet {
+@WebServlet("/NavigationRoleOverviewServlet")
+public class NavigationRoleOverviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NavigationOrderListServlet() {
+    public NavigationRoleOverviewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,17 +41,17 @@ public class NavigationOrderListServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String successURL = "Test.jsp";
-		String errorURL = "Test.jsp";
+		String errorURL = "Login.jsp";
 		RequestDispatcher dispatcher;
-		OrderService orderService = new OrderService();
+		AuthorizationService authorizationService = new AuthorizationService();
 		User user;
 		
 		user = (User) request.getSession().getAttribute("user");
 		
 		if(user != null){
-			List<Order> orderList = orderService.getOrderList(user);
+			List<Role> roleList = authorizationService.getRoleList();
 			
-			request.setAttribute("orderList", orderList);
+			request.setAttribute("roleList", roleList);
 			
 			dispatcher = request.getRequestDispatcher(successURL);
 			dispatcher.forward(request, response);
