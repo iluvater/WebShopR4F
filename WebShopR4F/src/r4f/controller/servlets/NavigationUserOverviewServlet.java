@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.controller.services.AuthorizationService;
 import r4f.controller.services.UserService;
-import r4f.model.Role;
 import r4f.model.User;
 
 /**
