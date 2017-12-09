@@ -1,16 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Anmeldung abschlie√üen</title>
-<link href="DesignV1.css" rel="stylesheet">
-</head>
-<body>
+<%@ include file="Head.jspf" %>
+<title>Anmeldung abschlieﬂen</title>
+<%@ include file="Header.jspf" %>
+
 	<div id="container">
-	<h3>Anmeldung abschlie√üen</h3>
+	<h3>Anmeldung abschlieﬂen</h3>
 	<form action="./ConfirmationCodeServlet" method="post">
 		<div id="inhalt">
 			<p>Bitte geben Sie hier den Code ein, der Ihnen per E-Mail zugesendet wurde, um Ihr Kundenkonto zu aktivieren!</p>
