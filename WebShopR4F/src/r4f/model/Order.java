@@ -41,7 +41,7 @@ public class Order {
 	 *            the order items to set
 	 */
 	public Order(int id, Date entryDate, Address deliveryAddress, Address billingAddress, String paymentMethod,
-			List<OrderItem> items, Date deliveryDate) {
+			List<OrderItem> items, Date deliveryDate, User user) {
 		this.id = id;
 		this.entryDate = entryDate;
 		this.deliveryAddress = deliveryAddress;
@@ -49,6 +49,7 @@ public class Order {
 		this.paymentMethod = paymentMethod;
 		this.items = items;
 		this.deliveryDate = deliveryDate;
+		this.user = user;
 	}
 
 	/**
@@ -62,6 +63,7 @@ public class Order {
 		paymentMethod = null;
 		items = new ArrayList<OrderItem>();
 		this.deliveryDate = new Date();
+		user = null;
 		deliveryDate.setTime(deliveryDate.getTime() + 604800000);
 	}
 

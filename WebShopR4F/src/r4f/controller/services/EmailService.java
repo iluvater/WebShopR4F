@@ -67,7 +67,7 @@ public class EmailService {
 			String emailBody = getEmailBody("orderConfirmation");
 			emailBody = emailBody.replaceAll("!orderId!", Integer.toString(order.getId()));
 			emailBody = emailBody.replaceAll("!entryDate!", order.getEntryDate().toString());
-			emailBody = emailBody.replaceAll("!deliveryDate!", order.getItems().get(0).getArticle().getDeliveryDate().toString());
+			emailBody = emailBody.replaceAll("!deliveryDate!", order.getDeliveryDate().toString());
 			emailBody = emailBody.replaceAll("!firstName!", order.getUser().getFirstName());
 			emailBody = emailBody.replaceAll("!lastName!", order.getUser().getLastName());
 			emailBody = emailBody.replaceAll("!street!", order.getDeliveryAddress().getStreet());
@@ -75,10 +75,10 @@ public class EmailService {
 			emailBody = emailBody.replaceAll("!postCode!", order.getDeliveryAddress().getPostCode());
 			emailBody = emailBody.replaceAll("!city!", order.getDeliveryAddress().getCity());
 			emailBody = emailBody.replaceAll("!paymentMethod!", order.getPaymentMethod());
-			emailBody = emailBody.replaceAll("!orderPrice!", "50.00");
+			emailBody = emailBody.replaceAll("!orderPrice!", Double.toString(order.getTotalPrice()));
 			String orderItems = "";
 			for (OrderItem item : order.getItems()) {
-				orderItems = orderItems + "<tr valign=\"top\"> td width=\"35%\">"+ item.getArticle().getName() + "</td><td width=\"35%\">" + item.getArticle().getPrice() + "</td></tr>";
+				orderItems = orderItems + "<tr valign=\"top\"><td width=\"35%\">"+ item.getArticle().getName() + "</td><td width=\"35%\">" + item.getArticle().getPrice() + "</td></tr>";
 			}
 			emailBody = emailBody.replaceAll("!orderItems!", orderItems);
 			
@@ -145,7 +145,7 @@ public class EmailService {
 
 			// setting the Email text
 
-			generateMailMessage.setContent(emailBody, "text/html");
+			generateMailMessage.setContent(emailBody, "text/html; charset=UTF-8");
 
 			// transport of the email
 			Transport transport = getMailSession.getTransport("smtp");

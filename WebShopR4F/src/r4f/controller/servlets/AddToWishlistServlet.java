@@ -53,15 +53,31 @@ public class AddToWishlistServlet extends HttpServlet {
 		try {
 			articleId = Integer.parseInt(request.getParameter("articleId"));
 			article = articleService.getArticle(articleId);
-			size = Integer.parseInt(request.getParameter("size"));
-			color = request.getParameter("color");			
 
 		} catch (NumberFormatException e) {
-			article = (Article)request.getSession().getAttribute("articleForWishlist");
-			size = (Integer) request.getSession().getAttribute("size");
-			color = (String) request.getSession().getAttribute("color");
-			request.getSession().removeAttribute("size");
-			request.getSession().removeAttribute("color");
+			article = (Article) request.getSession().getAttribute("articleForWishlist");
+
+		}
+
+		Object s = request.getSession().getAttribute("size");
+		Object c = (String) request.getSession().getAttribute("color");
+		request.getSession().removeAttribute("size");
+		request.getSession().removeAttribute("color");
+		
+		if(c== null || s == null){
+			if(!article.getColor().isEmpty()){
+				color = article.getColor().get(0);
+			}else{
+				throw new ServletException();
+			}
+			if(!article.getSize().isEmpty()){
+				size = article.getSize().get(0);
+			}else{
+				throw new ServletException();
+			}
+		}else{
+			size = (Integer) s;
+			color = (String) c;
 		}
 		wishlist = (Wishlist) request.getSession().getAttribute("wishlist");
 		

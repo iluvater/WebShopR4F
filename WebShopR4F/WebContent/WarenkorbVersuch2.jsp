@@ -47,6 +47,8 @@
 							<p><b>Menge</b>
 							<form action="./ChangeAmountShoppingBasketServlet" method="post">
 								<input type="hidden" name="articleId" value="${item.article.id }" />
+								<input type="hidden" name="size" value="${item.size }" />
+								<input type="hidden" name="color" value="${item.color }" />
  								<select name="amount" onChange="submit();">
  									<option value="${item.amount}">${item.amount}</option>
  									<option value="1">1</option>
@@ -64,6 +66,8 @@
 							</p>
 							<form action="./RemoveArticleFromShoppingBasket" method="post">
 								<input type="hidden" name="articleId" value="${item.article.id }" />
+								<input type="hidden" name="size" value="${item.size }" />
+								<input type="hidden" name="color" value="${item.color }" />
 								<p><input type="submit" id="buttonEntfernen" value="entfernen" /></p>
 								<!-- <p><a href="WarenkorbVersuch2.jsp" >entfernen</a></p> -->
 							</form>

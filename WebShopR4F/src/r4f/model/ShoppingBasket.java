@@ -77,7 +77,7 @@ public class ShoppingBasket {
 		boolean notFound = true;
 		for(int i =0; i < items.size() && notFound; i++){
 			ShoppingBasketItem item = items.get(i);
-			if(item.getArticle().getId() == article.getId()){
+			if(item.getArticle().getId() == article.getId() && item.getColor().equals(color) && item.getSize() == size){
 				notFound = false;
 				item.setAmount(item.getAmount()+1);
 			}
@@ -125,12 +125,12 @@ public class ShoppingBasket {
 	 * @param articleId the id of the article which amount should be changed
 	 * @param amount the new amount
 	 */
-	public void setAmountOfArticle(int articleId, int amount){
+	public void setAmountOfArticle(int articleId, int amount, int size, String color){
 		if(amount <= 0){
-			removeItem(articleId); 
+			removeItem(articleId, size, color); 
 		}else{
 			for (ShoppingBasketItem shoppingBasketItem : items) {
-				if(shoppingBasketItem.getArticle().getId() == articleId){
+				if(shoppingBasketItem.getArticle().getId() == articleId && shoppingBasketItem.getSize() == size && shoppingBasketItem.getColor().equals(color)){
 					shoppingBasketItem.setAmount(amount);
 				}
 			}
@@ -141,10 +141,10 @@ public class ShoppingBasket {
 	 * This method removes an article from the shopping basket
 	 * @param articleId the id of the article that should be removed
 	 */
-	public void removeItem(int articleId){
+	public void removeItem(int articleId, int size, String color){
 		List<ShoppingBasketItem> deleteItems = new ArrayList<ShoppingBasketItem>();
 		for (ShoppingBasketItem shoppingBasketItem : items) {
-			if(shoppingBasketItem.getArticle().getId() == articleId){
+			if(shoppingBasketItem.getArticle().getId() == articleId && shoppingBasketItem.getSize() == size && shoppingBasketItem.getColor().equals(color)){
 				deleteItems.add(shoppingBasketItem);
 			}
 		}

@@ -34,43 +34,46 @@ public class AddToShoppingBasketServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//		RequestDispatcher dispatcher;
-//		ArticleService articleService = new ArticleService();
-//		String successURL = "WarenkorbVersuch2.jsp";
-//		String loginURL = "Benutzerauthentifizierung.jsp";
-//		String overviewURL = "./NavigationOverviewServlet";
-//		ShoppingBasket shoppingBasket;
-//		Article article;
-//		
-//		try {
-//		
-//			shoppingBasket = (ShoppingBasket)request.getSession().getAttribute("shoppingBasket");
-//			article = (Article)request.getSession().getAttribute("articleForShoppingBasket");
-//			
-//			if(shoppingBasket == null){
-//				if(article == null){
-//					//Errorhandling no article
-//					dispatcher = request.getRequestDispatcher(overviewURL);
-//					dispatcher.forward(request, response);
-//					return;
-//				}else{
-//				//Errorhandling not logged in
-//				request.getSession().setAttribute("articleForShoppingBasket", article);
-//				dispatcher = request.getRequestDispatcher(loginURL);
-//				dispatcher.forward(request, response);
-//				return;
-//				}
-//			}else{				
-//				shoppingBasket.addItem(article);	
-//				request.getSession().removeAttribute("articleForShoppingBasket");
-//			}					
-//		} catch (NumberFormatException e) {
-//			
-//		}
-//		
-//		dispatcher = request.getRequestDispatcher(successURL);
-//		dispatcher.forward(request, response);
-//		return;
+		// RequestDispatcher dispatcher;
+		// ArticleService articleService = new ArticleService();
+		// String successURL = "WarenkorbVersuch2.jsp";
+		// String loginURL = "Benutzerauthentifizierung.jsp";
+		// String overviewURL = "./NavigationOverviewServlet";
+		// ShoppingBasket shoppingBasket;
+		// Article article;
+		//
+		// try {
+		//
+		// shoppingBasket =
+		// (ShoppingBasket)request.getSession().getAttribute("shoppingBasket");
+		// article =
+		// (Article)request.getSession().getAttribute("articleForShoppingBasket");
+		//
+		// if(shoppingBasket == null){
+		// if(article == null){
+		// //Errorhandling no article
+		// dispatcher = request.getRequestDispatcher(overviewURL);
+		// dispatcher.forward(request, response);
+		// return;
+		// }else{
+		// //Errorhandling not logged in
+		// request.getSession().setAttribute("articleForShoppingBasket",
+		// article);
+		// dispatcher = request.getRequestDispatcher(loginURL);
+		// dispatcher.forward(request, response);
+		// return;
+		// }
+		// }else{
+		// shoppingBasket.addItem(article);
+		// request.getSession().removeAttribute("articleForShoppingBasket");
+		// }
+		// } catch (NumberFormatException e) {
+		//
+		// }
+		//
+		// dispatcher = request.getRequestDispatcher(successURL);
+		// dispatcher.forward(request, response);
+		// return;
 	}
 
 	/**
@@ -95,40 +98,50 @@ public class AddToShoppingBasketServlet extends HttpServlet {
 			article = articleService.getArticle(articleId);
 
 		} catch (NumberFormatException e) {
-			article = (Article)request.getSession().getAttribute("articleForShoppingBasket");
-			
-		}
-		try {
-			size = Integer.parseInt(request.getParameter("size"));
-			color = request.getParameter("color");
+			article = (Article) request.getSession().getAttribute("articleForShoppingBasket");
 
-		} catch (NumberFormatException e) {
-			size = (Integer) request.getSession().getAttribute("size");
-			color = (String) request.getSession().getAttribute("color");
-			request.getSession().removeAttribute("size");
-			request.getSession().removeAttribute("color");
-			
+		}
+
+		Object s = request.getSession().getAttribute("size");
+		Object c = (String) request.getSession().getAttribute("color");
+		request.getSession().removeAttribute("size");
+		request.getSession().removeAttribute("color");
+		
+		if(c== null || s == null){
+			if(!article.getColor().isEmpty()){
+				color = article.getColor().get(0);
+			}else{
+				throw new ServletException();
+			}
+			if(!article.getSize().isEmpty()){
+				size = article.getSize().get(0);
+			}else{
+				throw new ServletException();
+			}
+		}else{
+			size = (Integer) s;
+			color = (String) c;
 		}
 		
 		
+
 		shoppingBasket = (ShoppingBasket) request.getSession().getAttribute("shoppingBasket");
-		
-		
+
 		if (shoppingBasket == null) {
 			// Errorhandling not logged in
 			request.getSession().setAttribute("articleForShoppingBasket", article);
 			dispatcher = request.getRequestDispatcher(errorURL);
 			dispatcher.forward(request, response);
 			return;
-		} else { 
-			if(article == null || size == -1 || color == null){
+		} else {
+			if (article == null || size == -1 || color == null) {
 				dispatcher = request.getRequestDispatcher(overviewURL);
 				dispatcher.forward(request, response);
 				return;
-			}else{
+			} else {
 				shoppingBasket.addItem(article, size, color);
 				request.getSession().removeAttribute("articleForShoppingBasket");
-			}			
+			}
 		}
 		dispatcher = request.getRequestDispatcher(successURL);
 		dispatcher.forward(request, response);

@@ -39,8 +39,22 @@ public class OrderService extends Service {
 		return orderId;
 	}
 
+	/**
+	 * This method selects all order for a certain user
+	 * @param user the user
+	 * @return returns a list of all orders from the user
+	 */
 	public List<Order> getOrderList(User user) {
 		return super.getDbConnection().getOrderList(user.getId());
+	}
+	
+	/**
+	 * This method selects an order from the database
+	 * @param orderId the id of the order that should be selected
+	 * @return returns the order or null if no order was selected
+	 */
+	public Order getOrder(int orderId){
+		return super.getDbConnection().getOrder(orderId);
 	}
 
 }
