@@ -42,8 +42,8 @@ public class AddToWishlistServlet extends HttpServlet {
 		int articleId;
 		RequestDispatcher dispatcher;
 		ArticleService articleService = new ArticleService();
-		String successURL = "Merkzettel.jsp";
-		String errorURL = "Benutzerauthentifizierung.jsp";
+		String successURL = "Merkliste.jsp";
+		String errorURL = "Login.jsp";
 		String overviewURL = "./NavigationOverviewServlet";
 		Wishlist wishlist;
 		int size;

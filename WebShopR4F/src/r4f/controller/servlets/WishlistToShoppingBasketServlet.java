@@ -39,7 +39,7 @@ public class WishlistToShoppingBasketServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String successURL = "Test.jsp";
+		String successURL = "WarenkorbVersuch2.jsp";
 		RequestDispatcher dispatcher;
 		
 		Wishlist wishlist = null;
@@ -52,7 +52,8 @@ public class WishlistToShoppingBasketServlet extends HttpServlet {
 		
 		if(user == null || wishlist == null || shoppingBasket == null){
 			// Errorhandling not logged in
-			return;
+			ServletException e = new ServletException();
+			throw e;
 		}else{
 			shoppingBasket.addWishlist(wishlist);
 			request.getSession().removeAttribute("shoppingBasket");

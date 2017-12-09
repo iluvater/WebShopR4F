@@ -40,7 +40,7 @@ public class RemoveArticleFromWishlistServlet extends HttpServlet {
 		int articleId;
 		RequestDispatcher dispatcher;
 		String successURL = "Merkliste.jsp";
-		String errorURL = "Benutzerauthentifizierung.jsp";
+		String errorURL = "Login.jsp";
 		Wishlist wishlist;
 
 		try {
