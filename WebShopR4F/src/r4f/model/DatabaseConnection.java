@@ -187,8 +187,8 @@ public class DatabaseConnection {
 
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT u.*, r.name, a.salutation, a.firstName, a.lastName, a.street, a.houseNumber, a.postCode, a.city "
-						+ "FROM user AS u INNER JOIN role AS r ON r.id = u.role INNER JOIN address AS a ON a.user = u.id "
+				String sql = "SELECT u.*, a.salutation, a.firstName, a.lastName, a.street, a.houseNumber, a.postCode, a.city "
+						+ "FROM user AS u INNER JOIN address AS a ON a.user = u.id "
 						+ "WHERE a.masterData='1' AND u.id=?";
 				
 				preparedStatement = conn.prepareStatement(sql);
@@ -1222,7 +1222,7 @@ public class DatabaseConnection {
 				
 				statement.setInt(1, userId);
 				
-				ResultSet result = statement.executeQuery(sql);
+				ResultSet result = statement.executeQuery();
 
 				// Ergebnissätze durchfahren.
 				while (result.next()) {
@@ -1233,9 +1233,10 @@ public class DatabaseConnection {
 					Address billingAddress = getAddress(result.getInt("billingAddress"));
 					Date deliveryDate = result.getDate("deliveryDate");
 					String paymentMethod = result.getString("paymentMethod");
+					User user = getUser(userId);
 					List<OrderItem> orderItems = getOrderItems(id);
 
-					order = new Order(id, entryDate, deliveryAddress, billingAddress, paymentMethod, orderItems, deliveryDate);
+					order = new Order(id, entryDate, deliveryAddress, billingAddress, paymentMethod, orderItems, deliveryDate, user);
 					orderList.add(order);
 				}
 			} catch (SQLException e) {
@@ -1243,6 +1244,49 @@ public class DatabaseConnection {
 			}
 		}
 		return orderList;
+	}
+	
+	/**
+	 * This method selects an order from the database
+	 * @param orderId the id of the order that should be selected
+	 * @return returns the order or null if no order was selected
+	 */
+	public Order getOrder(int orderId){
+		Order order = null;
+
+		conn = getInstance();
+		if (conn != null) {
+			try {
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT o.*, p.name AS paymentMethod"
+						+ " FROM orders AS o INNER JOIN paymentmethod AS p ON o.paymentMethod = p.id"
+						+ " WHERE o.id = ?"
+						+ " ORDER BY entryDate";
+				System.out.println(sql);
+				PreparedStatement statement = conn.prepareStatement(sql);
+				
+				statement.setInt(1, orderId);
+				
+				ResultSet result = statement.executeQuery();
+
+				// Ergebnissätze durchfahren.
+				while (result.next()) {
+					int id = result.getInt("id");
+					Date entryDate = result.getDate("entryDate");
+					Address deliveryAddress = getAddress(result.getInt("deliveryAddress"));
+					Address billingAddress = getAddress(result.getInt("billingAddress"));
+					Date deliveryDate = result.getDate("deliveryDate");
+					String paymentMethod = result.getString("paymentMethod");
+					User user = getUser(result.getInt("user"));
+					List<OrderItem> orderItems = getOrderItems(id);
+
+					order = new Order(id, entryDate, deliveryAddress, billingAddress, paymentMethod, orderItems, deliveryDate, user);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return order;
 	}
 	
 	/**
@@ -1257,7 +1301,7 @@ public class DatabaseConnection {
 		if (conn != null) {
 			try {
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT o.position, o.amount, o.price, o.article, c.name AS color, s.size AS name"
+				String sql = "SELECT o.position, o.amount, o.price, o.article, c.name AS color, s.size AS size"
 						+ " FROM orderitem AS o INNER JOIN color AS c ON o.color = c.id INNER JOIN size AS s ON o.size = s.id"
 						+ " WHERE o.orders = ? ORDER BY position";
 				System.out.println(sql);
@@ -1265,7 +1309,7 @@ public class DatabaseConnection {
 				
 				statement.setInt(1, orderId);
 				
-				ResultSet result = statement.executeQuery(sql);
+				ResultSet result = statement.executeQuery();
 
 				// Ergebnissätze durchfahren.
 				while (result.next()) {
@@ -1304,7 +1348,7 @@ public class DatabaseConnection {
 				
 				preparedStatement.setInt(1, id);
 				
-				ResultSet result = preparedStatement.executeQuery(sql);
+				ResultSet result = preparedStatement.executeQuery();
 
 				// Ergebnissätze durchfahren.
 				if (result.next()) {

@@ -39,9 +39,9 @@
 				<div id="weiterEinkaufen">
 					<h4>Rechnungsadresse</h4>
 						<p>
-						${order.user.salutation}
+						${order.billingAddress.salutation}
 						<br/>
-						${order.user.firstName} ${order.user.lastName}
+						${order.billingAddress.firstName} ${order.billingAddress.lastName}
 						<br/>
 						${order.billingAddress.street} ${order.billingAddress.houseNumber}
 						<br/>
@@ -53,7 +53,7 @@
 						<p>
 						${order.user.salutation}
 						<br/>
-						${order.user.firstName} ${order.user.lastName}
+						${order.deliveryAddress.firstName} ${order.deliveryAddress.lastName}
 						<br/>
 						${order.deliveryAddress.street} ${order.deliveryAddress.houseNumber}
 						<br/>

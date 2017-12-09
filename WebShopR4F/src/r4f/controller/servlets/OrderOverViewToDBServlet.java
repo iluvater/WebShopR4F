@@ -56,6 +56,8 @@ public class OrderOverViewToDBServlet extends HttpServlet {
 		orderId = orderService.createOrderInDB(order);
 		
 		if(orderId!=-1){
+			//get order
+			order = orderService.getOrder(orderId);
 			//clear shopping basket
 			shoppingBasket = (ShoppingBasket) request.getSession().getAttribute("shoppingBasket");
 			shoppingBasket.getItems().clear();
@@ -64,8 +66,8 @@ public class OrderOverViewToDBServlet extends HttpServlet {
 			//remove order object from session
 			request.getSession().removeAttribute("order");
 			
-			//Send Mail
 			
+			//Send Mail
 			emailService.sendOrderConfirmation(order);
 
 			//successMessage
