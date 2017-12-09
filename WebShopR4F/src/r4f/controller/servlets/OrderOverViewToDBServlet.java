@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import r4f.controller.services.EmailService;
 import r4f.controller.services.OrderService;
 import r4f.model.ErrorMessage;
 import r4f.model.Order;
@@ -44,6 +45,7 @@ public class OrderOverViewToDBServlet extends HttpServlet {
 		String errorURL = "Bestelluebersicht.jsp";
 		RequestDispatcher dispatcher;
 		OrderService orderService = new OrderService();
+		EmailService emailService = new EmailService();
 		
 		ShoppingBasket shoppingBasket;
 		Order order;
@@ -62,6 +64,7 @@ public class OrderOverViewToDBServlet extends HttpServlet {
 			//remove order object from session
 			request.getSession().removeAttribute("order");
 			
+			//send Confirmationmail
 			
 			//successMessage something went from wrong during creation
 			ErrorMessage successMessage = new ErrorMessage(601);

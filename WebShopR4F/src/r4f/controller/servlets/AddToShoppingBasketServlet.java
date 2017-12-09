@@ -93,17 +93,24 @@ public class AddToShoppingBasketServlet extends HttpServlet {
 		try {
 			articleId = Integer.parseInt(request.getParameter("articleId"));
 			article = articleService.getArticle(articleId);
+
+		} catch (NumberFormatException e) {
+			article = (Article)request.getSession().getAttribute("articleForShoppingBasket");
+			
+		}
+		try {
 			size = Integer.parseInt(request.getParameter("size"));
 			color = request.getParameter("color");
 
 		} catch (NumberFormatException e) {
-			article = (Article)request.getSession().getAttribute("articleForShoppingBasket");
 			size = (Integer) request.getSession().getAttribute("size");
 			color = (String) request.getSession().getAttribute("color");
 			request.getSession().removeAttribute("size");
 			request.getSession().removeAttribute("color");
 			
 		}
+		
+		
 		shoppingBasket = (ShoppingBasket) request.getSession().getAttribute("shoppingBasket");
 		
 		

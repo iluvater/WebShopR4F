@@ -237,7 +237,7 @@ public class Order {
 	public void resetPositions() {
 		for (int i = 0; i < items.size(); i++) {
 			OrderItem item = items.get(i);
-			item.setPosition(i);
+			item.setPosition(i+1);
 		}
 	}
 
