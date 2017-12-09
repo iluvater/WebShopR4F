@@ -21,7 +21,7 @@
 	
 	<div id="container">
 		<h2>Rollenbearbeitung</h2>
-		<form action="./" method="post">
+		<form action="./CreateRoleServlet" method="post">
 			<div id="inhalt">
 				<h4>Neue Rolle anlegen</h4>
 				<p><label for="name">Bezeichnung</label>
@@ -39,14 +39,14 @@
 			<div id="inhalt">
 				<h4>Rollen ändern</h4>
 				<c:forEach items="${roleList}" var="role">
-					<form action="./" method="post">
-						<p><input id="name" name="name" value="<jsp:getProperty property="name" name="role"/>" type="text" /><br /></p>
+					<form action="./ChangeRoleServlet" method="post">
+						<p><input id="name" name="name" value="${role.name}" type="text" /><br /></p>
 						<c:if test ="${not empty error }">
 							<c:if test="${error.errorCode == 138 }">
 								<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 							</c:if>	
 						</c:if>
-						<textarea id="description" name="description"><jsp:getProperty property="description" name="role"/></textarea>
+						<textarea id="description" name="description">${role.description}</textarea>
 						<c:if test ="${not empty error }">
 							<c:if test="${error.errorCode == 118 }">
 								<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>

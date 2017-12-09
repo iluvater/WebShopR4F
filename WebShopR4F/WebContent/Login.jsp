@@ -67,7 +67,14 @@
 				<c:if test="${error.errorCode == 109 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 				</c:if>	
-			</c:if>			
+			</c:if>
+			<p><label for="password2">Passwort wiederholen</label>
+			<input id="password2" placeholder="Passwort" name="password2" value="" type="password" /></p>
+			<c:if test ="${not empty error }">
+				<c:if test="${error.errorCode == 132 }">
+					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+				</c:if>	
+			</c:if>				
 		</div>
 		<hr/>
 		<div id="inhalt">
