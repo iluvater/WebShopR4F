@@ -41,8 +41,8 @@ public class OrderOverViewToDBServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String successURL = "Test.jsp";
-		String errorURL = "Test.jsp";
+		String successURL = "Bestellabschluss.jsp";
+		String errorURL = "Bestelluebersicht.jsp";
 		RequestDispatcher dispatcher;
 		OrderService orderService = new OrderService();
 		EmailService emailService = new EmailService();
@@ -66,8 +66,7 @@ public class OrderOverViewToDBServlet extends HttpServlet {
 			
 			//Send Mail
 			emailService.sendOrderConfirmation(order);
-			
-			
+
 			//successMessage
 			ErrorMessage successMessage = new ErrorMessage(601);
 			successMessage.setErrorMessage(successMessage.getErrorMessage().replaceAll("!orderId", Integer.toString(order.getId())));

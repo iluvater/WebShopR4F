@@ -89,15 +89,12 @@ public class DatabaseConnection {
 			try {
 
 				PreparedStatement preparedStatement = conn.prepareStatement(
-						"INSERT INTO `user` (`id`, `email`, `firstName`, `lastName`, `birthday`, `password`, `salutation`, `shoppingBasket`, `wishlist`)"
-								+ " VALUES (NULL, ?, ?, ?, ?, ?, ?, null, null)",
+						"INSERT INTO `user` (`id`, `email`, `birthday`, `password`, `shoppingBasket`, `wishlist`)"
+								+ " VALUES (NULL, ?, ?, ?, null, null)",
 						Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setString(1, user.getEmail());
-				preparedStatement.setString(2, user.getFirstName());
-				preparedStatement.setString(3, user.getLastName());
-				preparedStatement.setDate(4, new Date(user.getBirthday().getTime()));
-				preparedStatement.setString(5, user.getPassword());
-				preparedStatement.setString(6, user.getSalutation());
+				preparedStatement.setDate(2, new Date(user.getBirthday().getTime()));
+				preparedStatement.setString(3, user.getPassword());
 
 				int lines = preparedStatement.executeUpdate();
 
@@ -138,8 +135,8 @@ public class DatabaseConnection {
 				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT u.*, r.name , a.street, a.houseNumber, a.postCode, a.city "
-						+ "FROM user AS u INNER JOIN role AS r ON r.id = u.role INNER JOIN address AS a ON a.user = u.id "
+				String sql = "SELECT u.*, a.salutation, a.firstName, a.lastName, a.street, a.houseNumber, a.postCode, a.city "
+						+ "FROM user AS u INNER JOIN address AS a ON a.user = u.id "
 						+ "WHERE a.masterData='1' AND email=?";
 				
 				preparedStatement = conn.prepareStatement(sql);
@@ -160,7 +157,7 @@ public class DatabaseConnection {
 					String salutation = result.getString("salutation");
 					int shoppingBasket = result.getInt("shoppingBasket");
 					int wishlist = result.getInt("wishlist");
-					String role = result.getString("name");
+					List<Role> role = getRoleList(id);
 					user = new User(id, firstName, lastName, email, birthday, password, street, houseNumber, postCode,
 							city, salutation, shoppingBasket, role, wishlist);
 				}
@@ -190,7 +187,7 @@ public class DatabaseConnection {
 
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT u.*, r.name , a.street, a.houseNumber, a.postCode, a.city "
+				String sql = "SELECT u.*, r.name, a.salutation, a.firstName, a.lastName, a.street, a.houseNumber, a.postCode, a.city "
 						+ "FROM user AS u INNER JOIN role AS r ON r.id = u.role INNER JOIN address AS a ON a.user = u.id "
 						+ "WHERE a.masterData='1' AND u.id=?";
 				
@@ -213,7 +210,7 @@ public class DatabaseConnection {
 					String salutation = result.getString("salutation");
 					int shoppingBasket = result.getInt("shoppingBasket");
 					int wishlist = result.getInt("wishlist");
-					String role = result.getString("name");
+					List<Role> role = getRoleList(id);
 					user = new User(id, firstName, lastName, email, birthday, password, street, houseNumber, postCode,
 							city, salutation, shoppingBasket, role, wishlist);
 				}
@@ -239,19 +236,15 @@ public class DatabaseConnection {
 		if (conn != null) {
 
 			PreparedStatement preparedStatement = conn
-					.prepareStatement("UPDATE `user` SET `email` = ?, `firstName` = ?, `lastName` = ?, "
-							+ "`birthday` = ?, `password` = ?, `salutation` = ?, `shoppingBasket` = ?, "
-							+ "`role`= ?,  `wishlist` = ? WHERE `user`.`id` = ? ");
+					.prepareStatement("UPDATE `user` SET `email` = ?, "
+							+ "`birthday` = ?, `password` = ?, `shoppingBasket` = ?, "
+							+ " `wishlist` = ? WHERE `user`.`id` = ? ");
 			preparedStatement.setString(1, user.getEmail());
-			preparedStatement.setString(2, user.getFirstName());
-			preparedStatement.setString(3, user.getLastName());
-			preparedStatement.setDate(4, new Date(user.getBirthday().getTime()));
-			preparedStatement.setString(5, user.getPassword());
-			preparedStatement.setString(6, user.getSalutation());
-			preparedStatement.setInt(7, user.getShoppingBasket());
-			preparedStatement.setInt(8, getRoleId(user.getRole()));
-			preparedStatement.setInt(9, user.getWishlist());
-			preparedStatement.setInt(10, user.getId());
+			preparedStatement.setDate(2, new Date(user.getBirthday().getTime()));
+			preparedStatement.setString(3, user.getPassword());
+			preparedStatement.setInt(4, user.getShoppingBasket());
+			preparedStatement.setInt(5, user.getWishlist());
+			preparedStatement.setInt(6, user.getId());
 			
 			preparedStatement.executeUpdate();
 		}
@@ -991,21 +984,26 @@ public class DatabaseConnection {
 	 * @return return the id of the created entry in the data base. returns -1
 	 *         if no entry was created
 	 */
-	public int createAddressInDB(int userId, String street, String houseNumber, String postCode, String city,
-			boolean masterData) {
+	public int createAddressInDB(int userId, String firstName, String lastName, String street, String houseNumber, String postCode, String city,
+			boolean masterData, String salutation) {
 		conn = getInstance();
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
 			try {
-				String sql = "INSERT INTO address (street, houseNumber, postCode, city, masterData, user) values (?, ?, ?, ?, ?, ?)";
+				String sql = "INSERT INTO address (firstName, lastName, street, houseNumber, postCode, city, masterData, user, salutation)"
+						+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-				preparedStatement.setString(1, street);
-				preparedStatement.setString(2, houseNumber);
-				preparedStatement.setString(3, postCode);
-				preparedStatement.setString(4, city);
-				preparedStatement.setBoolean(5, masterData);
-				preparedStatement.setInt(6, userId);
+				preparedStatement.setString(1, firstName);
+				preparedStatement.setString(2, lastName);
+				preparedStatement.setString(3, street);
+				preparedStatement.setString(4, houseNumber);
+				preparedStatement.setString(5, postCode);
+				preparedStatement.setString(6, city);
+				preparedStatement.setBoolean(7, masterData);
+				preparedStatement.setInt(8, userId);
+				preparedStatement.setString(9, salutation);
+				
 
 				int lines = preparedStatement.executeUpdate();
 
@@ -1037,21 +1035,24 @@ public class DatabaseConnection {
 	 * @param city the new City
 	 * @throws SQLException
 	 */
-	public void updateAddressInDB(int userId, String street, String houseNumber, String postCode, String city) throws SQLException {
+	public void updateAddressInDB(int userId, String firstName, String lastName, String street, String houseNumber, String postCode, String city, String salutation) throws SQLException {
 		conn = getInstance();
 
 		if (conn != null) {
 
 			PreparedStatement preparedStatement = conn.prepareStatement(
 					"UPDATE `address` SET `street` = ?, `houseNumber` = ?, `postCode` = ?, "
-							+ "`city` = ? WHERE `address`.`user` = ? AND `masterData`= ?",
+							+ "`city` = ?, `firstname` = ?, `lastname` = ?, `salutation` = ? WHERE `address`.`user` = ? AND `masterData`= ?",
 					Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, street);
 			preparedStatement.setString(2, houseNumber);
 			preparedStatement.setString(3, postCode);
 			preparedStatement.setString(4, city);
-			preparedStatement.setInt(5, userId);
-			preparedStatement.setBoolean(6,true);
+			preparedStatement.setString(5, firstName);
+			preparedStatement.setString(6, lastName);
+			preparedStatement.setString(7, salutation);
+			preparedStatement.setInt(8, userId);
+			preparedStatement.setBoolean(9,true);
 
 
 			preparedStatement.executeUpdate();
@@ -1073,17 +1074,20 @@ public class DatabaseConnection {
 				preparedStatement.setInt(1, userId);
 				preparedStatement.setBoolean(2, masterData);
 				
-				ResultSet result = preparedStatement.executeQuery(sql);
+				ResultSet result = preparedStatement.executeQuery();
 
 				// Ergebnissätze durchfahren.
 				if (result.next()) {
+					String salutation = result.getString("salutation");
+					String firstName = result.getString("firstName");
+					String lastName = result.getString("lastName");
 					String street = result.getString("street");
 					String houseNumber = result.getString("houseNumber");
 					String postCode = result.getString("postCode");
 					String city = result.getString("city");
 					int id = result.getInt("id");
 					
-					address = new Address(id, street, houseNumber, postCode, city);
+					address = new Address(id, firstName, lastName, street, houseNumber, postCode, city, salutation);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -1103,12 +1107,13 @@ public class DatabaseConnection {
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
 			try {
-				String sql = "INSERT INTO orders (id, entryDate, user, deliveryAddress, billingAddress, paymentMethod) values (null, null, ?, ?, ?, ?)";
+				String sql = "INSERT INTO orders (id, entryDate, user, deliveryAddress, billingAddress, paymentMethod, deliveryDate) values (null, null, ?, ?, ?, ?, ?)";
 				PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, order.getUser().getId());
 				preparedStatement.setInt(2, order.getDeliveryAddress().getId());
 				preparedStatement.setInt(3, order.getBillingAddress().getId());
 				preparedStatement.setInt(4, getPaymentMethodId(order.getPaymentMethod()));
+				preparedStatement.setDate(5, new Date(order.getDeliveryDate().getTime()));
 
 				int lines = preparedStatement.executeUpdate();
 
@@ -1175,16 +1180,17 @@ public class DatabaseConnection {
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
 			try {
-				String sql = "INSERT INTO orderitem (order, position, amount, price, article, size, color) values (?, ?, ?, ?, ?, ?, ?)";
+				String sql = "INSERT INTO `orderitem` (`orders`, `position`, `article`, `amount`, `price`, `color`, `size`) "
+						+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 				PreparedStatement preparedStatement = conn.prepareStatement(sql);
 				preparedStatement.setInt(1, orderId);
 				preparedStatement.setInt(2, item.getPosition());
-				preparedStatement.setInt(3, item.getAmount());
-				preparedStatement.setDouble(4, item.getArticle().getPrice());
-				preparedStatement.setInt(5, item.getArticle().getId());
+				preparedStatement.setInt(3, item.getArticle().getId());
+				preparedStatement.setInt(4, item.getAmount());
+				preparedStatement.setDouble(5, item.getArticle().getPrice());
 				preparedStatement.setInt(6, getSizeId(item.getSize()));
 				preparedStatement.setInt(7, getColorId(item.getColor()));
-
+				
 				preparedStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -1223,10 +1229,11 @@ public class DatabaseConnection {
 					Date entryDate = result.getDate("entryDate");
 					Address deliveryAddress = getAddress(result.getInt("deliveryAddress"));
 					Address billingAddress = getAddress(result.getInt("billingAddress"));
+					Date deliveryDate = result.getDate("deliveryDate");
 					String paymentMethod = result.getString("paymentMethod");
 					List<OrderItem> orderItems = getOrderItems(id);
 
-					order = new Order(id, entryDate, deliveryAddress, billingAddress, paymentMethod, orderItems);
+					order = new Order(id, entryDate, deliveryAddress, billingAddress, paymentMethod, orderItems, deliveryDate);
 					orderList.add(order);
 				}
 			} catch (SQLException e) {
@@ -1299,13 +1306,16 @@ public class DatabaseConnection {
 
 				// Ergebnissätze durchfahren.
 				if (result.next()) {
+					String salutation = result.getString("salutation");
+					String firstName = result.getString("firstName");
+					String lastName = result.getString("lastName");
 					String street = result.getString("street");
 					String houseNumber = result.getString("houseNumber");
 					String postCode = result.getString("postCode");
 					String city = result.getString("city");
 					id = result.getInt("id");
 					
-					address = new Address(id, street, houseNumber, postCode, city);
+					address = new Address(id, firstName, lastName, street, houseNumber, postCode, city, salutation);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -1412,7 +1422,7 @@ public class DatabaseConnection {
 				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT w.id, w.article, s.size, c.name FROM wishlistitem AS w "
+				String sql = "SELECT w.id, w.article, s.size AS size, c.name AS color FROM wishlistitem AS w "
 						+ "INNER JOIN size AS s ON w.size = s.id "
 						+ "INNER JOIN color AS c ON w.color = c.id "
 						+ "WHERE wishlist=?";
@@ -1489,8 +1499,9 @@ public class DatabaseConnection {
 				while (result.next()) {
 					int id = result.getInt("id");
 					String name = result.getString("name");
-
-					Role role = new Role(id, name);
+					String description = result.getString("description");
+					
+					Role role = new Role(id, name, description);
 					roles.add(role);
 
 				}
@@ -1502,12 +1513,8 @@ public class DatabaseConnection {
 		return roles;
 	}
 	
-	/**
-	 * This method selects a list of all authorizations from the database
-	 * @return returns a list of all authorizations
-	 */
-	public List<Authorization> getAuthorizationList(){
-		List<Authorization> authorizations = new ArrayList<Authorization>() ;
+	public List<Role> getRoleList(int userId){
+		List<Role> roles = new ArrayList<Role>() ;
 		
 		conn = getInstance();
 
@@ -1518,9 +1525,10 @@ public class DatabaseConnection {
 				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT * FROM authorization";
+				String sql = "SELECT r.* FROM mappinguserrole AS m INNER JOIN role AS R ON m.role = r.id WHERE m.user = ?";
 				
 				statement = conn.prepareStatement(sql);
+				statement.setInt(1, userId);
 				ResultSet result = statement.executeQuery();
 
 				// Ergebnissätze durchfahren.
@@ -1528,9 +1536,9 @@ public class DatabaseConnection {
 					int id = result.getInt("id");
 					String name = result.getString("name");
 					String description = result.getString("description");
-
-					Authorization authorization = new Authorization(id, name, description);
-					authorizations.add(authorization);
+					
+					Role role = new Role(id, name, description);
+					roles.add(role);
 
 				}
 			} catch (SQLException e) {
@@ -1538,50 +1546,7 @@ public class DatabaseConnection {
 			}
 		}
 		
-		return authorizations;
-	}
-	
-	/**
-	 * This method returns a list of all mappings of roles and authorizations
-	 * @return returns a list of all mappings
-	 */
-	public List<AuthorizationMapping> getAuthorizationMapping(){
-		List<AuthorizationMapping> mappings = new ArrayList<AuthorizationMapping>() ;
-		
-		conn = getInstance();
-
-		if (conn != null) {
-			// Anfrage-Statement erzeugen.
-			PreparedStatement statement;
-			try {
-				
-
-				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT m.id AS id, r.id AS r_id, r.name AS role, a.id AS a_id, a.name AS authorization, a.description AS description "
-						+ "FROM mappingroleauthorization AS m "
-						+ "INNER JOIN role AS r ON m.role = r.id "
-						+ "INNER JOIN authorization AS a ON m.authorization = a.id";
-				
-				statement = conn.prepareStatement(sql);
-				ResultSet result = statement.executeQuery();
-
-				// Ergebnissätze durchfahren.
-				while (result.next()) {
-					int id = result.getInt("id");
-					Role role = new Role(result.getInt("r_id"), result.getString("role"));
-					Authorization authorization = new Authorization(result.getInt("a_id"), result.getString("authorization"), result.getString("description"));
-					
-					AuthorizationMapping mapping = new AuthorizationMapping(id, role, authorization);
-					
-					mappings.add(mapping);
-
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return mappings;
+		return roles;
 	}
 	
 	/**
@@ -1597,9 +1562,10 @@ public class DatabaseConnection {
 			try {
 
 				PreparedStatement preparedStatement = conn.prepareStatement(
-						"INSERT INTO `role` (`id`, `name`) " + "VALUES (NULL, ?)",
+						"INSERT INTO `role` (`id`, `name`, `description`) " + "VALUES (NULL, ?, ?)",
 						Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setString(1, role.getName());
+				preparedStatement.setString(2, role.getDescription());
 
 				int lines = preparedStatement.executeUpdate();
 
@@ -1622,67 +1588,7 @@ public class DatabaseConnection {
 		}
 	}
 	
-	/**
-	 * This method creates a new mapping in the database
-	 * @param mapping the mapping that should be created
-	 * @return returns the id of the new mapping returns -1 if no mapping was created
-	 */
-	public int createAuthorizationMapping(AuthorizationMapping mapping){
-		conn = getInstance();
-
-		if (conn != null) {
-
-			try {
-
-				PreparedStatement preparedStatement = conn.prepareStatement(
-						"INSERT INTO `mappingroleauthorization` (`id`, `authorization`, `role`) " + "VALUES (NULL, ?, ?)",
-						Statement.RETURN_GENERATED_KEYS);
-				preparedStatement.setInt(1, mapping.getAuthorization().getId());
-				preparedStatement.setInt(2, mapping.getRole().getId());
-
-				int lines = preparedStatement.executeUpdate();
-
-				if (lines != 0) {
-					ResultSet result = preparedStatement.getGeneratedKeys();
-					if (result.next()) {
-						return result.getInt(1);
-					} else {
-						return -1;
-					}
-				} else {
-					return -1;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-				return -1;
-			}
-		} else {
-			return -1;
-		}
-	}
 	
-	/**
-	 * This method deletes an mapping of a role and an authorization in the database
-	 * @param mapping the mapping that should be deleted
-	 */
-	public void deleteAuthorizationMapping(AuthorizationMapping mapping){
-		conn = getInstance();
-
-		if (conn != null) {
-
-			try {
-
-				PreparedStatement preparedStatement = conn.prepareStatement(
-						"DELETE FROM `mappingroleauthorization` WHERE `id` = ?");
-				preparedStatement.setInt(1, mapping.getId());
-
-				preparedStatement.executeUpdate();
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
 	
 	/**
 	 * This method selects all sizes for an article
@@ -1989,5 +1895,254 @@ public class DatabaseConnection {
 		}
 
 		return id;
+	}
+	
+	/**
+	 * This method creates a mapping of a role and a user
+	 * @param user the user
+	 * @param role the role
+	 * @return returns the id of the new entry in the database, returns -1 if no entry was created
+	 */
+	public int createRoleMapping(User user, Role role){
+		conn = getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement preparedStatement = conn.prepareStatement(
+						"INSERT INTO `mappinguserrole` (`user`, `role`) " + "VALUES ( ?, ?)",
+						Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setInt(1, role.getId());
+				preparedStatement.setInt(2, user.getId());
+
+				int lines = preparedStatement.executeUpdate();
+
+				if (lines != 0) {
+					ResultSet result = preparedStatement.getGeneratedKeys();
+					if (result.next()) {
+						return result.getInt(1);
+					} else {
+						return -1;
+					}
+				} else {
+					return -1;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return -1;
+			}
+		} else {
+			return -1;
+		}
+	}
+	
+	/**
+	 * This method deletes all mappings of a user and his roles
+	 * @param user the user who´s roles should be deleted
+	 */
+	public void deleteRoleMappings(User user){
+		conn = getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement preparedStatement = conn.prepareStatement(
+						"DELETE FROM `mappinguserrole` WHERE `user` = ?");
+				preparedStatement.setInt(1, user.getId());
+
+				preparedStatement.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * This method selects a role from the database
+	 * @param roleId the roleId
+	 * @return the role or null if no role was selected
+	 */
+	public Role getRole(int roleId){
+		Role role = null;
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			PreparedStatement preparedStatement;
+			try {
+				
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT * FROM role WHERE id=?";
+				preparedStatement = conn.prepareStatement(sql);
+				preparedStatement.setInt(1, roleId);
+				ResultSet result = preparedStatement.executeQuery();
+
+				// Ergebnissätze durchfahren.
+				if (result.next()) {
+					int id = result.getInt("id");
+					String name = result.getString("name");
+					String description = result.getString("description");
+					
+					role = new Role(id, name, description);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return role;
+	}
+
+	/**
+	 * This method updates a role in the databasae
+	 * @param role the rol containing the new values
+	 * @throws SQLException will be thrown if an error occures during update
+	 */
+	public void updateRoleInDB(Role role)  throws SQLException{
+		conn = getInstance();
+
+		if (conn != null) {
+
+			PreparedStatement preparedStatement = conn
+					.prepareStatement("UPDATE `role` SET `name`= ?, `description` = ? WHERE `role`.`id` = ? ");
+			preparedStatement.setInt(1, role.getId());
+			preparedStatement.setString(2, role.getName());
+			preparedStatement.setString(3, role.getDescription());
+			
+			
+			preparedStatement.executeUpdate();
+		}
+	}
+	
+	/**
+	 * This method selects a list of all user from the database
+	 * @return a list of all user in the database
+	 */
+	public List<User> getUserList() {
+		List<User> userList = new ArrayList<User>();
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			PreparedStatement preparedStatement;
+			try {
+				
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT u.*, a.salutation, a.firstName, a.lastName, a.street, a.houseNumber, a.postCode, a.city "
+						+ "FROM user AS u INNER JOIN address AS a ON a.user = u.id "
+						+ "WHERE a.masterData='1'";
+				
+				preparedStatement = conn.prepareStatement(sql);
+				ResultSet result = preparedStatement.executeQuery();
+
+				// Ergebnissätze durchfahren.
+				while (result.next()) {
+					User user;
+					int id = result.getInt("id");
+					String email = result.getString("email");
+					String firstName = result.getString("firstName");
+					String lastName = result.getString("lastName");
+					Date birthday = result.getDate("birthday");
+					String password = result.getString("password");
+					String street = result.getString("street");
+					String houseNumber = result.getString("houseNumber");
+					String postCode = result.getString("postCode");
+					String city = result.getString("city");
+					String salutation = result.getString("salutation");
+					int shoppingBasket = result.getInt("shoppingBasket");
+					int wishlist = result.getInt("wishlist");
+					List<Role> role = getRoleList(id);
+					user = new User(id, firstName, lastName, email, birthday, password, street, houseNumber, postCode,
+							city, salutation, shoppingBasket, role, wishlist);
+					userList.add(user);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return userList;
+	}
+
+	/**
+	 * This method deletes a mapping of a role and an user 
+	 * @param userId the id of the user
+	 * @param roleId the id of the role
+	 */
+	public void deleteUserRoleMapping(int userId, int roleId) {
+		conn = getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement preparedStatement = conn.prepareStatement(
+						"DELETE FROM `mappinguserrole` WHERE `user` = ? AND role =?");
+				preparedStatement.setInt(1, userId);
+				preparedStatement.setInt(2, roleId);
+
+				preparedStatement.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * This method returns a list of user that contain the search pattern in their last name, id, email
+	 * @param searchPattern the search pattern 
+	 * @return the list of users
+	 */
+	public List<User> getUserListSearchPattern(String searchPattern) {
+		List<User> userList = new ArrayList<User>();
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			PreparedStatement preparedStatement;
+			try {
+				
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT u.*, a.salutation, a.firstName, a.lastName, a.street, a.houseNumber, a.postCode, a.city "
+						+ "FROM `user` AS u INNER JOIN address AS a On a.user = u.id WHERE a.masterData='1' AND "
+						+ "( u.id  LIKE "+ searchPattern + " OR a.lastName LIKE "+ searchPattern + " OR u.email LIKe "+ searchPattern + ");";
+				
+				preparedStatement = conn.prepareStatement(sql);
+				ResultSet result = preparedStatement.executeQuery();
+
+				// Ergebnissätze durchfahren.
+				while (result.next()) {
+					User user;
+					int id = result.getInt("id");
+					String email = result.getString("email");
+					String firstName = result.getString("firstName");
+					String lastName = result.getString("lastName");
+					Date birthday = result.getDate("birthday");
+					String password = result.getString("password");
+					String street = result.getString("street");
+					String houseNumber = result.getString("houseNumber");
+					String postCode = result.getString("postCode");
+					String city = result.getString("city");
+					String salutation = result.getString("salutation");
+					int shoppingBasket = result.getInt("shoppingBasket");
+					int wishlist = result.getInt("wishlist");
+					List<Role> role = getRoleList(id);
+					user = new User(id, firstName, lastName, email, birthday, password, street, houseNumber, postCode,
+							city, salutation, shoppingBasket, role, wishlist);
+					userList.add(user);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return userList;
 	}
 }

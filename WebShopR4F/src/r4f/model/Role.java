@@ -10,30 +10,36 @@ package r4f.model;
 public class Role {
 	private int id;
 	private String name;
+	private String description;
 	
 	/**
 	 * Constructor for being a bean
 	 */
 	public Role(){
 		name = null;
+		description = null;
 	}
 	
 	/**
-	 * Constructor for an role that is already stored in the database
-	 * @param id the id to set
-	 * @param name the name to set
+	 * constructor for a role that is stored in the database
+	 * @param id the id of the role
+	 * @param name the name of the role
+	 * @param description the description of the role
 	 */
-	public Role(int id, String name){
+	public Role(int id, String name, String description){
 		this.id = id;
 		this.name = name;
+		this.description = description;
 	}
 	
 	/**
-	 * Constructor for a role that is not stared in the database yet
-	 * @param name the name to set
+	 * constructor for a role that is not stored in the database yet
+	 * @param name the name of the role
+	 * @param description the description of the role
 	 */
-	public Role(String name){
+	public Role( String name, String description){
 		this.name = name;
+		this.description = description;
 	}
 	
 	/**
@@ -60,7 +66,17 @@ public class Role {
 	public void setName(String name) {
 		this.name = name;
 	}
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	
-	
-
 }

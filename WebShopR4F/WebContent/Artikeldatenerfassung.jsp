@@ -1,28 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<%@ include file="Head.jspf" %>
 <title>Artikeldatenerfassung</title>
-<link href="DesignV1.css" rel="stylesheet">
-</head>
-<body>
+<%@ include file="Header.jspf" %>
 
 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
-	</jsp:useBean> 
-	
-	<div id="kopf">
-		<h1>Ãœberschrift Test</h1>
-	</div>
+	</jsp:useBean>
+	<jsp:useBean id="success" class="r4f.model.ErrorMessage" scope="request">
+	</jsp:useBean>  
 	
 	<div id="container">
 		<form action="./ArticleCreationServlet" method="post" enctype="multipart/form-data">
 		<h2>Artikeldatenerfassung</h2>
 		<div id="inhalt">
 			<h4>Artikeldaten einpflegen</h4>	
-			<p><label for="bezeichnung1">Bezeichnung</label>
+			
+			<p><label for="bezeichnung1">Bezeichnung:</label>
 			<input id="bezeichnung1" name="name" value="" type="text" /><br /></p>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 117 }">
@@ -30,29 +21,68 @@
 				</c:if>	
 			</c:if>
 
-			<p><label for="preis1">Preis</label>
+			<p><label for="preis1">Preis:</label>
 			<input id="preis1" name="price" min="0" value="" type="number" step="0.01" /></p>
-
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 115 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 				</c:if>	
 			</c:if>
-			<p><label for="groesse1">Gr&ouml&szlige</label>
+			
+<%-- 			<p><label for="groesse1">Gr&ouml;&szlig;e:</label>
 			<input id="groesse1" name="size" min="20" value="" type="number" /></p>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 116 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 				</c:if>	
+			</c:if> --%>
+			
+			<p><label for="size" class="artikeldaten">Gr&ouml;&szlig;e:</label></p>
+			<fieldset>
+				<input type="checkbox" id="size" name="size" value="1"> 36<br />
+				<input type="checkbox" id="size" name="size" value="2"> 37<br />
+				<input type="checkbox" id="size" name="size" value="3"> 38<br />
+				<input type="checkbox" id="size" name="size" value="4"> 39<br />
+				<input type="checkbox" id="size" name="size" value="5"> 40<br />
+				<input type="checkbox" id="size" name="size" value="6"> 41<br />
+				<input type="checkbox" id="size" name="size" value="7"> 42<br />
+				<input type="checkbox" id="size" name="size" value="8"> 43<br />
+				<input type="checkbox" id="size" name="size" value="9"> 44<br />
+				<input type="checkbox" id="size" name="size" value="10"> 45<br />
+  			</fieldset> 
+  			<c:if test ="${not empty error }">
+				<c:if test="${error.errorCode == 116 }">
+					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+				</c:if>	
 			</c:if>
-			<p><label for="farbe1">Farbe</label>
+			
+<%-- 			<p><label for="farbe1">Farbe:</label>
 			<input id="farbe1" name="color" value="" type="text" /></p>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 120 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 				</c:if>	
-			</c:if>
- 			<p><label for="hersteller">Hersteller</label> 
+			</c:if> --%>
+			
+			<p><label for="color" class="artikeldaten">Farbe:</label> </p>
+			<fieldset>
+          		<input type="checkbox" id="color" name="color" value="1" ${filter.color1}> Gelb<br />
+           		<input type="checkbox" id="color" name="color" value="2" ${filter.color2}> Orange<br />
+          		<input type="checkbox" id="color" name="color" value="3" ${filter.color3}> Rot<br />
+          		<input type="checkbox" id="color" name="color" value="4" ${filter.color4}> Pink<br />
+          		<input type="checkbox" id="color" name="color" value="5" ${filter.color5}> Grün<br />
+          		<input type="checkbox" id="color" name="color" value="6" ${filter.color6}> Blau<br />
+          		<input type="checkbox" id="color" name="color" value="7" ${filter.color7}> Schwarz<br />
+          		<input type="checkbox" id="color" name="color" value="8" ${filter.color8}> Weiß<br />
+  			</fieldset>
+  			<c:if test ="${not empty error }">
+				<c:if test="${error.errorCode == 120 }">
+					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+				</c:if>	
+			</c:if>	
+			
+			
+ 			<p><label for="hersteller">Hersteller:</label> 
  			<select name="manufacturer">
  				<option value="">Bitte w&aumlhlen</option>
  				<option value="Nike">Nike</option>
@@ -66,7 +96,8 @@
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 				</c:if>	
 			</c:if>
-			<p><label for="kategorie">Kategorie</label> 
+			
+			<p><label for="kategorie">Kategorie:</label> 
 			<select name="category">
 				<option value="">Bitte w&aumlhlen</option>
  				<option value="Herren">Herren</option>
@@ -77,7 +108,8 @@
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 				</c:if>	
 			</c:if>
-			<p><label for="sportart">Sportart</label> 
+			
+			<p><label for="sportart">Sportart:</label> 
  			<select name="sport">
  			<option value="">Bitte w&aumlhlen</option>
  				<option value="Laufen">Laufen</option>
@@ -90,15 +122,17 @@
 				<c:if test="${error.errorCode == 123 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 				</c:if>	
-			</c:if>		
-			<p><label for="image1">Bild</label>
+			</c:if>	
+				
+			<p><label for="image1">Bild:</label>
 			<input id="image1" name="image" type="file"/></p>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 124 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 				</c:if>	
-			</c:if>				
-			<p><label for="beschreibung">Beschreibung</label>
+			</c:if>		
+					
+			<p><label for="beschreibung">Beschreibung:</label>
 			<textarea id="textarea_fest" name="description" cols=37></textarea>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 118 }">
@@ -117,9 +151,5 @@
 		</center> 
 		</form>
 	</div>
-
-	<div id="fuss">
-		<p class="footer"><a class="footer" href="Test.jsp">AGB's</a> <a class="footer" href="Test.jsp">Kontaktseite</a> <a class="footer" href="Test.jsp">Impressum</a> <a class="footer" href="Test.jsp">Hilfeseite</a> Â© 2017 Run4Fun GmbH, Alle Rechte vorbehalten</p>
-	</div>	
 </body>
 </html>

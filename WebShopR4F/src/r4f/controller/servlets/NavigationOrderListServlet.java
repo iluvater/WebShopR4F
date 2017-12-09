@@ -55,7 +55,7 @@ public class NavigationOrderListServlet extends HttpServlet {
 			
 			dispatcher = request.getRequestDispatcher(successURL);
 			dispatcher.forward(request, response);
-			
+			return;
 		}else{
 			//Errorhandling please login			
 			dispatcher = request.getRequestDispatcher(errorURL);

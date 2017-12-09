@@ -1,20 +1,50 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Registrierungsmaske</title>
+<title>Login</title>
 <link href="DesignV1.css" rel="stylesheet">
 </head>
-<body>
+<body> --%>
+<%@ include file="Head.jspf" %>
+<title>Login</title>
+<%@ include file="Header.jspf" %>
+
 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
 	</jsp:useBean> 
 	
 	<div id="container">
-		<h2>Neu bei Run4Fun? </h2>
-		<h3>Herzlich Willkommen! Noch ein paar Infos angeben, bevor es losgeht... </h3>
+		<h2 class="center">Dein Konto für alles von Run 4 Fun</h2>
+		<h3 class="center">Bereits Kunde bei Run 4 Fun?</h3>
+		<form action="./LoginServlet" method="post">
+			<div id="inhalt">
+				<h4>Log-In Daten</h4>			
+				<p><label for="email">E-Mailadresse</label>
+				<input id="email" placeholder="E-Mailadresse" name="email" value="" type="email" /><br /></p>
+				<c:if test ="${not empty error }">
+					<c:if test="${error.errorCode == 106 }">
+						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+					</c:if>	
+				</c:if>	
+				<p><label for="password">Passwort</label>
+				<input id="password" placeholder="Passwort" name="password" value="" type="password" /></p>
+				<c:if test ="${not empty error }">
+					<c:if test="${error.errorCode == 114 }">
+						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+					</c:if>	
+				</c:if>	
+			</div>
+		<hr />
+		<center>
+			<input type="submit" id="button" value="Login" />
+		</center> 
+		</form>
+		<br />
+	
+		<h3 class="center">Noch kein Mitglied? Jetzt registrieren...</h3>
 		<form action="./RegistrationServlet" method="post">
 		<div id="inhalt">
 			<h4>Log-In Daten</h4>			

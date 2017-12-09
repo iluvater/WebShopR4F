@@ -39,7 +39,7 @@ public class OrderCheckoutServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String successURL = "Test.jsp";
+		String successURL = "Bestellung.jsp";
 		RequestDispatcher dispatcher;
 		
 		ShoppingBasket shoppingBasket = null;
@@ -47,7 +47,7 @@ public class OrderCheckoutServlet extends HttpServlet {
 		User user = null;;
 		
 		shoppingBasket = (ShoppingBasket)request.getSession().getAttribute("shoppingBasket");
-		user = (User)request.getSession().getAttribute("User");
+		user = (User)request.getSession().getAttribute("user");
 		
 		if(user == null || shoppingBasket == null){
 			// Errorhandling not logged in

@@ -63,8 +63,8 @@ public class LoginServlet extends HttpServlet {
 		RequestDispatcher dispatcher;
 		Article article;
 
-		String errorURL = "Benutzerauthentifizierung.jsp";
-		String successURL = "Willkommen.jsp";
+		String errorURL = "Login.jsp";
+		String successURL = "./NavigationOverviewSerlvet.jsp";
 		String shoppingBasketURL = "./AddToShoppingBasketServlet";
 		String wishlistURL = "./AddToWishlistServlet";
 

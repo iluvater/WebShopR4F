@@ -54,7 +54,7 @@ public class RegistrationServlet extends HttpServlet {
 		User user;
 		UserService userService;
 		RequestDispatcher dispatcher;
-		String errorURL = "Registrierungsmaske.jsp";
+		String errorURL = "Login.jsp";
 		String successURL = "BestaetigungsCode.jsp";
 		int year, month, day;
 		HashService hashService;

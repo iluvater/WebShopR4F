@@ -20,46 +20,50 @@ import r4f.model.Article;
 @WebServlet("/SearchServlet")
 public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SearchServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public SearchServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doPost(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-				String successURL = "Uebersichtsseite.jsp";
-				
-				RequestDispatcher dispatcher;
-				FilterList filterList = null; 
-				String searchPattern = request.getParameter("search");
-				
-				request.getSession().removeAttribute("filterList");
-				request.getSession().removeAttribute("filter");
-				if(filterList ==null){
-					filterList = new FilterList();
-				}		
-				
-				ArticleService articleService = new ArticleService();
-				List<Article> articles = articleService.getArticleListSearch(searchPattern);
-				request.setAttribute("articleList", articles);
-				
-				dispatcher = request.getRequestDispatcher(successURL);
-				dispatcher.forward(request, response);
-				return;
+		String successURL = "Uebersichtsseite.jsp";
+
+		RequestDispatcher dispatcher;
+		FilterList filterList = null;
+		String searchPattern = request.getParameter("search");
+
+		request.getSession().removeAttribute("filterList");
+		request.getSession().removeAttribute("filter");
+		if (filterList == null) {
+			filterList = new FilterList();
+		}
+
+		ArticleService articleService = new ArticleService();
+		List<Article> articles = articleService.getArticleListSearch(searchPattern);
+		request.setAttribute("articleList", articles);
+
+		dispatcher = request.getRequestDispatcher(successURL);
+		dispatcher.forward(request, response);
+		return;
 	}
 
 }

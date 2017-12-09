@@ -49,6 +49,15 @@ label {
 	/* margin-left: 26%; */
 }
 
+label.artikel{
+	width: 3em;
+	border: none;
+	align: left; 
+	/* margin-bottom: 1em; */
+	/* clear:left; */
+	/* display: inline; */
+}
+
 header {
 	background-color: #2f528f;
 	width: 100%;
@@ -104,9 +113,22 @@ h3.impressum {
 	padding-left: 15px;
 }
 
+.center {
+	text-align: center;
+}
+
+.right {
+	text-align: right;
+}
+
 h4.agb {
 	padding-left: 15px;
-} 
+}
+p.erlaeuterung {
+	padding-right: 15px;
+	color: gray;
+}
+ 
 
 h3.artikelDetails {
 	padding-left: 15px;
@@ -163,6 +185,23 @@ p.fehler {
 	font-size:8pt;
 	font-family: arial;
 	color: #FF0000;
+}
+
+p.erfolg {
+	font-size:8pt;
+	font-family: arial;
+	color: #64FE2E;
+}
+
+p.deliveryDate{
+	font-size: 10pt;
+	color: green;
+}
+
+fieldset{
+	border:none;
+	margin: auto; 
+	padding: auto;
 }
 
 a.footer {
@@ -258,6 +297,15 @@ li.inline {
 	padding-top: 2px;
 	padding-bottom: 5px;
 }
+#uebersicht {
+	width: 100%; 
+	margin-left:4%;
+/* 	margin-right: 0%;
+	padding-top: 2px;
+	padding-right:0px; 
+	padding-top: 2px;
+	padding-bottom: 5px; */
+}
 
 #checkboxRegistrierung{
 	width: 70%; 
@@ -308,7 +356,8 @@ div.warenkorbLeer {
 }
 
 #containerButtonUebersicht {
-	padding-left: 4.5em; 
+	padding-left: 25%;
+	padding-right: 25%;
 }
 
 p.artikelUebersicht{
@@ -368,9 +417,12 @@ p.artikelUebersicht{
 	line-height: 3em;
 }
 
-#paddingLeft {
-	padding-left: 15px;
+.paddingLeft1{
 	margin-left: 15px;
+}
+
+#paddingLeft2 {
+	margin-left: 30px;
 }
 
 #containerAgb {
@@ -450,6 +502,14 @@ div.containerArtikelDetails {
 .ImgWarenkorb {
 	width: 200px;
 	height: 150px;
+/* 	border-color: black;
+	border-width: 1px;
+	border-style: solid; */
+}
+
+.ImgBestellung {
+	width: 100px;
+	height: 75px;
 /* 	border-color: black;
 	border-width: 1px;
 	border-style: solid; */
@@ -536,6 +596,16 @@ h4 {
 
 }
 
+.gesamtpreisUebersicht { 
+	position: relative; 
+	float: right;
+	margin-top: 2%; 
+	width: 15%;
+	right: 5%;
+	 
+
+}
+
 #weiterEinkaufen { 
 	position:relative;
 	top: 2%;
@@ -575,6 +645,7 @@ h4 {
 #ablauf{
 	border:1px solid black;
 	width:600px;
+	text-align: center;
 }
 
 .bild{  
@@ -644,6 +715,7 @@ p {
 .containerLink:hover{
 	color: white;
 }
+
 
 #buttonEntfernen{
 	 background: none;

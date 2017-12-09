@@ -9,21 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.controller.services.EmailService;
+import r4f.controller.services.AuthorizationService;
 import r4f.model.ErrorMessage;
-import r4f.model.User;
 
 /**
- * Servlet implementation class SendConctactMailServlet
+ * Servlet implementation class CreateUserRoleMappingServlet
  */
-@WebServlet("/SendConctactMailServlet")
-public class SendConctactMailServlet extends HttpServlet {
+@WebServlet("/CreateUserRoleMappingServlet")
+public class CreateUserRoleMappingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SendConctactMailServlet() {
+    public CreateUserRoleMappingServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,50 +38,51 @@ public class SendConctactMailServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email, subject, body;
-		EmailService emailService;
 		RequestDispatcher dispatcher;
 		String errorURL = "Test.jsp";
-		String successURL = "Willkommen.jsp";
+		String successURL = "Test.jsp";
+		int userId;
+		String role;
+		AuthorizationService authorizationService;
 		
-		email = request.getParameter("email");
-		subject = request.getParameter("subject");
-		body = request.getParameter("body");
-		
-		if(email != null && !email.equals("") && User.checkEmail(email)){
-			if(subject != null && !subject.equals("")){
-				if(body != null && !body.equals("")){
-					emailService = new EmailService();
-					body = "Antwort an: " + email + " <br><br>";
-					emailService.sendContactMail(subject, body);
-					
-					dispatcher = request.getRequestDispatcher(successURL);
-					dispatcher.forward(request, response);
-					return;
-				}else{
-					//Error handling missing input
-					ErrorMessage errorMessage = new ErrorMessage(134);
-					request.setAttribute("error", errorMessage);
-					dispatcher = request.getRequestDispatcher(errorURL);
-					dispatcher.forward(request, response);
-					return;
-				}
+		try{
+			userId = Integer.parseInt(request.getParameter("userID"));
+			role = request.getParameter("role");
+			authorizationService = new AuthorizationService();
+			if(role!=null && !role.equals("")){
+			int id = authorizationService.createUserRoleMapping(userId, role);
+			if(id != -1){
+				//success
+				ErrorMessage successMessage = new ErrorMessage(603);
+				request.setAttribute("success", successMessage);
+				dispatcher = request.getRequestDispatcher(successURL);
+				dispatcher.forward(request, response);
 			}else{
-				//Error handling missing input
-				ErrorMessage errorMessage = new ErrorMessage(133);
+				//something wrong during creating
+				ErrorMessage errorMessage = new ErrorMessage(126);
 				request.setAttribute("error", errorMessage);
 				dispatcher = request.getRequestDispatcher(errorURL);
 				dispatcher.forward(request, response);
 				return;
 			}
-		}else{
-			//Error handling missing input
-			ErrorMessage errorMessage = new ErrorMessage(132);
+			}else{
+				//Error missing input role
+				ErrorMessage errorMessage = new ErrorMessage(138);
+				request.setAttribute("error", errorMessage);
+				dispatcher = request.getRequestDispatcher(errorURL);
+				dispatcher.forward(request, response);
+				return;
+			}
+		}catch(NumberFormatException e){
+			//Error missing input userID
+			ErrorMessage errorMessage = new ErrorMessage(139);
 			request.setAttribute("error", errorMessage);
 			dispatcher = request.getRequestDispatcher(errorURL);
 			dispatcher.forward(request, response);
 			return;
 		}
+		
+		
 	}
 
 }

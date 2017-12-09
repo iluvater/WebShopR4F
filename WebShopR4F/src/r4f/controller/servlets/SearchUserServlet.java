@@ -1,6 +1,7 @@
 package r4f.controller.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,19 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.model.Wishlist;
+import r4f.controller.services.UserService;
+import r4f.model.User;
 
 /**
- * Servlet implementation class RemoveAllArticlesFromWishlistServlet
+ * Servlet implementation class SearchUserServlet
  */
-@WebServlet("/RemoveAllArticlesFromWishlistServlet")
-public class RemoveAllArticlesFromWishlistServlet extends HttpServlet {
+@WebServlet("/SearchUserServlet")
+public class SearchUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RemoveAllArticlesFromWishlistServlet() {
+    public SearchUserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,28 +32,22 @@ public class RemoveAllArticlesFromWishlistServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher;
-		String successURL = "Merkzettel.jsp";
-		String errorURL = "Login.jsp";
-		Wishlist wishlist;
+		String successURL = "Test.jsp";
 
-		wishlist = (Wishlist) request.getSession().getAttribute("wishlist");
-		
-		if (wishlist == null) {
-			// Errorhandling not logged in
-			dispatcher = request.getRequestDispatcher(errorURL);
-			dispatcher.forward(request, response);
-			return;
-		} else {			
-				wishlist.removeAllItems();			
-		}
+		RequestDispatcher dispatcher;
+		String searchPattern = request.getParameter("search");
+
+		UserService userService = new UserService();
+		List<User> users = userService.getUserSearchPattern(searchPattern);
+		request.setAttribute("userList", users);
+
 		dispatcher = request.getRequestDispatcher(successURL);
 		dispatcher.forward(request, response);
 		return;

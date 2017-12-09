@@ -39,8 +39,8 @@ public class RemoveArticleFromWishlistServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int articleId;
 		RequestDispatcher dispatcher;
-		String successURL = "Merkzettel.jsp";
-		String errorURL = "Benutzerauthentifizierung.jsp";
+		String successURL = "Merkliste.jsp";
+		String errorURL = "Login.jsp";
 		Wishlist wishlist;
 
 		try {

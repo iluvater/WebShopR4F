@@ -14,7 +14,7 @@ public class FilterList {
 	private List<FilterInterface> filters;
 	
 	public FilterList(){
-		filters = new ArrayList();
+		filters = new ArrayList<FilterInterface>();
 	}
 
 	/**

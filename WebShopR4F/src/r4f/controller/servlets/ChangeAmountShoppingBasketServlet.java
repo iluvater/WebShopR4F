@@ -41,7 +41,7 @@ public class ChangeAmountShoppingBasketServlet extends HttpServlet {
 		int articleId;
 		RequestDispatcher dispatcher;
 		String successURL = "WarenkorbVersuch2.jsp";
-		String errorURL = "Benutzerauthentifizierung.jsp";
+		String errorURL = "Login.jsp";
 		ShoppingBasket shoppingBasket;
 
 		try {

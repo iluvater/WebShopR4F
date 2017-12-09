@@ -19,25 +19,38 @@ public class Order {
 	private Address billingAddress;
 	private String paymentMethod;
 	private List<OrderItem> items;
+	private final double shippingPrice = 4.95;
+	private Date deliveryDate;
+	
 	
 	/**
-	 * Constructor that can be used if the order is already stored in the database
-	 * @param id the id to set
-	 * @param entryDate the entryDate to set
-	 * @param deliveryAddress the deliveryAddress to set
-	 * @param billingAddress the billingAddress to set
-	 * @param paymentMethod the paymentMethod to set
-	 * @param items the order items to set
+	 * Constructor that can be used if the order is already stored in the
+	 * database
+	 * 
+	 * @param id
+	 *            the id to set
+	 * @param entryDate
+	 *            the entryDate to set
+	 * @param deliveryAddress
+	 *            the deliveryAddress to set
+	 * @param billingAddress
+	 *            the billingAddress to set
+	 * @param paymentMethod
+	 *            the paymentMethod to set
+	 * @param items
+	 *            the order items to set
 	 */
-	public Order(int id, Date entryDate, Address deliveryAddress, Address billingAddress, String paymentMethod, List<OrderItem> items){
+	public Order(int id, Date entryDate, Address deliveryAddress, Address billingAddress, String paymentMethod,
+			List<OrderItem> items, Date deliveryDate) {
 		this.id = id;
 		this.entryDate = entryDate;
 		this.deliveryAddress = deliveryAddress;
 		this.billingAddress = billingAddress;
 		this.paymentMethod = paymentMethod;
 		this.items = items;
+		this.deliveryDate = deliveryDate;
 	}
-	
+
 	/**
 	 * Constructor that is needed for being a java bean
 	 */
@@ -48,6 +61,8 @@ public class Order {
 		billingAddress = null;
 		paymentMethod = null;
 		items = new ArrayList<OrderItem>();
+		this.deliveryDate = new Date();
+		deliveryDate.setTime(deliveryDate.getTime() + 604800000);
 	}
 
 	/**
@@ -139,77 +154,137 @@ public class Order {
 	public void setPaymentMethod(String paymentMethod) {
 		this.paymentMethod = paymentMethod;
 	}
-	
+
 	/**
 	 * This method adds an Article to the order
-	 * @param article the article to set
-	 * @param amount the amount of the article
+	 * 
+	 * @param article
+	 *            the article to set
+	 * @param amount
+	 *            the amount of the article
 	 */
-	public void addOrderItem(Article article, int amount, int size, String color){
-		OrderItem item = new OrderItem(getLastPosition()+1, amount, article.getPrice(), article , size, color);
+	public void addOrderItem(Article article, int amount, int size, String color) {
+		OrderItem item = new OrderItem(getLastPosition() + 1, amount, article.getPrice(), article, size, color);
 		items.add(item);
 	}
-	
+
 	/**
 	 * This method adds all items of a shoppingBasket to the order
-	 * @param shoppingBasket the shoppingBasket that should be add to the order
+	 * 
+	 * @param shoppingBasket
+	 *            the shoppingBasket that should be add to the order
 	 */
-	public void addShoppingBasket(ShoppingBasket shoppingBasket){
+	public void addShoppingBasket(ShoppingBasket shoppingBasket) {
 		for (ShoppingBasketItem item : shoppingBasket.getItems()) {
 			addOrderItem(item.getArticle(), item.getAmount(), item.getSize(), item.getColor());
 		}
 	}
-	
+
 	/**
 	 * This method returns the last position number of the order
+	 * 
 	 * @return the last Position
 	 */
-	private int getLastPosition(){
-		int max = items.get(0).getPosition();
-		for (OrderItem orderItem : items) {
-			if(max< orderItem.getPosition()){
-				max = orderItem.getPosition();
+	private int getLastPosition() {
+		if (!items.isEmpty()) {
+			int max = items.get(0).getPosition();
+			for (OrderItem orderItem : items) {
+				if (max < orderItem.getPosition()) {
+					max = orderItem.getPosition();
+				}
 			}
+			return max;
+		} else {
+			return 0;
 		}
-		return max;
 	}
-	
+
 	/**
 	 * 
-	 * @param items items to set
+	 * @param items
+	 *            items to set
 	 */
-	public void setItems(List<OrderItem> items){
+	public void setItems(List<OrderItem> items) {
 		this.items = items;
 	}
-	
+
 	/**
 	 * 
 	 * @return the items
 	 */
-	public List<OrderItem> getItems(){
+	public List<OrderItem> getItems() {
 		return this.items;
 	}
-	
+
 	/**
 	 * This method checks whether a string is a valid paymentMethod or not
-	 * @param paymentMethod the string to check
+	 * 
+	 * @param paymentMethod
+	 *            the string to check
 	 * @return returns true if the string is a payment methods
 	 */
-	public static boolean checkPaymentMethod(String paymentMethod){
-		if(paymentMethod.equals("Vorkasse") || paymentMethod.equals("Nachnahme")){
+	public static boolean checkPaymentMethod(String paymentMethod) {
+		if (paymentMethod.equals("Vorkasse") || paymentMethod.equals("Nachnahme")) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * This method resets the positions of the order
 	 */
 	public void resetPositions() {
 		for (int i = 0; i < items.size(); i++) {
 			OrderItem item = items.get(i);
-			item.setPosition(i);
+			item.setPosition(i+1);
 		}
 	}
+
+	/**
+	 * @return the shippingPrice
+	 */
+	public double getShippingPrice() {
+		return shippingPrice;
+	}
+	
+	/**
+	 * This method return the total price of the order incl. the shipping Price
+	 * @return the total price
+	 */
+	public double getTotalPrice(){
+		double sum= 0;
+		for (OrderItem orderItem : items) {
+			sum += orderItem.getPrice() * orderItem.getAmount();
+		}
+		sum += shippingPrice;
+		return ((double) Math.round(sum * 100)) / 100.0;
+	}
+	
+	/**
+	 * This method returns the price of all items of the order
+	 * @return the total price of the order The price is rounded at two digits.
+	 */
+	public double getOrderPrice(){
+		double sum= 0;
+		for (OrderItem orderItem : items) {
+			sum += orderItem.getPrice() * orderItem.getAmount();
+		}
+		return ((double) Math.round(sum * 100)) / 100.0;
+	}
+
+	/**
+	 * @return the deliveryDate
+	 */
+	public Date getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	/**
+	 * @param deliveryDate the deliveryDate to set
+	 */
+	public void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+	
 }
