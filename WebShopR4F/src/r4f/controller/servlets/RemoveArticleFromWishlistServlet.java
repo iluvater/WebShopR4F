@@ -38,6 +38,8 @@ public class RemoveArticleFromWishlistServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int articleId;
+		int size;
+		String color;
 		RequestDispatcher dispatcher;
 		String successURL = "Merkliste.jsp";
 		String errorURL = "Login.jsp";
@@ -45,10 +47,10 @@ public class RemoveArticleFromWishlistServlet extends HttpServlet {
 
 		try {
 			articleId = Integer.parseInt(request.getParameter("articleId"));
+			size = Integer.parseInt(request.getParameter("size"));
+			color = request.getParameter("color");
 		} catch (NumberFormatException e) {
-			dispatcher = request.getRequestDispatcher(errorURL);
-			dispatcher.forward(request, response);
-			return;
+			throw new ServletException();
 		}
 		wishlist = (Wishlist) request.getSession().getAttribute("wishlist");
 		
@@ -58,7 +60,7 @@ public class RemoveArticleFromWishlistServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 			return;
 		} else {			
-				wishlist.removeItem(articleId);			
+				wishlist.removeItem(articleId, size, color);			
 		}
 		dispatcher = request.getRequestDispatcher(successURL);
 		dispatcher.forward(request, response);

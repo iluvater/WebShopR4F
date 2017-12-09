@@ -715,7 +715,9 @@ public class DatabaseConnection {
 			try {
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT * FROM shoppingbasketitem WHERE shoppingBasket=?";
+				String sql = "SELECT sh.amount, sh.id, sh.article, c.name AS color, s.size AS size "
+						+ "FROM shoppingbasketitem AS sh INNER JOIN size AS s ON s.id = sh.size INNER JOIN color AS c ON c.id = sh.color "
+						+ "WHERE shoppingBasket=?";
 				preparedStatement = conn.prepareStatement(sql);
 				preparedStatement.setInt(1, id);
 				ResultSet result = preparedStatement.executeQuery();
@@ -1341,7 +1343,7 @@ public class DatabaseConnection {
 						"INSERT INTO `wishlistitem` (`id`, `article`, `wishlist`, `size`, `color`) "
 								+ "VALUES (NULL, ?, ?, ?, ?)",
 						Statement.RETURN_GENERATED_KEYS);
-				preparedStatement.setInt(1, wishlistItem.getId());
+				preparedStatement.setInt(1, wishlistItem.getArticle().getId());
 				preparedStatement.setInt(2, wishlistId);
 				preparedStatement.setInt(3, getSizeId(wishlistItem.getSize()));
 				preparedStatement.setInt(4, getColorId(wishlistItem.getColor()));

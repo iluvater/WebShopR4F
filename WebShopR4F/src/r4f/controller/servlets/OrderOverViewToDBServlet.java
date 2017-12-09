@@ -65,6 +65,7 @@ public class OrderOverViewToDBServlet extends HttpServlet {
 			request.getSession().removeAttribute("order");
 			
 			//Send Mail
+			
 			emailService.sendOrderConfirmation(order);
 
 			//successMessage

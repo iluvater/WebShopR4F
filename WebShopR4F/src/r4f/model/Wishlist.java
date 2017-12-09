@@ -75,7 +75,7 @@ public class Wishlist {
 	public void addItem(Article article, int size, String color){
 		boolean found = false;
 		for (WishlistItem item : list) {
-			if(item.getArticle().getId() == article.getId()){
+			if(item.getArticle().getId() == article.getId() && item.getColor().equals(color) && item.getSize() == size){
 				found = true;
 			}
 		}
@@ -112,10 +112,10 @@ public class Wishlist {
 	 * This method removes an article from the wishlist
 	 * @param articleId the id of the article that should be removed
 	 */
-	public void removeItem(int articleId){
+	public void removeItem(int articleId, int size, String color){
 		List<WishlistItem> removeArticles = new ArrayList<WishlistItem>();
 		for (WishlistItem item : list) {
-			if(item.getArticle().getId() == articleId){
+			if(item.getArticle().getId() == articleId && item.getColor().equals(color) && item.getSize() == size){
 				removeArticles.add(item);
 			}
 		}

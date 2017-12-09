@@ -39,6 +39,8 @@ public class ChangeAmountShoppingBasketServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int amount;
 		int articleId;
+		int size;
+		String color;
 		RequestDispatcher dispatcher;
 		String successURL = "WarenkorbVersuch2.jsp";
 		String errorURL = "Login.jsp";
@@ -46,11 +48,11 @@ public class ChangeAmountShoppingBasketServlet extends HttpServlet {
 
 		try {
 			articleId = Integer.parseInt(request.getParameter("articleId"));
+			size = Integer.parseInt(request.getParameter("size"));
 			amount = Integer.parseInt(request.getParameter("amount"));
+			color = request.getParameter("color");
 		} catch (NumberFormatException e) {
-			dispatcher = request.getRequestDispatcher(errorURL);
-			dispatcher.forward(request, response);
-			return;
+			throw new ServletException();
 		}
 		shoppingBasket = (ShoppingBasket) request.getSession().getAttribute("shoppingBasket");
 		
@@ -60,7 +62,7 @@ public class ChangeAmountShoppingBasketServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 			return;
 		} else {			
-				shoppingBasket.setAmountOfArticle(articleId, amount);			
+				shoppingBasket.setAmountOfArticle(articleId, amount, size, color);			
 		}
 		dispatcher = request.getRequestDispatcher(successURL);
 		dispatcher.forward(request, response);

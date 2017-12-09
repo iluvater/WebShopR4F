@@ -63,6 +63,8 @@
 							</p> --%>
 						<form action="./RemoveArticleFromWishlistServlet" method="post">
 							<input type="hidden" name="articleId" value="${item.article.id }" />
+							<input type="hidden" name="size" value="${item.size }" />
+							<input type="hidden" name="color" value="${item.color }" />
 							<p><input type="submit" id="buttonEntfernen" value="entfernen" /></p>
 						</form>
 					</div> 
