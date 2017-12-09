@@ -2092,4 +2092,56 @@ public class DatabaseConnection {
 			}
 		}
 	}
+
+	/**
+	 * This method returns a list of user that contain the search pattern in their last name, id, email
+	 * @param searchPattern the search pattern 
+	 * @return the list of users
+	 */
+	public List<User> getUserListSearchPattern(String searchPattern) {
+		List<User> userList = new ArrayList<User>();
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			PreparedStatement preparedStatement;
+			try {
+				
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT u.*, a.salutation, a.firstName, a.lastName, a.street, a.houseNumber, a.postCode, a.city "
+						+ "FROM `user` AS u INNER JOIN address AS a On a.user = u.id WHERE a.masterData='1' AND "
+						+ "( u.id  LIKE "+ searchPattern + " OR a.lastName LIKE "+ searchPattern + " OR u.email LIKe "+ searchPattern + ");";
+				
+				preparedStatement = conn.prepareStatement(sql);
+				ResultSet result = preparedStatement.executeQuery();
+
+				// Ergebnissätze durchfahren.
+				while (result.next()) {
+					User user;
+					int id = result.getInt("id");
+					String email = result.getString("email");
+					String firstName = result.getString("firstName");
+					String lastName = result.getString("lastName");
+					Date birthday = result.getDate("birthday");
+					String password = result.getString("password");
+					String street = result.getString("street");
+					String houseNumber = result.getString("houseNumber");
+					String postCode = result.getString("postCode");
+					String city = result.getString("city");
+					String salutation = result.getString("salutation");
+					int shoppingBasket = result.getInt("shoppingBasket");
+					int wishlist = result.getInt("wishlist");
+					List<Role> role = getRoleList(id);
+					user = new User(id, firstName, lastName, email, birthday, password, street, houseNumber, postCode,
+							city, salutation, shoppingBasket, role, wishlist);
+					userList.add(user);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return userList;
+	}
 }
