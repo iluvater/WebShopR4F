@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
 		Article article;
 
 		String errorURL = "Login.jsp";
-		String successURL = "./NavigationOverviewSerlvet";
+		String successURL = "./NavigationOverviewServlet";
 		String shoppingBasketURL = "./AddToShoppingBasketServlet";
 		String wishlistURL = "./AddToWishlistServlet";
 
