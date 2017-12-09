@@ -40,7 +40,7 @@ public class NavigationRoleOverviewServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String successURL = "Test.jsp";
+		String successURL = "Rollenbearbeitung.jsp";
 		String errorURL = "Login.jsp";
 		RequestDispatcher dispatcher;
 		AuthorizationService authorizationService = new AuthorizationService();
