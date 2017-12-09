@@ -110,7 +110,7 @@ public class RegistrationServlet extends HttpServlet {
 							return;
 						} else {
 							if (password_wdh == null || password_wdh.equals("")) {
-								ErrorMessage errorMessage = new ErrorMessage(138);
+								ErrorMessage errorMessage = new ErrorMessage(132);
 								request.setAttribute("error", errorMessage);
 								dispatcher = request.getRequestDispatcher(errorURL);
 								dispatcher.forward(request, response);
