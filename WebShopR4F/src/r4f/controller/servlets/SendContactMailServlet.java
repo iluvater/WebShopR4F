@@ -42,8 +42,8 @@ public class SendContactMailServlet extends HttpServlet {
 		String email, subject, body;
 		EmailService emailService;
 		RequestDispatcher dispatcher;
-		String errorURL = "Test.jsp";
-		String successURL = "Willkommen.jsp";
+		String errorURL = "Kontaktseite.jsp";
+		String successURL = "Kontaktseite.jsp";
 		
 		email = request.getParameter("email");
 		subject = request.getParameter("subject");
@@ -77,7 +77,7 @@ public class SendContactMailServlet extends HttpServlet {
 			}
 		}else{
 			//Error handling missing input
-			ErrorMessage errorMessage = new ErrorMessage(132);
+			ErrorMessage errorMessage = new ErrorMessage(106);
 			request.setAttribute("error", errorMessage);
 			dispatcher = request.getRequestDispatcher(errorURL);
 			dispatcher.forward(request, response);

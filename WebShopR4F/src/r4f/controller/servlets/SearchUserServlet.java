@@ -10,10 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.controller.filter.FilterList;
-import r4f.controller.services.ArticleService;
 import r4f.controller.services.UserService;
-import r4f.model.Article;
 import r4f.model.User;
 
 /**

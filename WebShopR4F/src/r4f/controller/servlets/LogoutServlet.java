@@ -43,7 +43,7 @@ public class LogoutServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		RequestDispatcher dispatcher;
-		String successURL = "Willkommen.jsp";
+		String successURL = "./NavigationOverviewServlet";
 		ShoppingBasketService shoppingBasketService = new ShoppingBasketService();
 		WishlistService wishlistService = new WishlistService();
 		

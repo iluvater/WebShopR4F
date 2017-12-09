@@ -83,7 +83,7 @@ public class AddToShoppingBasketServlet extends HttpServlet {
 		RequestDispatcher dispatcher;
 		ArticleService articleService = new ArticleService();
 		String successURL = "WarenkorbVersuch2.jsp";
-		String errorURL = "Benutzerauthentifizierung.jsp";
+		String errorURL = "Login.jsp";
 		String overviewURL = "./NavigationOverviewServlet";
 		ShoppingBasket shoppingBasket;
 		int size;

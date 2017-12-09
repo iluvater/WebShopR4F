@@ -39,7 +39,7 @@ public class RemoveAllArticleFromShoppingBasketServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher;
 		String successURL = "WarenkorbVersuch2.jsp";
-		String errorURL = "Benutzerauthentifizierung.jsp";
+		String errorURL = "Login.jsp";
 		ShoppingBasket shoppingBasket;
 
 		shoppingBasket = (ShoppingBasket) request.getSession().getAttribute("shoppingBasket");
