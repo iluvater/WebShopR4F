@@ -20,6 +20,11 @@
 				<h4>Log-In Daten</h4>			
 				<p><label for="email">E-Mailadresse</label>
 				<input id="email" placeholder="E-Mailadresse" name="email" value="" type="email" /><br /></p>
+				<c:if test ="${not empty error }">
+					<c:if test="${error.errorCode == 106 }">
+						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+					</c:if>	
+				</c:if>	
 				<p><label for="password">Passwort</label>
 				<input id="password" placeholder="Passwort" name="password" value="" type="password" /></p>
 				<c:if test ="${not empty error }">

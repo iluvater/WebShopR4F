@@ -117,6 +117,10 @@ h3.impressum {
 	text-align: center;
 }
 
+.right {
+	text-align: right;
+}
+
 h4.agb {
 	padding-left: 15px;
 }

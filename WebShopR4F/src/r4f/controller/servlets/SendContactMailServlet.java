@@ -14,16 +14,16 @@ import r4f.model.ErrorMessage;
 import r4f.model.User;
 
 /**
- * Servlet implementation class SendConctactMailServlet
+ * Servlet implementation class SendContactMailServlet
  */
-@WebServlet("/SendConctactMailServlet")
-public class SendConctactMailServlet extends HttpServlet {
+@WebServlet("/SendContactMailServlet")
+public class SendContactMailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SendConctactMailServlet() {
+    public SendContactMailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -53,7 +53,7 @@ public class SendConctactMailServlet extends HttpServlet {
 			if(subject != null && !subject.equals("")){
 				if(body != null && !body.equals("")){
 					emailService = new EmailService();
-					body = "Antwort an: " + email + " <br><br>";
+					body = "Antwort an: " + email + " <br><br>" + body;
 					emailService.sendContactMail(subject, body);
 					
 					dispatcher = request.getRequestDispatcher(successURL);
