@@ -12,9 +12,9 @@
 	<div id="fuss">
 	<ul>
 		<li><a class="footer" href="AGB.jsp">AGB's</a></li>
-		<li><a class="footer" href="Test.jsp">Kontaktseite</a></li>
+		<li><a class="footer" href="Kontaktseite.jsp">Kontaktseite</a></li>
 		<li><a class="footer" href="Impressum.jsp">Impressum</a></li>
-		<li><a class="footer" href="Test.jsp">Hilfeseite</a></li>
+		<li><a class="footer" href="Hilfeseite.jsp">Hilfeseite</a></li>
 		<li> © 2017 Run4Fun GmbH, Alle Rechte vorbehalten</li>
 	</ul>
 	</div>
