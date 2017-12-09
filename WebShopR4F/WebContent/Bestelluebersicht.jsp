@@ -79,12 +79,12 @@
 						<h5>Gesamtkosten:</h5>
 					</div>
 					<div class="preis">
-						<p><jsp:getProperty property="OrderPrice" name="order"/>&euro;</p>
+						<p><jsp:getProperty property="orderPrice" name="order"/>&euro;</p>
 						<p><jsp:getProperty property="shippingPrice" name="order"/>&euro;</p>
 						<h5><jsp:getProperty property="totalPrice" name="order"/>&euro;</h5>
 					</div>
 					<center>
-					<form>
+					<form action="./OrderOverViewToDBServlet" method="post">
 					<input type="submit" id="button" value="Kostenpflichtig bestellen" />
 					</form>
 					</center>

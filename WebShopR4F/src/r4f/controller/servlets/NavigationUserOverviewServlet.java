@@ -10,21 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.controller.services.OrderService;
-import r4f.model.Order;
+import r4f.controller.services.UserService;
 import r4f.model.User;
 
 /**
- * Servlet implementation class NavigationOrderListServlet
+ * Servlet implementation class NavigationUserOverviewServlet
  */
-@WebServlet("/NavigationOrderListServlet")
-public class NavigationOrderListServlet extends HttpServlet {
+@WebServlet("/NavigationUserOverviewServlet")
+public class NavigationUserOverviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NavigationOrderListServlet() {
+    public NavigationUserOverviewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,17 +40,17 @@ public class NavigationOrderListServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String successURL = "Test.jsp";
-		String errorURL = "Test.jsp";
+		String errorURL = "Login.jsp";
 		RequestDispatcher dispatcher;
-		OrderService orderService = new OrderService();
+		UserService userService = new UserService();
 		User user;
 		
 		user = (User) request.getSession().getAttribute("user");
 		
 		if(user != null){
-			List<Order> orderList = orderService.getOrderList(user);
+			List<User> userList = userService.getUserList();
 			
-			request.setAttribute("orderList", orderList);
+			request.setAttribute("userList", userList);
 			
 			dispatcher = request.getRequestDispatcher(successURL);
 			dispatcher.forward(request, response);

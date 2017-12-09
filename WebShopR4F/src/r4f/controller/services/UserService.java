@@ -4,7 +4,10 @@
 package r4f.controller.services;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import r4f.model.Role;
 import r4f.model.User;
 
 /**
@@ -18,6 +21,10 @@ public class UserService extends Service {
 			super.getDbConnection().updateUserInDB(user);
 			super.getDbConnection().updateAddressInDB(user.getId(), user.getFirstName(), user.getLastName(),
 					user.getStreet(), user.getHouseNumber(), user.getPostCode(), user.getCity(), user.getSalutation());
+			super.getDbConnection().deleteRoleMappings(user);
+			for (Role role : user.getRole()) {
+				super.getDbConnection().createRoleMapping(user, role);
+			}
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -61,7 +68,9 @@ public class UserService extends Service {
 		user.setShoppingBasket(shoppingBasketId);
 		user.setId(userId);
 		user.setWishlist(wishlistId);
-		user.setRole("Kunde");
+		List<Role> roles = new ArrayList<Role>();
+		roles.add(super.getDbConnection().getRole(1));
+		user.setRole(roles);
 
 		try {
 			super.getDbConnection().updateUserInDB(user);
@@ -106,10 +115,23 @@ public class UserService extends Service {
 	 * @param email
 	 *            email of the user that should be selected in the database
 	 * @return return an object of the class User representing the user with the
-	 *         email adress of the input parameter
+	 *         email address of the input parameter
 	 */
 	public User getUser(String email) {
 		return super.getDbConnection().getUser(email);
+	}
+
+	public List<User> getUserList() {
+		return super.getDbConnection().getUserList();
+	}
+	
+	/**
+	 * This method returns a list of user that contain the search pattern in their lastname, id, email 
+	 * @param searchPattern the search pattern 
+	 * @return the list of users
+	 */
+	public List<User> getUserSearchPattern(String searchPattern) {
+		return super.getDbConnection().getUserListSearchPattern(searchPattern);
 	}
 
 }

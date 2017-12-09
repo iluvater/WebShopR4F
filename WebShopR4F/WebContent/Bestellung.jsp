@@ -24,8 +24,8 @@
 		<form action="./OrderInputToOverviewServlet" method="post">
 		<div id="inhalt">
 			<h4>Versandadresse</h4>		
-				<p><input type="radio" id="matchingAdresses" name="matchingAdresses" value="matchingAdresses"> Die Versandadresse entspricht der Adresse aus dem Benutzerprofil.</p>	
-				<p><input type="radio" id="matchingAdresses" name="matchingAdresses" value="notmatching"> Die Versandadresse ist abweichend von der Adresse aus dem Benutzerprofil.</p>
+				<p><input type="radio" id="matchingAddresses" name="matchingAddresses" value="matchingAddresses"> Die Versandadresse entspricht der Adresse aus dem Benutzerprofil.</p>	
+				<p><input type="radio" id="matchingAddresses" name="matchingAddresses" value="notmatching"> Die Versandadresse ist abweichend von der Adresse aus dem Benutzerprofil.</p>
 				<div id="uebersicht">
  				<p><label for="anrede"> Anrede</label> 
  				<select name="salutation">

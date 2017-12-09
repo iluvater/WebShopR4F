@@ -10,21 +10,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import r4f.controller.services.OrderService;
-import r4f.model.Order;
+import r4f.controller.filter.FilterList;
+import r4f.controller.services.ArticleService;
+import r4f.controller.services.UserService;
+import r4f.model.Article;
 import r4f.model.User;
 
 /**
- * Servlet implementation class NavigationOrderListServlet
+ * Servlet implementation class SearchUserServlet
  */
-@WebServlet("/NavigationOrderListServlet")
-public class NavigationOrderListServlet extends HttpServlet {
+@WebServlet("/SearchUserServlet")
+public class SearchUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NavigationOrderListServlet() {
+    public SearchUserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +35,7 @@ public class NavigationOrderListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		
 	}
 
 	/**
@@ -41,26 +43,17 @@ public class NavigationOrderListServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String successURL = "Test.jsp";
-		String errorURL = "Test.jsp";
+
 		RequestDispatcher dispatcher;
-		OrderService orderService = new OrderService();
-		User user;
-		
-		user = (User) request.getSession().getAttribute("user");
-		
-		if(user != null){
-			List<Order> orderList = orderService.getOrderList(user);
-			
-			request.setAttribute("orderList", orderList);
-			
-			dispatcher = request.getRequestDispatcher(successURL);
-			dispatcher.forward(request, response);
-			return;
-		}else{
-			//Errorhandling please login			
-			dispatcher = request.getRequestDispatcher(errorURL);
-			dispatcher.forward(request, response);
-		}
+		String searchPattern = request.getParameter("search");
+
+		UserService userService = new UserService();
+		List<User> users = userService.getUserSearchPattern(searchPattern);
+		request.setAttribute("userList", users);
+
+		dispatcher = request.getRequestDispatcher(successURL);
+		dispatcher.forward(request, response);
+		return;
 	}
 
 }

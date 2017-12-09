@@ -1,6 +1,8 @@
 package r4f.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Class that represents a user that is registred to the webshop.
@@ -24,7 +26,7 @@ public class User {
 	private String salutation;
 	private int shoppingBasket;
 	private int wishlist;
-	private String role;
+	private List<Role> role;
 	private String confirmationCode;
 
 	/**
@@ -58,7 +60,7 @@ public class User {
 	 *            the role to set
 	 */
 	public User(int id, String firstName, String lastName, String email, Date birthday, String password, String street,
-			String houseNumber, String postCode, String city, String salutation, int shoppingBasket, String role,
+			String houseNumber, String postCode, String city, String salutation, int shoppingBasket, List<Role> role,
 			int wishlist) {
 		this.id = id;
 		this.firstName = firstName;
@@ -131,6 +133,7 @@ public class User {
 		this.city = null;
 		this.salutation = null;
 		confirmationCode = User.getConfirmationCode(6);
+		this.role = new ArrayList<Role>();
 	}
 
 	/**
@@ -404,7 +407,7 @@ public class User {
 	/**
 	 * @return the role
 	 */
-	public String getRole() {
+	public List<Role> getRole() {
 		return role;
 	}
 
@@ -412,7 +415,7 @@ public class User {
 	 * @param role
 	 *            the role to set
 	 */
-	public void setRole(String role) {
+	public void setRole(List<Role> role) {
 		this.role = role;
 	}
 
