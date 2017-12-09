@@ -124,5 +124,14 @@ public class UserService extends Service {
 	public List<User> getUserList() {
 		return super.getDbConnection().getUserList();
 	}
+	
+	/**
+	 * This method returns a list of user that contain the search pattern in their lastname, id, email 
+	 * @param searchPattern the search pattern 
+	 * @return the list of users
+	 */
+	public List<User> getUserSearchPattern(String searchPattern) {
+		return super.getDbConnection().getUserListSearchPattern(searchPattern);
+	}
 
 }
