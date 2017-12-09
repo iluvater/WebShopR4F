@@ -97,6 +97,16 @@ input.warenkorb[type="text"]
     text-align: center;
 }
 
+.changeRole{
+	float: left;
+	margin-right: 4%;
+}
+
+textarea.roleChange{
+	resize: none; 
+	width: 60%;
+}
+
 h2.agb {
 	padding-left: 15px; 
 }
