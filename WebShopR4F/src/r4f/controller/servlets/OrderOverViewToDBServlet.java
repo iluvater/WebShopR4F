@@ -64,9 +64,10 @@ public class OrderOverViewToDBServlet extends HttpServlet {
 			//remove order object from session
 			request.getSession().removeAttribute("order");
 			
-			//send Confirmationmail
-			
-			//successMessage something went from wrong during creation
+			//Send Mail
+			emailService.sendOrderConfirmation(order);
+
+			//successMessage
 			ErrorMessage successMessage = new ErrorMessage(601);
 			successMessage.setErrorMessage(successMessage.getErrorMessage().replaceAll("!orderId", Integer.toString(order.getId())));
 			request.setAttribute("success", successMessage);

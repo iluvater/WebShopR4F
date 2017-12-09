@@ -1,0 +1,24 @@
+<h2> Bestellbest&aumltigung f&uumlr Bestellung: #!orderId! bestellt am !entryDate!</h2>
+<br>
+<p>
+<h4>Guten Tag,</h4>
+vielen Danl f&uumlr Ihre Bestellung. Wir werden Ihr(e) Artikel schnellst m&oumlglich an Sie versenden. Sie finden das vorrausssichtliche Lieferdatum weiter unten.
+Um Ihre Bestellungen anzusehen besuchen Sie <a href="http://localhost:8080/WebShopR4F/Bestellungen.jsp">Meine Bestellungen</a>.
+</p> 
+<hr />
+<table border="0" align = "center">
+	<tr valign="top">
+		<td width="35%">Zustellung: <br /> !deliveryDate!</td>
+		<td width="35%">Lieferadresse: <br /> !firstName! !lastName! <br /> !street! !houseNumber! <br /> !postCode! !city!</td>
+	</tr>
+</table>
+<hr />
+<h4>Einzelheiten ihrer Bestellung</h4>
+<table border="0" align = "center">
+	!orderItems!	
+</table>
+<hr />
+Der gesamte Rechnungsbetrage betr&aumlgt !orderPrice! inkl. Umsatzsteuer. Bitte lassen Sie uns den genannten Betrag laut der von Ihnen gew&aumllten Zahlungsmethode, !paymentMethod!, zukommen.<br>
+<br />
+Wir freuen uns auf Ihre n&aumlchste Bestellung!
+<h4>Run4Fun</h4>
