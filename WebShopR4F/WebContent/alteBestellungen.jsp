@@ -48,12 +48,13 @@
 			</div>
 		</c:forEach>
  			<div id="weiterEinkaufen">
- 					<form action="./NavigationOverwiewServlet" method="post">
-						<p><input type="submit" id="button" value="Neue Schuhe bestellen" /></p>
-					</form>
+
+			<form action="./NavigationOverviewServlet" method="post">
+				<input type="submit" id="button" value="Neue Schuhe bestellen" />
+			</form>
+
 				</div>
 			</div>
-		</div>
 </c:if> 
 </body>
 </html>

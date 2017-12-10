@@ -384,16 +384,29 @@
 			</c:if>	
 		</c:if>
 		
-		<hr />
-		<center> 
+
+		</form>
+		<div id="weiterEinkaufen">
+			<div class="linkerButtonMerkliste">
+			<form action="./ChangeArticleServlet" method="post">
+				<input type="submit" id="button" value="Speichern" />
+			</form>
+			</div>
+			<div class="rechterButtonMerkliste">
+			<form action="Artikelsuche.jsp" method="post"> 
+				<input type="submit" id="button" value="Abbrechen" />
+			</form>
+			</div>
+		</div>
+		<!-- <center> 
 			<input type="submit" id="button" value="Speichern" />
 		</center> 
-		</form>
+		
 		<center>
 		<form action="Artikelsuche.jsp"> 
 			<input type="submit" id="button" value="Abbrechen" />
 		</form> 
-		</center>
+		</center> -->
 		 
 	</div>
 <%@ include file="Footer.jspf" %>
