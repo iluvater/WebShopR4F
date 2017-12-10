@@ -26,7 +26,7 @@
 
 	<div id="container">
 		<h2 class="ueberschrift">Deine Daten bei R4F</h2>
-		<h3>Hier muss noch ein guter Text hin... </h3>
+		<h3>Überprüfen Sie, ob Ihre Kundendaten aktuell und richtig sind, oder ändern Sie die Daten einfach.  </h3>
 		<form action="./ChangeUserDataServlet" method="post">
 		<div id="inhalt">
 			<h4>Persönliche Daten</h4>
