@@ -93,14 +93,14 @@ public class ArticleCreationServlet extends HttpServlet {
 				if (item.isFormField()) {
 					switch (item.getFieldName()) {
 					case "name":
-						name = item.getString();
+						name = item.getString("UTF-8");
 						break;
 					case "description":
-						description = item.getString();
+						description = item.getString("UTF-8");
 						break;
 					case "price":
 						try {
-							price = Double.parseDouble(item.getString());
+							price = Double.parseDouble(item.getString("UTF-8"));
 						} catch (Exception e) {
 							// error handling missing input
 							ErrorMessage errorMessage = new ErrorMessage(115);
@@ -112,7 +112,7 @@ public class ArticleCreationServlet extends HttpServlet {
 						break;
 					case "size":
 						try {
-							sizes = item.getString().split(";");
+							sizes = item.getString("UTF-8").split(";");
 							size = new ArrayList<Integer>();
 							for (int i = 0; i < sizes.length; i++) {
 								size.add(Integer.parseInt(sizes[i]));
@@ -127,20 +127,20 @@ public class ArticleCreationServlet extends HttpServlet {
 						}
 						break;
 					case "manufacturer":
-						manufacturer = item.getString();
+						manufacturer = item.getString("UTF-8");
 						break;
 					case "color":
-						colors = item.getString().split(";");
+						colors = item.getString("UTF-8").split(";");
 						color = new ArrayList<String>();
 						for (String string : colors) {
 							color.add(string);
 						}
 						break;
 					case "category":
-						category = item.getString();
+						category = item.getString("UTF-8");
 						break;
 					case "sport":
-						sport = item.getString();
+						sport = item.getString("UTF-8");
 						break;
 					}
 				} else {
