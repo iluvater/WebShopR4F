@@ -41,7 +41,8 @@
 				<c:forEach items="${roleList}" var="role">
 					<form action="./ChangeRoleServlet" method="post">
 					<div class="changeRole"><p><input class="changeRole" id="name" name="name" value="${role.name}" type="text" disabled/><br /></p>
-					<input type="hidden" name="name" value="${role.name }" /></p>
+					<input type="hidden" name="name" value="${role.name }" />
+					<input type="hidden" name="roleId" value="${role.id }" />
 						<c:if test ="${not empty error }">
 							<c:if test="${error.errorCode == 138 }">
 								<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>

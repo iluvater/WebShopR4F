@@ -12,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import r4f.model.ShoppingBasket;
 
 /**
- * Servlet implementation class RemoveArticleFromShoppingBasket
+ * Servlet implementation class RemoveArticleFromShoppingBasketServlet
  */
-@WebServlet("/RemoveArticleFromShoppingBasket")
-public class RemoveArticleFromShoppingBasket extends HttpServlet {
+@WebServlet("/RemoveArticleFromShoppingBasketServlet")
+public class RemoveArticleFromShoppingBasketServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RemoveArticleFromShoppingBasket() {
+    public RemoveArticleFromShoppingBasketServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

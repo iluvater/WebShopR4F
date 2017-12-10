@@ -12,8 +12,8 @@
 	</jsp:useBean> 
 
 	<div id="container">
-		<h2>Artikeldatenänderung</h2>
-		<h3>Bitte im Folgenden die Artikeldaten anpassen</h3>
+		<h2 class="ueberschrift">Artikeldatenänderung</h2>
+		<h3 class="impressum">Bitte im Folgenden die Artikeldaten anpassen</h3>
 		<form action="./ChangeArticleServlet" method="post" enctype="multipart/form-data">
 		<div id="inhalt">
 			<h4>Artikeldaten ändern</h4>

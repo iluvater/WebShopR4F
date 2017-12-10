@@ -40,8 +40,8 @@ public class ChangeRoleServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher;
-		String errorURL = "Test.jsp";
-		String successURL = "Test.jsp";
+		String errorURL = "Rollenbearbeitung.jsp";
+		String successURL = "Rollenbearbeitung.jsp";
 		int roleId;
 		String name;
 		String description;
