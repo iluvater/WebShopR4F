@@ -58,7 +58,7 @@
 								<input type="hidden" name="size" value="${item.size }" />
 								<input type="hidden" name="color" value="${item.color }" />
 								<p><input type="submit" id="buttonEntfernen" value="entfernen" /></p>
-								<!-- <p><a href="WarenkorbVersuch2.jsp" >entfernen</a></p> -->
+								<!-- <p><a href="Warenkorb.jsp" >entfernen</a></p> -->
 							</form>
 						</div> 
 					</div>

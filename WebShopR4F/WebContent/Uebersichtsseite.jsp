@@ -103,7 +103,7 @@
 <!--        				<a href="Merkliste.jsp" class="btn btn-default btn-sm">
       					<span class="glyphicon glyphicon-heart-empty"></span>
     				</a>   -->
-<!--     				<a href="WarenkorbVersuch2.jsp" class="btn btn-default btn-sm ">
+<!--     				<a href="Warenkorb.jsp" class="btn btn-default btn-sm ">
      					<span class="glyphicon glyphicon-shopping-cart"></span>
     				</a>
     				 -->

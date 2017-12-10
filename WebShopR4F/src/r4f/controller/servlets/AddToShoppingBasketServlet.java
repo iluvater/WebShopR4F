@@ -36,7 +36,7 @@ public class AddToShoppingBasketServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// RequestDispatcher dispatcher;
 		// ArticleService articleService = new ArticleService();
-		// String successURL = "WarenkorbVersuch2.jsp";
+		// String successURL = "Warenkorb.jsp";
 		// String loginURL = "Benutzerauthentifizierung.jsp";
 		// String overviewURL = "./NavigationOverviewServlet";
 		// ShoppingBasket shoppingBasket;
@@ -85,7 +85,7 @@ public class AddToShoppingBasketServlet extends HttpServlet {
 		int articleId;
 		RequestDispatcher dispatcher;
 		ArticleService articleService = new ArticleService();
-		String successURL = "WarenkorbVersuch2.jsp";
+		String successURL = "Warenkorb.jsp";
 		String errorURL = "Login.jsp";
 		String overviewURL = "./NavigationOverviewServlet";
 		ShoppingBasket shoppingBasket;

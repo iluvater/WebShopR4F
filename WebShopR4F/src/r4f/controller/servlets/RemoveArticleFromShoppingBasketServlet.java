@@ -41,7 +41,7 @@ public class RemoveArticleFromShoppingBasketServlet extends HttpServlet {
 		int size;
 		String color;
 		RequestDispatcher dispatcher;
-		String successURL = "WarenkorbVersuch2.jsp";
+		String successURL = "Warenkorb.jsp";
 		String errorURL = "Login.jsp";
 		ShoppingBasket shoppingBasket;
 

@@ -39,7 +39,7 @@ public class WishlistToShoppingBasketServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String successURL = "WarenkorbVersuch2.jsp";
+		String successURL = "Warenkorb.jsp";
 		RequestDispatcher dispatcher;
 		
 		Wishlist wishlist = null;
