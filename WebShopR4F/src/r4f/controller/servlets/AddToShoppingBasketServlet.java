@@ -89,7 +89,7 @@ public class AddToShoppingBasketServlet extends HttpServlet {
 		String errorURL = "Login.jsp";
 		String overviewURL = "./NavigationOverviewServlet";
 		ShoppingBasket shoppingBasket;
-		int size;
+		String size;
 		String color;
 		Article article;
 
@@ -114,12 +114,12 @@ public class AddToShoppingBasketServlet extends HttpServlet {
 				throw new ServletException();
 			}
 			if(!article.getSize().isEmpty()){
-				size = article.getSize().get(0);
+				size = Integer.toString(article.getSize().get(0));
 			}else{
 				throw new ServletException();
 			}
 		}else{
-			size = (Integer) s;
+			size = Integer.toString((Integer) s);
 			color = (String) c;
 		}
 		
@@ -134,12 +134,12 @@ public class AddToShoppingBasketServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 			return;
 		} else {
-			if (article == null || size == -1 || color == null) {
+			if (article == null || size == null || color == null) {
 				dispatcher = request.getRequestDispatcher(overviewURL);
 				dispatcher.forward(request, response);
 				return;
 			} else {
-				shoppingBasket.addItem(article, size, color);
+				shoppingBasket.addItem(article, Integer.parseInt(size), color);
 				request.getSession().removeAttribute("articleForShoppingBasket");
 			}
 		}

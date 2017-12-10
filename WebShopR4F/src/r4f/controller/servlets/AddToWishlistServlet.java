@@ -46,7 +46,7 @@ public class AddToWishlistServlet extends HttpServlet {
 		String errorURL = "Login.jsp";
 		String overviewURL = "./NavigationOverviewServlet";
 		Wishlist wishlist;
-		int size;
+		String size;
 		String color;
 		Article article;
 
@@ -71,12 +71,12 @@ public class AddToWishlistServlet extends HttpServlet {
 				throw new ServletException();
 			}
 			if(!article.getSize().isEmpty()){
-				size = article.getSize().get(0);
+				size = Integer.toString(article.getSize().get(0));
 			}else{
 				throw new ServletException();
 			}
 		}else{
-			size = (Integer) s;
+			size = Integer.toString((Integer) s);
 			color = (String) c;
 		}
 		wishlist = (Wishlist) request.getSession().getAttribute("wishlist");
@@ -93,7 +93,7 @@ public class AddToWishlistServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 				return;
 			}else{
-				wishlist.addItem(article, size, color);
+				wishlist.addItem(article, Integer.parseInt(size), color);
 				request.getSession().removeAttribute("articleForWishlist");
 			}			
 		}

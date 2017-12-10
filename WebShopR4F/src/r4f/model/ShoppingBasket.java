@@ -206,11 +206,12 @@ public class ShoppingBasket {
 	 *            the new color
 	 */
 	public void setSizeColorOfArticle(int articleId, int size, String color, int sizeNew, String colorNew) {
-		for (ShoppingBasketItem shoppingBasketItem : items) {
+		for (int i= 0; i<items.size(); i++) {
+			ShoppingBasketItem shoppingBasketItem = items.get(i);
 			if (shoppingBasketItem.getArticle().getId() == articleId && shoppingBasketItem.getSize() == size
 					&& shoppingBasketItem.getColor().equals(color)) {
-				shoppingBasketItem.setColor(colorNew);
-				shoppingBasketItem.setSize(sizeNew);
+				items.get(i).setColor(colorNew);
+				items.get(i).setSize(sizeNew);
 			}
 		}
 		removeDublicates();

@@ -125,11 +125,12 @@ public class Wishlist {
 	}
 
 	public void setSizeColorOfArticle(int articleId, int size, String color, int sizeNew, String colorNew) {
-		for (WishlistItem wishlistItem : list) {
+		for (int i = 0; i<list.size();i++) {
+			WishlistItem wishlistItem = list.get(i);			
 			if (wishlistItem.getArticle().getId() == articleId && wishlistItem.getSize() == size
 					&& wishlistItem.getColor().equals(color)) {
-				wishlistItem.setColor(colorNew);
-				wishlistItem.setSize(sizeNew);
+				list.get(i).setColor(colorNew);
+				list.get(i).setSize(sizeNew);
 			}
 		}
 		removeDublicates();		
