@@ -9,12 +9,12 @@
 	<c:if test ="${empty wishlist.list}">
 		<h3 class="ueberschrift">Merkliste</h3>
 		<div class="warenkorbLeer">
-			<p class="impressum">Ihre Merkliste ist noch leer. <br/>Legen Sie los und f&uuml;llen Sie ihn mit Ihren neuen Lieblingsschuhen!</p>
+			<p class="impressum">Ihre Merkliste ist noch leer. <br/>Legen Sie los und f&uuml;llen Sie sie mit Ihren neuen Lieblingsschuhen!</p>
 		</div>
 		<hr />
 		<center>
 			<form action="./NavigationOverviewServlet" method="post">
-				<input type="submit" id="button" value="Neues R4F Konto erstellen" />
+				<input type="submit" id="button" value="Zu deinen Lieblingschuhen" />
 			</form>
 		</center>
 	</c:if>

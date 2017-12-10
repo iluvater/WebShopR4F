@@ -20,8 +20,8 @@ public class ImageService extends Service{
 	 * @param contentType the content type of the image
 	 * @return returns the id of the created image
 	 */
-	public int createImageInDB(InputStream inputStream, String contentType, boolean mainImage){
-		return super.getDbConnection().createImageInDB(inputStream, contentType, mainImage);		
+	public int createImageInDB(InputStream inputStream, String contentType, boolean mainImage, int articleId){
+		return super.getDbConnection().createImageInDB(inputStream, contentType, mainImage, articleId);		
 	}
 	
 	/**

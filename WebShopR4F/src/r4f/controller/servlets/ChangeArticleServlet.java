@@ -273,7 +273,7 @@ public class ChangeArticleServlet extends HttpServlet {
 									if (newImages) {
 										for (InputStreamStringHelpClass item : imagesHelper) {
 											imageService.createImageInDB(item.getInputStream(), item.getImageType(),
-													false);
+													false, articleId);
 										}
 									}
 
