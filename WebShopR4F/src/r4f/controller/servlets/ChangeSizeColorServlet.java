@@ -39,14 +39,14 @@ public class ChangeSizeColorServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String color;
-		int size, articleId;
+		String color, size;
+		int articleId;
 		RequestDispatcher dispatcher;
 		String successURL = "./NavigationArticleDetailsServlet";
 
 		try {
 			color = request.getParameter("color");
-			size = Integer.parseInt(request.getParameter("size"));
+			size = request.getParameter("size");
 			request.getSession().setAttribute("color", color);
 			request.getSession().setAttribute("size", size);
 			articleId = Integer.parseInt(request.getParameter("articleId"));
