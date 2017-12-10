@@ -26,9 +26,10 @@
 		<form action="./OrderInputToOverviewServlet" method="post">
 		<div id="inhalt">
 			<h4>Versandadresse</h4>		
-			<p><input type="radio" id="matchingAddresses" name="matchingAddresses" value="matchingAddresses"> Die Versandadresse entspricht der Adresse aus dem Benutzerprofil.</p>	
+			<p><input type="radio" id="matchingAddresses" name="matchingAddresses" value="matchingAddresses" checked="checked"> Die Versandadresse entspricht der Adresse aus dem Benutzerprofil.</p>	
 			<p><input type="radio" id="matchingAddresses" name="matchingAddresses" value="notmatching"> Die Versandadresse ist abweichend von der Adresse aus dem Benutzerprofil.</p>
 			<div id="uebersicht">
+
  				<p><label for="anrede"> Anrede</label> 
  				<select name="salutation">
  					<option value="Herr">Herr</option>
@@ -85,12 +86,12 @@
 		</div>
 		<hr />	
 		<div id="inhalt">
-			<h4>Bezahlart</h4>				
-			<p><input type="radio" id="vorkasse" name="paymentMethod" value="Vorkasse"> Vorkasse</p>
+			<h4>Bezahlart</h4>
+			<p><input type="radio" id="vorkasse" name="paymentMethod" value="Vorkasse" checked="checked"> Vorkasse</p>
 			<div id="uebersicht"><p class="erlaeuterung">W&auml;hlen Sie die Variante "Vorkasse" bekommen Sie mit der Best&auml;tigungmail unsere Bankdaten. 
 			Nach Eingang der Bezahlung wird Ihre Bestellung versendet.<p></div>
-    		<p><input type="radio" id="nachnahme" name="paymentMethod" value="Nachnahme"> Nachnahme</p>
-    		<div id="uebersicht"><p class="erlaeuterung">W&auml;hlen Sie die Variante "Nachnahme" zahlen Sie erst, nachdem die Bestellung bei Ihnen eingetroffen ist.</p></div>
+    	<p><input type="radio" id="nachnahme" name="paymentMethod" value="Nachnahme"> Nachnahme</p>
+    	<div id="uebersicht"><p class="erlaeuterung">W&auml;hlen Sie die Variante "Nachnahme" zahlen Sie erst, nachdem die Bestellung bei Ihnen eingetroffen ist.</p></div>
 		</div>
 		<hr/>
  		<center>

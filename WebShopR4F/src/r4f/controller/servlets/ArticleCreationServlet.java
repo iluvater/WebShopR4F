@@ -82,6 +82,9 @@ public class ArticleCreationServlet extends HttpServlet {
 
 		// Set overall request size constraint
 		upload.setSizeMax(16777216);
+		
+		size = new ArrayList<Integer>();
+		color = new ArrayList<String>();
 
 		// Parse the request
 		try {
@@ -113,7 +116,6 @@ public class ArticleCreationServlet extends HttpServlet {
 					case "size":
 						try {
 							sizes = item.getString("UTF-8").split(";");
-							size = new ArrayList<Integer>();
 							for (int i = 0; i < sizes.length; i++) {
 								size.add(Integer.parseInt(sizes[i]));
 							}
@@ -131,7 +133,7 @@ public class ArticleCreationServlet extends HttpServlet {
 						break;
 					case "color":
 						colors = item.getString("UTF-8").split(";");
-						color = new ArrayList<String>();
+						
 						for (String string : colors) {
 							color.add(string);
 						}

@@ -89,11 +89,12 @@
 						<h5><jsp:getProperty property="totalPrice" name="order"/>&euro;</h5>
 						<hr/>
 					</div>
-					<center>
+					<div id="weiterEinkaufen">
 					<form action="./OrderOverViewToDBServlet" method="post">
 					<input type="submit" id="button" value="Kostenpflichtig bestellen" />
 					</form>
-					</center>
+					</div>
+
 				</div>
 				</c:if>
 			</div>
