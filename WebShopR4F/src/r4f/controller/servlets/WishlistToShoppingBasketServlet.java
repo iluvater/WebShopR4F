@@ -56,6 +56,9 @@ public class WishlistToShoppingBasketServlet extends HttpServlet {
 			throw e;
 		}else{
 			shoppingBasket.addWishlist(wishlist);
+			wishlist.getList().clear();
+			request.getSession().removeAttribute("wishlist");
+			request.getSession().setAttribute("wishlist", wishlist);
 			request.getSession().removeAttribute("shoppingBasket");
 			request.getSession().setAttribute("shoppingBasket", shoppingBasket);
 			
