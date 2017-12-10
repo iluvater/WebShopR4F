@@ -1658,7 +1658,7 @@ public class DatabaseConnection {
 				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT s.size AS size FROM mappingarticlesize AS m INNER JOIN size AS s ON s.id = m.size WHERE article = ?";
+				String sql = "SELECT s.size AS size FROM mappingarticlesize AS m INNER JOIN size AS s ON s.id = m.size WHERE article = ? ORDER BY s.size";
 				
 				statement = conn.prepareStatement(sql);
 				statement.setInt(1, articleId);
@@ -1695,7 +1695,7 @@ public class DatabaseConnection {
 				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT c.name AS color FROM mappingarticlecolor AS m INNER JOIN color AS c ON c.id = m.color WHERE article = ?";
+				String sql = "SELECT c.name AS color FROM mappingarticlecolor AS m INNER JOIN color AS c ON c.id = m.color WHERE article = ? ORDER BY c.name";
 				
 				statement = conn.prepareStatement(sql);
 				statement.setInt(1, articleId);
