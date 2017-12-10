@@ -2059,10 +2059,10 @@ public class DatabaseConnection {
 		if (conn != null) {
 
 			PreparedStatement preparedStatement = conn
-					.prepareStatement("UPDATE `role` SET `name`= ?, `description` = ? WHERE `role`.`id` = ? ");
-			preparedStatement.setInt(1, role.getId());
-			preparedStatement.setString(2, role.getName());
-			preparedStatement.setString(3, role.getDescription());
+					.prepareStatement("UPDATE `role` SET `name`= ?, `description` = ? WHERE `role`.`id` = ? ", Statement.RETURN_GENERATED_KEYS);
+			preparedStatement.setInt(3, role.getId());
+			preparedStatement.setString(1, role.getName());
+			preparedStatement.setString(2, role.getDescription());
 			
 			
 			preparedStatement.executeUpdate();
