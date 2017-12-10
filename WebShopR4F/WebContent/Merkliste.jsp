@@ -113,12 +113,7 @@
 					</form>
 				</div>
 			</div>
-			
- 			<!-- 	<div id="weiterEinkaufen">
- 				<form action="./WishlistToShoppingBasketServlet" method="post">
-					<p><input type="submit" id="button" value="In den Warenkorb" /></p>
-				</form>
-				</div> -->
+
 			</c:if>
 		</div>
 	

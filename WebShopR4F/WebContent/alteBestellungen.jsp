@@ -26,11 +26,13 @@
 	<div id="container">	
 		<h3 class="impressum">Meine Bestellungen</h3>
 		<c:forEach items="${orderList}" var= "order">
+
  			<div class="bestellung">
+ 			 	<hr class="black" />
  				<div class="bestellungDetails"> 
- 					<div class="bestelldatum"><p>Bestellung aufgegeben am <br/><fmt:formatDate pattern = "dd.MM.yyyy" value = "${order.entryDate}" /></p></div>
- 					<div class="bestellsumme"><p>Summe <br/><b>${order.totalPrice}&euro;</b></p></div>
- 					<div class="bestellid"><p>Bestell ID <br/>${order.id}</p></div>
+ 					<div class="bestelldatum"><p>Bestellung aufgegeben am: <fmt:formatDate pattern = "dd.MM.yyyy" value = "${order.entryDate}" /></p></div>
+ 					<div class="bestellsumme"><p>Summe: <b>${order.totalPrice}&euro;</b></p></div>
+ 					<div class="bestellid"><p>Bestell ID: ${order.id}</p></div>
  				</div>
 				<c:forEach items="${order.items}" var="item">
 					<div class="artikelBestellungen">
@@ -44,15 +46,14 @@
 			
 			<hr class="black" />
 			</div>
-			
 		</c:forEach>
-			</div>
- 				<div id="weiterEinkaufen">
+ 			<div id="weiterEinkaufen">
  					<form action="./NavigationOverwiewServlet" method="post">
-					<p><input type="submit" id="button" value="Neue Schuhe bestellen" /></p>
+						<p><input type="submit" id="button" value="Neue Schuhe bestellen" /></p>
 					</form>
 				</div>
 			</div>
+		</div>
 </c:if> 
 </body>
 </html>

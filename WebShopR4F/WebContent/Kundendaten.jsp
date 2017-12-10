@@ -117,12 +117,15 @@
 			</c:if>	
 		</c:if>
 		<hr />
-		<%-- <center> --%>
-		<input type="submit" id="button" value="Speichern" />
-		
+
+		<div id="weiterEinkaufen">
+ 			 	<div class="linkerButtonMerkliste">
+						<input type="submit" id="button" value="Speichern" />
+				</div>
+				<div class="rechterButtonMerkliste">
+						<a href="MeinKonto.jsp"><input type="button" id="button" value="Abbrechen" /></a>
+				</div>
+		</div>
 		</form>
-		
-		<input type="submit" id="button" value="Abbrechen" />
-		<%-- </center>  --%>
 	</div>
 <%@ include file="Footer.jspf" %>
