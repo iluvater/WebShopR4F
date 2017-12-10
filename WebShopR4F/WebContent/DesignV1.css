@@ -586,7 +586,7 @@ h4 {
 
 .gesamtpreis { 
 	position: fixed; 
-	top: 60px; 
+	top: 100px; 
 	width: 15%;
 	right: 17%; 
 
@@ -636,6 +636,40 @@ h4 {
 	width: 65%;
 	height: 168px;
 	border: 1px solid black;
+}
+
+.bestellung{
+	position:relative;
+	top: 2%;
+	left:5%;
+	margin-left: 2%;
+	margin-bottom: 1%;
+	margin-top: 1%;
+	width: 65%;
+	height: 320px;
+	border: 1px solid black;
+}
+
+.artikelBestellungen{
+	position:relative;
+	top: 2%;
+	left:5%;
+	margin-left: 2%;
+	margin-bottom: 1%;
+	margin-top: 1%;
+	width: 65%;
+	height: 168px;
+}
+
+.bestellungDetails{
+	position:relative;
+	top: 2%;
+	left:5%;
+	margin-left: 2%;
+	margin-bottom: 1%;
+	margin-top: 1%;
+	width: 65%;
+	height: 50px;
 }
 
 #ablauf{
