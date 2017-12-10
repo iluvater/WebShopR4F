@@ -33,7 +33,7 @@
 						<input type="hidden" name="articleId" value="${item.article.id }" />
 						<input type="hidden" name="size" value="${item.size }" />
 						<input type="hidden" name="color" value="${item.color }" />	
- 						<c:if test="${size eq item.size}">
+ 						<c:if test="${size ne item.size}">
 							<p><b>Gr&ouml;&szlig;e: </b>
 							<select id="size" name="sizeNew" onChange="submit();">
 								<c:forEach items="${item.article.size}" var="articleSize" begin="0" end="0">
@@ -45,7 +45,7 @@
 							</select>
 							</p>
 						</c:if> 
-						<c:if test="${size ne item.size }">
+						<c:if test="${size eq item.size }">
 							<p><b>Gr&ouml;&szlig;e: </b>
 							<select id="size" name="sizeNew" onChange="submit();">
 								<c:forEach items="${item.article.size}" var="articleSize">
@@ -59,8 +59,8 @@
 							</select>
 							</p>
 						</c:if>
-					 	<c:if test="${color eq item.color }">
-							<p><b>Farbe: </b>
+					 	<c:if test="${color ne item.color }">
+							<p><b>Farbe:</b>
 							<select id="color" name="colorNew" onChange="submit();">
 								<c:forEach items="${item.article.color}" var="articleColor" begin="0" end="0">
 									<option selected value="${articleColor}">${articleColor}</option>
@@ -71,7 +71,7 @@
 							</select>
 							</p>
 						</c:if> 
-						<c:if test="${color ne item.color }">
+						<c:if test="${color eq item.color }">
 							<p><b>Farbe: </b>
 							<select id="color" name="colorNew" onChange="submit();">
 								<c:forEach items="${item.article.color}" var="articleColor">

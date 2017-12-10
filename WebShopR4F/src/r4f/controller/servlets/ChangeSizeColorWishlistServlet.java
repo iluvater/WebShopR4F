@@ -64,6 +64,8 @@ public class ChangeSizeColorWishlistServlet extends HttpServlet {
 		} else {				
 				wishlist.setSizeColorOfArticle(articleId, size, color, sizeNew, colorNew);
 		}
+		request.getSession().setAttribute("size", Integer.toString(sizeNew));
+		request.getSession().setAttribute("color", colorNew);
 		dispatcher = request.getRequestDispatcher(successURL);
 		dispatcher.forward(request, response);
 		return;
