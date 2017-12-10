@@ -16,7 +16,7 @@
 <%@ include file="Header.jspf" %>
 
 	<div id="containerAgb">
-	<h2 class="agb">AGB</h2>
+	<h2 class="ueberschrift">AGB</h2>
 	<h3 class="agb">Allgemeine Gesch&aumlftsbedingungen und Kundeninformationen der Run 4 Fun GmbH & Co.KG</h3>
 	<a href="#Link_1"><h4 class="agb">&sect 1 Betreiber des Online-Shops und Geltung dieser Allgemeinen Gesch&aumlftsbedingungen</h4></a>
 	<a href="#Link_2"><h4 class="agb">&sect 2 Vertragsschluss</h4></a>

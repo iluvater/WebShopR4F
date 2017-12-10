@@ -9,7 +9,7 @@
 	
 	<div id="container">
 		<form action="./ArticleCreationServlet" method="post" enctype="multipart/form-data">
-		<h2>Artikeldatenerfassung</h2>
+		<h2 class="ueberschrift">Artikeldatenerfassung</h2>
 		<div id="inhalt">
 			<h4>Artikeldaten einpflegen</h4>	
 			

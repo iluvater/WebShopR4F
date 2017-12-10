@@ -109,13 +109,13 @@
     				 -->
     				<form class="header" action="./AddToWishlistServlet" method="post">
 						<input type="hidden" name="articleId" value="${article.id }" />
-						<button type="button" class="btn btn-default btn-sm">
+						<button type="submit" class="btn btn-default btn-sm">
       						<span class="glyphicon glyphicon-heart-empty"></span>
     					</button>
 					</form>
 					<form action="./AddToShoppingBasketServlet" method="post">
 						<input type="hidden" name="articleId" value="${article.id }" />
-						<button type="button" class="btn btn-default btn-sm">
+						<button type="submit" class="btn btn-default btn-sm">
       						<span class="glyphicon glyphicon-shopping-cart"></span>
     					</button>
 					</form>

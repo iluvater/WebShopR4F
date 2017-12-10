@@ -20,7 +20,7 @@
 	<jsp:useBean id="order" class="r4f.model.Order" scope="session">
 	</jsp:useBean>
 	<div id="container">	
-		<h3 class="impressum">Bestellübersicht</h3>
+		<h3 class="ueberschrift">Bestellübersicht</h3>
 			<div id="weiterEinkaufen">
 				<h4>Ihre Artikel</h4>
 			</div>

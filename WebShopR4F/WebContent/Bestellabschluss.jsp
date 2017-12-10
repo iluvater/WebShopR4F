@@ -17,8 +17,7 @@
 
 	<div id="container">
 		<center>
-			<hr/>
-			<h4>Herzlichen Glückwunsch! Sie haben ihre Bestellung abgeschlossen!</h4>
+			<h4 class="ueberschrift">Herzlichen Glückwunsch! Sie haben ihre Bestellung abgeschlossen!</h4>
 			<p>Ihre Bestellung wird voraussichtlich am <fmt:formatDate pattern = "dd.MM.yyyy" value = "${order.deliveryDate}" /> eintreffen.</p>
 			<p>Sie können sich Ihre letzten Bestellungen im Überblick ansehen oder weitere Artikel kaufen</p>
 			<input type="submit" id="button" value="Bestellüberblick" />
