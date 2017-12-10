@@ -70,7 +70,7 @@
     		</a>
   			<div class="dropdown-content">
     			<a href="Kundendaten.jsp">Account bearbeiten</a><br /><br />
-    			<a href="Test.jsp">Meine Bestellungen</a>
+    			<a href="./NavigationOrderListServlet">Meine Bestellungen</a>
   			</div>
 		</div>
     </c:if>

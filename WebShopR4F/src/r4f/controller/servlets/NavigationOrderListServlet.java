@@ -40,8 +40,8 @@ public class NavigationOrderListServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String successURL = "Test.jsp";
-		String errorURL = "Test.jsp";
+		String successURL = "alteBestellungen.jsp";
+		String errorURL = "Login.jsp";
 		RequestDispatcher dispatcher;
 		OrderService orderService = new OrderService();
 		User user;

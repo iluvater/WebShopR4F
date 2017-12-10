@@ -92,20 +92,18 @@
     			<div id="uebersicht"><p class="erlaeuterung">Wählen Sie die Variante "Nachnahme" zahlen Sie erst, nachdem die Bestellung bei Ihnen eingetroffen ist.</p></div>
 		</div>
 		<hr/>
-			<center>
-				<input type="submit" id="button" value="Zurück zum Warenkorb" />
-				<input type="submit" id="button" value="Weiter zur Bestellübersicht" />
+ 			<center>
+ 				<div class="linkerButtonMerkliste">
+					<a href="Warenkorb.jsp">
+						<input type="button" id="button" value="Zurück zum Warenkorb" />
+					</a>
+				</div>
+				<div class="rechterButtonMerkliste">
+					<input type="submit" id="button" value="Weiter zur Bestellübersicht" />
+				</div>
 			</center>
 		</form>
+		<hr/>
 	</div>
-	
-	<div id="fuss">
-		<ul>
-			<li><a class="footer" href="Test.jsp">AGB's</a></li>
-			<li><a class="footer" href="Test.jsp">Kontaktseite</a></li>
-			<li><a class="footer" href="Test.jsp">Impressum</a></li>
-			<li><a class="footer" href="Test.jsp">Hilfeseite</a></li>
-			<li> © 2017 Run4Fun GmbH, Alle Rechte vorbehalten</li>
-		</ul>	
 	</div>
 <%@ include file="Footer.jspf" %>

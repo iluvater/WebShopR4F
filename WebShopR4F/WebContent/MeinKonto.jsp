@@ -29,7 +29,7 @@
 		</div>
 		
 		<div class="block">
-			<h4><a class="containerLink" href="Test.jsp">Meine Bestellungen</a></h4>
+			<h4><a class="containerLink" href="./NavigationOrderListServlet">Meine Bestellungen</a></h4>
 		</div>
 	</div>
 	
