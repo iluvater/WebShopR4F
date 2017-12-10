@@ -8,7 +8,7 @@
 	</jsp:useBean>
 
 <c:if test ="${empty orderList}">
-	<div class="container">
+	<div id="container">
 		<h3 class="impressum">Meine Bestellungen</h3>
 		<div class="warenkorbLeer">
 			<p class="impressum">Sie haben bisher noch keine Bestellungen aufgegeben. 
