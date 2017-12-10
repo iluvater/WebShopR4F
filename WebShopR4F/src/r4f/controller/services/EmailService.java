@@ -112,6 +112,9 @@ public class EmailService {
 		case "orderConfirmation":
 			filename = "OrderConfirmationEmail.txt";
 			break;
+		case "forgotPassword":
+			filename = "ForgotPasswordEmail.txt";
+			break;
 		}
 		bReader = new BufferedReader(new InputStreamReader(EmailService.class.getResourceAsStream(filename)));
 		String line = "";
@@ -166,6 +169,19 @@ public class EmailService {
 	 */
 	public void sendContactMail(String subject, String emailBody){
 		sendMail(emailaddress, subject, emailBody);
+	}
+
+	public void sendForgotPasswordMail(String email, String code) {
+		try {
+			String emailBody = getEmailBody("forgotPassword");
+			emailBody = emailBody.replaceAll("!code!", code);
+
+
+			sendMail(email, "Passwort vergessen Run4Fun.de", emailBody);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
