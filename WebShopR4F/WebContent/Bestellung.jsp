@@ -79,6 +79,7 @@
 					</c:if>	
 				</c:if>
 				</div>
+				</span>
 		</div>
 			<hr />
 			
