@@ -20,80 +20,96 @@ import r4f.model.Role;
 @WebServlet("/ChangeRoleServlet")
 public class ChangeRoleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ChangeRoleServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public ChangeRoleServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		RequestDispatcher dispatcher;
 		String errorURL = "Rollenbearbeitung.jsp";
 		String successURL = "Rollenbearbeitung.jsp";
 		int roleId;
 		String name;
 		String description;
-		AuthorizationService authorizationService;
-		
-		try{
+		AuthorizationService authorizationService = new AuthorizationService();;
+
+		try {
 			roleId = Integer.parseInt(request.getParameter("roleId"));
 			name = request.getParameter("name");
 			description = request.getParameter("description");
-			
-			if(name != null && name.equals("")){
-				if(description != null && description.equals("")){
+
+			if (name != null && !name.equals("")) {
+				if (description != null && !description.equals("")) {
 					authorizationService = new AuthorizationService();
 					Role role = new Role(roleId, name, description);
 					boolean update = authorizationService.updateRoleInDB(role);
-					if(update){
-						//success
+					if (update) {
+						// success
 						List<Role> roleList = authorizationService.getRoleList();
-						
+
 						request.setAttribute("roleList", roleList);
 						ErrorMessage successMessage = new ErrorMessage(604);
 						request.setAttribute("success", successMessage);
 						dispatcher = request.getRequestDispatcher(successURL);
 						dispatcher.forward(request, response);
 						return;
-					}else{
-						//Error during update
+					} else {
+						// Error during update
+						List<Role> roleList = authorizationService.getRoleList();
+
+						request.setAttribute("roleList", roleList);
 						ErrorMessage errorMessage = new ErrorMessage(126);
 						request.setAttribute("error", errorMessage);
 						dispatcher = request.getRequestDispatcher(errorURL);
 						dispatcher.forward(request, response);
 						return;
 					}
-				}else{
-					//Error missing input description
+				} else {
+					// Error missing input description
+					List<Role> roleList = authorizationService.getRoleList();
+
+					request.setAttribute("roleList", roleList);
 					ErrorMessage errorMessage = new ErrorMessage(118);
 					request.setAttribute("error", errorMessage);
 					dispatcher = request.getRequestDispatcher(errorURL);
 					dispatcher.forward(request, response);
 					return;
 				}
-			}else{
-				//Error missing input name
+			} else {
+				// Error missing input name
+				List<Role> roleList = authorizationService.getRoleList();
+
+				request.setAttribute("roleList", roleList);
 				ErrorMessage errorMessage = new ErrorMessage(138);
 				request.setAttribute("error", errorMessage);
 				dispatcher = request.getRequestDispatcher(errorURL);
 				dispatcher.forward(request, response);
 				return;
 			}
-		}catch(NumberFormatException e){
-			//Error missing input role
+		} catch (NumberFormatException e) {
+			// Error missing input role
+			List<Role> roleList = authorizationService.getRoleList();
+
+			request.setAttribute("roleList", roleList);
 			ErrorMessage errorMessage = new ErrorMessage(138);
 			request.setAttribute("error", errorMessage);
 			dispatcher = request.getRequestDispatcher(errorURL);

@@ -1,6 +1,7 @@
 package r4f.controller.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,8 +43,8 @@ public class CreateRoleServlet extends HttpServlet {
 		String name;
 		String description;
 		RequestDispatcher dispatcher;
-		String errorURL = "Test.jsp";
-		String successURL = "TEst.jsp";
+		String errorURL = "Rollenbearbeitung.jsp";
+		String successURL = "Rollenbearbeitung.jsp";
 		AuthorizationService authorizationService = new AuthorizationService();
 		
 		name = request.getParameter("name");
@@ -55,6 +56,9 @@ public class CreateRoleServlet extends HttpServlet {
 				int roleId = authorizationService.createRoleInDB(role);
 				if(roleId != -1){
 					//success
+					List<Role> roleList = authorizationService.getRoleList();
+					
+					request.setAttribute("roleList", roleList);
 					ErrorMessage successMessage = new ErrorMessage(604);
 					request.setAttribute("success", successMessage);
 					dispatcher = request.getRequestDispatcher(successURL);
@@ -62,6 +66,9 @@ public class CreateRoleServlet extends HttpServlet {
 					return;
 				}else{
 					//error something wrong during creation
+					List<Role> roleList = authorizationService.getRoleList();
+					
+					request.setAttribute("roleList", roleList);
 					ErrorMessage errorMessage = new ErrorMessage(126);
 					request.setAttribute("error", errorMessage);
 					dispatcher = request.getRequestDispatcher(errorURL);
@@ -70,6 +77,9 @@ public class CreateRoleServlet extends HttpServlet {
 				}
 			}else{
 				//error missing input description
+				List<Role> roleList = authorizationService.getRoleList();
+				
+				request.setAttribute("roleList", roleList);
 				ErrorMessage errorMessage = new ErrorMessage(118);
 				request.setAttribute("error", errorMessage);
 				dispatcher = request.getRequestDispatcher(errorURL);
@@ -78,6 +88,9 @@ public class CreateRoleServlet extends HttpServlet {
 			}
 		}else{
 			//error missing input name
+			List<Role> roleList = authorizationService.getRoleList();
+			
+			request.setAttribute("roleList", roleList);
 			ErrorMessage errorMessage = new ErrorMessage(117);
 			request.setAttribute("error", errorMessage);
 			dispatcher = request.getRequestDispatcher(errorURL);
