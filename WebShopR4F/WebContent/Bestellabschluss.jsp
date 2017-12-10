@@ -15,7 +15,9 @@
 <title>Bestellabschluss</title>
 <%@ include file="Header.jspf" %>
 
+
 	<div id="container">
+	    <c:if test = "${f:checkAuthorization(user, 'Kunde')}">
 		<center>
 			<h4 class="ueberschrift">Herzlichen Gl&uuml;ckwunsch! Sie haben ihre Bestellung abgeschlossen!</h4>
 			<p>Ihre Bestellung wird voraussichtlich am <fmt:formatDate pattern = "dd.MM.yyyy" value = "${order.deliveryDate}" /> eintreffen.</p>
@@ -24,15 +26,18 @@
 		</center>
 		<hr/>
 		<div id="weiterEinkaufenBestellabschluss">
- 			 	<div class="linkerButtonMerkliste">
- 			 		<form action="NavigationOverviewServlet">
-						<input type="submit" id="button" value="Weitere Artikel ansehen" />
-					</form>
-				</div>
-				<div class="rechterButtonMerkliste">
-					<form action="./NavigationOrderListServlet" method="post">
-						<input type="submit" id="button" value="Meine Bestellungen" />
-					</form>
-				</div>
+ 			 <div class="linkerButtonMerkliste">
+ 			 	<form action="NavigationOverviewServlet">
+					<input type="submit" id="button" value="Weitere Artikel ansehen" />
+				</form>
+			</div>
+			<div class="rechterButtonMerkliste">
+				<form action="./NavigationOrderListServlet" method="post">
+					<input type="submit" id="button" value="Meine Bestellungen" />
+				</form>
+			</div>
+	 	</div>
+	 	</c:if>
 	</div>
+
 <%@ include file="Footer.jspf" %>

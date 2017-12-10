@@ -12,6 +12,7 @@
 	</jsp:useBean> 
 
 	<div id="container">
+	    <c:if test = "${f:checkAuthorization(user, 'Mitarbeiter')}">
 		<h2 class="ueberschrift">Artikeldaten&auml;nderung</h2>
 		<h3 class="impressum">Bitte im Folgenden die Artikeldaten anpassen</h3>
 		<form action="./ChangeArticleServlet" method="post" enctype="multipart/form-data">
@@ -405,8 +406,9 @@
 		<center>
 		<form action="Artikelsuche.jsp"> 
 			<input type="submit" id="button" value="Abbrechen" />
-		</form> 
-		</center> -->
-		 
+		</form>
+		</center>
+		</c:if>
+
 	</div>
 <%@ include file="Footer.jspf" %>

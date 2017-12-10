@@ -19,7 +19,10 @@
 	</jsp:useBean>
 	<jsp:useBean id="order" class="r4f.model.Order" scope="session">
 	</jsp:useBean>
-	<div id="container">	
+	
+
+	<div id="container">
+		<c:if test = "${f:checkAuthorization(user, 'Kunde')}">	
 		<h3 class="ueberschrift">Bestell&uuml;bersicht</h3>
 			<div id="weiterEinkaufen">
 				<h4>Ihre Artikel</h4>
@@ -93,5 +96,7 @@
 					</div>
 
 				</div>
+				</c:if>
 			</div>
+
 <%@ include file="Footer.jspf" %>
