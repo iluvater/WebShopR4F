@@ -46,7 +46,7 @@
 							</p>
 						</c:if> 
 						<c:if test="${size eq item.size }">
-							<p><b>Gr&ouml;&szlig;e: </b>
+							<p><b>Gr&ouml;&szlig;e: ${size}</b>
 							<select id="size" name="sizeNew" onChange="submit();">
 								<c:forEach items="${item.article.size}" var="articleSize">
 									<c:if test="${articleSize eq size}">
@@ -60,7 +60,7 @@
 							</p>
 						</c:if>
 					 	<c:if test="${color ne item.color }">
-							<p><b>Farbe:</b>
+							<p><b>Farbe: ${color }</b>
 							<select id="color" name="colorNew" onChange="submit();">
 								<c:forEach items="${item.article.color}" var="articleColor" begin="0" end="0">
 									<option selected value="${articleColor}">${articleColor}</option>
