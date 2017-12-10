@@ -125,5 +125,4 @@
 		<input type="submit" id="button" value="Abbrechen" />
 		<%-- </center>  --%>
 	</div>
-</body>
-</html>
+<%@ include file="Footer.jspf" %>

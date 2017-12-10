@@ -90,5 +90,4 @@
 					</center>
 				</div>
 			</div>
-</body>
-</html>
+<%@ include file="Footer.jspf" %>

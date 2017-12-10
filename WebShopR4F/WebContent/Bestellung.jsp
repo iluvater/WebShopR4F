@@ -107,6 +107,4 @@
 			<li> © 2017 Run4Fun GmbH, Alle Rechte vorbehalten</li>
 		</ul>	
 	</div>
-
-</body>
-</html>
+<%@ include file="Footer.jspf" %>

@@ -99,16 +99,28 @@
 					<input type="hidden" name="articleId" value="${article.id }" />
 					<button type="submit" class="linkButton"><strong>Sportart: </strong>${article.sport}</button>
 				</form> --%>
-				<div id="containerButtonUebersicht" >
-				<button type="button" class="btn btn-default btn-sm">
-          			<span class="glyphicon glyphicon-eye-open"></span>
-       			</button>
-				<button type="button" class="btn btn-default btn-sm">
-          			<span class="glyphicon glyphicon-heart-empty"></span>
-       			</button>
-       			<button type="button" class="btn btn-default btn-sm">
-          			<span class="glyphicon glyphicon-shopping-cart"></span>
-        		</button> 
+				<div id="containerButtonUebersicht" >       			
+<!--        				<a href="Merkliste.jsp" class="btn btn-default btn-sm">
+      					<span class="glyphicon glyphicon-heart-empty"></span>
+    				</a>   -->
+<!--     				<a href="WarenkorbVersuch2.jsp" class="btn btn-default btn-sm ">
+     					<span class="glyphicon glyphicon-shopping-cart"></span>
+    				</a>
+    				 -->
+    				<form class="header" action="./AddToWishlistServlet" method="post">
+						<input type="hidden" name="id" value="${article.id }" />
+						<button type="button" class="btn btn-default btn-sm">
+      						<span class="glyphicon glyphicon-heart-empty"></span>
+    					</button>
+					</form>
+					<form action="./AddToShoppingBasketServlet" method="post">
+						<input type="hidden" name="id" value="${article.id }" />
+						<button type="button" class="btn btn-default btn-sm">
+      						<span class="glyphicon glyphicon-shopping-cart"></span>
+    					</button>
+					</form>
+    				
+    				
 				</div>
 				<br />
 			</div> 
@@ -117,6 +129,4 @@
 		<div class="clearLeft"></div>
 	</div>
 	
-
-</body>
-</html>
+<%@ include file="Footer.jspf" %>

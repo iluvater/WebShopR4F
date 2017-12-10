@@ -18,7 +18,7 @@
 	</jsp:useBean>
 	
 	<c:if test ="${empty wishlist.list}">
-	<div class="container">
+	<div id="container">
 		<h3 class="impressum">Merkliste</h3>
 		<div class="warenkorbLeer">
 			<p class="impressum">Ihre Merkliste ist noch leer. <br/>Legen Sie los und f&uuml;llen Sie ihn mit Ihren neuen Lieblingsschuhen!</p>
@@ -43,24 +43,6 @@
 						<p><b>Preis: </b><b>${item.article.price}&euro;</b></p>
 					</div> 
 					<div class="menge">					
-<%-- 							<p><b>Menge: </b>
-							<form action="./ChangeAmountShoppingBasketServlet" method="post">
-								<input type="hidden" name="articleId" value="${item.article.id }" />
- 								<select name="amount" onChange="submit();">
- 									<option value="${item.amount}">${item.amount}</option>
- 									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
-									<option value="7">7</option>
-									<option value="8">8</option>
-									<option value="9">9</option>
-									<option value="10">10</option>
-								</select>
-							</form>
-							</p> --%>
 						<form action="./RemoveArticleFromWishlistServlet" method="post">
 							<input type="hidden" name="articleId" value="${item.article.id }" />
 							<input type="hidden" name="size" value="${item.size }" />
@@ -73,20 +55,11 @@
 			
 			<div class="gesamtpreis">
  			<div id="weiterEinkaufen">
-				<p><input type="submit" id="button" value="Weiter Einkaufen" /></p>
+ 			 		<form action="NavigationOverviewServlet">
+						<p><input type="submit" id="button" value="Weiter Einkaufen" /></p>
+					</form>
+				<!-- <p><input type="submit" id="button" value="Weiter Einkaufen" /></p> -->
 			</div>
-<%-- 			<div class="gesamtpreis"> 
-					<h4>Gesamtpreis:</h4>
-					<div class="preisbezeichnung">
-						<p>Bestellwert:</p>
-						<p>Versandkosten:</p>
-						<h5>Gesamtkosten:</h5>
-					</div>
-					<div class="preis">
-						<p><jsp:getProperty property="orderPrice" name="shoppingBasket"/>&euro;</p>
-						<p><jsp:getProperty property="shippingPrice" name="shoppingBasket"/>&euro;</p>
-						<h5><jsp:getProperty property="totalPrice" name="shoppingBasket"/>&euro;</h5>
-					</div> --%>
  				<div id="weiterEinkaufen">
  				<form action="./WishlistToShoppingBasketServlet" method="post">
 					<p><input type="submit" id="button" value="In den Warenkorb" /></p>
@@ -96,5 +69,4 @@
 			<!-- </div> -->
 		</div>
 	</c:if>
-</body>
-</html>
+<%@ include file="Footer.jspf" %>

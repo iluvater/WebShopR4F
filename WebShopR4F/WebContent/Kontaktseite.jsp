@@ -28,4 +28,5 @@
 		</form>
 		
 	</div>
-	<jsp:include page="Footer.jspf" />
+	
+<%@ include file="Footer.jspf" %>
