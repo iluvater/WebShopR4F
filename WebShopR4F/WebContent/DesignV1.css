@@ -540,12 +540,13 @@ div.containerArtikelDetails {
 }
 
 .ImgWarenkorb {
-	width: 200px;
-	height: 150px;
-/* 	border-color: black;
-	border-width: 1px;
-	border-style: solid; */
+	width: 75%;
 }
+
+.ImgAlteBestellungen{
+	width: 45%;
+}
+
 
 .ImgBestellung {
 	width: 100px;
@@ -654,6 +655,17 @@ h4 {
 /* 	border: 1px solid black; */
 }
 
+#weiterEinkaufenBestellabschluss { 
+	position:relative;
+	top: 2%;
+/* 	left:5%;
+	margin-left: 2%; */
+	margin-bottom: 1%;
+	margin-top: 1%;
+	width: 100%;
+/* 	border: 1px solid black; */
+}
+
 .preisbezeichnung{
 	width: 60%;
 	text-align: left;
@@ -731,14 +743,14 @@ h4 {
   /*  border:1px solid black;  */
 }
 
-.linkerButton{  
+.linkerButtonMerkliste{  
 	/* position:relative; */
    vertical-align:middle; 
    text-align:center;
    float: left; 
    width: 30%; 
    height: 168px; 
-   margin-left: 20%; 
+   margin-left: 22%; 
    margin-right: 2%; 
   /*  border:1px solid black;  */
 }
@@ -755,7 +767,7 @@ h4 {
   /*  border:1px solid black; */
 }
 
-.rechterButton{ 
+.rechterButtonMerkliste{ 
 /* 	position:relative; */
    vertical-align:top; 
    text-align:left;

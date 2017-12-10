@@ -41,12 +41,12 @@
 			</c:forEach>
 			<hr/>
  			<div id="weiterEinkaufen">
- 			 	<div class="linkerButton">
+ 			 	<div class="linkerButtonMerkliste">
  			 		<form action="NavigationOverviewServlet">
 						<input type="submit" id="button" value="Weitere Artikel ansehen" />
 					</form>
 				</div>
-				<div class="rechterButton">
+				<div class="rechterButtonMerkliste">
 					<form action="./WishlistToShoppingBasketServlet" method="post">
 						<input type="submit" id="button" value="Alle Artikel in den Warenkorb" />
 					</form>
