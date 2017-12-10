@@ -17,7 +17,7 @@
 	</jsp:useBean> 
 	
 	<div id="container">
-		<h2 class="center">Dein Konto für alles von Run 4 Fun</h2>
+		<h2 class="ueberschrift">Dein Konto für alles von Run 4 Fun</h2>
 		<h3 class="center">Bereits Kunde bei Run 4 Fun?</h3>
 		<form action="./LoginServlet" method="post">
 			<div id="inhalt">

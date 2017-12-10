@@ -20,7 +20,7 @@
 	</jsp:useBean> 	
 	
 	<div id="container">
-		<h2>Rollenbearbeitung</h2>
+		<h2 class="ueberschrift">Rollenbearbeitung</h2>
 		<form action="./CreateRoleServlet" method="post">
 			<div id="inhalt">
 				<h4>Neue Rolle anlegen</h4>
@@ -35,6 +35,7 @@
 				<textarea id="description" name="description" style='width:80%'></textarea><br /></p>
 				<center><p><input type="submit" id="button" value="Speichern" /></p></center>
 			</div>
+		</form>
 			<br />
 			<div id="inhalt">
 				<h4>Rollen ändern</h4>

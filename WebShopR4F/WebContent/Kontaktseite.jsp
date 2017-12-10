@@ -5,7 +5,7 @@
 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
 	</jsp:useBean> 
 	<div id="container">
-		<h3 class="agb">Kontakt und Feedback</h3>
+		<h3 class="ueberschrift">Kontakt und Feedback</h3>
 		<p class="agb">Haben Sie eine Frage, eine gute Idee oder möchten Sie uns einfach Ihre Meinung mitteilen?<br/>
 		Dann nutzen Sie bitte das unten stehende Formular, um uns Ihre Meinung mitzuteilen. Wir werden Ihnen sobald wie möglich antworten.<br/>
 		Die häufigsten Fragen und Antworten finden sie außerdem in unseren FAQ's.</p>
