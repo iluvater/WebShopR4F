@@ -6,13 +6,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Bestellübersicht</title>
+<title>Bestell&uuml;bersicht</title>
 <link href="DesignV1.css" rel="stylesheet">
 
 </head>
 <body> --%>
 <%@ include file="Head.jspf" %>
-<title>Bestellübersicht</title>
+<title>Bestell&uuml;bersicht</title>
 <%@ include file="Header.jspf" %>
 
 	<jsp:useBean id="shoppingBasket" class="r4f.model.ShoppingBasket" scope="session">
@@ -20,7 +20,7 @@
 	<jsp:useBean id="order" class="r4f.model.Order" scope="session">
 	</jsp:useBean>
 	<div id="container">	
-		<h3 class="ueberschrift">Bestellübersicht</h3>
+		<h3 class="ueberschrift">Bestell&uuml;bersicht</h3>
 			<div id="weiterEinkaufen">
 				<h4>Ihre Artikel</h4>
 			</div>
@@ -32,7 +32,7 @@
 							<p><b>Preis: </b><b>${item.article.price}&euro;</b></p>
 							<p><b>Menge: </b>${item.amount}</p>
 							<p><b>Farbe: </b>${item.color}</p>
-							<p><b>Größe: </b>${item.size}</p>
+							<p><b>Gr&ouml;&szlig;e: </b>${item.size}</p>
 						</div> 		
 					</div>
 				</c:forEach>
@@ -62,9 +62,9 @@
 						${order.deliveryAddress.city}
 						</p>
 					<h4>Bezahlart</h4>
-						<p>Sie haben sich für die Bezahlart "<b>${order.paymentMethod}</b>" entschieden.</p>
+						<p>Sie haben sich f&uuml;r die Bezahlart "<b>${order.paymentMethod}</b>" entschieden.</p>
 						<hr />
-						<p class="deliveryDate">Lieferbar bis spätestens: <fmt:formatDate pattern = "dd.MM.yyyy" value = "${order.deliveryDate}" /></p> 
+						<p class="deliveryDate">Lieferbar bis sp&auml;testens: <fmt:formatDate pattern = "dd.MM.yyyy" value = "${order.deliveryDate}" /></p> 
 				</div>
  				<div id="weiterEinkaufen">
  					<center>

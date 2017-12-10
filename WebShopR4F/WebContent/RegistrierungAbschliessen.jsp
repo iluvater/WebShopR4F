@@ -1,5 +1,5 @@
 <%@ include file="Head.jspf" %>
-<title>Anmeldung abschlieﬂen</title>
+<title>Anmeldung abschlie&szlig;en</title>
 <%@ include file="Header.jspf" %>
 
 	<div id="container">

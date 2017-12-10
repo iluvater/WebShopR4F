@@ -30,7 +30,7 @@
 		</div>
 		
 		<div class="block">
-			<h4><a class="containerLink" href="Artikelsuche.jsp">Artikeldaten ändern</a></h4>
+			<h4><a class="containerLink" href="Artikelsuche.jsp">Artikeldaten &auml;ndern</a></h4>
 		</div>
 		
 		<div class="block">

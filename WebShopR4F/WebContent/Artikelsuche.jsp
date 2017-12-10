@@ -26,10 +26,10 @@
 	
 	<div id="container">
 		<h2 class="ueberschrift">Artikelsuche</h2>
-		<h3 class="impressum">Bitte geben Sie die ID des Artikel ein, den Sie bearbeiten möchten</h3>
+		<h3 class="impressum">Bitte geben Sie die ID des Artikel ein, den Sie bearbeiten m&ouml;chten</h3>
 		<form action="./SearchArticleForChangeServlet" method="post">
 		<div id="inhalt">
-			<h4>Eingabe der ID des gewünschten Artikels</h4>
+			<h4>Eingabe der ID des gew&uuml;nschten Artikels</h4>
 			<p><label for="id">ID:</label>
 			<input id="id" name="id" min="1" value="<jsp:getProperty property="id" name="article"/>" type="number" step="1" /></p>
 			<c:if test ="${not empty error }">

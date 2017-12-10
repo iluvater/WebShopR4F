@@ -14,7 +14,7 @@
 					<img id="ImgArtikelDetails" src="./ImageServlet/${article.mainImage }" alt="Bild">
 					<h3 class="ueberschrift"><jsp:getProperty property="name" name="article"/></h3> 
 					<h4 class="artikelDetails">Preis: <jsp:getProperty property="price" name="article"/> &euro; </h4>
-					<p class="deliveryDate">Lieferbar bis spätestens: <fmt:formatDate pattern = "dd.MM.yyyy" value = "${article.deliveryDate}" /></p>
+					<p class="deliveryDate">Lieferbar bis sp&auml;testens: <fmt:formatDate pattern = "dd.MM.yyyy" value = "${article.deliveryDate}" /></p>
 					
 					<%-- <jsp:getProperty property="deliveryDate" name="article"/></p> --%>
 					<hr />
@@ -39,7 +39,7 @@
 					<form action="./ChangeSizeColorServlet" method="post">
 						<input type="hidden" name="articleId" value="${article.id }" />
  						<c:if test="${empty size }">
-							<p class="artikelDetails"><b>Größe: </b>
+							<p class="artikelDetails"><b>Gr&ouml;&szlig;e: </b>
 							<select id="size" name="size" onChange="submit();">
 								<c:forEach items="${article.size}" var="articleSize" begin="0" end="0">
 									<option selected value="${articleSize}">${articleSize}</option>
@@ -51,7 +51,7 @@
 							</p>
 						</c:if> 
 						<c:if test="${not empty size }">
-							<p class="artikelDetails"><b>Größe: </b>
+							<p class="artikelDetails"><b>Gr&ouml;&szlig;e: </b>
 							<select id="size" name="size" onChange="submit();">
 								<c:forEach items="${article.size}" var="articleSize">
 									<c:if test="${articleSize eq size}">

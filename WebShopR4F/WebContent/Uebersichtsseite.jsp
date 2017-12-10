@@ -27,7 +27,7 @@
 		<form action="./NavigationOverviewFilterServlet" method="post">
 			<p class="paddingLeft1"><strong>Sportart</strong></p>
 			<input type="checkbox" id="paddingLeft2" name="sport" value="1" onChange="submit();" ${filter.sport1}> Laufen<br>
-			<input type="checkbox" id="paddingLeft2" name="sport" value="2" onChange="submit();" ${filter.sport2}> Fußball<br>
+			<input type="checkbox" id="paddingLeft2" name="sport" value="2" onChange="submit();" ${filter.sport2}> Fu&szlig;ball<br>
 			<input type="checkbox" id="paddingLeft2" name="sport" value="3" onChange="submit();" ${filter.sport3}> Golf<br>
 			<input type="checkbox" id="paddingLeft2" name="sport" value="4" onChange="submit();" ${filter.sport4}> Basketball<br>
 			<input type="checkbox" id="paddingLeft2" name="sport" value="5" onChange="submit();" ${filter.sport5}> Fahrrad<br>
@@ -47,10 +47,10 @@
 			<input type="checkbox" id="paddingLeft2" name="color" value="2" onChange="submit();" ${filter.color2}> Orange<br />
 			<input type="checkbox" id="paddingLeft2" name="color" value="3" onChange="submit();" ${filter.color3}> Rot<br />
 			<input type="checkbox" id="paddingLeft2" name="color" value="4" onChange="submit();" ${filter.color4}> Pink<br />
-			<input type="checkbox" id="paddingLeft2" name="color" value="5" onChange="submit();" ${filter.color5}> Grün<br />
+			<input type="checkbox" id="paddingLeft2" name="color" value="5" onChange="submit();" ${filter.color5}> Gr&uuml;n<br />
 			<input type="checkbox" id="paddingLeft2" name="color" value="6" onChange="submit();" ${filter.color6}> Blau<br />
 			<input type="checkbox" id="paddingLeft2" name="color" value="7" onChange="submit();" ${filter.color7}> Schwarz<br />
-			<input type="checkbox" id="paddingLeft2" name="color" value="8" onChange="submit();" ${filter.color8}> Weiß<br />
+			<input type="checkbox" id="paddingLeft2" name="color" value="8" onChange="submit();" ${filter.color8}> Wei&szlig;<br />
 			<br />
 		
 			<p class="paddingLeft1"><strong>Preis</strong></p>

@@ -17,7 +17,7 @@
 	</jsp:useBean> 
 	
 	<div id="container">
-		<h2 class="ueberschrift">Dein Konto für alles von Run 4 Fun</h2>
+		<h2 class="ueberschrift">Dein Konto f&uuml;r alles von Run 4 Fun</h2>
 		<h3 class="center">Bereits Kunde bei Run 4 Fun?</h3>
 		<form action="./LoginServlet" method="post">
 			<div id="inhalt">
@@ -78,7 +78,7 @@
 		</div>
 		<hr/>
 		<div id="inhalt">
-			<h4>Persönliche Daten</h4>				
+			<h4>Pers&ouml;nliche Daten</h4>				
  				<p><label for="anrede"> Anrede</label> 
  				<select name="salutation"><option value="Herr">Herr</option>
 					<option value="Frau">Frau</option></select></p>
