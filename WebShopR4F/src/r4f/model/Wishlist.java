@@ -123,4 +123,43 @@ public class Wishlist {
 			list.remove(item);
 		}
 	}
+
+	public void setSizeColorOfArticle(int articleId, int size, String color, int sizeNew, String colorNew) {
+		for (WishlistItem wishlistItem : list) {
+			if (wishlistItem.getArticle().getId() == articleId && wishlistItem.getSize() == size
+					&& wishlistItem.getColor().equals(color)) {
+				wishlistItem.setColor(colorNew);
+				wishlistItem.setSize(sizeNew);
+			}
+		}
+		removeDublicates();		
+	}
+
+	private void removeDublicates() {
+		List<WishlistItem> duplicates = new ArrayList<WishlistItem>();
+		for(int i = 0; i< list.size(); i++){
+			WishlistItem item = list.get(i);
+			boolean found = false;
+			for(int j = 0; j < duplicates.size();j++){
+				
+				WishlistItem duplicate = duplicates.get(j);
+				if(duplicate.getArticle().getId() == item.getId() && duplicate.getSize() == item.getSize()
+						&& duplicate.getColor().equals(item.getColor())){
+					found = true;
+				}
+			}
+			if(!found){
+				for(int k = i+1; k < list.size(); k++){
+					WishlistItem posDuplicate = list.get(k);
+					if(posDuplicate.getArticle().getId() == item.getId() && posDuplicate.getSize() == item.getSize()
+							&& posDuplicate.getColor().equals(item.getColor())){
+						duplicates.add(posDuplicate);
+					}
+				}
+			}
+		}
+		for (WishlistItem wishlistItem : duplicates) {
+			list.remove(wishlistItem);
+		}		
+	}
 }
