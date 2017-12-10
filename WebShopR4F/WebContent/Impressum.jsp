@@ -16,7 +16,7 @@
 
 <div id="containerAgb">
 
-<h2 class="impressum">Impressum</h2>
+<h2 class="ueberschrift">Impressum</h2>
 <p class="impressum">Run 4 Fun GmbH & Co. KG<br /> F&uumlrstenallee 5<br /> 33102 Paderborn</p>
 <p class="impressum">Telefon: 05251 1234<br /> E-Mail: <a href="mailto:webshop.r4f@gmail.com">webshop.r4f@gmail.com</a><br /></p>
 <p class="impressum"><strong>Vertreten durch:</strong><br />Run 4 Fun GmbH<br />Gesch&aumlftsf&uumlhrer: Laura Birkheuer, Maike Polaszek, Ture K&uumlsener<br />Registergericht: Paderborn<br />Registernummer: 1234</p>

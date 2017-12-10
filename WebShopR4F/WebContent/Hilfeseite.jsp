@@ -14,7 +14,7 @@
 <%@ include file="Header.jspf" %>
 
 <div id="containerAgb">
-<h2 class="impressum">Kundenservice</h2>
+<h2 class="ueberschrift">Kundenservice</h2>
 	
 	<table class="hilfe">
 		

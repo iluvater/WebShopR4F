@@ -18,8 +18,7 @@
 
 	<div id="container">
 		<center>
-			<hr/>
-			<h4>Ups... es ist ein Fehler aufgetreten!</h4>
+			<h4 class="ueberschrift">Ups... es ist ein Fehler aufgetreten!</h4>
 			<p>Bitte versuchen Sie es später erneut.</p>
 			</center>
 	</div>

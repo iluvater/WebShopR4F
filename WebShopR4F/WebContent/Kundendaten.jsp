@@ -25,7 +25,7 @@
 	</jsp:useBean> 
 
 	<div id="container">
-		<h2>Deine Daten bei R4F</h2>
+		<h2 class="ueberschrift">Deine Daten bei R4F</h2>
 		<h3>Hier muss noch ein guter Text hin... </h3>
 		<form action="./ChangeUserDataServlet" method="post">
 		<div id="inhalt">

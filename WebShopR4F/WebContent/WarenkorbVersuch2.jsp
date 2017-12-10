@@ -22,7 +22,7 @@
 </c:if>
 <c:if test ="${not empty shoppingBasket.items}">
 	<div id="container">	
-		<h3 class="impressum">Warenkorb</h3>
+		<h3 class="ueberschrift">Warenkorb</h3>
  			<c:forEach items="${shoppingBasket.items}" var="item">
 				<div class="artikel">
 						<div class="bild"><img class="ImgWarenkorb" src="./ImageServlet/${item.article.mainImage}" alt="Bild"></div> 

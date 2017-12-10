@@ -20,7 +20,7 @@
 	</jsp:useBean> 
 	
 	<div id="container">
-		<h3>Bestelldetails</h3>
+		<h3 class="ueberschrift">Bestelldetails</h3>
 		<form action="./OrderInputToOverviewServlet" method="post">
 		<div id="inhalt">
 			<h4>Versandadresse</h4>		
