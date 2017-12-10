@@ -65,7 +65,7 @@
 				</c:forEach>
  				<div id="weiterEinkaufen">
  					<form action="NavigationOverviewServlet">
-						<p><input type="submit" id="button" value="Weiter Einkaufen" /></p>
+						<p><input type="submit" id="button" value="Weitere Artikel ansehen" /></p>
 					</form>
 				</div>
 				

@@ -39,21 +39,25 @@
 					</div> 
 				</div>
 			</c:forEach>
-			
-			<div class="gesamtpreis">
+			<hr/>
  			<div id="weiterEinkaufen">
+ 			 	<div class="linkerButton">
  			 		<form action="NavigationOverviewServlet">
-						<p><input type="submit" id="button" value="Weiter Einkaufen" /></p>
+						<input type="submit" id="button" value="Weitere Artikel ansehen" />
 					</form>
-				<!-- <p><input type="submit" id="button" value="Weiter Einkaufen" /></p> -->
+				</div>
+				<div class="rechterButton">
+					<form action="./WishlistToShoppingBasketServlet" method="post">
+						<input type="submit" id="button" value="Alle Artikel in den Warenkorb" />
+					</form>
+				</div>
 			</div>
- 				<div id="weiterEinkaufen">
+			
+ 			<!-- 	<div id="weiterEinkaufen">
  				<form action="./WishlistToShoppingBasketServlet" method="post">
 					<p><input type="submit" id="button" value="In den Warenkorb" /></p>
 				</form>
-				</div>
-				</div>
-			<!-- </div> -->
+				</div> -->
 			</c:if>
 		</div>
 	
