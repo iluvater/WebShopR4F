@@ -22,7 +22,7 @@ public class AuthorizationService extends Service{
 	 * 			returns true if the user has the authorization
 	 */
 	public static boolean authorityCheck(User user, String role){
-		if(user.getEmail() == null){
+		if(user.getId() == 0){
 			//authorization not granted because user has to login
 			return false;
 		}else{
