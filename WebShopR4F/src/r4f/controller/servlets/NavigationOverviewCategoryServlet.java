@@ -52,6 +52,7 @@ public class NavigationOverviewCategoryServlet extends HttpServlet {
 		
 		if(category != null && !category.equals("")){
 			FilterCategory categoryFilter = new FilterCategory(category);
+			filterList.removeFilter("category");
 			filterList.getFilters().add(categoryFilter);
 			
 			request.getSession().setAttribute("filterList", filterList);

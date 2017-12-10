@@ -18,11 +18,11 @@ public class FilterCategory implements FilterInterface {
 	 * @see r4f.controller.filter.FilterInterface#getSQLFilter()
 	 */
 	@Override
-	public String getSQLFilter(String tableArticle, String tableCategory, String tableManufacturer, String tableSport, String tableColor) {
+	public String getSQLFilter(String tableArticle, String tableCategory, String tableManufacturer, String tableSport, String tableColor, String tableSize) {
 		if(category == null || category.equals("")){
 			return "";
 		}else{
-			return " AND " + tableCategory + ".name = \"" + category + "\"";
+			return " " + tableCategory + ".name = \"" + category + "\"";
 		}
 	}
 

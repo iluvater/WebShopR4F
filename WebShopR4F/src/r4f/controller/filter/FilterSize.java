@@ -23,12 +23,12 @@ public class FilterSize implements FilterInterface {
 	 */
 	@Override
 	public String getSQLFilter(String tableArticle, String tableCategory, String tableManufacturer, String tableSport,
-			String tableColor) {
+			String tableColor, String tableSize) {
 		String sql = "( ";
 
 		for (int i = 0; i< sizes.size(); i++) {
 			Integer size = sizes.get(i);
-			sql = sql + tableArticle + ".size = \"" + size + "\"";
+			sql = sql + tableSize + ".size = \"" + size + "\"";
 			if(i != sizes.size() -1 ){
 				sql = sql + " OR ";
 			}

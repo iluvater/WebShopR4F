@@ -78,11 +78,11 @@ public class EmailService {
 			emailBody = emailBody.replaceAll("!orderPrice!", Double.toString(order.getTotalPrice()));
 			String orderItems = "";
 			for (OrderItem item : order.getItems()) {
-				orderItems = orderItems + "<tr valign=\"top\"><td width=\"35%\">"+ item.getArticle().getName() + "</td><td width=\"35%\">" + item.getArticle().getPrice() + "</td></tr>";
+				orderItems = orderItems + "<tr valign=\"top\"><td width=\"35%\">"+ item.getArticle().getName() + "</td><td width=\"35%\">" + item.getArticle().getPrice() + "€</td></tr>";
 			}
 			emailBody = emailBody.replaceAll("!orderItems!", orderItems);
 			
-			sendMail(order.getUser().getEmail(), ("Bestellbest&aumltigung für Bestellung # " + order.getId()), emailBody);
+			sendMail(order.getUser().getEmail(), ("Bestellbestätigung für Bestellung #" + order.getId()), emailBody);
 		}catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -141,7 +141,7 @@ public class EmailService {
 			getMailSession = Session.getDefaultInstance(mailServerProperties, null);
 			generateMailMessage = new MimeMessage(getMailSession);
 			generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-			generateMailMessage.setSubject(subject);
+			generateMailMessage.setSubject(subject, "UTF-8");
 
 			// setting the Email text
 

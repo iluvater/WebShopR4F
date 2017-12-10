@@ -40,14 +40,14 @@ public class FilterList {
 	 * @param tableColor the name of the table color
 	 * @return the where clause specified by this filter
 	 */
-	public String getSQLFilter(String tableArticle, String tableCategory, String tableManufacturer, String tableSport, String tableColor){
+	public String getSQLFilter(String tableArticle, String tableCategory, String tableManufacturer, String tableSport, String tableColor, String tableSize){
 		String filter = "";
 		if(!filters.isEmpty()){
 			filter = " WHERE ";
 		}
 		for (int i = 0; i < filters.size(); i++) {
 			FilterInterface filterInterface = filters.get(i);
-			filter = filter + filterInterface.getSQLFilter(tableArticle, tableCategory, tableManufacturer, tableSport, tableColor);
+			filter = filter + filterInterface.getSQLFilter(tableArticle, tableCategory, tableManufacturer, tableSport, tableColor, tableSize);
 			if(i != filters.size() -1){
 				filter = filter + " AND ";
 			}

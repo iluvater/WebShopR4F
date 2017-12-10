@@ -47,8 +47,8 @@ public class ConfirmationCodeSerlvet extends HttpServlet {
 		RequestDispatcher dispatcher;
 		User user;
 		String registrierungsURL = "Login.jsp";
-		String errorURL = "BestaetigungsCode.jsp";
-		String successURL = "BestaetigungsCode.jsp";
+		String errorURL = "RegistrierungAbschliesen.jsp";
+		String successURL = "./NavigationOverviewServlet";
 		String code;
 
 		code = request.getParameter("code");

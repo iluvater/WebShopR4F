@@ -1,8 +1,8 @@
 <p>Hallo !firstName! !lastName!,</p>
-herzlich Willkommen bei Run4Fun, Ihrem Online-Shop für Sportschuhe.<br><br>
-Bevor Sie nun einkaufen können müssen Sie ihren Account bestätigen. Geben Sie dazu auf der Seite zu der Sie weitergeleitet wurden den folgenden Zahlencode ein.<br><br>
+herzlich Willkommen bei Run4Fun, Ihrem Online-Shop fï¿½r Sportschuhe.<br><br>
+Bevor Sie nun einkaufen kÃ¶nnen mÃ¼ssen Sie ihren Account bestÃ¤tigen. Geben Sie dazu auf der Seite zu der Sie weitergeleitet wurden den folgenden Zahlencode ein.<br><br>
 <h2> !code! </h2>
-Wenn Sie noch Fragen zum Webshop haben, dann können Sie unter <a href="http://localhost:8080/WebShopR4F/Hilfe.jsp" > run4fun.de/Hilfe </a> weiter Informationen erhalten 
+Wenn Sie noch Fragen zum Webshop haben, dann kÃ¶nnen Sie unter <a href="http://localhost:8080/WebShopR4F/Hilfe.jsp" > run4fun.de/Hilfe </a> weiter Informationen erhalten 
 oder unter <a href="http://localhost:8080/WebShopR4F/Kontakt.jsp" > run4fun.de/Kontakt </a> sich direkt an uns wenden. <br> <br>
-Viele Gr&uuml;ße<br>
+Viele GrÃ¼ÃŸe<br>
 Run4Fun

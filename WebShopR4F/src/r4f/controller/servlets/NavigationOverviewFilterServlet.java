@@ -149,11 +149,11 @@ public class NavigationOverviewFilterServlet extends HttpServlet {
 			filterList.removeFilter("manufacturer");
 		}
 		if (color != null && !color.equals("")) {
-			FilterColor filterColor = (FilterColor) filterList.getFilter("manufacturer");
+			FilterColor filterColor = (FilterColor) filterList.getFilter("color");
 			if (filterColor == null) {
 				filterColor = new FilterColor();
 			}
-			filterList.removeFilter("manufacturer");
+			filterList.removeFilter("color");
 			filterColor.getColors().clear();
 			for (String string : color) {
 				switch (string) {
