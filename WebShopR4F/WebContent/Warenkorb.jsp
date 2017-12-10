@@ -28,8 +28,11 @@
 						<div class="bild"><img class="ImgWarenkorb" src="./ImageServlet/${item.article.mainImage}" alt="Bild"></div> 
 						<div class="daten">
 							<p><b>${item.article.name}</b></p>
-							<form action="./ChangeSizeColorServlet" method="post">
+							<form action="./ChangeAmountShoppingBasketServlet" method="post">
 								<input type="hidden" name="articleId" value="${article.id }" />
+								<input type="hidden" name="size" value="${item.size }" />
+								<input type="hidden" name="color" value="${item.color }" />	
+								<input type="hidden" name="amount" value="${item.amount }" />
  								<c:if test="${empty size }">
 									<p><b>Gr&ouml;&szlig;e: </b>
 									<select id="size" name="sizeNew" onChange="submit();">
@@ -90,7 +93,9 @@
 							<form action="./ChangeAmountShoppingBasketServlet" method="post">
 								<input type="hidden" name="articleId" value="${item.article.id }" />
 								<input type="hidden" name="size" value="${item.size }" />
-								<input type="hidden" name="color" value="${item.color }" />						
+								<input type="hidden" name="color" value="${item.color }" />	
+								<input type="hidden" name="sizeNew" value="${item.size }" />
+								<input type="hidden" name="colorNew" value="${item.color }" />					
 								<!-- <p><label for="amount">Menge:</label> -->
 								<p><b>Menge:</b>
 								<select name="amount">
