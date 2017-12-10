@@ -21,10 +21,6 @@ public class UserService extends Service {
 			super.getDbConnection().updateUserInDB(user);
 			super.getDbConnection().updateAddressInDB(user.getId(), user.getFirstName(), user.getLastName(),
 					user.getStreet(), user.getHouseNumber(), user.getPostCode(), user.getCity(), user.getSalutation());
-			super.getDbConnection().deleteRoleMappings(user);
-			for (Role role : user.getRole()) {
-				super.getDbConnection().createRoleMapping(user, role);
-			}
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();

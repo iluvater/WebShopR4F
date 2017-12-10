@@ -50,8 +50,8 @@ public class ChangeUserDataServlet extends HttpServlet {
 		User user;
 		UserService userService;
 		RequestDispatcher dispatcher;
-		String errorURL = "Test.jsp";
-		String successURL = "Willkommen.jsp";
+		String errorURL = "Kundendaten.jsp";
+		String successURL = "Kundendaten.jsp";
 		int year, month, day;
 
 		// Getting all data
@@ -173,7 +173,7 @@ public class ChangeUserDataServlet extends HttpServlet {
 													}
 													}else{
 														// Errorhandling not old enough
-														ErrorMessage errorMessage = new ErrorMessage(126);
+														ErrorMessage errorMessage = new ErrorMessage(129);
 														request.setAttribute("error", errorMessage);
 														dispatcher = request.getRequestDispatcher(errorURL);
 														dispatcher.forward(request, response);
