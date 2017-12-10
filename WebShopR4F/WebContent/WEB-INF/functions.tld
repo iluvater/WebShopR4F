@@ -13,6 +13,6 @@
     <function>
         <name>checkAuthorization</name>
         <function-class>r4f.controller.services.AuthorizationService</function-class>
-        <function-signature>boolean authorityCheck(User , String )</function-signature>
+        <function-signature>boolean authorityCheck(r4f.model.User , java.lang.String )</function-signature>
     </function>
 </taglib>
