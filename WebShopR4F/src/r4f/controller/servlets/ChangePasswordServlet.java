@@ -48,7 +48,7 @@ public class ChangePasswordServlet extends HttpServlet {
 		String code_input;
 		String email;
 		String password, password_wdh;
-		String successURL = "TEstSuccess.jsp";
+		String successURL = "Login.jsp";
 		String errorURL = "Testerror.jsp";
 		RequestDispatcher dispatcher;
 		UserService userService = new UserService();
@@ -73,8 +73,11 @@ public class ChangePasswordServlet extends HttpServlet {
 							user = userService.getUser(email);
 							user.setPassword(password);
 							if (userService.updateUserInDB(user)) {
-								// sucess
-
+								//sucess
+								request.getSession().removeAttribute("code");
+								dispatcher = request.getRequestDispatcher(successURL);
+								dispatcher.forward(request, response);
+								return;
 							} else {
 								// error during update
 								ErrorMessage errorMessage = new ErrorMessage(126);
