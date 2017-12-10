@@ -4,6 +4,10 @@
 
 	<jsp:useBean id="shoppingBasket" class="r4f.model.ShoppingBasket" scope="session">
 	</jsp:useBean>
+	<jsp:useBean id="size" class="java.lang.String" scope="session" >
+	</jsp:useBean>
+	<jsp:useBean id="color" class="java.lang.String" scope="session">
+	</jsp:useBean>
 	
 <c:if test ="${empty shoppingBasket.items}">
 <div id="container">
@@ -29,11 +33,11 @@
 						<div class="daten">
 							<p><b>${item.article.name}</b></p>
 							<form action="./ChangeAmountShoppingBasketServlet" method="post">
-								<input type="hidden" name="articleId" value="${article.id }" />
+								<input type="hidden" name="articleId" value="${item.article.id }" />
 								<input type="hidden" name="size" value="${item.size }" />
 								<input type="hidden" name="color" value="${item.color }" />	
 								<input type="hidden" name="amount" value="${item.amount }" />
- 								<c:if test="${empty size }">
+ 								<c:if test="${ size eq item.size}">
 									<p><b>Gr&ouml;&szlig;e: </b>
 									<select id="size" name="sizeNew" onChange="submit();">
 									<c:forEach items="${item.article.size}" var="articleSize" begin="0" end="0">
@@ -45,21 +49,21 @@
 									</select>
 									</p>
 								</c:if> 
-								<c:if test="${not empty size }">
+								<c:if test="${size ne item.size }">
 									<p><b>Gr&ouml;&szlig;e: </b>
 									<select id="size" name="sizeNew" onChange="submit();">
 									<c:forEach items="${item.article.size}" var="articleSize">
-										<c:if test="${articleSize eq size}">
+										<c:if test="${articleSize eq item.size}">
 											<option selected value="${articleSize}">${articleSize}</option>
 										</c:if>
-										<c:if test="${articleSize ne size}">
+										<c:if test="${articleSize ne item.size}">
 											<option value="${articleSize}">${articleSize}</option>
 										</c:if>
 									</c:forEach>
 									</select>
 									</p>
 								</c:if>
-					 			<c:if test="${empty color }">
+					 			<c:if test="${color eq item.color }">
 									<p><b>Farbe: </b>
 									<select id="color" name="colorNew" onChange="submit();">
 										<c:forEach items="${item.article.color}" var="articleColor" begin="0" end="0">
@@ -71,14 +75,14 @@
 									</select>
 									</p>
 								</c:if> 
-								<c:if test="${not empty color }">
+								<c:if test="${color ne item.color}">
 									<p><b>Farbe: </b>
 									<select id="color" name="colorNew" onChange="submit();">
 									<c:forEach items="${item.article.color}" var="articleColor">
-										<c:if test="${articleColor eq color}">
+										<c:if test="${articleColor eq item.color}">
 											<option selected value="${articleColor}">${articleColor}</option>
 										</c:if>
-										<c:if test="${articleColor ne color}">
+										<c:if test="${articleColor ne item.color}">
 											<option value="${articleColor}">${articleColor}</option>
 										</c:if>
 									</c:forEach>
@@ -91,7 +95,6 @@
 						<div class="menge">					
 							<hr />
 							<form action="./ChangeAmountShoppingBasketServlet" method="post">
-							<p><b>Menge</b>
 								<input type="hidden" name="articleId" value="${item.article.id }" />
 								<input type="hidden" name="size" value="${item.size }" />
 								<input type="hidden" name="color" value="${item.color }" />	
@@ -99,7 +102,7 @@
 								<input type="hidden" name="colorNew" value="${item.color }" />					
 								<!-- <p><label for="amount">Menge:</label> -->
 								<p><b>Menge:</b>
-								<select name="amount">
+								<select name="amount"  onChange="submit();">
  								<c:if test="${item.amount == '1'}">
  									<option selected value="1">1</option>
  			 						<option value="2">2</option>
@@ -114,7 +117,7 @@
 					 			</c:if>
 					 			<c:if test="${item.amount == '2'}">
 					 				<option value="1">1</option>
-					 			 	<option selected value="2">Asics</option>
+					 			 	<option selected value="2">2</option>
 					 				<option value="3">3</option>
 					 				<option value="4">4</option>
 									<option value="5">5</option>
@@ -224,7 +227,7 @@
 								</p>							
 							</form>
 							<p />
-							<form action="./RemoveArticleFromShoppingBasket" method="post">
+							<form action="./RemoveArticleFromShoppingBasketServlet" method="post">
 								<input type="hidden" name="articleId" value="${item.article.id }" />
 								<input type="hidden" name="size" value="${item.size }" />
 								<input type="hidden" name="color" value="${item.color }" />

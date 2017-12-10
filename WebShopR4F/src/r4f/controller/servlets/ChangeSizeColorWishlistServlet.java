@@ -41,7 +41,7 @@ public class ChangeSizeColorWishlistServlet extends HttpServlet {
 		int size, sizeNew;
 		String color, colorNew;
 		RequestDispatcher dispatcher;
-		String successURL = "Warenkorb.jsp";
+		String successURL = "Merkliste.jsp";
 		String errorURL = "Login.jsp";
 		Wishlist wishlist;
 

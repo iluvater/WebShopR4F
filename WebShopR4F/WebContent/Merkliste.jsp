@@ -4,7 +4,11 @@
 
 	<jsp:useBean id="wishlist" class="r4f.model.Wishlist" scope="session">
 	</jsp:useBean>
-
+	<jsp:useBean id="size" class="java.lang.String" scope="session" >
+	</jsp:useBean>
+	<jsp:useBean id="color" class="java.lang.String" scope="session">
+	</jsp:useBean>
+	
 	<div id="container">	
 	<c:if test ="${empty wishlist.list}">
 		<h3 class="ueberschrift">Merkliste</h3>
@@ -26,12 +30,12 @@
 					<div class="daten">
 						<p><b>${item.article.name}</b></p>
 						<form action="./ChangeSizeColorWishlistServlet" method="post">
-						<input type="hidden" name="articleId" value="${article.id }" />
+						<input type="hidden" name="articleId" value="${item.article.id }" />
 						<input type="hidden" name="size" value="${item.size }" />
 						<input type="hidden" name="color" value="${item.color }" />	
- 						<c:if test="${empty size }">
+ 						<c:if test="${size eq item.size}">
 							<p><b>Gr&ouml;&szlig;e: </b>
-							<select id="size" name="size" onChange="submit();">
+							<select id="size" name="sizeNew" onChange="submit();">
 								<c:forEach items="${item.article.size}" var="articleSize" begin="0" end="0">
 									<option selected value="${articleSize}">${articleSize}</option>
 								</c:forEach>
@@ -41,9 +45,9 @@
 							</select>
 							</p>
 						</c:if> 
-						<c:if test="${not empty size }">
+						<c:if test="${size ne item.size }">
 							<p><b>Gr&ouml;&szlig;e: </b>
-							<select id="size" name="size" onChange="submit();">
+							<select id="size" name="sizeNew" onChange="submit();">
 								<c:forEach items="${item.article.size}" var="articleSize">
 									<c:if test="${articleSize eq size}">
 										<option selected value="${articleSize}">${articleSize}</option>
@@ -55,9 +59,9 @@
 							</select>
 							</p>
 						</c:if>
-					 	<c:if test="${empty color }">
+					 	<c:if test="${color eq item.color }">
 							<p><b>Farbe: </b>
-							<select id="color" name="color" onChange="submit();">
+							<select id="color" name="colorNew" onChange="submit();">
 								<c:forEach items="${item.article.color}" var="articleColor" begin="0" end="0">
 									<option selected value="${articleColor}">${articleColor}</option>
 								</c:forEach>
@@ -67,9 +71,9 @@
 							</select>
 							</p>
 						</c:if> 
-						<c:if test="${not empty color }">
+						<c:if test="${color ne item.color }">
 							<p><b>Farbe: </b>
-							<select id="color" name="color" onChange="submit();">
+							<select id="color" name="colorNew" onChange="submit();">
 								<c:forEach items="${item.article.color}" var="articleColor">
 									<c:if test="${articleColor eq color}">
 										<option selected value="${articleColor}">${articleColor}</option>
