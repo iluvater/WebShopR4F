@@ -41,16 +41,16 @@ public class CreateUserRoleMappingServlet extends HttpServlet {
 		RequestDispatcher dispatcher;
 		String errorURL = "Test.jsp";
 		String successURL = "Test.jsp";
-		int userId;
+		String email;
 		String role;
 		AuthorizationService authorizationService;
 		
 		try{
-			userId = Integer.parseInt(request.getParameter("userID"));
+			email = request.getParameter("email");
 			role = request.getParameter("role");
 			authorizationService = new AuthorizationService();
 			if(role!=null && !role.equals("")){
-			int id = authorizationService.createUserRoleMapping(userId, role);
+			int id = authorizationService.createUserRoleMapping(email, role);
 			if(id != -1){
 				//success
 				ErrorMessage successMessage = new ErrorMessage(603);
@@ -74,8 +74,8 @@ public class CreateUserRoleMappingServlet extends HttpServlet {
 				return;
 			}
 		}catch(NumberFormatException e){
-			//Error missing input userID
-			ErrorMessage errorMessage = new ErrorMessage(139);
+			//Error missing input email
+			ErrorMessage errorMessage = new ErrorMessage(108);
 			request.setAttribute("error", errorMessage);
 			dispatcher = request.getRequestDispatcher(errorURL);
 			dispatcher.forward(request, response);
