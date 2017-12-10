@@ -64,9 +64,8 @@ public class UserService extends Service {
 		user.setShoppingBasket(shoppingBasketId);
 		user.setId(userId);
 		user.setWishlist(wishlistId);
-		List<Role> roles = new ArrayList<Role>();
-		roles.add(super.getDbConnection().getRole(1));
-		user.setRole(roles);
+		
+		super.getDbConnection().createRoleMapping(userId, 1);
 
 		try {
 			super.getDbConnection().updateUserInDB(user);

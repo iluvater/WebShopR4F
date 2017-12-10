@@ -91,6 +91,7 @@
 						<div class="menge">					
 							<hr />
 							<form action="./ChangeAmountShoppingBasketServlet" method="post">
+							<p><b>Menge</b>
 								<input type="hidden" name="articleId" value="${item.article.id }" />
 								<input type="hidden" name="size" value="${item.size }" />
 								<input type="hidden" name="color" value="${item.color }" />	

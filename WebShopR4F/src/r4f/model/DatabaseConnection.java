@@ -1954,7 +1954,7 @@ public class DatabaseConnection {
 	 * @param role the role
 	 * @return returns the id of the new entry in the database, returns -1 if no entry was created
 	 */
-	public int createRoleMapping(User user, Role role){
+	public int createRoleMapping(int userId, int roleId){
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1964,8 +1964,8 @@ public class DatabaseConnection {
 				PreparedStatement preparedStatement = conn.prepareStatement(
 						"INSERT INTO `mappinguserrole` (`user`, `role`) " + "VALUES ( ?, ?)",
 						Statement.RETURN_GENERATED_KEYS);
-				preparedStatement.setInt(1, role.getId());
-				preparedStatement.setInt(2, user.getId());
+				preparedStatement.setInt(1, userId);
+				preparedStatement.setInt(2, roleId);
 
 				int lines = preparedStatement.executeUpdate();
 
