@@ -16,10 +16,10 @@
 
 	<jsp:useBean id="wishlist" class="r4f.model.Wishlist" scope="session">
 	</jsp:useBean>
-	
+
+	<div id="container">	
 	<c:if test ="${empty wishlist.list}">
-	<div id="container">
-		<h3 class="impressum">Merkliste</h3>
+		<h3 class="ueberschrift">Merkliste</h3>
 		<div class="warenkorbLeer">
 			<p class="impressum">Ihre Merkliste ist noch leer. <br/>Legen Sie los und f&uuml;llen Sie ihn mit Ihren neuen Lieblingsschuhen!</p>
 		</div>
@@ -28,11 +28,9 @@
 			<input type="submit" id="button" value="Zu deinen Lieblingschuhen" />
 			<input type="submit" id="button" value="Neues R4F Konto erstellen" />
 		</center>
-	</div>
 	</c:if>
-	<c:if test ="${not empty wishlist.list}">
-	<div id="container">	
-		<h3 class="impressum">Merkliste</h3>
+	<c:if test ="${not empty wishlist.list}">	
+		<h3 class="ueberschrift">Merkliste</h3>
  			<c:forEach items="${wishlist.list}" var="item">
 				<div class="artikel">
 					<div class="bild"><img class="ImgWarenkorb" src="./ImageServlet/${item.article.mainImage}" alt="Bild"></div> 
@@ -67,6 +65,7 @@
 				</div>
 				</div>
 			<!-- </div> -->
+			</c:if>
 		</div>
-	</c:if>
+	
 <%@ include file="Footer.jspf" %>
