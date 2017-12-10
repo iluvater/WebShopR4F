@@ -26,23 +26,26 @@
 	<div id="container">	
 		<h3 class="impressum">Meine Bestellungen</h3>
 		<c:forEach items="${orderList}" var= "order">
- 			<div class="bestellungen">
- 			<div class="bestellungDetails"> 
- 				<div class="bild"><p>Bestellung aufgegeben am <br/><fmt:formatDate pattern = "dd.MM.yyyy" value = "${order.entryDate}" /></p></div>
- 				<div class="daten"><p>Summe <br/><b>${order.totalPrice}&euro;</b></p></div>
- 				<div class="menge"><p>Bestellnummer <br/>${order.id}</p></div>
- 			</div>
-			<c:forEach items="${order.items}" var="item">
-				<div class="artikelBestellungen">
+ 			<div class="bestellung">
+ 				<div class="bestellungDetails"> 
+ 					<div class="bestelldatum"><p>Bestellung aufgegeben am <br/><fmt:formatDate pattern = "dd.MM.yyyy" value = "${order.entryDate}" /></p></div>
+ 					<div class="bestellsumme"><p>Summe <br/><b>${order.totalPrice}&euro;</b></p></div>
+ 					<div class="bestellid"><p>Bestell ID <br/>${order.id}</p></div>
+ 				</div>
+				<c:forEach items="${order.items}" var="item">
+					<div class="artikelBestellungen">
 						<div class="bild"><img class="ImgAlteBestellungen" src="./ImageServlet/${item.article.mainImage}" alt="Bild"></div> 
 						<div class="daten">
 							<p><b>${item.article.name}</b></p>
 							<p><b>Preis: </b><b>${item.article.price}&euro;</b></p>
 						</div> 
-				</div> 
-			</c:forEach> 
-		</div>
-</c:forEach>
+					</div> 
+				</c:forEach> 
+			
+			<hr class="black" />
+			</div>
+			
+		</c:forEach>
 			</div>
  				<div id="weiterEinkaufen">
  					<form action="./NavigationOverwiewServlet" method="post">

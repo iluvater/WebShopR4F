@@ -43,8 +43,7 @@ public class AuthorizationService extends Service{
 	public int createUserRoleMapping(String email, String name) {
 		User user = super.getDbConnection().getUser(email);
 		int roleId = super.getDbConnection().getRoleId(name);
-		Role role = super.getDbConnection().getRole(roleId);
-		return super.getDbConnection().createRoleMapping(user, role);
+		return super.getDbConnection().createRoleMapping(user.getId(), roleId);
 		
 	}
 	
