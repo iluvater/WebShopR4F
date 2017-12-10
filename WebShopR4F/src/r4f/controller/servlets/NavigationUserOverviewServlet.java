@@ -39,7 +39,7 @@ public class NavigationUserOverviewServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String successURL = "Test.jsp";
+		String successURL = "Rollenzuordnung.jsp";
 		String errorURL = "Login.jsp";
 		RequestDispatcher dispatcher;
 		UserService userService = new UserService();

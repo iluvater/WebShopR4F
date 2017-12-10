@@ -68,7 +68,9 @@
 				</div>
  				<div id="weiterEinkaufen">
  					<center>
- 						<input type="submit" id="button" value="Bestellung abbrechen" />
+ 						<a href="Warenkorb.jsp">
+ 							<input type="submit" id="button" value="Bestellung abbrechen" />
+ 						</a>
 					</center>
 				</div>
 				<div class="gesamtpreis"> 

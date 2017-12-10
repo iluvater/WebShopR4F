@@ -19,9 +19,20 @@
 		<center>
 			<h4 class="ueberschrift">Herzlichen Gl&uuml;ckwunsch! Sie haben ihre Bestellung abgeschlossen!</h4>
 			<p>Ihre Bestellung wird voraussichtlich am <fmt:formatDate pattern = "dd.MM.yyyy" value = "${order.deliveryDate}" /> eintreffen.</p>
+
 			<p>Sie k&ouml;nnen sich Ihre letzten Bestellungen im &Uuml;berblick ansehen oder weitere Artikel kaufen</p>
-			<input type="submit" id="button" value="Bestell&uuml;berblick" />
-			<input type="submit" id="button" value="Weiter Einkaufen" />
 		</center>
+		<hr/>
+		<div id="weiterEinkaufenBestellabschluss">
+ 			 	<div class="linkerButtonMerkliste">
+ 			 		<form action="NavigationOverviewServlet">
+						<input type="submit" id="button" value="Weitere Artikel ansehen" />
+					</form>
+				</div>
+				<div class="rechterButtonMerkliste">
+					<form action="./NavigationOrderListServlet" method="post">
+						<input type="submit" id="button" value="Meine Bestellungen" />
+					</form>
+				</div>
 	</div>
 <%@ include file="Footer.jspf" %>
