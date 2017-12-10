@@ -39,8 +39,8 @@ public class CreateUserRoleMappingServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher;
-		String errorURL = "Test.jsp";
-		String successURL = "Test.jsp";
+		String errorURL = "Rollenzuordnung.jsp";
+		String successURL = "Rollenzuordnung.jsp";
 		String email;
 		String role;
 		AuthorizationService authorizationService;
