@@ -29,7 +29,7 @@
 		<h3>Überprüfen Sie, ob Ihre Kundendaten aktuell und richtig sind, oder ändern Sie die Daten einfach.  </h3>
 		<form action="./ChangeUserDataServlet" method="post">
 		<div id="inhalt">
-			<h4>Persönliche Daten</h4>
+			<h4>Pers&ouml;nliche Daten</h4>
 			
 			<p><label for="id">ID:</label>
 			<input id="id" name="id" value="<jsp:getProperty property="id" name="user"/>" type="text" disabled/><br /></p>
@@ -82,7 +82,7 @@
 			
 			<h4>Adresse</h4>
 			
-			<p><label for="street">Straße:</label>
+			<p><label for="street">Stra&szlig;e:</label>
 			<input id="street" name="street" value="<jsp:getProperty property="street" name="user"/>" type="text" /><br /></p>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 110 }">

@@ -86,20 +86,20 @@
 		<div id="inhalt">
 			<h4>Bezahlart</h4>				
 				<p><input type="radio" id="vorkasse" name="paymentMethod" value="Vorkasse"> Vorkasse</p>
-				<div id="uebersicht"><p class="erlaeuterung">Wählen Sie die Variante "Vorkasse" bekommen Sie mit der Bestätigungmail unsere Bankdaten. 
+				<div id="uebersicht"><p class="erlaeuterung">W&auml;hlen Sie die Variante "Vorkasse" bekommen Sie mit der Best&auml;tigungmail unsere Bankdaten. 
 				Nach Eingang der Bezahlung wird Ihre Bestellung versendet.<p></div>
     			<p><input type="radio" id="nachnahme" name="paymentMethod" value="Nachnahme"> Nachnahme</p>
-    			<div id="uebersicht"><p class="erlaeuterung">Wählen Sie die Variante "Nachnahme" zahlen Sie erst, nachdem die Bestellung bei Ihnen eingetroffen ist.</p></div>
+    			<div id="uebersicht"><p class="erlaeuterung">W&auml;hlen Sie die Variante "Nachnahme" zahlen Sie erst, nachdem die Bestellung bei Ihnen eingetroffen ist.</p></div>
 		</div>
 		<hr/>
  			<center>
  				<div class="linkerButtonMerkliste">
 					<a href="Warenkorb.jsp">
-						<input type="button" id="button" value="Zurück zum Warenkorb" />
+						<input type="button" id="button" value="Zur&uuml;ck zum Warenkorb" />
 					</a>
 				</div>
 				<div class="rechterButtonMerkliste">
-					<input type="submit" id="button" value="Weiter zur Bestellübersicht" />
+					<input type="submit" id="button" value="Weiter zur Bestell&uuml;bersicht" />
 				</div>
 			</center>
 		</form>

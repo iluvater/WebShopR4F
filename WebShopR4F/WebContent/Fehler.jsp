@@ -19,7 +19,7 @@
 	<div id="container">
 		<center>
 			<h4 class="ueberschrift">Ups... es ist ein Fehler aufgetreten!</h4>
-			<p>Bitte versuchen Sie es später erneut.</p>
+			<p>Bitte versuchen Sie es sp&auml;ter erneut.</p>
 			</center>
 	</div>
 <%@ include file="Footer.jspf" %>

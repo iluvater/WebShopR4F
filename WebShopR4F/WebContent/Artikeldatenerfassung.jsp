@@ -70,10 +70,10 @@
            		<input type="checkbox" id="color" name="color" value="2" ${filter.color2}> Orange<br />
           		<input type="checkbox" id="color" name="color" value="3" ${filter.color3}> Rot<br />
           		<input type="checkbox" id="color" name="color" value="4" ${filter.color4}> Pink<br />
-          		<input type="checkbox" id="color" name="color" value="5" ${filter.color5}> Grün<br />
+          		<input type="checkbox" id="color" name="color" value="5" ${filter.color5}> Gr&uuml;n<br />
           		<input type="checkbox" id="color" name="color" value="6" ${filter.color6}> Blau<br />
           		<input type="checkbox" id="color" name="color" value="7" ${filter.color7}> Schwarz<br />
-          		<input type="checkbox" id="color" name="color" value="8" ${filter.color8}> Weiß<br />
+          		<input type="checkbox" id="color" name="color" value="8" ${filter.color8}> Wei&szlig;<br />
   			</fieldset>
   			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 120 }">

@@ -4,7 +4,8 @@
 
 	<jsp:useBean id="userList" type="java.util.ArrayList<r4f.model.User>" class="java.util.ArrayList" scope="request">
 	</jsp:useBean> 	
-
+	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
+	</jsp:useBean> 
 <div id="container">
 	<h2 class="ueberschrift">Rollenzuordnung</h2>
 	<form action="./CreateUserRoleMappingServlet" method="post">
@@ -24,9 +25,17 @@
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 				</c:if>	
 			</c:if>	
+			<c:if test ="${not empty error }">
+				<c:if test="${error.errorCode == 126}">
+					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+				</c:if>	
+			</c:if>	
 			<center><p><input type="submit" id="button" value="Speichern" /></p></center>
 		</div>
 	</form>
+		<div id="inhalt">
+			
+		</div>
 </div>
 
 <%@ include file="Footer.jspf" %>

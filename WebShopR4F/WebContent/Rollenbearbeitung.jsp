@@ -38,7 +38,7 @@
 		</form>
 			<br />
 			<div id="inhalt">
-				<h4>Rollen ändern</h4>
+				<h4>Rollen &auml;ndern</h4>
 				<c:forEach items="${roleList}" var="role">
 					<form action="./ChangeRoleServlet" method="post">
 					<div class="changeRole"><p><input class="changeRole" id="name" name="name" value="${role.name}" type="text" disabled/><br /></p>
