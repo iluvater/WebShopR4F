@@ -93,5 +93,4 @@
 	<p class="hilfeAntwort">Senden Sie Ihre Bewerbung inkl. Motivationsschreiben und Lebenslauf mit dem Betreff "Meine Karriere bei R4F" an <a href="mailto:webshop.r4f@gmail.com">webshop.r4f@gmail.com</a>!</p>
 	</div>
 </div>
-</body>
-</html>
+<%@ include file="Footer.jspf" %>

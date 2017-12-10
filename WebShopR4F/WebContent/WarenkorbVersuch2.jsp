@@ -18,7 +18,7 @@
 	</jsp:useBean>
 	
 <c:if test ="${empty shoppingBasket.items}">
-<div class="container">
+<div id="container">
 	<h3 class="impressum">Warenkorb</h3>
 	<div class="warenkorbLeer">
 		<p class="impressum">Dein Warenkorb ist noch leer. 
@@ -75,8 +75,13 @@
 					</div>
 				</c:forEach>
  				<div id="weiterEinkaufen">
-					<p><input type="submit" id="button" value="Weiter Einkaufen" /></p>
+ 					<form action="NavigationOverviewServlet">
+						<p><input type="submit" id="button" value="Weiter Einkaufen" /></p>
+					</form>
 				</div>
+				
+				
+				
 				<div class="gesamtpreis"> 
 					<h4>Gesamtpreis:</h4>
 					<div class="preisbezeichnung">
@@ -98,5 +103,4 @@
 				</div>
 			</div>
 	</c:if>
-</body>
-</html>
+<%@ include file="Footer.jspf" %>

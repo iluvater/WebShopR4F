@@ -25,13 +25,12 @@
 	
 	<div id="container">
 		<div class="block">
-			<h4><a class="containerLink" href="#">Persönliche Daten ändern</a></h4>
+			<h4><a class="containerLink" href="Kundendaten.jsp">Meine Daten bearbeiten</a></h4>
 		</div>
 		
 		<div class="block">
-			<h4><a class="containerLink" href="#">Meine Bestellungen</a></h4>
+			<h4><a class="containerLink" href="Test.jsp">Meine Bestellungen</a></h4>
 		</div>
 	</div>
 	
-</body>
-</html>
+<%@ include file="Footer.jspf" %>

@@ -33,5 +33,4 @@ Die Darstellung dieser Website in fremden Frames ist nur mit schriftlicher Erlau
 <p class="impressum">Soweit besondere Bedingungen f&uumlr einzelne Nutzungen dieser Website von den vorgenannten Paragraphen abweichen, wird an entsprechender Stelle ausdr&uumlcklich darauf hingewiesen. In diesem Falle gelten im jeweiligen Einzelfall die besonderen Nutzungsbedingungen.</p>
 
 </div>
-</body>
-</html>
+<%@ include file="Footer.jspf" %>

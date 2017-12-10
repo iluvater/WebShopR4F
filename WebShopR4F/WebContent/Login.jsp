@@ -164,15 +164,4 @@
 		</form>
 	</div>
 	
-	<div id="fuss">
-		<ul>
-			<li><a class="footer" href="Test.jsp">AGB's</a></li>
-			<li><a class="footer" href="Test.jsp">Kontaktseite</a></li>
-			<li><a class="footer" href="Test.jsp">Impressum</a></li>
-			<li><a class="footer" href="Test.jsp">Hilfeseite</a></li>
-			<li> © 2017 Run4Fun GmbH, Alle Rechte vorbehalten</li>
-		</ul>	
-	</div>
-
-</body>
-</html>
+<%@ include file="Footer.jspf" %>

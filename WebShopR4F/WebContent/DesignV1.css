@@ -220,6 +220,7 @@ fieldset{
 
 a.footer {
 	margin-right: 2.5em;
+	color: black;
 }
 
 a.header {
@@ -366,8 +367,8 @@ div.warenkorbLeer {
 }
 
 #containerButtonUebersicht {
-	padding-left: 25%;
-	padding-right: 25%;
+	padding-left: 36%;
+	padding-right: 35%;
 }
 
 p.artikelUebersicht{

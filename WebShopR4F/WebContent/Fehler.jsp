@@ -23,5 +23,4 @@
 			<p>Bitte versuchen Sie es später erneut.</p>
 			</center>
 	</div>
-</body>
-</html>
+<%@ include file="Footer.jspf" %>

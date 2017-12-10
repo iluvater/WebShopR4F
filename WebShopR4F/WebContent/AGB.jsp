@@ -15,8 +15,6 @@
 <title>AGB</title>
 <%@ include file="Header.jspf" %>
 
-	<!-- Hier kommt der Header hin  -->
-
 	<div id="containerAgb">
 	<h2 class="agb">AGB</h2>
 	<h3 class="agb">Allgemeine Gesch&aumlftsbedingungen und Kundeninformationen der Run 4 Fun GmbH & Co.KG</h3>
@@ -109,8 +107,4 @@
 	
 	<p class="agb">Stand: 06.11.2017</p>	
 	</div>
-	
-	
-<!-- 	Hier kommt der Footer hin  -->
-</body>
-</html>
+<%@ include file="Footer.jspf" %>

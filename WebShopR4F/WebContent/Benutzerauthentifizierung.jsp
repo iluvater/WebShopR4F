@@ -38,5 +38,4 @@
 		<input type="submit" id="button" value="Login" />
 	</center> 
 </form>
-</body>
-</html>
+<%@ include file="Footer.jspf" %>
