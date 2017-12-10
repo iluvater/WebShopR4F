@@ -125,7 +125,7 @@
 			</c:if>	
 				
 			<p><label for="image1">Bild:</label>
-			<input id="image1" name="image" type="file"/></p>
+			<input id="image1" name="mainImage" type="file"/></p>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 124 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
