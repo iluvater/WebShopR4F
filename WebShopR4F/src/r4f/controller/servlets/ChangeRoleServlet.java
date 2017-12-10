@@ -1,6 +1,7 @@
 package r4f.controller.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -59,6 +60,9 @@ public class ChangeRoleServlet extends HttpServlet {
 					boolean update = authorizationService.updateRoleInDB(role);
 					if(update){
 						//success
+						List<Role> roleList = authorizationService.getRoleList();
+						
+						request.setAttribute("roleList", roleList);
 						ErrorMessage successMessage = new ErrorMessage(604);
 						request.setAttribute("success", successMessage);
 						dispatcher = request.getRequestDispatcher(successURL);
