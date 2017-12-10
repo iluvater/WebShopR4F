@@ -10,7 +10,7 @@
 	<h3 class="impressum">Warenkorb</h3>
 	<div class="warenkorbLeer">
 		<p class="impressum">Dein Warenkorb ist noch leer. 
-		<br/>Lege los und f&uuml;lle ihn mit deinen neuen Lieblingsschuhen!</p>
+		<br/>Legen Sie los und f&uuml;llen Sie ihn mit Ihren neuen Lieblingsschuhen!</p>
 	</div>
 	<hr />
 	<center>

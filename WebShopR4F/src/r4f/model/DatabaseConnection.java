@@ -873,16 +873,17 @@ public class DatabaseConnection {
 	 * @return returns true if the image was created in the database and false
 	 *         if not
 	 */
-	public int createImageInDB(InputStream inputStream, String contentType, boolean mainImage) {
+	public int createImageInDB(InputStream inputStream, String contentType, boolean mainImage, int articleId) {
 		conn = getInstance();
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
 			try {
-				String sql = "INSERT INTO image (image, type, mainImage) values (?, ?, ?)";
+				String sql = "INSERT INTO image (image, type, mainImage, article) values (?, ?, ?, ?)";
 				PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setString(2, contentType);
 				preparedStatement.setBoolean(3, mainImage);
+				preparedStatement.setInt(4, articleId);
 
 				if (inputStream != null) {
 					// fetches input stream of the upload file for the blob
