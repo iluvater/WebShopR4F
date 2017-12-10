@@ -66,6 +66,10 @@ header {
 	padding-top: 1em; 
 }
 
+#search {
+	padding-right: 1em;
+}
+
 ul {
 	list-style-type: none;
 	margin: 0; 
@@ -227,15 +231,11 @@ input[type=text].header {
 	width: 93em;
 	padding: 5px 10px;
   	font-size: 12px;
-  	line-height: 1.5;
+  	line-height: 1.3;
   	border-radius: 3px
 }
 
 .btnPadding {
-	margin-right: 2.5em; 
-}
-
-.btnPaddingSm {
 	margin-right: 2.5em; 
 }
 
@@ -387,14 +387,26 @@ p.artikelUebersicht{
      outline:none;
 }
 
-#centerButton {
-	 /* width: 33,33333%; */
-     align: center;  
+.buttonLink{
+     background:none!important;
+     color:white;
+     border:none; 
+     padding-right: 5%;
+     font: inherit;
+     /*border is optional*/
+     /* border-bottom:1px solid white;  */
+     cursor: pointer;
+     float: left;
 }
 
 .linkButton:active {
 	background:none;
 	border: none; 
+}
+
+#centerButton {
+	 /* width: 33,33333%; */
+     align: center;  
 }
 
 #ImgArtikelUebersicht {
@@ -534,14 +546,7 @@ font-size: 0.7em;
 }
   
 #buttonHeader {
-/* 	background-color: white;
-	color: 2f528f; 
-	border: white;
-	width: 150px;
-	height: 30px;
-	font-familiy: arial; 
-	font-size: 10pt; 
-	text-align: center;*/
+	float: right;
 }
 
 #logo{
@@ -557,6 +562,8 @@ font-size: 0.7em;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 12px 16px;
     z-index: 1;
+    font-size: 11px;
+    font-family: arial;
 }
 
 .dropdown:hover .dropdown-content {
@@ -566,6 +573,8 @@ font-size: 0.7em;
 .dropdown {
     position: relative;
     display: inline-block;
+    float: right;
+    padding-right: 1%;
 }
 
 h2 {

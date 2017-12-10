@@ -356,8 +356,8 @@
 				</c:if>	
 			</c:if> 				 			
 				 				
-			<p><label for="image">Bild:</label>
-			<input id="image" name="image" value="<jsp:getProperty property="image" name="article"/>" type="file"/></p>
+			<p><label for="mainImage">Bild:</label>
+			<input id="mainImage" name="mainImage" value="<jsp:getProperty property="mainImage" name="article"/>" type="file"/></p>
 <%-- 		<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 124 }">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>

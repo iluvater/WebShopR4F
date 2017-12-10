@@ -26,7 +26,7 @@
 	
 	<div id="container">
 		<h2>Artikelsuche</h2>
-		<h3></h3>
+		<h3>Bitte geben Sie die ID des Artikel ein, den Sie bearbeiten möchten.</h3>
 		<form action="./SearchArticleForChangeServlet" method="post">
 		<div id="inhalt">
 			<h4>Eingabe der ID des gewünschten Artikels</h4>

@@ -26,31 +26,19 @@
 	<div id="container">
 	
 		<div class="block">
-			<h4><a class="containerLink" href="#">Artikeldaten erfassen</a></h4>
+			<h4><a class="containerLink" href="Artikeldatenerfassung.jsp">Artikeldaten erfassen</a></h4>
 		</div>
 		
 		<div class="block">
-			<h4><a class="containerLink" href="#">Artikeldatenimport per CSV</a></h4>
+			<h4><a class="containerLink" href="Artikelsuche.jsp">Artikeldaten ändern</a></h4>
 		</div>
 		
 		<div class="block">
-			<h4><a class="containerLink" href="#">Artikeldaten ändern</a></h4>
+			<h4><a class="containerLink" href="NavigationRoleOverviewServlet">Rollen anlegen / bearbeiten</a></h4>
 		</div>
 		
 		<div class="block">
-			<h4><a class="containerLink" href="#">Artikeldaten löschen</a></h4>
-		</div>
-		
-		<div class="block">
-			<h4><a class="containerLink" href="#">Berechtigungen anpassen</a></h4>
-		</div>
-		
-		<div class="block">
-			<h4><a class="containerLink" href="#">Persönliche Daten ändern</a></h4>
-		</div>
-		
-		<div class="block">
-			<h4><a class="containerLink" href="#">Statistiken</a></h4>
+			<h4><a class="containerLink" href="Rollenzuordnung.jsp">Rollen zuordnen / entfernen</a></h4>
 		</div>
 	</div>
 	
