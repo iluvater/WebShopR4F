@@ -370,7 +370,11 @@ public class DatabaseConnection {
 						+ " FROM article AS a INNER JOIN category AS ca ON a.category = ca.id"
 						+ " INNER JOIN manufacturer AS m ON a.manufacturer = m.id"
 						+ " INNER JOIN sport AS s ON a.sport = s.id"
-						+ filter.getSQLFilter("a", "ca", "m", "s", "co");
+						+ " INNER JOIN mappingarticlecolor as mac ON	a.id = mac.article"
+						+ " INNER JOIN mappingarticlesize as mas ON	a.id = mas.article"
+						+ " INNER JOIN color as co ON mac.color = co.id"
+						+ " INNER JOIN size as si ON mas.size = si.id "
+						+ filter.getSQLFilter("a", "ca", "m", "s", "co", "si");
 				System.out.println(sql);
 				
 				preparedStatement = conn.prepareStatement(sql);
@@ -1213,7 +1217,7 @@ public class DatabaseConnection {
 		if (conn != null) {
 			try {
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT o.*, p.name AS paymentMethod"
+				String sql = "SELECT o.id, o.entryDate, o.deliveryAddress, o.billingAddress, o.deliveryDate, p.name AS paymentMethod"
 						+ " FROM orders AS o INNER JOIN paymentmethod AS p ON o.paymentMethod = p.id"
 						+ " WHERE o.user = ?"
 						+ " ORDER BY entryDate";
@@ -1258,7 +1262,7 @@ public class DatabaseConnection {
 		if (conn != null) {
 			try {
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT o.*, p.name AS paymentMethod"
+				String sql = "SELECT o.id, o.entryDate, o.deliveryAddress, o.billingAddress, o.deliveryDate, o.user, p.name AS paymentMethod"
 						+ " FROM orders AS o INNER JOIN paymentmethod AS p ON o.paymentMethod = p.id"
 						+ " WHERE o.id = ?"
 						+ " ORDER BY entryDate";

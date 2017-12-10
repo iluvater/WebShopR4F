@@ -100,6 +100,7 @@ public class OrderInputToOverviewServlet extends HttpServlet {
 										addressService = new AddressService();
 										Address deliveryAddress = new Address(firstName, lastName, street, houseNumber,
 												postCode, city, salutation);
+										deliveryAddress.setId(-1);
 										Address billingAddress = addressService.getAddress(user);
 
 										order.setBillingAddress(billingAddress);

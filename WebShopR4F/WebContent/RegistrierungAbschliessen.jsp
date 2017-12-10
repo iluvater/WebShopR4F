@@ -3,8 +3,8 @@
 <%@ include file="Header.jspf" %>
 
 	<div id="container">
-	<h3>Anmeldung abschließen</h3>
-	<form action="./ConfirmationCodeServlet" method="post">
+	<h3>Anmeldung abschlie&szlig;en</h3>
+	<form action="./ConfirmationCodeSerlvet" method="post">
 		<div id="inhalt">
 			<p>Bitte geben Sie hier den Code ein, der Ihnen per E-Mail zugesendet wurde, um Ihr Kundenkonto zu aktivieren!</p>
 			<center>

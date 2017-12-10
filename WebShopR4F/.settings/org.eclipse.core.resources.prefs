@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
 encoding//WebContent/AGB.jsp=UTF-8
+encoding//src/r4f/controller/services/OrderConfirmationEmail.txt=UTF-8
+encoding//src/r4f/controller/services/RegistrationConfirmationEmail.txt=UTF-8

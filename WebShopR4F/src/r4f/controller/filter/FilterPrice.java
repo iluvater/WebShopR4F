@@ -23,7 +23,7 @@ public class FilterPrice implements FilterInterface {
 	 */
 	@Override
 	public String getSQLFilter(String tableArticle, String tableCategory, String tableManufacturer, String tableSport,
-			String tableColor) {
+			String tableColor, String tableSize) {
 		String sql = " ( ";
 
 		for (int i = 0; i<prices.size(); i++) {
