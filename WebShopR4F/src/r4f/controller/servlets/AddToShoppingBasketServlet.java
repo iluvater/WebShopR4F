@@ -102,12 +102,12 @@ public class AddToShoppingBasketServlet extends HttpServlet {
 
 		}
 
-		Object s = request.getSession().getAttribute("size");
-		Object c = (String) request.getSession().getAttribute("color");
+		size = (String) request.getSession().getAttribute("size");
+		color = (String) request.getSession().getAttribute("color");
 		request.getSession().removeAttribute("size");
 		request.getSession().removeAttribute("color");
 		
-		if(c== null || s == null){
+		if(color == null || color.equals("") || size== null || size.equals("")){
 			if(!article.getColor().isEmpty()){
 				color = article.getColor().get(0);
 			}else{
@@ -118,9 +118,6 @@ public class AddToShoppingBasketServlet extends HttpServlet {
 			}else{
 				throw new ServletException();
 			}
-		}else{
-			size = Integer.toString((Integer) s);
-			color = (String) c;
 		}
 		
 		
