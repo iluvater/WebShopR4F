@@ -9,9 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import r4f.controller.services.ShoppingBasketService;
 import r4f.controller.services.UserService;
+import r4f.controller.services.WishlistService;
 import r4f.model.ErrorMessage;
+import r4f.model.ShoppingBasket;
 import r4f.model.User;
+import r4f.model.Wishlist;
 
 /**
  * Servlet implementation class ConfirmationCodeSerlvet
@@ -44,8 +48,12 @@ public class ConfirmationCodeSerlvet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		UserService userService;
+		WishlistService wishlistService;
+		ShoppingBasketService shoppingBasketService;
 		RequestDispatcher dispatcher;
 		User user;
+		Wishlist wishlist;
+		ShoppingBasket shoppingBasket;
 		String registrierungsURL = "Login.jsp";
 		String errorURL = "RegistrierungAbschliesen.jsp";
 		String successURL = "./NavigationOverviewServlet";
@@ -58,9 +66,15 @@ public class ConfirmationCodeSerlvet extends HttpServlet {
 			if (user!=null) {
 				if (code.equals(user.getConfirmationCode())) {
 					userService = new UserService();
+					wishlistService = new WishlistService();
+					shoppingBasketService = new ShoppingBasketService();
 					user = userService.createBenutzerInDB(user);
+					wishlist = wishlistService.getWishlist(user.getWishlist());
+					shoppingBasket = shoppingBasketService.getShoppingBasket(user.getShoppingBasket());
 					request.getSession().removeAttribute("user");
 					request.getSession().setAttribute("user", user);
+					request.getSession().setAttribute("wishlist", wishlist);
+					request.getSession().setAttribute("shoppingBasket", shoppingBasket);
 					dispatcher = request.getRequestDispatcher(successURL);
 					dispatcher.forward(request, response);
 					return;
