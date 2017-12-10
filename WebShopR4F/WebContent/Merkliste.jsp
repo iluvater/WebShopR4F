@@ -25,8 +25,10 @@
 					<div class="bild"><img class="ImgWarenkorb" src="./ImageServlet/${item.article.mainImage}" alt="Bild"></div> 
 					<div class="daten">
 						<p><b>${item.article.name}</b></p>
-						<form action="./ChangeSizeColorServlet" method="post">
+						<form action="./ChangeSizeColorWishlistServlet" method="post">
 						<input type="hidden" name="articleId" value="${article.id }" />
+						<input type="hidden" name="size" value="${item.size }" />
+						<input type="hidden" name="color" value="${item.color }" />	
  						<c:if test="${empty size }">
 							<p><b>Gr&ouml;&szlig;e: </b>
 							<select id="size" name="size" onChange="submit();">

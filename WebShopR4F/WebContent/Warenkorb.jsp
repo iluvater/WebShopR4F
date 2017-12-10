@@ -28,92 +28,207 @@
 						<div class="bild"><img class="ImgWarenkorb" src="./ImageServlet/${item.article.mainImage}" alt="Bild"></div> 
 						<div class="daten">
 							<p><b>${item.article.name}</b></p>
-							<form action="./ChangeSizeColorServlet" method="post">
-						<input type="hidden" name="articleId" value="${article.id }" />
- 						<c:if test="${empty size }">
-							<p><b>Gr&ouml;&szlig;e: </b>
-							<select id="size" name="size" onChange="submit();">
-								<c:forEach items="${item.article.size}" var="articleSize" begin="0" end="0">
-									<option selected value="${articleSize}">${articleSize}</option>
-								</c:forEach>
-								<c:forEach items="${item.article.size}" var="articleSize" begin="1">
-									<option value="${articleSize}">${articleSize}</option>
-								</c:forEach>
-							</select>
-							</p>
-						</c:if> 
-						<c:if test="${not empty size }">
-							<p><b>Gr&ouml;&szlig;e: </b>
-							<select id="size" name="size" onChange="submit();">
-								<c:forEach items="${item.article.size}" var="articleSize">
-									<c:if test="${articleSize eq size}">
+							<form action="./ChangeAmountShoppingBasketServlet" method="post">
+								<input type="hidden" name="articleId" value="${article.id }" />
+								<input type="hidden" name="size" value="${item.size }" />
+								<input type="hidden" name="color" value="${item.color }" />	
+								<input type="hidden" name="amount" value="${item.amount }" />
+ 								<c:if test="${empty size }">
+									<p><b>Gr&ouml;&szlig;e: </b>
+									<select id="size" name="sizeNew" onChange="submit();">
+									<c:forEach items="${item.article.size}" var="articleSize" begin="0" end="0">
 										<option selected value="${articleSize}">${articleSize}</option>
-									</c:if>
-									<c:if test="${articleSize ne size}">
+									</c:forEach>
+									<c:forEach items="${item.article.size}" var="articleSize" begin="1">
 										<option value="${articleSize}">${articleSize}</option>
-									</c:if>
-								</c:forEach>
-							</select>
-							</p>
-						</c:if>
-					 	<c:if test="${empty color }">
-							<p><b>Farbe: </b>
-							<select id="color" name="color" onChange="submit();">
-								<c:forEach items="${item.article.color}" var="articleColor" begin="0" end="0">
-									<option selected value="${articleColor}">${articleColor}</option>
-								</c:forEach>
-								<c:forEach items="${item.article.color}" var="articleColor" begin="1">
-									<option value="${articleColor}">${articleColor}</option>
-								</c:forEach>
-							</select>
-							</p>
-						</c:if> 
-						<c:if test="${not empty color }">
-							<p><b>Farbe: </b>
-							<select id="color" name="color" onChange="submit();">
-								<c:forEach items="${item.article.color}" var="articleColor">
-									<c:if test="${articleColor eq color}">
-										<option selected value="${articleColor}">${articleColor}</option>
-									</c:if>
-									<c:if test="${articleColor ne color}">
-										<option value="${articleColor}">${articleColor}</option>
-									</c:if>
-								</c:forEach>
-							</select>
-							</p>
-						</c:if>
-					</form>											
-<%-- 							<p><b>Farbe: </b>${item.color}</p>
-							<p><b>Gr&ouml;&szlig;e: </b>${item.size}</p> --%>
+									</c:forEach>
+									</select>
+									</p>
+								</c:if> 
+								<c:if test="${not empty size }">
+									<p><b>Gr&ouml;&szlig;e: </b>
+									<select id="size" name="sizeNew" onChange="submit();">
+									<c:forEach items="${item.article.size}" var="articleSize">
+										<c:if test="${articleSize eq size}">
+											<option selected value="${articleSize}">${articleSize}</option>
+										</c:if>
+										<c:if test="${articleSize ne size}">
+											<option value="${articleSize}">${articleSize}</option>
+										</c:if>
+									</c:forEach>
+									</select>
+									</p>
+								</c:if>
+					 			<c:if test="${empty color }">
+									<p><b>Farbe: </b>
+									<select id="color" name="colorNew" onChange="submit();">
+										<c:forEach items="${item.article.color}" var="articleColor" begin="0" end="0">
+											<option selected value="${articleColor}">${articleColor}</option>
+										</c:forEach>
+										<c:forEach items="${item.article.color}" var="articleColor" begin="1">
+											<option value="${articleColor}">${articleColor}</option>
+										</c:forEach>
+									</select>
+									</p>
+								</c:if> 
+								<c:if test="${not empty color }">
+									<p><b>Farbe: </b>
+									<select id="color" name="colorNew" onChange="submit();">
+									<c:forEach items="${item.article.color}" var="articleColor">
+										<c:if test="${articleColor eq color}">
+											<option selected value="${articleColor}">${articleColor}</option>
+										</c:if>
+										<c:if test="${articleColor ne color}">
+											<option value="${articleColor}">${articleColor}</option>
+										</c:if>
+									</c:forEach>
+									</select>
+									</p>
+								</c:if>
+							</form>											
 							<p><b>Preis: </b><b>${item.article.price}&euro;</b></p>
 						</div> 
 						<div class="menge">					
+							<hr />
 							<form action="./ChangeAmountShoppingBasketServlet" method="post">
 							<p><b>Menge</b>
 								<input type="hidden" name="articleId" value="${item.article.id }" />
 								<input type="hidden" name="size" value="${item.size }" />
-								<input type="hidden" name="color" value="${item.color }" />
- 								<select name="amount" onChange="submit();">
- 									<option value="${item.amount}">${item.amount}</option>
- 									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
+								<input type="hidden" name="color" value="${item.color }" />	
+								<input type="hidden" name="sizeNew" value="${item.size }" />
+								<input type="hidden" name="colorNew" value="${item.color }" />					
+								<!-- <p><label for="amount">Menge:</label> -->
+								<p><b>Menge:</b>
+								<select name="amount">
+ 								<c:if test="${item.amount == '1'}">
+ 									<option selected value="1">1</option>
+ 			 						<option value="2">2</option>
+ 									<option value="3">3</option>
+ 									<option value="4">4</option>
 									<option value="5">5</option>
 									<option value="6">6</option>
 									<option value="7">7</option>
 									<option value="8">8</option>
 									<option value="9">9</option>
 									<option value="10">10</option>
-								</select>
+					 			</c:if>
+					 			<c:if test="${item.amount == '2'}">
+					 				<option value="1">1</option>
+					 			 	<option selected value="2">Asics</option>
+					 				<option value="3">3</option>
+					 				<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+					 			</c:if>
+					 			<c:if test="${item.amount == '3'}">
+					 				<option value="1">1</option>
+					 			 	<option value="2">2</option>
+					 				<option selected value="3">3</option>
+					 				<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+					 			</c:if>
+					 			<c:if test="${item.amount == '4'}">
+					 				<option value="1">1</option>
+					 			 	<option value="2">2</option>
+					 				<option value="3">3</option>
+					 				<option selected value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+					 			</c:if>
+					 			<c:if test="${item.amount == '5'}">
+					 				<option value="1">1</option>
+					 			 	<option value="2">2</option>
+					 				<option value="3">3</option>
+					 				<option value="4">4</option>
+									<option selected value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+					 			</c:if>
+					 			<c:if test="${item.amount == '6'}">
+					 				<option value="1">1</option>
+					 			 	<option value="2">2</option>
+					 				<option value="3">3</option>
+					 				<option value="4">4</option>
+									<option value="5">5</option>
+									<option selected value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+					 			</c:if>
+					 			<c:if test="${item.amount == '7'}">
+					 				<option value="1">1</option>
+					 			 	<option value="2">2</option>
+					 				<option value="3">3</option>
+					 				<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option selected value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+					 			</c:if>
+					 			<c:if test="${item.amount == '8'}">
+					 				<option value="1">1</option>
+					 			 	<option value="2">2</option>
+					 				<option value="3">3</option>
+					 				<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option selected value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+					 			</c:if>
+					 			<c:if test="${item.amount == '9'}">
+					 				<option value="1">1</option>
+					 			 	<option value="2">2</option>
+					 				<option value="3">3</option>
+					 				<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option selected value="9">9</option>
+									<option value="10">10</option>
+					 			</c:if>
+					 			<c:if test="${item.amount == '10'}">
+					 				<option value="1">1</option>
+					 			 	<option value="2">2</option>
+					 				<option value="3">3</option>
+					 				<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option selected value="10">10</option>
+					 			</c:if>
+								</select>	
+								</p>							
 							</form>
-							</p>
+							<p />
 							<form action="./RemoveArticleFromShoppingBasket" method="post">
 								<input type="hidden" name="articleId" value="${item.article.id }" />
 								<input type="hidden" name="size" value="${item.size }" />
 								<input type="hidden" name="color" value="${item.color }" />
 								<p><input type="submit" id="buttonEntfernen" value="entfernen" /></p>
-								<!-- <p><a href="Warenkorb.jsp" >entfernen</a></p> -->
 							</form>
 						</div> 
 					</div>
