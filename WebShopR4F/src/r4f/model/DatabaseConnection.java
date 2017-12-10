@@ -366,7 +366,7 @@ public class DatabaseConnection {
 				
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT a.id, a.name, a.description, a.price, m.name as manufacturer, a.entryDate, ca.name as category, s.name as sport "
+				String sql = "SELECT DISTINCT a.id, a.name, a.description, a.price, m.name as manufacturer, a.entryDate, ca.name as category, s.name as sport "
 						+ " FROM article AS a INNER JOIN category AS ca ON a.category = ca.id"
 						+ " INNER JOIN manufacturer AS m ON a.manufacturer = m.id"
 						+ " INNER JOIN sport AS s ON a.sport = s.id"
@@ -419,7 +419,7 @@ public class DatabaseConnection {
 		if (conn != null) {
 			try {
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT a.id, a.name, a.description, a.price, m.name as manufacturer, a.entryDate, ca.name as category, s.name as sport "
+				String sql = "SELECT DISTINCT a.id, a.name, a.description, a.price, m.name as manufacturer, a.entryDate, ca.name as category, s.name as sport "
 						+ " FROM article AS a INNER JOIN category AS ca ON a.category = ca.id"
 						+ " INNER JOIN manufacturer AS m ON a.manufacturer = m.id"
 						+ " INNER JOIN sport AS s ON a.sport = s.id" 
@@ -1750,10 +1750,10 @@ public class DatabaseConnection {
 	/**
 	 * This method creates a mapping of a size and an article
 	 * @param size the size
-	 * @param article the article
+	 * @param articleId the article
 	 * @return the id of the mapping entry that was created returns null if no entry was created
 	 */
-	public int createSizeMapping(int size, Article article){
+	public int createSizeMapping(int size, int articleId){
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1764,7 +1764,7 @@ public class DatabaseConnection {
 						"INSERT INTO `mappingarticlesize` (`id`, `size`, `article`) " + "VALUES (NULL, ?, ?)",
 						Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, getSizeId(size));
-				preparedStatement.setInt(2, article.getId());
+				preparedStatement.setInt(2, articleId);
 
 				int lines = preparedStatement.executeUpdate();
 
@@ -1791,10 +1791,10 @@ public class DatabaseConnection {
 	/**
 	 * This method creates a mapping of a color and an article
 	 * @param color the color 
-	 * @param article the article
+	 * @param articleId the article
 	 * @return the id of the mapping entry that was created returns null if no entry was created 
 	 */
-	public int createColorMapping(String color, Article article){
+	public int createColorMapping(String color, int articleId){
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1805,7 +1805,7 @@ public class DatabaseConnection {
 						"INSERT INTO `mappingarticlecolor` (`id`, `color`, `article`) " + "VALUES (NULL, ?, ?)",
 						Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, getColorId(color));
-				preparedStatement.setInt(2, article.getId());
+				preparedStatement.setInt(2, articleId);
 
 				int lines = preparedStatement.executeUpdate();
 
