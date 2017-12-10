@@ -45,10 +45,10 @@
 			<hr class="black" />
 			</div>
 		</c:forEach>
- 		<div id="weiterEinkaufen">
- 			<form action="./NavigationOverwiewServlet" method="post">
-				<input type="submit" id="button" value="Neue Schuhe bestellen" />
-			</form>
+		<div id="weiterEinkaufen">
+		<form action="./NavigationOverviewServlet" method="post">
+			<input type="submit" id="button" value="Neue Schuhe" />
+		</form>
 		</div>
 	<!-- </div> -->
 	</c:if> 
