@@ -141,25 +141,26 @@ public class ChangeArticleServlet extends HttpServlet {
 				} else {
 					switch (item.getName()) {
 					case "mainImage":
-						if(item.getSize() != 0){
+						if (item.getSize() != 0) {
 							mainImageType = item.getContentType();
 							mainImageStream = item.getInputStream();
-						}else{
+						} else {
 							newMainImage = false;
-						}						
+						}
 						break;
 					case "images":
-						if(item.getSize() != 0){
+						if (item.getSize() != 0) {
 							InputStream inputStream = item.getInputStream();
 							String imageType = item.getContentType();
-							InputStreamStringHelpClass helpItem = new InputStreamStringHelpClass(inputStream, imageType);
+							InputStreamStringHelpClass helpItem = new InputStreamStringHelpClass(inputStream,
+									imageType);
 							imagesHelper.add(helpItem);
-						}else{
-							if(images.isEmpty()){
+						} else {
+							if (images.isEmpty()) {
 								newImages = false;
 							}
 						}
-						
+
 						break;
 					}
 					if (item.getFieldName().equals("mainImage") && item.getSize() != 0) {
@@ -181,6 +182,71 @@ public class ChangeArticleServlet extends HttpServlet {
 						if (category != null && !category.equals("") && Article.checkCategory(category)) {
 							if (sport != null && !sport.equals("") && Article.checkSport(sport)) {
 								if (mainImageStream != null || !newMainImage) {
+
+									for (int i = 0; i< size.size();i++ ) {
+										switch (size.get(i)) {
+										case 1:
+											size.set(i, 36);
+											break;
+										case 2:
+											size.set(i, 37);
+											break;
+										case 3:
+											size.set(i, 38);
+											break;
+										case 4:
+											size.set(i, 39);
+											break;
+										case 5:
+											size.set(i, 41);
+											break;
+										case 6:
+											size.set(i, 42);
+											break;
+										case 7:
+											size.set(i, 43);
+											break;
+										case 8:
+											size.set(i, 44);
+											break;
+										case 9:
+											size.set(i, 45);
+											break;
+										case 10:
+											size.set(i, 46);
+											break;
+										}
+									}
+
+									for (int i = 0; i<color.size();i++) {
+										switch (color.get(i)) {
+										case "1":
+											color.set(i, "gelb");
+											break;
+										case "2":
+											color.set(i, "orange");
+											break;
+										case "3":
+											color.set(i, "rot");
+											break;
+										case "4":
+											color.set(i, "pink");
+											break;
+										case "5":
+											color.set(i, "grün");
+											break;
+										case "6":
+											color.set(i, "blau");
+											break;
+										case "7":
+											color.set(i, "schwarz");
+											break;
+										case "8":
+											color.set(i, "weiß");
+											break;
+										}
+									}
+
 									article = articleService.getArticle(articleId);
 
 									article.setName(name);
@@ -198,15 +264,16 @@ public class ChangeArticleServlet extends HttpServlet {
 									boolean updateImages;
 									ImageService imageService = new ImageService();
 									if (newMainImage) {
-										
-										updateMainImage = imageService.updateImageInDB(article.getMainImage(), mainImageStream,
-												mainImageType, true);
+
+										updateMainImage = imageService.updateImageInDB(article.getMainImage(),
+												mainImageStream, mainImageType, true);
 									} else {
 										updateMainImage = true;
 									}
-									if(newImages){
+									if (newImages) {
 										for (InputStreamStringHelpClass item : imagesHelper) {
-											imageService.createImageInDB(item.getInputStream(), item.getImageType(), false);
+											imageService.createImageInDB(item.getInputStream(), item.getImageType(),
+													false);
 										}
 									}
 

@@ -17,13 +17,19 @@ public class ArticleService extends Service{
 	
 		/**
 	 * This method creates a new Article in the database
-	 * @param artikel article that should be created
+	 * @param article article that should be created
 	 * @return returns the created article returns null if the article could be created
 	 */
-	public Article createArtikelInDB(Article artikel){
+	public Article createArtikelInDB(Article article){
 		int id;
 		
-		id = super.getDbConnection().createArticleInDB(artikel);
+		id = super.getDbConnection().createArticleInDB(article);
+		for (String color : article.getColor()) {
+			super.getDbConnection().createColorMapping(color, id);
+		}
+		for(Integer size : article.getSize()){
+			super.getDbConnection().createSizeMapping(size, id);
+		}
 		
 		return super.getDbConnection().getArticle(id);
 	}
@@ -52,6 +58,14 @@ public class ArticleService extends Service{
 	public void updateArticleInDB(Article article) {
 		try {
 			super.getDbConnection().updateArticleInDB(article);
+			super.getDbConnection().deleteColorMapping(article);
+			super.getDbConnection().deleteSizeMapping(article);
+			for (String color : article.getColor()) {
+				super.getDbConnection().createColorMapping(color, article.getId());
+			}
+			for(Integer size : article.getSize()){
+				super.getDbConnection().createSizeMapping(size, article.getId());
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,6 +80,14 @@ public class ArticleService extends Service{
 	public boolean updateArticleinDB(Article article) {
 		try{
 			super.getDbConnection().updateArticleInDB(article);
+			super.getDbConnection().deleteColorMapping(article);
+			super.getDbConnection().deleteSizeMapping(article);
+			for (String color : article.getColor()) {
+				super.getDbConnection().createColorMapping(color, article.getId());
+			}
+			for(Integer size : article.getSize()){
+				super.getDbConnection().createSizeMapping(size, article.getId());
+			}
 			return true;
 		}catch(SQLException e){
 			e.printStackTrace();
