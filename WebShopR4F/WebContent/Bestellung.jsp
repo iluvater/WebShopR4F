@@ -102,8 +102,8 @@
 					<input type="submit" id="button" value="Weiter zur Bestell&uuml;bersicht" />
 				</div>
 			</center>
+				<hr/>
 		</form>
-		<hr/>
 	</div>
 	</div>
 <%@ include file="Footer.jspf" %>

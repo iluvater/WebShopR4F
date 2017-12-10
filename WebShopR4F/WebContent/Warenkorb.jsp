@@ -11,7 +11,7 @@
 	
 <c:if test ="${empty shoppingBasket.items}">
 <div id="container">
-	<h3 class="impressum">Warenkorb</h3>
+	<h3 class="ueberschrift">Warenkorb</h3>
 	<div class="warenkorbLeer">
 		<p class="impressum">Dein Warenkorb ist noch leer. 
 		<br/>Legen Sie los und f&uuml;llen Sie ihn mit Ihren neuen Lieblingsschuhen!</p>
@@ -256,6 +256,7 @@
 						<p><jsp:getProperty property="orderPrice" name="shoppingBasket"/>&euro;</p>
 						<p><jsp:getProperty property="shippingPrice" name="shoppingBasket"/>&euro;</p>
 						<h5><jsp:getProperty property="totalPrice" name="shoppingBasket"/>&euro;</h5>
+						<hr/>
 					</div>
  					<div id="weiterEinkaufen">
  					<form action="./OrderCheckoutServlet" method="post">
