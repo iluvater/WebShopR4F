@@ -24,7 +24,9 @@
 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
 	</jsp:useBean> 
 
+
 	<div id="container">
+	    <c:if test = "${f:checkAuthorization(user, 'Kunde')}">
 		<h2 class="ueberschrift">Deine Daten bei R4F</h2>
 		<h3>Überprüfen Sie, ob Ihre Kundendaten aktuell und richtig sind, oder ändern Sie die Daten einfach.  </h3>
 		<form action="./ChangeUserDataServlet" method="post">
@@ -127,5 +129,7 @@
 				</div>
 		</div>
 		</form>
+		</c:if>
 	</div>
+
 <%@ include file="Footer.jspf" %>

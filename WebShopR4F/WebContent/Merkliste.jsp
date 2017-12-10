@@ -8,8 +8,10 @@
 	</jsp:useBean>
 	<jsp:useBean id="color" class="java.lang.String" scope="session">
 	</jsp:useBean>
-	
+
+
 	<div id="container">	
+	<c:if test = "${f:checkAuthorization(user, 'Kunde')}"> 
 	<c:if test ="${empty wishlist.list}">
 		<h3 class="ueberschrift">Merkliste</h3>
 		<div class="warenkorbLeer">
@@ -115,6 +117,8 @@
 			</div>
 
 			</c:if>
+			</c:if> 
 		</div>
+
 	
 <%@ include file="Footer.jspf" %>

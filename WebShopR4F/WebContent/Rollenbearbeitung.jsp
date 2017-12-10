@@ -19,7 +19,9 @@
 	<jsp:useBean id="roleList" type="java.util.ArrayList<r4f.model.Role>" class="java.util.ArrayList" scope="request">
 	</jsp:useBean> 	
 	
+
 	<div id="container">
+		<c:if test = "${f:checkAuthorization(user, 'Mitarbeiter')}">
 		<h2 class="ueberschrift">Rollenbearbeitung</h2>
 		<form action="./CreateRoleServlet" method="post">
 			<div id="inhalt">
@@ -36,32 +38,31 @@
 				<center><p><input type="submit" id="button" value="Speichern" /></p></center>
 			</div>
 		</form>
-			<br />
-			<div id="inhalt">
-				<h4>Rollen &auml;ndern</h4>
-				<c:forEach items="${roleList}" var="role">
-					<form action="./ChangeRoleServlet" method="post">
+		<br />
+		<div id="inhalt">
+			<h4>Rollen &auml;ndern</h4>
+			<c:forEach items="${roleList}" var="role">
+				<form action="./ChangeRoleServlet" method="post">
 					<div class="changeRole"><p><input class="changeRole" id="name" name="name" value="${role.name}" type="text" disabled/><br /></p>
-					<input type="hidden" name="name" value="${role.name }" />
-					<input type="hidden" name="roleId" value="${role.id }" />
+						<input type="hidden" name="name" value="${role.name }" />
+						<input type="hidden" name="roleId" value="${role.id }" />
 						<c:if test ="${not empty error }">
 							<c:if test="${error.errorCode == 138 }">
 								<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 							</c:if>	
 						</c:if>
 					</div> 
-						<textarea class="roleChange" id="description" name="description">${role.description}</textarea>
-						<c:if test ="${not empty error }">
-							<c:if test="${error.errorCode == 118 }">
-								<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
-							</c:if>	
-						</c:if>
-					<!-- <input type="submit" class="fa fa-floppy-o input-group-addon " value="Speichern" /> -->
+					<textarea class="roleChange" id="description" name="description">${role.description}</textarea>
+					<c:if test ="${not empty error }">
+						<c:if test="${error.errorCode == 118 }">
+							<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
+						</c:if>	
+					</c:if>
 					<button><i class="fa fa-floppy-o"></i></button> 
-					</form>
-	
-				</c:forEach>
-			</div>
-		</form>
+				</form>
+			</c:forEach>
+		</div>
+		</c:if>
 	</div>
+
 <%@ include file="Footer.jspf" %>

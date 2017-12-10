@@ -23,8 +23,9 @@
 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
 	</jsp:useBean> 
 	
+
 	<div id="container">
-	
+	    <c:if test = "${f:checkAuthorization(user, 'Mitarbeiter')}">
 		<div class="block">
 			<h4><a class="containerLink" href="Artikeldatenerfassung.jsp">Artikeldaten erfassen</a></h4>
 		</div>
@@ -40,6 +41,7 @@
 		<div class="block">
 			<h4><a class="containerLink" href="Rollenzuordnung.jsp">Rollen zuordnen / entfernen</a></h4>
 		</div>
+		</c:if>	
 	</div>
 	
 <%@ include file="Footer.jspf" %>

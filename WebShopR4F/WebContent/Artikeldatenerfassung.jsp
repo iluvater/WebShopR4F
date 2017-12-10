@@ -8,6 +8,7 @@
 	</jsp:useBean>  
 	
 	<div id="container">
+	    <c:if test = "${f:checkAuthorization(user, 'Mitarbeiter')}">
 		<form action="./ArticleCreationServlet" method="post" enctype="multipart/form-data">
 		<h2 class="ueberschrift">Artikeldatenerfassung</h2>
 		<div id="inhalt">
@@ -150,5 +151,6 @@
 			<input type="submit" id="button" value="Speichern" />
 		</center> 
 		</form>
+		</c:if>
 	</div>
 <%@ include file="Footer.jspf" %>

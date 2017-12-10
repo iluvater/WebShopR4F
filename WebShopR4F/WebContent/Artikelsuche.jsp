@@ -25,6 +25,7 @@
 	</jsp:useBean> 
 	
 	<div id="container">
+	    <c:if test = "${f:checkAuthorization(user, 'Mitarbeiter')}">
 		<h2 class="ueberschrift">Artikelsuche</h2>
 		<h3 class="impressum">Bitte geben Sie die ID des Artikel ein, den Sie bearbeiten m&ouml;chten</h3>
 		<form action="./SearchArticleForChangeServlet" method="post">
@@ -43,6 +44,7 @@
 			</center>
 		</div>
 		</form>
+		</c:if>
 	</div>
 <%@ include file="Footer.jspf" %>
 

@@ -7,9 +7,11 @@
 	<jsp:useBean id="shoppingBasket" class="r4f.model.ShoppingBasket" scope="session">
 	</jsp:useBean>
 
-<c:if test ="${empty orderList}">
+
 	<div id="container">
-		<h3 class="impressum">Meine Bestellungen</h3>
+	<c:if test = "${f:checkAuthorization(user, 'Kunde')}">
+	<c:if test ="${empty orderList}">
+		<h3 class="ueberschrift">Meine Bestellungen</h3>
 		<div class="warenkorbLeer">
 			<p class="impressum">Sie haben bisher noch keine Bestellungen aufgegeben. 
 			<br/>Legen Sie los und finden Ihre neuen Lieblingsschuhe!</p>
@@ -20,13 +22,10 @@
 				<input type="submit" id="button" value="Zu deinen Lieblingschuhen" />
 			</form>
 		</center>
-	</div>
-</c:if>
-<c:if test ="${not empty orderList}">
-	<div id="container">	
-		<h3 class="impressum">Meine Bestellungen</h3>
+	</c:if>
+	<c:if test ="${not empty orderList}">
+		<h3 class="ueberschrift">Meine Bestellungen</h3>
 		<c:forEach items="${orderList}" var= "order">
-
  			<div class="bestellung">
  			 	<hr class="black" />
  				<div class="bestellungDetails"> 
@@ -43,17 +42,18 @@
 						</div> 
 					</div> 
 				</c:forEach> 
-			
 			<hr class="black" />
 			</div>
 		</c:forEach>
- 			<div id="weiterEinkaufen">
- 					<form action="./NavigationOverwiewServlet" method="post">
-						<p><input type="submit" id="button" value="Neue Schuhe bestellen" /></p>
-					</form>
-				</div>
-			</div>
+ 		<div id="weiterEinkaufen">
+ 			<form action="./NavigationOverwiewServlet" method="post">
+				<p><input type="submit" id="button" value="Neue Schuhe bestellen" /></p>
+			</form>
 		</div>
-</c:if> 
+	<!-- </div> -->
+	</c:if> 
+	</c:if>
+	</div>
+
 </body>
 </html>
