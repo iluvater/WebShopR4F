@@ -24,35 +24,35 @@ import r4f.controller.filter.FilterList;
  *
  */
 public class DatabaseConnection {
-	private static Connection conn = null;
+	private Connection conn = null;
 
 	int i;
 
 	// Hostname
-	private static String dbHost = "localhost";
+	private  String dbHost = "localhost";
 
 	// Port -- Standard: 3306
-	private static String dbPort = "3306";
+	private  String dbPort = "3306";
 
 	// Datenbankname
-	private static String database = "webshop_db";
+	private  String database = "webshop_db";
 
 	// Datenbankuser
-	private static String dbUser = "techuser";
+	private  String dbUser = "techuser";
 
 	// Datenbankpasswort
-	private static String dbPassword = "Winter2017!";
+	private  String dbPassword = "Winter2017!";
 
 	public DatabaseConnection() {
 		try {
 
-			// Datenbanktreiber f¸r ODBC Schnittstellen laden.
-			// F¸r verschiedene ODBC-Datenbanken muss dieser Treiber
+			// Datenbanktreiber f√ºr ODBC Schnittstellen laden.
+			// F√ºr verschiedene ODBC-Datenbanken muss dieser Treiber
 			// nur einmal geladen werden.
 			Class.forName("com.mysql.jdbc.Driver");
 
 			// Verbindung zur ODBC-Datenbank 'sakila' herstellen.
-			// Es wird die JDBC-ODBC-Br¸cke verwendet.
+			// Es wird die JDBC-ODBC-Br√ºcke verwendet.
 			conn = DriverManager.getConnection("jdbc:mysql://" + dbHost + ":" + dbPort + "/" + database + "?" + "user="
 					+ dbUser + "&password=" + dbPassword);
 		} catch (ClassNotFoundException e) {
@@ -64,9 +64,25 @@ public class DatabaseConnection {
 		}
 	}
 
-	private static Connection getInstance() {
+	private  Connection getInstance() {
 		if (conn == null)
-			new DatabaseConnection();
+			try {
+				// Datenbanktreiber f√ºr ODBC Schnittstellen laden.
+				// F√ºr verschiedene ODBC-Datenbanken muss dieser Treiber
+				// nur einmal geladen werden.
+				Class.forName("com.mysql.jdbc.Driver");
+
+				// Verbindung zur ODBC-Datenbank 'sakila' herstellen.
+				// Es wird die JDBC-ODBC-Br√ºcke verwendet.
+				conn = DriverManager.getConnection("jdbc:mysql://" + dbHost + ":" + dbPort + "/" + database + "?" + "user="
+						+ dbUser + "&password=" + dbPassword);
+			} catch (ClassNotFoundException e) {
+				System.out.println("Treiber nicht gefunden");
+				e.printStackTrace();
+			} catch (SQLException e) {
+				System.out.println("Connect nicht moeglich");
+				e.printStackTrace();
+			}
 		return conn;
 	}
 
@@ -81,11 +97,10 @@ public class DatabaseConnection {
 	 *         user created
 	 */
 	public int createUserInDB(User user) {
-
+		int userId;
 		conn = getInstance();
 
 		if (conn != null) {
-
 			try {
 
 				PreparedStatement preparedStatement = conn.prepareStatement(
@@ -103,18 +118,30 @@ public class DatabaseConnection {
 					if (result.next()) {
 						return result.getInt(1);
 					} else {
-						return -1;
+						userId = -1;
 					}
 				} else {
-					return -1;
+					userId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				userId = -1;
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		} else {
-			return -1;
+			userId = -1;
 		}
+		return userId;
 	}
 
 	/**
@@ -132,18 +159,17 @@ public class DatabaseConnection {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement preparedStatement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT u.*, a.salutation, a.firstName, a.lastName, a.street, a.houseNumber, a.postCode, a.city "
 						+ "FROM user AS u INNER JOIN address AS a ON a.user = u.id "
 						+ "WHERE a.masterData='1' AND email=?";
-				
+
 				preparedStatement = conn.prepareStatement(sql);
 				preparedStatement.setString(1, email);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					int id = result.getInt("id");
 					String firstName = result.getString("firstName");
@@ -161,8 +187,19 @@ public class DatabaseConnection {
 					user = new User(id, firstName, lastName, email, birthday, password, street, houseNumber, postCode,
 							city, salutation, shoppingBasket, role, wishlist);
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -185,17 +222,16 @@ public class DatabaseConnection {
 			PreparedStatement preparedStatement;
 			try {
 
-
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT u.*, a.salutation, a.firstName, a.lastName, a.street, a.houseNumber, a.postCode, a.city "
 						+ "FROM user AS u INNER JOIN address AS a ON a.user = u.id "
 						+ "WHERE a.masterData='1' AND u.id=?";
-				
+
 				preparedStatement = conn.prepareStatement(sql);
 				preparedStatement.setInt(1, id);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					id = result.getInt("id");
 					String firstName = result.getString("firstName");
@@ -214,8 +250,19 @@ public class DatabaseConnection {
 					user = new User(id, firstName, lastName, email, birthday, password, street, houseNumber, postCode,
 							city, salutation, shoppingBasket, role, wishlist);
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -235,9 +282,8 @@ public class DatabaseConnection {
 
 		if (conn != null) {
 
-			PreparedStatement preparedStatement = conn
-					.prepareStatement("UPDATE `user` SET `email` = ?, "
-							+ "`birthday` = ?, `password` = ?, `shoppingBasket` = ?, "
+			PreparedStatement preparedStatement = conn.prepareStatement(
+					"UPDATE `user` SET `email` = ?, " + "`birthday` = ?, `password` = ?, `shoppingBasket` = ?, "
 							+ " `wishlist` = ? WHERE `user`.`id` = ? ");
 			preparedStatement.setString(1, user.getEmail());
 			preparedStatement.setDate(2, new Date(user.getBirthday().getTime()));
@@ -245,8 +291,15 @@ public class DatabaseConnection {
 			preparedStatement.setInt(4, user.getShoppingBasket());
 			preparedStatement.setInt(5, user.getWishlist());
 			preparedStatement.setInt(6, user.getId());
-			
+
 			preparedStatement.executeUpdate();
+			preparedStatement.close();
+
+			if (conn != null) {
+				conn.close();
+				conn = null;
+			}
+
 		}
 	}
 
@@ -259,17 +312,17 @@ public class DatabaseConnection {
 	 *         created the method return -1
 	 */
 	public int createArticleInDB(Article artikel) {
+		int articleId;
 		conn = getInstance();
 
 		if (conn != null) {
 
 			try {
 
-				PreparedStatement preparedStatement = conn
-						.prepareStatement(
-								"INSERT INTO `Article` (`id`, `name`, `description`, `price`, `manufacturer`, `entryDate`, `category`, `sport`) "
-										+ "VALUES (NULL, ?, ?, ?, ?, null, ?, ?)",
-								Statement.RETURN_GENERATED_KEYS);
+				PreparedStatement preparedStatement = conn.prepareStatement(
+						"INSERT INTO `Article` (`id`, `name`, `description`, `price`, `manufacturer`, `entryDate`, `category`, `sport`) "
+								+ "VALUES (NULL, ?, ?, ?, ?, null, ?, ?)",
+						Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setString(1, artikel.getName());
 				preparedStatement.setString(2, artikel.getDescription());
 				preparedStatement.setDouble(3, artikel.getPrice());
@@ -282,20 +335,32 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						articleId = result.getInt(1);
 					} else {
-						return -1;
+						articleId = -1;
 					}
 				} else {
-					return -1;
+					articleId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				articleId = -1;
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		} else {
-			return -1;
+			articleId = -1;
 		}
+		return articleId;
 	}
 
 	/**
@@ -314,18 +379,17 @@ public class DatabaseConnection {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement preparedStatement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT a.id, a.name, a.description, a.price, m.name as manufacturer, a.entryDate, ca.name as category, s.name as sport "
 						+ " FROM article AS a INNER JOIN category AS ca INNER JOIN manufacturer AS m INNER JOIN sport AS s"
 						+ " WHERE a.category = ca.id AND a.manufacturer = m.id AND a.sport = s.id AND a.id = ?";
-				
+
 				preparedStatement = conn.prepareStatement(sql);
 				preparedStatement.setInt(1, id);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					id = result.getInt("id");
 					String name = result.getString("name");
@@ -343,6 +407,7 @@ public class DatabaseConnection {
 					article = new Article(id, name, description, sizes, price, manufacturer, color, entryDate, category,
 							sport, mainImage, images);
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -363,7 +428,6 @@ public class DatabaseConnection {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement preparedStatement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT DISTINCT a.id, a.name, a.description, a.price, m.name as manufacturer, a.entryDate, ca.name as category, s.name as sport "
@@ -372,15 +436,14 @@ public class DatabaseConnection {
 						+ " INNER JOIN sport AS s ON a.sport = s.id"
 						+ " INNER JOIN mappingarticlecolor as mac ON	a.id = mac.article"
 						+ " INNER JOIN mappingarticlesize as mas ON	a.id = mas.article"
-						+ " INNER JOIN color as co ON mac.color = co.id"
-						+ " INNER JOIN size as si ON mas.size = si.id "
+						+ " INNER JOIN color as co ON mac.color = co.id" + " INNER JOIN size as si ON mas.size = si.id "
 						+ filter.getSQLFilter("a", "ca", "m", "s", "co", "si");
 				System.out.println(sql);
-				
+
 				preparedStatement = conn.prepareStatement(sql);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					Article article;
 					int id = result.getInt("id");
@@ -396,21 +459,36 @@ public class DatabaseConnection {
 					int mainImage = getImageId(id, true);
 					List<Integer> images = getImageIdList(id);
 
-					article = new Article(id, name, description, sizes, price, manufacturer, colors, entryDate, category,
-							sport, mainImage, images);
+					article = new Article(id, name, description, sizes, price, manufacturer, colors, entryDate,
+							category, sport, mainImage, images);
 					articleList.add(article);
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		return articleList;
 	}
-	
+
 	/**
-	 * This method selects list of all articles that match with the search pattern
-	 * @param searchPattern the search pattern
-	 * @return returns a list of the articles that matches with the search pattern
+	 * This method selects list of all articles that match with the search
+	 * pattern
+	 * 
+	 * @param searchPattern
+	 *            the search pattern
+	 * @return returns a list of the articles that matches with the search
+	 *         pattern
 	 */
 	public List<Article> getArticleListSearch(String searchPattern) {
 		List<Article> articleList = new ArrayList<Article>();
@@ -422,14 +500,15 @@ public class DatabaseConnection {
 				String sql = "SELECT DISTINCT a.id, a.name, a.description, a.price, m.name as manufacturer, a.entryDate, ca.name as category, s.name as sport "
 						+ " FROM article AS a INNER JOIN category AS ca ON a.category = ca.id"
 						+ " INNER JOIN manufacturer AS m ON a.manufacturer = m.id"
-						+ " INNER JOIN sport AS s ON a.sport = s.id" 
-						+ " WHERE LOWER(a.id) LIKE LOWER('%" + searchPattern + "%') OR LOWER(a.name) LIKE LOWER('%" + searchPattern + "%') Or LOWER(a.description) LIKE LOWER('%" + searchPattern + "%')";
+						+ " INNER JOIN sport AS s ON a.sport = s.id" + " WHERE LOWER(a.id) LIKE LOWER('%"
+						+ searchPattern + "%') OR LOWER(a.name) LIKE LOWER('%" + searchPattern
+						+ "%') Or LOWER(a.description) LIKE LOWER('%" + searchPattern + "%')";
 				System.out.println(sql);
 				PreparedStatement statement = conn.prepareStatement(sql);
-				
+
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					Article article;
 					int id = result.getInt("id");
@@ -445,17 +524,28 @@ public class DatabaseConnection {
 					int mainImage = getImageId(id, true);
 					List<Integer> images = getImageIdList(id);
 
-					article = new Article(id, name, description, sizes, price, manufacturer, colors, entryDate, category,
-							sport, mainImage, images);
+					article = new Article(id, name, description, sizes, price, manufacturer, colors, entryDate,
+							category, sport, mainImage, images);
 					articleList.add(article);
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		return articleList;
 	}
-	
+
 	/**
 	 * This method updates an article in the database
 	 * 
@@ -468,11 +558,10 @@ public class DatabaseConnection {
 
 		if (conn != null) {
 
-			PreparedStatement preparedStatement = conn.prepareStatement(
-					"UPDATE `article` SET `name` = ?, `description` = ?, "
-							+ "`price` = ?, `manufacturer` = ?, `category` = ?, "
-							+ "`sport` = ?" + " WHERE `article`.`id` = ?",
-					Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement preparedStatement = conn
+					.prepareStatement("UPDATE `article` SET `name` = ?, `description` = ?, "
+							+ "`price` = ?, `manufacturer` = ?, `category` = ?, " + "`sport` = ?"
+							+ " WHERE `article`.`id` = ?", Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, article.getName());
 			preparedStatement.setString(2, article.getDescription());
 			preparedStatement.setDouble(3, article.getPrice());
@@ -483,6 +572,11 @@ public class DatabaseConnection {
 			preparedStatement.setInt(7, article.getId());
 
 			preparedStatement.executeUpdate();
+			preparedStatement.close();
+			if (conn != null) {
+				conn.close();
+				conn = null;
+			}
 
 		}
 	}
@@ -502,7 +596,6 @@ public class DatabaseConnection {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement preparedStatement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT id FROM role WHERE name=?";
@@ -510,10 +603,11 @@ public class DatabaseConnection {
 				preparedStatement.setString(1, role);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					id = result.getInt("id");
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -537,7 +631,6 @@ public class DatabaseConnection {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement preparedStatement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT id FROM category WHERE name=?";
@@ -545,10 +638,11 @@ public class DatabaseConnection {
 				preparedStatement.setString(1, category);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					id = result.getInt("id");
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -572,7 +666,6 @@ public class DatabaseConnection {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement preparedStatement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT id FROM manufacturer WHERE name=?";
@@ -580,10 +673,11 @@ public class DatabaseConnection {
 				preparedStatement.setString(1, manufacturer);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					id = result.getInt("id");
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -607,7 +701,6 @@ public class DatabaseConnection {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement preparedStatement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT id FROM sport WHERE name=?";
@@ -615,10 +708,11 @@ public class DatabaseConnection {
 				preparedStatement.setString(1, sport);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					id = result.getInt("id");
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -626,13 +720,15 @@ public class DatabaseConnection {
 
 		return id;
 	}
-	
+
 	/**
 	 * This method selects the id of a color
-	 * @param color the color which¥s id should be selected
+	 * 
+	 * @param color
+	 *            the color which¬¥s id should be selected
 	 * @return returns the id of the color
 	 */
-	public int getColorId(String color){
+	public int getColorId(String color) {
 		int id = -1;
 		conn = getInstance();
 
@@ -640,7 +736,6 @@ public class DatabaseConnection {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement preparedStatement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT id FROM color WHERE name=?";
@@ -648,10 +743,11 @@ public class DatabaseConnection {
 				preparedStatement.setString(1, color);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					id = result.getInt("id");
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -668,6 +764,7 @@ public class DatabaseConnection {
 	 * @return returns the id of the shopping basket
 	 */
 	public int createShoppingBasketInDB(int userId) {
+		int shoppingBasketId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -684,20 +781,32 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						shoppingBasketId = result.getInt(1);
 					} else {
-						return -1;
+						shoppingBasketId = -1;
 					}
 				} else {
-					return -1;
+					shoppingBasketId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				shoppingBasketId = -1;
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		} else {
-			return -1;
+			shoppingBasketId = -1;
 		}
+		return shoppingBasketId;
 	}
 
 	/**
@@ -726,7 +835,7 @@ public class DatabaseConnection {
 				preparedStatement.setInt(1, id);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					ShoppingBasketItem item = new ShoppingBasketItem();
 					item.setAmount(result.getInt("amount"));
@@ -740,8 +849,21 @@ public class DatabaseConnection {
 					shoppingBasket.getItems().add(item);
 
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						if (conn != null) {
+							conn.close();
+							conn = null;
+						}
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -767,9 +889,20 @@ public class DatabaseConnection {
 				preparedStatement.setInt(1, id);
 
 				preparedStatement.executeUpdate();
+				preparedStatement.close();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -786,6 +919,7 @@ public class DatabaseConnection {
 	 * 
 	 */
 	public int createShoppingBasketItem(ShoppingBasketItem shoppingBasketItem, int shoppingBasketId) {
+		int itemId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -807,60 +941,32 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						itemId = result.getInt(1);
 					} else {
-						return -1;
+						itemId = -1;
 					}
 				} else {
-					return -1;
+					itemId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
-			}
-		} else {
-			return -1;
-		}
-	}
-
-	/**
-	 * This method checks whether an authorization is included in a role or not
-	 * 
-	 * @param roleId
-	 *            role in which the authorization should be included
-	 * @param authorization
-	 *            authorization to check
-	 * @return returns true if the authorization is in the role include and
-	 *         return false if not
-	 */
-	public boolean checkAuthorizationInDB(int roleId, String authorization) {
-		conn = getInstance();
-
-		if (conn != null) {
-
-			try {
-
-				PreparedStatement preparedStatement = conn.prepareStatement("SELECT m.role, a.authorization, a.name "
-						+ "FROM mappingroleauthorization AS m INNER JOIN authorization AS a "
-						+ "ON m.authorization = a.id" + " WHERE a.name = ? AND m.role = ?");
-
-				preparedStatement.setString(1, authorization);
-				preparedStatement.setInt(2, roleId);
-
-				int lines = preparedStatement.executeUpdate();
-
-				if (lines != 0) {
-					return true;
-				} else {
-					return false;
+				itemId = -1;
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-				return false;
 			}
 		} else {
-			return false;
+			itemId = -1;
 		}
+		return itemId;
 	}
 
 	/**
@@ -874,6 +980,7 @@ public class DatabaseConnection {
 	 *         if not
 	 */
 	public int createImageInDB(InputStream inputStream, String contentType, boolean mainImage, int articleId) {
+		int imageId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -896,20 +1003,32 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						imageId = result.getInt(1);
 					} else {
-						return -1;
+						imageId = -1;
 					}
 				} else {
-					return -1;
+					imageId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				imageId = -1;
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		} else {
-			return -1;
+			imageId = -1;
 		}
+		return imageId;
 	}
 
 	/**
@@ -929,7 +1048,6 @@ public class DatabaseConnection {
 			PreparedStatement preparedStatement;
 			Blob blob = null;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT * FROM image WHERE id=?";
@@ -937,31 +1055,49 @@ public class DatabaseConnection {
 				preparedStatement.setInt(1, id);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					blob = result.getBlob("image");
 					image = new Image(id, blob, result.getString("type"), result.getBoolean("mainImage"));
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		return image;
 	}
-	
+
 	/**
 	 * This method updates an image in the database
-	 * @param imageId the id of the image that should be updated
-	 * @param imageStream the new content
-	 * @param imageType the new content type of the image
-	 * @throws SQLException an SQLException will be thrown if any error occurred
+	 * 
+	 * @param imageId
+	 *            the id of the image that should be updated
+	 * @param imageStream
+	 *            the new content
+	 * @param imageType
+	 *            the new content type of the image
+	 * @throws SQLException
+	 *             an SQLException will be thrown if any error occurred
 	 */
-	public void updateImageInDB(int imageId, InputStream imageStream, String imageType, boolean mainImage) throws SQLException {
+	public void updateImageInDB(int imageId, InputStream imageStream, String imageType, boolean mainImage)
+			throws SQLException {
 		conn = getInstance();
 
 		if (conn != null) {
 
 			PreparedStatement preparedStatement = conn.prepareStatement(
+
 					"UPDATE `image` SET `image` = ?, `type` = ? "
 							+ " WHERE `image`.`id` = ? AND `mainImage`= ?",
 					Statement.RETURN_GENERATED_KEYS);
@@ -969,14 +1105,16 @@ public class DatabaseConnection {
 			preparedStatement.setString(2, imageType);
 			preparedStatement.setInt(3, imageId);
 			preparedStatement.setBoolean(4, mainImage);
-			
-
 
 			preparedStatement.executeUpdate();
-
-		}	
+			preparedStatement.close();
+			if (conn != null) {
+				conn.close();
+				conn = null;
+			}
+		}
 	}
-	
+
 	/**
 	 * This method create a new address in the database
 	 * 
@@ -991,8 +1129,9 @@ public class DatabaseConnection {
 	 * @return return the id of the created entry in the data base. returns -1
 	 *         if no entry was created
 	 */
-	public int createAddressInDB(int userId, String firstName, String lastName, String street, String houseNumber, String postCode, String city,
-			boolean masterData, String salutation) {
+	public int createAddressInDB(int userId, String firstName, String lastName, String street, String houseNumber,
+			String postCode, String city, boolean masterData, String salutation) {
+		int addressId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1010,39 +1149,57 @@ public class DatabaseConnection {
 				preparedStatement.setBoolean(7, masterData);
 				preparedStatement.setInt(8, userId);
 				preparedStatement.setString(9, salutation);
-				
 
 				int lines = preparedStatement.executeUpdate();
 
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						addressId = result.getInt(1);
 					} else {
-						return -1;
+						addressId = -1;
 					}
 				} else {
-					return -1;
+					addressId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				addressId = -1;
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		} else {
-			return -1;
+			addressId = -1;
 		}
+		return addressId;
 	}
-	
+
 	/**
 	 * This method updates the master data address of an user
-	 * @param userId the id of user who's address should be updated
-	 * @param street the new street
-	 * @param houseNumber the new houseNumber
-	 * @param postCode the new postCode
-	 * @param city the new City
+	 * 
+	 * @param userId
+	 *            the id of user who's address should be updated
+	 * @param street
+	 *            the new street
+	 * @param houseNumber
+	 *            the new houseNumber
+	 * @param postCode
+	 *            the new postCode
+	 * @param city
+	 *            the new City
 	 * @throws SQLException
 	 */
-	public void updateAddressInDB(int userId, String firstName, String lastName, String street, String houseNumber, String postCode, String city, String salutation) throws SQLException {
+	public void updateAddressInDB(int userId, String firstName, String lastName, String street, String houseNumber,
+			String postCode, String city, String salutation) throws SQLException {
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1059,15 +1216,18 @@ public class DatabaseConnection {
 			preparedStatement.setString(6, lastName);
 			preparedStatement.setString(7, salutation);
 			preparedStatement.setInt(8, userId);
-			preparedStatement.setBoolean(9,true);
-
+			preparedStatement.setBoolean(9, true);
 
 			preparedStatement.executeUpdate();
+			preparedStatement.close();
+			if (conn != null) {
+				conn.close();
+				conn = null;
+			}
 
-		}	
+		}
 	}
-	
-	
+
 	public Address getAddress(int userId, boolean masterData) {
 		Address address = null;
 
@@ -1077,13 +1237,13 @@ public class DatabaseConnection {
 			try {
 				String sql = "SELECT * FROM address WHERE user=? AND masterData  =?";
 				PreparedStatement preparedStatement = conn.prepareStatement(sql);
-				
+
 				preparedStatement.setInt(1, userId);
 				preparedStatement.setBoolean(2, masterData);
-				
+
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					String salutation = result.getString("salutation");
 					String firstName = result.getString("firstName");
@@ -1093,22 +1253,37 @@ public class DatabaseConnection {
 					String postCode = result.getString("postCode");
 					String city = result.getString("city");
 					int id = result.getInt("id");
-					
+
 					address = new Address(id, firstName, lastName, street, houseNumber, postCode, city, salutation);
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		return address;
 	}
-	
+
 	/**
 	 * This method creates an new order in the database
-	 * @param order the order that should be created
-	 * @return the id of the created order if an error occurred during the creation it will return -1
+	 * 
+	 * @param order
+	 *            the order that should be created
+	 * @return the id of the created order if an error occurred during the
+	 *         creation it will return -1
 	 */
 	public int createOrderInDB(Order order) {
+		int orderId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1127,28 +1302,42 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						orderId = result.getInt(1);
 					} else {
-						return -1;
+						orderId = -1;
 					}
 				} else {
-					return -1;
+					orderId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				orderId = -1;
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		} else {
-			return -1;
+			orderId = -1;
 		}
+		return orderId;
 	}
-	
+
 	/**
 	 * This method selects the id of an paymentMethod
-	 * @param paymentMethod the payment methods who¥s id should be selected
+	 * 
+	 * @param paymentMethod
+	 *            the payment methods who¬¥s id should be selected
 	 * @return the id of the payment method if no id was found it will return -1
 	 */
-	private int getPaymentMethodId(String paymentMethod) {
+	public int getPaymentMethodId(String paymentMethod) {
 		int id = -1;
 		conn = getInstance();
 
@@ -1156,7 +1345,6 @@ public class DatabaseConnection {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement preparedStatement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT id FROM paymentMethod WHERE name=?";
@@ -1164,10 +1352,11 @@ public class DatabaseConnection {
 				preparedStatement.setString(1, paymentMethod);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					id = result.getInt("id");
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1175,11 +1364,14 @@ public class DatabaseConnection {
 
 		return id;
 	}
-	
+
 	/**
 	 * This methdo creates a new OrderItem for an order in the database
-	 * @param orderId the id of the order
-	 * @param item the item that should be created
+	 * 
+	 * @param orderId
+	 *            the id of the order
+	 * @param item
+	 *            the item that should be created
 	 */
 	public void createOrderItemInDB(int orderId, OrderItem item) {
 		conn = getInstance();
@@ -1197,18 +1389,31 @@ public class DatabaseConnection {
 				preparedStatement.setDouble(5, item.getArticle().getPrice());
 				preparedStatement.setInt(6, getSizeId(item.getSize()));
 				preparedStatement.setInt(7, getColorId(item.getColor()));
-				
+
 				preparedStatement.executeUpdate();
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				
+
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-		} 
+		}
 	}
-	
+
 	/**
 	 * This method selects all order for a certain user
-	 * @param userId the id of the user
+	 * 
+	 * @param userId
+	 *            the id of the user
 	 * @return returns a list of all orders from the user
 	 */
 	public List<Order> getOrderList(int userId) {
@@ -1220,43 +1425,56 @@ public class DatabaseConnection {
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT o.id, o.entryDate, o.deliveryAddress, o.billingAddress, o.deliveryDate, p.name AS paymentMethod"
 						+ " FROM orders AS o INNER JOIN paymentmethod AS p ON o.paymentMethod = p.id"
-						+ " WHERE o.user = ?"
-						+ " ORDER BY entryDate";
+						+ " WHERE o.user = ?" + " ORDER BY entryDate";
 				System.out.println(sql);
 				PreparedStatement statement = conn.prepareStatement(sql);
-				
+
 				statement.setInt(1, userId);
-				
+
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					Order order;
 					int id = result.getInt("id");
 					Date entryDate = result.getDate("entryDate");
-					Address deliveryAddress = getAddress(result.getInt("deliveryAddress"));
-					Address billingAddress = getAddress(result.getInt("billingAddress"));
+					Address deliveryAddress = new DatabaseConnection().getAddress(result.getInt("deliveryAddress"));
+					Address billingAddress = new DatabaseConnection().getAddress(result.getInt("billingAddress"));
 					Date deliveryDate = result.getDate("deliveryDate");
 					String paymentMethod = result.getString("paymentMethod");
-					User user = getUser(userId);
-					List<OrderItem> orderItems = getOrderItems(id);
+					User user = new DatabaseConnection().getUser(userId);
+					List<OrderItem> orderItems = new DatabaseConnection().getOrderItems(id);
 
-					order = new Order(id, entryDate, deliveryAddress, billingAddress, paymentMethod, orderItems, deliveryDate, user);
+					order = new Order(id, entryDate, deliveryAddress, billingAddress, paymentMethod, orderItems,
+							deliveryDate, user);
 					orderList.add(order);
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		return orderList;
 	}
-	
+
 	/**
 	 * This method selects an order from the database
-	 * @param orderId the id of the order that should be selected
+	 * 
+	 * @param orderId
+	 *            the id of the order that should be selected
 	 * @return returns the order or null if no order was selected
 	 */
-	public Order getOrder(int orderId){
+	public Order getOrder(int orderId) {
 		Order order = null;
 
 		conn = getInstance();
@@ -1265,38 +1483,51 @@ public class DatabaseConnection {
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT o.id, o.entryDate, o.deliveryAddress, o.billingAddress, o.deliveryDate, o.user, p.name AS paymentMethod"
 						+ " FROM orders AS o INNER JOIN paymentmethod AS p ON o.paymentMethod = p.id"
-						+ " WHERE o.id = ?"
-						+ " ORDER BY entryDate";
+						+ " WHERE o.id = ?" + " ORDER BY entryDate";
 				System.out.println(sql);
 				PreparedStatement statement = conn.prepareStatement(sql);
-				
+
 				statement.setInt(1, orderId);
-				
+
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					int id = result.getInt("id");
 					Date entryDate = result.getDate("entryDate");
-					Address deliveryAddress = getAddress(result.getInt("deliveryAddress"));
-					Address billingAddress = getAddress(result.getInt("billingAddress"));
+					Address deliveryAddress = new DatabaseConnection().getAddress(result.getInt("deliveryAddress"));
+					Address billingAddress = new DatabaseConnection().getAddress(result.getInt("billingAddress"));
 					Date deliveryDate = result.getDate("deliveryDate");
 					String paymentMethod = result.getString("paymentMethod");
 					User user = getUser(result.getInt("user"));
-					List<OrderItem> orderItems = getOrderItems(id);
+					List<OrderItem> orderItems = new DatabaseConnection().getOrderItems(id);
 
-					order = new Order(id, entryDate, deliveryAddress, billingAddress, paymentMethod, orderItems, deliveryDate, user);
+					order = new Order(id, entryDate, deliveryAddress, billingAddress, paymentMethod, orderItems,
+							deliveryDate, user);
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		return order;
 	}
-	
+
 	/**
 	 * This method selects a list of items for a certain order
-	 * @param orderId the id of the order
+	 * 
+	 * @param orderId
+	 *            the id of the order
 	 * @return returns the list with all items of the order
 	 */
 	public List<OrderItem> getOrderItems(int orderId) {
@@ -1311,12 +1542,12 @@ public class DatabaseConnection {
 						+ " WHERE o.orders = ? ORDER BY position";
 				System.out.println(sql);
 				PreparedStatement statement = conn.prepareStatement(sql);
-				
+
 				statement.setInt(1, orderId);
-				
+
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					OrderItem orderItem;
 					int position = result.getInt("position");
@@ -1329,17 +1560,20 @@ public class DatabaseConnection {
 					orderItem = new OrderItem(position, amount, price, article, size, color);
 					orderItems.add(orderItem);
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}
+			} 
 		}
 		return orderItems;
 	}
 
 	/**
 	 * This method selects a address from the database
-	 * @param id the id of the address
-	 * @return returns the address with the id 
+	 * 
+	 * @param id
+	 *            the id of the address
+	 * @return returns the address with the id
 	 */
 	public Address getAddress(int id) {
 		Address address = null;
@@ -1350,12 +1584,12 @@ public class DatabaseConnection {
 			try {
 				String sql = "SELECT * FROM address WHERE id= ?";
 				PreparedStatement preparedStatement = conn.prepareStatement(sql);
-				
+
 				preparedStatement.setInt(1, id);
-				
+
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					String salutation = result.getString("salutation");
 					String firstName = result.getString("firstName");
@@ -1365,33 +1599,37 @@ public class DatabaseConnection {
 					String postCode = result.getString("postCode");
 					String city = result.getString("city");
 					id = result.getInt("id");
-					
+
 					address = new Address(id, firstName, lastName, street, houseNumber, postCode, city, salutation);
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 		return address;
 	}
-	
+
 	/**
 	 * This method creates a new wishlist item in the database
-	 * @param wishlistItem the article which should be the item
-	 * @param wishlistId the id of the wishlist
+	 * 
+	 * @param wishlistItem
+	 *            the article which should be the item
+	 * @param wishlistId
+	 *            the id of the wishlist
 	 * @return the id of the created item
 	 */
-	public int createWishlistItemInDB(WishlistItem wishlistItem, int wishlistId){
+	public int createWishlistItemInDB(WishlistItem wishlistItem, int wishlistId) {
+		int itemId;
 		conn = getInstance();
 
 		if (conn != null) {
 
 			try {
 
-				PreparedStatement preparedStatement = conn.prepareStatement(
-						"INSERT INTO `wishlistitem` (`id`, `article`, `wishlist`, `size`, `color`) "
-								+ "VALUES (NULL, ?, ?, ?, ?)",
-						Statement.RETURN_GENERATED_KEYS);
+				PreparedStatement preparedStatement = conn
+						.prepareStatement("INSERT INTO `wishlistitem` (`id`, `article`, `wishlist`, `size`, `color`) "
+								+ "VALUES (NULL, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, wishlistItem.getArticle().getId());
 				preparedStatement.setInt(2, wishlistId);
 				preparedStatement.setInt(3, getSizeId(wishlistItem.getSize()));
@@ -1402,28 +1640,43 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						itemId = result.getInt(1);
 					} else {
-						return -1;
+						itemId = -1;
 					}
 				} else {
-					return -1;
+					itemId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				itemId = -1;
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		} else {
-			return -1;
+			itemId = -1;
 		}
+		return itemId;
 	}
-	
+
 	/**
 	 * This method creates a wishlist for a user
-	 * @param userId the id of the user who¥s wishlsit should be created
+	 * 
+	 * @param userId
+	 *            the id of the user who¬¥s wishlsit should be created
 	 * @return the id of the created wishlist
 	 */
-	public int createWishlistInDB(int userId){
+	public int createWishlistInDB(int userId) {
+		int wishlistId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1431,8 +1684,7 @@ public class DatabaseConnection {
 			try {
 
 				PreparedStatement preparedStatement = conn.prepareStatement(
-						"INSERT INTO `wishlist` (`id`, `user`) " + "VALUES (NULL, ?)",
-						Statement.RETURN_GENERATED_KEYS);
+						"INSERT INTO `wishlist` (`id`, `user`) " + "VALUES (NULL, ?)", Statement.RETURN_GENERATED_KEYS);
 				preparedStatement.setInt(1, userId);
 
 				int lines = preparedStatement.executeUpdate();
@@ -1440,28 +1692,42 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						wishlistId = result.getInt(1);
 					} else {
-						return -1;
+						wishlistId = -1;
 					}
 				} else {
-					return -1;
+					wishlistId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				wishlistId = -1;
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		} else {
-			return -1;
+			wishlistId = -1;
 		}
+		return wishlistId;
 	}
-	
+
 	/**
 	 * This method selects an wishlist from the database
-	 * @param wishlistId the id of the wishlist that should be selected
+	 * 
+	 * @param wishlistId
+	 *            the id of the wishlist that should be selected
 	 * @return the wishlist
 	 */
-	public Wishlist getWishlist(int wishlistId){
+	public Wishlist getWishlist(int wishlistId) {
 		Wishlist wishlist = new Wishlist(wishlistId);
 
 		conn = getInstance();
@@ -1470,142 +1736,178 @@ public class DatabaseConnection {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement statement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT w.id, w.article, s.size AS size, c.name AS color FROM wishlistitem AS w "
-						+ "INNER JOIN size AS s ON w.size = s.id "
-						+ "INNER JOIN color AS c ON w.color = c.id "
+						+ "INNER JOIN size AS s ON w.size = s.id " + "INNER JOIN color AS c ON w.color = c.id "
 						+ "WHERE wishlist=?";
-				
+
 				statement = conn.prepareStatement(sql);
 				statement.setInt(1, wishlistId);
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					int id = result.getInt("id");
 					Article article = getArticle(result.getInt("article"));
 					int size = result.getInt("size");
 					String color = result.getString("color");
-					
+
 					WishlistItem wishlistitem = new WishlistItem(id, size, color, article);
 
 					wishlist.addItem(wishlistitem);
 
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 
 		return wishlist;
 	}
-	
+
 	/**
 	 * This method deletes all items of a wishlist in the database
-	 * @param wishlistId the id of the wishlist which¥s items should be deleted
+	 * 
+	 * @param wishlistId
+	 *            the id of the wishlist which¬¥s items should be deleted
 	 */
-	public void deleteAllItemsOfWishlistInDB(int wishlistId){
+	public void deleteAllItemsOfWishlistInDB(int wishlistId) {
 		conn = getInstance();
 
 		if (conn != null) {
 
 			try {
 
-				PreparedStatement preparedStatement = conn.prepareStatement(
-						"DELETE FROM `wishlistitem` WHERE `wishlist` = ?");
+				PreparedStatement preparedStatement = conn
+						.prepareStatement("DELETE FROM `wishlistitem` WHERE `wishlist` = ?");
 				preparedStatement.setInt(1, wishlistId);
 
 				preparedStatement.executeUpdate();
+				preparedStatement.close();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
-	
+
 	/**
 	 * This method selects a list of all roles from the database
+	 * 
 	 * @return returns a list of all roles
 	 */
-	public List<Role> getRoleList(){
-		List<Role> roles = new ArrayList<Role>() ;
-		
+	public List<Role> getRoleList() {
+		List<Role> roles = new ArrayList<Role>();
+
 		conn = getInstance();
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement statement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT * FROM role";
-				
+
 				statement = conn.prepareStatement(sql);
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					int id = result.getInt("id");
 					String name = result.getString("name");
 					String description = result.getString("description");
-					
+
 					Role role = new Role(id, name, description);
 					roles.add(role);
 
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
-		
+
 		return roles;
 	}
-	
-	public List<Role> getRoleList(int userId){
-		List<Role> roles = new ArrayList<Role>() ;
-		
+
+	public List<Role> getRoleList(int userId) {
+		List<Role> roles = new ArrayList<Role>();
+
 		conn = getInstance();
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement statement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT r.* FROM mappinguserrole AS m INNER JOIN role AS R ON m.role = r.id WHERE m.user = ?";
-				
+
 				statement = conn.prepareStatement(sql);
 				statement.setInt(1, userId);
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					int id = result.getInt("id");
 					String name = result.getString("name");
 					String description = result.getString("description");
-					
+
 					Role role = new Role(id, name, description);
 					roles.add(role);
 
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return roles;
 	}
-	
+
 	/**
 	 * This method creates a new role in the database
-	 * @param role the role that should be created
+	 * 
+	 * @param role
+	 *            the role that should be created
 	 * @return the id of the created role returns -1 if no role was created
 	 */
-	public int createRole(Role role){
+	public int createRole(Role role) {
+		int roleId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1623,104 +1925,120 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						roleId = result.getInt(1);
 					} else {
-						return -1;
+						roleId = -1;
 					}
 				} else {
-					return -1;
+					roleId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				roleId = -1;
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		} else {
-			return -1;
+			roleId = -1;
 		}
+		return roleId;
 	}
-	
-	
-	
+
 	/**
 	 * This method selects all sizes for an article
-	 * @param articleId the id of the article which¥s sizes should be selected
+	 * 
+	 * @param articleId
+	 *            the id of the article which¬¥s sizes should be selected
 	 * @return the list of sizes for that article
 	 */
-	public List<Integer> getSizeList(int articleId){
-		List<Integer> sizes = new ArrayList<Integer>() ;
-		
+	public List<Integer> getSizeList(int articleId) {
+		List<Integer> sizes = new ArrayList<Integer>();
+
 		conn = getInstance();
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement statement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT s.size AS size FROM mappingarticlesize AS m INNER JOIN size AS s ON s.id = m.size WHERE article = ? ORDER BY s.size";
-				
+
 				statement = conn.prepareStatement(sql);
 				statement.setInt(1, articleId);
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					int size = result.getInt("size");
-					
+
 					sizes.add(size);
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return sizes;
 	}
-	
+
 	/**
 	 * This method selects all colors of an article
-	 * @param articleId the id of the article which¥s color should be selected
-	 * @return the list of colors 
+	 * 
+	 * @param articleId
+	 *            the id of the article which¬¥s color should be selected
+	 * @return the list of colors
 	 */
-	public List<String> getColorList(int articleId){
-		List<String> colors = new ArrayList<String>() ;
-		
+	public List<String> getColorList(int articleId) {
+		List<String> colors = new ArrayList<String>();
+
 		conn = getInstance();
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement statement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT c.name AS color FROM mappingarticlecolor AS m INNER JOIN color AS c ON c.id = m.color WHERE article = ? ORDER BY c.name";
-				
+
 				statement = conn.prepareStatement(sql);
 				statement.setInt(1, articleId);
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					String size = result.getString("color");
-					
+
 					colors.add(size);
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return colors;
 	}
-	
+
 	/**
 	 * This method selects the id for a size from the database
-	 * @param size the size which¥s database should be selected
+	 * 
+	 * @param size
+	 *            the size which¬¥s database should be selected
 	 * @return returns the id of the size or -1 if no size was selected
 	 */
-	public int getSizeId(int size){
+	public int getSizeId(int size) {
 		int id = -1;
 		conn = getInstance();
 
@@ -1728,7 +2046,6 @@ public class DatabaseConnection {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement preparedStatement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT id FROM size WHERE size=?";
@@ -1736,10 +2053,11 @@ public class DatabaseConnection {
 				preparedStatement.setInt(1, size);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					id = result.getInt("id");
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1747,14 +2065,19 @@ public class DatabaseConnection {
 
 		return id;
 	}
-	
+
 	/**
 	 * This method creates a mapping of a size and an article
-	 * @param size the size
-	 * @param articleId the article
-	 * @return the id of the mapping entry that was created returns null if no entry was created
+	 * 
+	 * @param size
+	 *            the size
+	 * @param articleId
+	 *            the article
+	 * @return the id of the mapping entry that was created returns null if no
+	 *         entry was created
 	 */
-	public int createSizeMapping(int size, int articleId){
+	public int createSizeMapping(int size, int articleId) {
+		int mappingId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1772,30 +2095,46 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						mappingId = result.getInt(1);
 					} else {
-						return -1;
+						mappingId = -1;
 					}
 				} else {
-					return -1;
+					mappingId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				mappingId = -1;
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		} else {
-			return -1;
+			mappingId = -1;
 		}
+		return mappingId;
 	}
-	
-	
+
 	/**
 	 * This method creates a mapping of a color and an article
-	 * @param color the color 
-	 * @param articleId the article
-	 * @return the id of the mapping entry that was created returns null if no entry was created 
+	 * 
+	 * @param color
+	 *            the color
+	 * @param articleId
+	 *            the article
+	 * @return the id of the mapping entry that was created returns null if no
+	 *         entry was created
 	 */
-	public int createColorMapping(String color, int articleId){
+	public int createColorMapping(String color, int articleId) {
+		int mappingId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1813,113 +2152,158 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						mappingId = result.getInt(1);
 					} else {
-						return -1;
+						mappingId = -1;
 					}
 				} else {
-					return -1;
+					mappingId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				mappingId = -1;
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		} else {
-			return -1;
+			mappingId = -1;
 		}
+		return mappingId;
 	}
-	
+
 	/**
-	 * This method deletes all mapping of that article to a size for a certain article
-	 * @param article the article which¥s mappings should be deleted
+	 * This method deletes all mapping of that article to a size for a certain
+	 * article
+	 * 
+	 * @param article
+	 *            the article which¬¥s mappings should be deleted
 	 */
-	public void deleteSizeMapping(Article article){
+	public void deleteSizeMapping(Article article) {
 		conn = getInstance();
 
 		if (conn != null) {
 
 			try {
 
-				PreparedStatement preparedStatement = conn.prepareStatement(
-						"DELETE FROM `mappingarticlesize` WHERE `article` = ?");
+				PreparedStatement preparedStatement = conn
+						.prepareStatement("DELETE FROM `mappingarticlesize` WHERE `article` = ?");
 				preparedStatement.setInt(1, article.getId());
 
 				preparedStatement.executeUpdate();
-
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
-	
+
 	/**
-	 * This method deletes all mapping of that article to a color for a certain article
-	 * @param article the article which¥s mappings should be deleted
+	 * This method deletes all mapping of that article to a color for a certain
+	 * article
+	 * 
+	 * @param article
+	 *            the article which¬¥s mappings should be deleted
 	 */
-	public void deleteColorMapping(Article article){
+	public void deleteColorMapping(Article article) {
 		conn = getInstance();
 
 		if (conn != null) {
 
 			try {
 
-				PreparedStatement preparedStatement = conn.prepareStatement(
-						"DELETE FROM `mappingarticlecolor` WHERE `article` = ?");
+				PreparedStatement preparedStatement = conn
+						.prepareStatement("DELETE FROM `mappingarticlecolor` WHERE `article` = ?");
 				preparedStatement.setInt(1, article.getId());
 
 				preparedStatement.executeUpdate();
-
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
-	
+
 	/**
 	 * This method selects a list of all images from the database
-	 * @param articleId the id of the article which¥s images should be created
+	 * 
+	 * @param articleId
+	 *            the id of the article which¬¥s images should be created
 	 * @return the list of the image ids
 	 */
-	public List<Integer> getImageIdList(int articleId){
+	public List<Integer> getImageIdList(int articleId) {
 		List<Integer> images = new ArrayList<Integer>();
-		
+
 		conn = getInstance();
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement statement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT id FROM image WHERE article = ? AND mainImage = ?";
-				
+
 				statement = conn.prepareStatement(sql);
 				statement.setInt(1, articleId);
 				statement.setBoolean(2, false);
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					int size = result.getInt("id");
-					
+
 					images.add(size);
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return images;
 	}
-	
+
 	/**
 	 * This method selects the id of an images from the database
-	 * @param articleId the id of the article which¥s image id should be selected
-	 * @param mainImage boolean that specified whether the main image or not should be created
-	 * @return returns the id of the image or returns -1 if no images was selected
+	 * 
+	 * @param articleId
+	 *            the id of the article which¬¥s image id should be selected
+	 * @param mainImage
+	 *            boolean that specified whether the main image or not should be
+	 *            created
+	 * @return returns the id of the image or returns -1 if no images was
+	 *         selected
 	 */
-	public int getImageId(int articleId, boolean mainImage){
+	public int getImageId(int articleId, boolean mainImage) {
 		int id = -1;
 		conn = getInstance();
 
@@ -1927,7 +2311,6 @@ public class DatabaseConnection {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement preparedStatement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT id FROM image WHERE article=? and mainImage=?";
@@ -1936,10 +2319,11 @@ public class DatabaseConnection {
 				preparedStatement.setBoolean(2, mainImage);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					id = result.getInt("id");
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1947,14 +2331,19 @@ public class DatabaseConnection {
 
 		return id;
 	}
-	
+
 	/**
 	 * This method creates a mapping of a role and a user
-	 * @param user the user
-	 * @param role the role
-	 * @return returns the id of the new entry in the database, returns -1 if no entry was created
+	 * 
+	 * @param user
+	 *            the user
+	 * @param role
+	 *            the role
+	 * @return returns the id of the new entry in the database, returns -1 if no
+	 *         entry was created
 	 */
-	public int createRoleMapping(int userId, int roleId){
+	public int createRoleMapping(int userId, int roleId) {
+		int mappingId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1972,51 +2361,78 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						mappingId = result.getInt(1);
 					} else {
-						return -1;
+						mappingId = -1;
 					}
 				} else {
-					return -1;
+					mappingId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				mappingId = -1;
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		} else {
-			return -1;
+			mappingId = -1;
 		}
+		return mappingId;
 	}
-	
+
 	/**
 	 * This method deletes all mappings of a user and his roles
-	 * @param user the user who¥s roles should be deleted
+	 * 
+	 * @param user
+	 *            the user who¬¥s roles should be deleted
 	 */
-	public void deleteRoleMappings(User user){
+	public void deleteRoleMappings(User user) {
 		conn = getInstance();
 
 		if (conn != null) {
 
 			try {
 
-				PreparedStatement preparedStatement = conn.prepareStatement(
-						"DELETE FROM `mappinguserrole` WHERE `user` = ?");
+				PreparedStatement preparedStatement = conn
+						.prepareStatement("DELETE FROM `mappinguserrole` WHERE `user` = ?");
 				preparedStatement.setInt(1, user.getId());
 
 				preparedStatement.executeUpdate();
+				preparedStatement.close();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
-	
+
 	/**
 	 * This method selects a role from the database
-	 * @param roleId the roleId
+	 * 
+	 * @param roleId
+	 *            the roleId
 	 * @return the role or null if no role was selected
 	 */
-	public Role getRole(int roleId){
+	public Role getRole(int roleId) {
 		Role role = null;
 		conn = getInstance();
 
@@ -2024,7 +2440,6 @@ public class DatabaseConnection {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement preparedStatement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT * FROM role WHERE id=?";
@@ -2032,14 +2447,15 @@ public class DatabaseConnection {
 				preparedStatement.setInt(1, roleId);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					int id = result.getInt("id");
 					String name = result.getString("name");
 					String description = result.getString("description");
-					
+
 					role = new Role(id, name, description);
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -2050,27 +2466,36 @@ public class DatabaseConnection {
 
 	/**
 	 * This method updates a role in the databasae
-	 * @param role the rol containing the new values
-	 * @throws SQLException will be thrown if an error occures during update
+	 * 
+	 * @param role
+	 *            the rol containing the new values
+	 * @throws SQLException
+	 *             will be thrown if an error occures during update
 	 */
-	public void updateRoleInDB(Role role)  throws SQLException{
+	public void updateRoleInDB(Role role) throws SQLException {
 		conn = getInstance();
 
 		if (conn != null) {
 
-			PreparedStatement preparedStatement = conn
-					.prepareStatement("UPDATE `role` SET `name`= ?, `description` = ? WHERE `role`.`id` = ? ", Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement preparedStatement = conn.prepareStatement(
+					"UPDATE `role` SET `name`= ?, `description` = ? WHERE `role`.`id` = ? ",
+					Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setInt(3, role.getId());
 			preparedStatement.setString(1, role.getName());
 			preparedStatement.setString(2, role.getDescription());
-			
-			
+
 			preparedStatement.executeUpdate();
+			preparedStatement.close();
+			if (conn != null) {
+				conn.close();
+				conn = null;
+			}
 		}
 	}
-	
+
 	/**
 	 * This method selects a list of all user from the database
+	 * 
 	 * @return a list of all user in the database
 	 */
 	public List<User> getUserList() {
@@ -2081,17 +2506,15 @@ public class DatabaseConnection {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement preparedStatement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT u.*, a.salutation, a.firstName, a.lastName, a.street, a.houseNumber, a.postCode, a.city "
-						+ "FROM user AS u INNER JOIN address AS a ON a.user = u.id "
-						+ "WHERE a.masterData='1'";
-				
+						+ "FROM user AS u INNER JOIN address AS a ON a.user = u.id " + "WHERE a.masterData='1'";
+
 				preparedStatement = conn.prepareStatement(sql);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					User user;
 					int id = result.getInt("id");
@@ -2112,8 +2535,19 @@ public class DatabaseConnection {
 							city, salutation, shoppingBasket, role, wishlist);
 					userList.add(user);
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -2121,9 +2555,12 @@ public class DatabaseConnection {
 	}
 
 	/**
-	 * This method deletes a mapping of a role and an user 
-	 * @param userId the id of the user
-	 * @param roleId the id of the role
+	 * This method deletes a mapping of a role and an user
+	 * 
+	 * @param userId
+	 *            the id of the user
+	 * @param roleId
+	 *            the id of the role
 	 */
 	public void deleteUserRoleMapping(int userId, int roleId) {
 		conn = getInstance();
@@ -2132,22 +2569,36 @@ public class DatabaseConnection {
 
 			try {
 
-				PreparedStatement preparedStatement = conn.prepareStatement(
-						"DELETE FROM `mappinguserrole` WHERE `user` = ? AND role =?");
+				PreparedStatement preparedStatement = conn
+						.prepareStatement("DELETE FROM `mappinguserrole` WHERE `user` = ? AND role =?");
 				preparedStatement.setInt(1, userId);
 				preparedStatement.setInt(2, roleId);
 
 				preparedStatement.executeUpdate();
+				preparedStatement.close();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
 
 	/**
-	 * This method returns a list of user that contain the search pattern in their last name, id, email
-	 * @param searchPattern the search pattern 
+	 * This method returns a list of user that contain the search pattern in
+	 * their last name, id, email
+	 * 
+	 * @param searchPattern
+	 *            the search pattern
 	 * @return the list of users
 	 */
 	public List<User> getUserListSearchPattern(String searchPattern) {
@@ -2158,17 +2609,17 @@ public class DatabaseConnection {
 			// Anfrage-Statement erzeugen.
 			PreparedStatement preparedStatement;
 			try {
-				
 
 				// Ergebnistabelle erzeugen und abholen.
 				String sql = "SELECT u.*, a.salutation, a.firstName, a.lastName, a.street, a.houseNumber, a.postCode, a.city "
 						+ "FROM `user` AS u INNER JOIN address AS a On a.user = u.id WHERE a.masterData='1' AND "
-						+ "( u.id  LIKE "+ searchPattern + " OR a.lastName LIKE "+ searchPattern + " OR u.email LIKe "+ searchPattern + ");";
-				
+						+ "( u.id  LIKE " + searchPattern + " OR a.lastName LIKE " + searchPattern + " OR u.email LIKe "
+						+ searchPattern + ");";
+
 				preparedStatement = conn.prepareStatement(sql);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					User user;
 					int id = result.getInt("id");
@@ -2189,8 +2640,19 @@ public class DatabaseConnection {
 							city, salutation, shoppingBasket, role, wishlist);
 					userList.add(user);
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 

@@ -1,8 +1,8 @@
-<h2> Bestellbest&aumltigung f&uumlr Bestellung: #!orderId! bestellt am !entryDate!</h2>
+<h2> Bestellbest&auml;tigung f&uuml;r Bestellung: #!orderId! bestellt am !entryDate!</h2>
 <br>
 <p>
 <h4>Guten Tag,</h4>
-vielen Dank f&uumlr Ihre Bestellung. Wir werden Ihr(e) Artikel schnellst m&oumlglich an Sie versenden. Sie finden das vorrausssichtliche Lieferdatum weiter unten. 
+vielen Dank f&uuml;r Ihre Bestellung. Wir werden Ihr(e) Artikel schnellst m&ouml;glich an Sie versenden. Sie finden das vorrausssichtliche Lieferdatum weiter unten. 
 Um Ihre Bestellungen anzusehen, besuchen Sie <a href="http://localhost:8080/WebShopR4F/Bestellungen.jsp">Meine Bestellungen</a>.
 </p> 
 <hr />
@@ -19,7 +19,7 @@ Um Ihre Bestellungen anzusehen, besuchen Sie <a href="http://localhost:8080/WebS
 	!orderItems!	
 </table>
 <hr />
-Der gesamte Rechnungsbetrage betr&aumlgt !orderPrice!&euro inkl. Umsatzsteuer. Bitte lassen Sie uns den genannten Betrag laut der von Ihnen gew&aumllten Zahlungsmethode, !paymentMethod!, zukommen.<br>
+Der gesamte Rechnungsbetrage betr&auml;gt !orderPrice!&euro; inkl. Umsatzsteuer. Bitte lassen Sie uns den genannten Betrag laut der von Ihnen gew&auml;lten Zahlungsmethode, !paymentMethod!, zukommen.<br>
 <br />
-Wir freuen uns auf Ihre n&aumlchste Bestellung!
+Wir freuen uns auf Ihre n&auml;chste Bestellung!
 <h4>Run4Fun</h4>

@@ -39,7 +39,7 @@
 		</div>
 		
 		<div class="block">
-			<h4><a class="containerLink" href="Rollenzuordnung.jsp">Rollen zuordnen / entfernen</a></h4>
+			<h4><a class="containerLink" href="NavigationUserOverviewServlet">Rollen zuordnen / entfernen</a></h4>
 		</div>
 		</c:if>	
 	</div>

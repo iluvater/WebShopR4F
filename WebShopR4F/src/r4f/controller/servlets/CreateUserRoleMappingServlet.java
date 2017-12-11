@@ -1,6 +1,7 @@
 package r4f.controller.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import r4f.controller.services.AuthorizationService;
+import r4f.controller.services.UserService;
 import r4f.model.ErrorMessage;
+import r4f.model.User;
 
 /**
  * Servlet implementation class CreateUserRoleMappingServlet
@@ -44,6 +47,7 @@ public class CreateUserRoleMappingServlet extends HttpServlet {
 		String email;
 		String role;
 		AuthorizationService authorizationService;
+		UserService userService = new UserService();
 		
 		try{
 			email = request.getParameter("email");
@@ -54,12 +58,16 @@ public class CreateUserRoleMappingServlet extends HttpServlet {
 			if(id != -1){
 				//success
 				ErrorMessage successMessage = new ErrorMessage(603);
+				List<User> userList = userService.getUserList();
+				request.setAttribute("userList", userList);
 				request.setAttribute("success", successMessage);
 				dispatcher = request.getRequestDispatcher(successURL);
 				dispatcher.forward(request, response);
 			}else{
 				//something wrong during creating
 				ErrorMessage errorMessage = new ErrorMessage(126);
+				List<User> userList = userService.getUserList();
+				request.setAttribute("userList", userList);
 				request.setAttribute("error", errorMessage);
 				dispatcher = request.getRequestDispatcher(errorURL);
 				dispatcher.forward(request, response);
@@ -68,6 +76,8 @@ public class CreateUserRoleMappingServlet extends HttpServlet {
 			}else{
 				//Error missing input role
 				ErrorMessage errorMessage = new ErrorMessage(138);
+				List<User> userList = userService.getUserList();
+				request.setAttribute("userList", userList);
 				request.setAttribute("error", errorMessage);
 				dispatcher = request.getRequestDispatcher(errorURL);
 				dispatcher.forward(request, response);
@@ -76,6 +86,8 @@ public class CreateUserRoleMappingServlet extends HttpServlet {
 		}catch(NumberFormatException e){
 			//Error missing input email
 			ErrorMessage errorMessage = new ErrorMessage(108);
+			List<User> userList = userService.getUserList();
+			request.setAttribute("userList", userList);
 			request.setAttribute("error", errorMessage);
 			dispatcher = request.getRequestDispatcher(errorURL);
 			dispatcher.forward(request, response);
