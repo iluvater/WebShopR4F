@@ -941,3 +941,117 @@ p {
 	background-color: #fff;
 	overfow-x: hidden; 
 } */
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 450px){
+	/* Header Formatierungen*/
+	#logo{
+		clear: left;
+		width: 0;
+	}
+	
+	#search{
+		width: 78%;
+	}
+	#buttonHeader{
+		clear:Left;
+	}
+	.linkHeader{
+		clear: left;
+		width: 90%;
+	}
+	.buttonlink{
+		clear: left;
+		width: 90%;
+	}
+	
+	form.header {
+		float: left;
+		width : 100%;
+	}
+	
+	.btnPadding{
+		margin-right: 10%;
+	}
+	
+	.containerArtikel{
+		text-align: center;
+	}
+	
+	body {
+		background-image: none;
+	}
+	
+	h4{
+		padding-top:0;
+		margin-top: 0;
+	}
+	
+	hr {
+		margin-top: 0;
+		padding-top:0;
+		margin-bottom:0;
+		padding-bottom:0;
+	}
+	
+	header {
+		background-color: #2f528f;
+		width: 100%; 
+		height:18em;
+		margin-top:0;
+		padding-left: 1em; 
+		padding-top: 1em; 
+		float: left;
+	}
+	
+	.dropdown {
+    	float: left;
+    	width: 100%;
+	}
+	
+	#center {
+		margin-left: 10%;
+	}
+	
+	/*Übersichtsseite Formatierungen*/
+	.floatLeft {
+		float: left;
+	}
+	
+	.paddingLeft1{
+		margin-right: 5px;
+	}
+	
+	#containerInhalt{
+		min-width: 100%;
+		width: 100%;
+		margin-left: 10%;
+		padding: 0;	
+	}
+	
+	/* Footer Formatierungen*/	
+	a.footer {
+/*  		margin-right: 25%; */
+		margin-left: 25%; 
+		text-algin: center;
+		color: black;
+		align: center;
+	}
+	
+	#fuss {
+		height: 12em;
+	}
+}
+
+
+
+	
