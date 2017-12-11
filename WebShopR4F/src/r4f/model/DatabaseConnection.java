@@ -81,14 +81,13 @@ public class DatabaseConnection {
 	 *         user created
 	 */
 	public int createUserInDB(User user) {
-
+		int userId;
 		conn = getInstance();
 
 		if (conn != null) {
-
 			try {
 
-				PreparedStatement preparedStatement = conn.prepareStatement(
+				 PreparedStatement preparedStatement = conn.prepareStatement(
 						"INSERT INTO `user` (`id`, `email`, `birthday`, `password`, `shoppingBasket`, `wishlist`)"
 								+ " VALUES (NULL, ?, ?, ?, null, null)",
 						Statement.RETURN_GENERATED_KEYS);
@@ -103,18 +102,20 @@ public class DatabaseConnection {
 					if (result.next()) {
 						return result.getInt(1);
 					} else {
-						return -1;
+						userId =  -1;
 					}
 				} else {
-					return -1;
+					userId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				userId = -1;
 			}
 		} else {
-			return -1;
+			userId = -1;
 		}
+		return userId;
 	}
 
 	/**
@@ -161,6 +162,7 @@ public class DatabaseConnection {
 					user = new User(id, firstName, lastName, email, birthday, password, street, houseNumber, postCode,
 							city, salutation, shoppingBasket, role, wishlist);
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -214,6 +216,7 @@ public class DatabaseConnection {
 					user = new User(id, firstName, lastName, email, birthday, password, street, houseNumber, postCode,
 							city, salutation, shoppingBasket, role, wishlist);
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -247,6 +250,7 @@ public class DatabaseConnection {
 			preparedStatement.setInt(6, user.getId());
 			
 			preparedStatement.executeUpdate();
+			preparedStatement.close();
 		}
 	}
 
@@ -259,6 +263,7 @@ public class DatabaseConnection {
 	 *         created the method return -1
 	 */
 	public int createArticleInDB(Article artikel) {
+		int articleId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -282,20 +287,22 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						articleId =  result.getInt(1);
 					} else {
-						return -1;
+						articleId = -1;
 					}
 				} else {
-					return -1;
+					articleId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				articleId = -1;
 			}
 		} else {
-			return -1;
+			articleId = -1;
 		}
+		return articleId;
 	}
 
 	/**
@@ -343,6 +350,7 @@ public class DatabaseConnection {
 					article = new Article(id, name, description, sizes, price, manufacturer, color, entryDate, category,
 							sport, mainImage, images);
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -400,6 +408,7 @@ public class DatabaseConnection {
 							sport, mainImage, images);
 					articleList.add(article);
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -449,6 +458,7 @@ public class DatabaseConnection {
 							sport, mainImage, images);
 					articleList.add(article);
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -483,6 +493,7 @@ public class DatabaseConnection {
 			preparedStatement.setInt(7, article.getId());
 
 			preparedStatement.executeUpdate();
+			preparedStatement.close();
 
 		}
 	}
@@ -514,6 +525,7 @@ public class DatabaseConnection {
 				if (result.next()) {
 					id = result.getInt("id");
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -549,6 +561,7 @@ public class DatabaseConnection {
 				if (result.next()) {
 					id = result.getInt("id");
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -584,6 +597,7 @@ public class DatabaseConnection {
 				if (result.next()) {
 					id = result.getInt("id");
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -619,6 +633,7 @@ public class DatabaseConnection {
 				if (result.next()) {
 					id = result.getInt("id");
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -652,6 +667,7 @@ public class DatabaseConnection {
 				if (result.next()) {
 					id = result.getInt("id");
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -668,6 +684,7 @@ public class DatabaseConnection {
 	 * @return returns the id of the shopping basket
 	 */
 	public int createShoppingBasketInDB(int userId) {
+		int shoppingBasketId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -684,20 +701,22 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						shoppingBasketId =  result.getInt(1);
 					} else {
-						return -1;
+						shoppingBasketId = -1;
 					}
 				} else {
-					return -1;
+					shoppingBasketId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				shoppingBasketId = -1;
 			}
 		} else {
-			return -1;
+			shoppingBasketId = -1;
 		}
+		return shoppingBasketId;
 	}
 
 	/**
@@ -740,6 +759,7 @@ public class DatabaseConnection {
 					shoppingBasket.getItems().add(item);
 
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -767,6 +787,7 @@ public class DatabaseConnection {
 				preparedStatement.setInt(1, id);
 
 				preparedStatement.executeUpdate();
+				preparedStatement.close();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -786,6 +807,7 @@ public class DatabaseConnection {
 	 * 
 	 */
 	public int createShoppingBasketItem(ShoppingBasketItem shoppingBasketItem, int shoppingBasketId) {
+		int itemId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -807,20 +829,22 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						itemId = result.getInt(1);
 					} else {
-						return -1;
+						itemId = -1;
 					}
 				} else {
-					return -1;
+					itemId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				itemId = -1;
 			}
 		} else {
-			return -1;
+			itemId = -1;
 		}
+		return itemId;
 	}
 
 	/**
@@ -834,6 +858,7 @@ public class DatabaseConnection {
 	 *         return false if not
 	 */
 	public boolean checkAuthorizationInDB(int roleId, String authorization) {
+		boolean check;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -850,17 +875,19 @@ public class DatabaseConnection {
 				int lines = preparedStatement.executeUpdate();
 
 				if (lines != 0) {
-					return true;
+					check=  true;
 				} else {
-					return false;
+					check =  false;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return false;
+				check =  false;
 			}
 		} else {
-			return false;
+			check =  false;
 		}
+		return check;
 	}
 
 	/**
@@ -874,6 +901,7 @@ public class DatabaseConnection {
 	 *         if not
 	 */
 	public int createImageInDB(InputStream inputStream, String contentType, boolean mainImage, int articleId) {
+		int imageId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -896,20 +924,22 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						imageId =  result.getInt(1);
 					} else {
-						return -1;
+						imageId =  -1;
 					}
 				} else {
-					return -1;
+					imageId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				imageId = -1;
 			}
 		} else {
-			return -1;
+			imageId = -1;
 		}
+		return imageId;
 	}
 
 	/**
@@ -942,6 +972,7 @@ public class DatabaseConnection {
 					blob = result.getBlob("image");
 					image = new Image(id, blob, result.getString("type"), result.getBoolean("mainImage"));
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -973,7 +1004,7 @@ public class DatabaseConnection {
 
 
 			preparedStatement.executeUpdate();
-
+			preparedStatement.close();
 		}	
 	}
 	
@@ -993,6 +1024,7 @@ public class DatabaseConnection {
 	 */
 	public int createAddressInDB(int userId, String firstName, String lastName, String street, String houseNumber, String postCode, String city,
 			boolean masterData, String salutation) {
+		int addressId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1017,20 +1049,22 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						addressId =  result.getInt(1);
 					} else {
-						return -1;
+						addressId = -1;
 					}
 				} else {
-					return -1;
+					addressId=  -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				addressId = -1;
 			}
 		} else {
-			return -1;
+			addressId =  -1;
 		}
+		return addressId;
 	}
 	
 	/**
@@ -1063,6 +1097,7 @@ public class DatabaseConnection {
 
 
 			preparedStatement.executeUpdate();
+			preparedStatement.close();
 
 		}	
 	}
@@ -1096,6 +1131,7 @@ public class DatabaseConnection {
 					
 					address = new Address(id, firstName, lastName, street, houseNumber, postCode, city, salutation);
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1109,6 +1145,7 @@ public class DatabaseConnection {
 	 * @return the id of the created order if an error occurred during the creation it will return -1
 	 */
 	public int createOrderInDB(Order order) {
+		int orderId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1127,20 +1164,22 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						orderId =  result.getInt(1);
 					} else {
-						return -1;
+						orderId = -1;
 					}
 				} else {
-					return -1;
+					orderId =  -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				orderId = -1;
 			}
 		} else {
-			return -1;
+			orderId = -1;
 		}
+		return orderId;
 	}
 	
 	/**
@@ -1148,7 +1187,7 @@ public class DatabaseConnection {
 	 * @param paymentMethod the payment methods who´s id should be selected
 	 * @return the id of the payment method if no id was found it will return -1
 	 */
-	private int getPaymentMethodId(String paymentMethod) {
+	public int getPaymentMethodId(String paymentMethod) {
 		int id = -1;
 		conn = getInstance();
 
@@ -1168,6 +1207,7 @@ public class DatabaseConnection {
 				if (result.next()) {
 					id = result.getInt("id");
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1199,6 +1239,7 @@ public class DatabaseConnection {
 				preparedStatement.setInt(7, getColorId(item.getColor()));
 				
 				preparedStatement.executeUpdate();
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 				
@@ -1244,6 +1285,7 @@ public class DatabaseConnection {
 					order = new Order(id, entryDate, deliveryAddress, billingAddress, paymentMethod, orderItems, deliveryDate, user);
 					orderList.add(order);
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1287,6 +1329,7 @@ public class DatabaseConnection {
 
 					order = new Order(id, entryDate, deliveryAddress, billingAddress, paymentMethod, orderItems, deliveryDate, user);
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1329,6 +1372,7 @@ public class DatabaseConnection {
 					orderItem = new OrderItem(position, amount, price, article, size, color);
 					orderItems.add(orderItem);
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1368,6 +1412,7 @@ public class DatabaseConnection {
 					
 					address = new Address(id, firstName, lastName, street, houseNumber, postCode, city, salutation);
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1382,6 +1427,7 @@ public class DatabaseConnection {
 	 * @return the id of the created item
 	 */
 	public int createWishlistItemInDB(WishlistItem wishlistItem, int wishlistId){
+		int itemId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1402,20 +1448,22 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						itemId = result.getInt(1);
 					} else {
-						return -1;
+						itemId = -1;
 					}
 				} else {
-					return -1;
+					itemId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				itemId = -1;
 			}
 		} else {
-			return -1;
+			itemId = -1;
 		}
+		return itemId;
 	}
 	
 	/**
@@ -1424,6 +1472,7 @@ public class DatabaseConnection {
 	 * @return the id of the created wishlist
 	 */
 	public int createWishlistInDB(int userId){
+		int wishlistId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1440,20 +1489,22 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						wishlistId = result.getInt(1);
 					} else {
-						return -1;
+						wishlistId = -1;
 					}
 				} else {
-					return -1;
+					wishlistId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				wishlistId =  -1;
 			}
 		} else {
-			return -1;
+			wishlistId = -1;
 		}
+		return wishlistId;
 	}
 	
 	/**
@@ -1494,6 +1545,7 @@ public class DatabaseConnection {
 					wishlist.addItem(wishlistitem);
 
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1518,6 +1570,7 @@ public class DatabaseConnection {
 				preparedStatement.setInt(1, wishlistId);
 
 				preparedStatement.executeUpdate();
+				preparedStatement.close();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -1556,6 +1609,7 @@ public class DatabaseConnection {
 					roles.add(role);
 
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1592,6 +1646,7 @@ public class DatabaseConnection {
 					roles.add(role);
 
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1606,6 +1661,7 @@ public class DatabaseConnection {
 	 * @return the id of the created role returns -1 if no role was created
 	 */
 	public int createRole(Role role){
+		int roleId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1623,20 +1679,22 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						roleId =  result.getInt(1);
 					} else {
-						return -1;
+						roleId =  -1;
 					}
 				} else {
-					return -1;
+					roleId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				roleId = -1;
 			}
 		} else {
-			return -1;
+			roleId =  -1;
 		}
+		return roleId;
 	}
 	
 	
@@ -1670,6 +1728,7 @@ public class DatabaseConnection {
 					
 					sizes.add(size);
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1707,6 +1766,7 @@ public class DatabaseConnection {
 					
 					colors.add(size);
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1740,6 +1800,7 @@ public class DatabaseConnection {
 				if (result.next()) {
 					id = result.getInt("id");
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1755,6 +1816,7 @@ public class DatabaseConnection {
 	 * @return the id of the mapping entry that was created returns null if no entry was created
 	 */
 	public int createSizeMapping(int size, int articleId){
+		int mappingId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1772,20 +1834,22 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						mappingId = result.getInt(1);
 					} else {
-						return -1;
+						mappingId = -1;
 					}
 				} else {
-					return -1;
+					mappingId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				mappingId =  -1;
 			}
 		} else {
-			return -1;
+			mappingId = -1;
 		}
+		return mappingId;
 	}
 	
 	
@@ -1796,6 +1860,7 @@ public class DatabaseConnection {
 	 * @return the id of the mapping entry that was created returns null if no entry was created 
 	 */
 	public int createColorMapping(String color, int articleId){
+		int mappingId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1813,20 +1878,22 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						mappingId =  result.getInt(1);
 					} else {
-						return -1;
+						mappingId = -1;
 					}
 				} else {
-					return -1;
+					mappingId= -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				mappingId = -1;
 			}
 		} else {
-			return -1;
+			mappingId = -1;
 		}
+		return mappingId;
 	}
 	
 	/**
@@ -1845,7 +1912,7 @@ public class DatabaseConnection {
 				preparedStatement.setInt(1, article.getId());
 
 				preparedStatement.executeUpdate();
-
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1868,7 +1935,7 @@ public class DatabaseConnection {
 				preparedStatement.setInt(1, article.getId());
 
 				preparedStatement.executeUpdate();
-
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1905,6 +1972,7 @@ public class DatabaseConnection {
 					
 					images.add(size);
 				}
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1940,6 +2008,7 @@ public class DatabaseConnection {
 				if (result.next()) {
 					id = result.getInt("id");
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1955,6 +2024,7 @@ public class DatabaseConnection {
 	 * @return returns the id of the new entry in the database, returns -1 if no entry was created
 	 */
 	public int createRoleMapping(int userId, int roleId){
+		int mappingId;
 		conn = getInstance();
 
 		if (conn != null) {
@@ -1972,20 +2042,22 @@ public class DatabaseConnection {
 				if (lines != 0) {
 					ResultSet result = preparedStatement.getGeneratedKeys();
 					if (result.next()) {
-						return result.getInt(1);
+						mappingId = result.getInt(1);
 					} else {
-						return -1;
+						mappingId = -1;
 					}
 				} else {
-					return -1;
+					mappingId = -1;
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return -1;
+				mappingId = -1;
 			}
 		} else {
-			return -1;
+			mappingId = -1;
 		}
+		return mappingId;
 	}
 	
 	/**
@@ -2004,6 +2076,7 @@ public class DatabaseConnection {
 				preparedStatement.setInt(1, user.getId());
 
 				preparedStatement.executeUpdate();
+				preparedStatement.close();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -2040,6 +2113,7 @@ public class DatabaseConnection {
 					
 					role = new Role(id, name, description);
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -2066,6 +2140,7 @@ public class DatabaseConnection {
 			
 			
 			preparedStatement.executeUpdate();
+			preparedStatement.close();
 		}
 	}
 	
@@ -2112,6 +2187,7 @@ public class DatabaseConnection {
 							city, salutation, shoppingBasket, role, wishlist);
 					userList.add(user);
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -2138,6 +2214,7 @@ public class DatabaseConnection {
 				preparedStatement.setInt(2, roleId);
 
 				preparedStatement.executeUpdate();
+				preparedStatement.close();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -2189,6 +2266,7 @@ public class DatabaseConnection {
 							city, salutation, shoppingBasket, role, wishlist);
 					userList.add(user);
 				}
+				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
