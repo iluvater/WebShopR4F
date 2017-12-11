@@ -22,7 +22,7 @@
 				</c:if>	
 			</c:if>				
 			<p><label for="name">Rolle</label>
-			<input id="name" placeholder="Rolle" name="name" value="" type="text" style='width:80%'/><br /></p>
+			<input id="name" placeholder="Rolle" name="role" value="" type="text" style='width:80%'/><br /></p>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 138}">
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
@@ -37,7 +37,7 @@
 		</div>
 	</form>
 		<c:if test ="${not empty userList}">
-		<form action="./DeleteUserRoleMappingServlet" method="post">
+		
 			<div id="rollen">
 				<div class="userInfos">
 					<p><b>Vorname, Nachname, E-Mailadresse, ID</b></p>
@@ -51,19 +51,23 @@
 				
 				<c:forEach items="${userList}" var="user">
 					<c:forEach items="${user.role}" var="role">
-						<div class="userInfos">
-							<p>${user.firstName}, ${user.lastName}, ${user.email}, ${user.id} </p>
-						</div>
-						<div class="userRolle">
-							<p>${role.name}</p>
-						</div>
-						<div class="rolleLoeschen">
-							<p><input type="submit" id="button" value="entfernen" /></p>
-						</div>
+						<form action="./DeleteUserRoleMappingServlet" method="post">
+							<div class="userInfos">
+								<p>${user.firstName}, ${user.lastName}, ${user.email}, ${user.id} </p>
+							</div>
+							<div class="userRolle">
+								<p>${role.name}</p>
+							</div>
+							<div class="rolleLoeschen">
+							<input type="hidden" name="roleId" value="${role.id }" />
+							<input type="hidden" name="userId" value="${user.id }" />
+								<p><input type="submit" id="button" value="entfernen" /></p>
+							</div>
+						</form>
 					</c:forEach>
 				</c:forEach>
 				</div>	
-			</form>
+			
 		</c:if>
 	</c:if>
 	</div>
