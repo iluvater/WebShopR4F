@@ -38,15 +38,15 @@
 	</form>
 		<c:if test ="${not empty userList}">
 		<form action="./DeleteUserRoleMappingServlet" method="post">
-			<div class="inhalt">
+			<div id="rollen">
 				<div class="userInfos">
-					<p>Vorname, Nachname, E-Mailadresse, ID</p>
+					<p><b>Vorname, Nachname, E-Mailadresse, ID</b></p>
 				</div>
 				<div class="userRolle">
-					<p>Rolle</p>
+					<p><b>Rolle</b></p>
 				</div>
 				<div class="rolleLoeschen">
-					<p>entfernen</p>
+					<p><b>Rollenzuordnung entfernen</b></p>
 				</div>
 				
 				<c:forEach items="${userList}" var="user">
