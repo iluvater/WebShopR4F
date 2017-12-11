@@ -24,24 +24,24 @@ import r4f.controller.filter.FilterList;
  *
  */
 public class DatabaseConnection {
-	private static Connection conn = null;
+	private Connection conn = null;
 
 	int i;
 
 	// Hostname
-	private static String dbHost = "localhost";
+	private  String dbHost = "localhost";
 
 	// Port -- Standard: 3306
-	private static String dbPort = "3306";
+	private  String dbPort = "3306";
 
 	// Datenbankname
-	private static String database = "webshop_db";
+	private  String database = "webshop_db";
 
 	// Datenbankuser
-	private static String dbUser = "techuser";
+	private  String dbUser = "techuser";
 
 	// Datenbankpasswort
-	private static String dbPassword = "Winter2017!";
+	private  String dbPassword = "Winter2017!";
 
 	public DatabaseConnection() {
 		try {
@@ -64,9 +64,25 @@ public class DatabaseConnection {
 		}
 	}
 
-	private static Connection getInstance() {
+	private  Connection getInstance() {
 		if (conn == null)
-			new DatabaseConnection();
+			try {
+				// Datenbanktreiber für ODBC Schnittstellen laden.
+				// Für verschiedene ODBC-Datenbanken muss dieser Treiber
+				// nur einmal geladen werden.
+				Class.forName("com.mysql.jdbc.Driver");
+
+				// Verbindung zur ODBC-Datenbank 'sakila' herstellen.
+				// Es wird die JDBC-ODBC-Brücke verwendet.
+				conn = DriverManager.getConnection("jdbc:mysql://" + dbHost + ":" + dbPort + "/" + database + "?" + "user="
+						+ dbUser + "&password=" + dbPassword);
+			} catch (ClassNotFoundException e) {
+				System.out.println("Treiber nicht gefunden");
+				e.printStackTrace();
+			} catch (SQLException e) {
+				System.out.println("Connect nicht moeglich");
+				e.printStackTrace();
+			}
 		return conn;
 	}
 
@@ -113,7 +129,10 @@ public class DatabaseConnection {
 				userId = -1;
 			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -173,7 +192,10 @@ public class DatabaseConnection {
 				e.printStackTrace();
 			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -233,7 +255,10 @@ public class DatabaseConnection {
 				e.printStackTrace();
 			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -270,7 +295,10 @@ public class DatabaseConnection {
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 
-			conn.close();
+			if (conn != null) {
+				conn.close();
+				conn = null;
+			}
 
 		}
 	}
@@ -320,7 +348,10 @@ public class DatabaseConnection {
 				articleId = -1;
 			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -379,13 +410,6 @@ public class DatabaseConnection {
 				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			}
 		}
 		return article;
@@ -442,9 +466,12 @@ public class DatabaseConnection {
 				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -504,9 +531,12 @@ public class DatabaseConnection {
 				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -543,7 +573,10 @@ public class DatabaseConnection {
 
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
-			conn.close();
+			if (conn != null) {
+				conn.close();
+				conn = null;
+			}
 
 		}
 	}
@@ -759,9 +792,12 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				shoppingBasketId = -1;
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -816,9 +852,14 @@ public class DatabaseConnection {
 				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						if (conn != null) {
+							conn.close();
+							conn = null;
+						}
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -852,9 +893,12 @@ public class DatabaseConnection {
 
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -908,9 +952,12 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				itemId = -1;
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -921,8 +968,6 @@ public class DatabaseConnection {
 		}
 		return itemId;
 	}
-
-
 
 	/**
 	 * This method creates an image in the database
@@ -969,9 +1014,12 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				imageId = -1;
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1015,9 +1063,12 @@ public class DatabaseConnection {
 				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1055,7 +1106,10 @@ public class DatabaseConnection {
 
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
-			conn.close();
+			if (conn != null) {
+				conn.close();
+				conn = null;
+			}
 		}
 	}
 
@@ -1110,9 +1164,12 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				addressId = -1;
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1161,7 +1218,10 @@ public class DatabaseConnection {
 
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
-			conn.close();
+			if (conn != null) {
+				conn.close();
+				conn = null;
+			}
 
 		}
 	}
@@ -1197,9 +1257,12 @@ public class DatabaseConnection {
 				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1248,9 +1311,12 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				orderId = -1;
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1327,9 +1393,12 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1381,9 +1450,12 @@ public class DatabaseConnection {
 				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1434,9 +1506,12 @@ public class DatabaseConnection {
 				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1486,9 +1561,12 @@ public class DatabaseConnection {
 				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1581,9 +1659,12 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				itemId = -1;
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1630,9 +1711,12 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				wishlistId = -1;
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1685,9 +1769,12 @@ public class DatabaseConnection {
 				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1720,9 +1807,12 @@ public class DatabaseConnection {
 
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1765,9 +1855,12 @@ public class DatabaseConnection {
 				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1808,13 +1901,6 @@ public class DatabaseConnection {
 				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			}
 		}
 
@@ -1858,9 +1944,12 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				roleId = -1;
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -2025,9 +2114,12 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				mappingId = -1;
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -2079,9 +2171,12 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				mappingId = -1;
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -2115,9 +2210,12 @@ public class DatabaseConnection {
 				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -2148,9 +2246,12 @@ public class DatabaseConnection {
 				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -2279,9 +2380,12 @@ public class DatabaseConnection {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				mappingId = -1;
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -2315,9 +2419,12 @@ public class DatabaseConnection {
 
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -2387,7 +2494,10 @@ public class DatabaseConnection {
 
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
-			conn.close();
+			if (conn != null) {
+				conn.close();
+				conn = null;
+			}
 		}
 	}
 
@@ -2436,9 +2546,12 @@ public class DatabaseConnection {
 				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -2474,9 +2587,12 @@ public class DatabaseConnection {
 
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -2535,9 +2651,12 @@ public class DatabaseConnection {
 				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
+			} finally {
 				try {
-					conn.close();
+					if (conn != null) {
+						conn.close();
+						conn = null;
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
