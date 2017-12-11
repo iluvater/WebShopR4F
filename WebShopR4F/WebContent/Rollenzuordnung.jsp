@@ -14,6 +14,11 @@
 	<form action="./CreateUserRoleMappingServlet" method="post">
 		<div id="inhalt">
 			<h4>Rolle einem Benutzer zuordnen</h4>
+			<c:if test ="${not empty success }">
+				<c:if test="${success.errorCode == 603 }">
+					<p class="erfolg"><jsp:getProperty property="errorMessage" name="success"/></p>
+				</c:if>	
+			</c:if>
 			<p><label for="email">Benutzer</label>
 			<input id="email" placeholder="E-Mailadresse" name="email" value="" type="email" style='width:80%'/><br /></p>
 			<c:if test ="${not empty error }">

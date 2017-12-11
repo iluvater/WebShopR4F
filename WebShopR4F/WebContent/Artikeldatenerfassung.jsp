@@ -11,6 +11,11 @@
 	    <c:if test = "${f:checkAuthorization(user, 'Mitarbeiter')}">
 		<form action="./ArticleCreationServlet" method="post" enctype="multipart/form-data">
 		<h2 class="ueberschrift">Artikeldatenerfassung</h2>
+		<c:if test ="${not empty success }">
+			<c:if test="${success.errorCode == 600 }">
+				<p class="erfolg"><jsp:getProperty property="errorMessage" name="success"/></p>
+			</c:if>	
+		</c:if>
 		<div id="inhalt">
 			<h4>Artikeldaten einpflegen</h4>	
 			
