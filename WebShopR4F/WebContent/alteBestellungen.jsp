@@ -47,7 +47,7 @@
 		</c:forEach>
 		<div id="weiterEinkaufen">
 		<form action="./NavigationOverviewServlet" method="post">
-			<input type="submit" id="button" value="Neue Schuhe" />
+			<input type="submit" id="button" value="Noch mehr Schuhe kaufen" />
 		</form>
 		</div>
 	<!-- </div> -->

@@ -21,7 +21,7 @@
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 				</c:if>	
 			</c:if>				
-			<p><label for="name">Bezeichnung</label>
+			<p><label for="name">Rolle</label>
 			<input id="name" placeholder="Rolle" name="name" value="" type="text" style='width:80%'/><br /></p>
 			<c:if test ="${not empty error }">
 				<c:if test="${error.errorCode == 138}">
@@ -36,11 +36,37 @@
 			<center><p><input type="submit" id="button" value="Speichern" /></p></center>
 		</div>
 	</form>
-		<div id="inhalt">
-			
-		</div>
+		<c:if test ="${not empty userList}">
+		<form action="./DeleteUserRoleMappingServlet" method="post">
+			<div class="inhalt">
+				<div class="userInfos">
+					<p>Vorname, Nachname, E-Mailadresse, ID</p>
+				</div>
+				<div class="userRolle">
+					<p>Rolle</p>
+				</div>
+				<div class="rolleLoeschen">
+					<p>entfernen</p>
+				</div>
+				
+				<c:forEach items="${userList}" var="user">
+					<c:forEach items="${user.role}" var="role">
+						<div class="userInfos">
+							<p>${user.firstName}, ${user.lastName}, ${user.email}, ${user.id} </p>
+						</div>
+						<div class="userRolle">
+							<p>${role.name}</p>
+						</div>
+						<div class="rolleLoeschen">
+							<p><input type="submit" id="button" value="entfernen" /></p>
+						</div>
+					</c:forEach>
+				</c:forEach>
+				</div>	
+			</form>
 		</c:if>
-</div>
+	</c:if>
+	</div>
 
 
 <%@ include file="Footer.jspf" %>

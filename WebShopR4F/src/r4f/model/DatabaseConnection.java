@@ -963,7 +963,7 @@ public class DatabaseConnection {
 
 			PreparedStatement preparedStatement = conn.prepareStatement(
 					"UPDATE `image` SET `image` = ?, `type` = ? "
-							+ " WHERE `image`.`id` = ?, `mainImage`= ?",
+							+ " WHERE `image`.`id` = ? AND `mainImage`= ?",
 					Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setBlob(1, imageStream);
 			preparedStatement.setString(2, imageType);
