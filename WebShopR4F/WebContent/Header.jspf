@@ -84,7 +84,7 @@
     			<a href="Artikeldatenerfassung.jsp">Artikeldaten erfassen</a><br /><br />
     			<a href="Artikelsuche.jsp">Artikeldaten &auml;ndern</a><br /><br />
     			<a href="NavigationRoleOverviewServlet">Rolle anlegen / bearbeiten</a><br /><br />
-    			<a href="Rollenzuordnung.jsp">Rolle zuordnen / entfernen</a><br /><br />
+    			<a href="NavigationUserOverviewServlet">Rolle zuordnen / entfernen</a><br /><br />
   			</div>
 		</div>
     </c:if>    

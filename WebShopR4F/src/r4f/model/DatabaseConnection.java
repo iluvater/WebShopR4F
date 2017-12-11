@@ -1438,12 +1438,12 @@ public class DatabaseConnection {
 					Order order;
 					int id = result.getInt("id");
 					Date entryDate = result.getDate("entryDate");
-					Address deliveryAddress = getAddress(result.getInt("deliveryAddress"));
-					Address billingAddress = getAddress(result.getInt("billingAddress"));
+					Address deliveryAddress = new DatabaseConnection().getAddress(result.getInt("deliveryAddress"));
+					Address billingAddress = new DatabaseConnection().getAddress(result.getInt("billingAddress"));
 					Date deliveryDate = result.getDate("deliveryDate");
 					String paymentMethod = result.getString("paymentMethod");
-					User user = getUser(userId);
-					List<OrderItem> orderItems = getOrderItems(id);
+					User user = new DatabaseConnection().getUser(userId);
+					List<OrderItem> orderItems = new DatabaseConnection().getOrderItems(id);
 
 					order = new Order(id, entryDate, deliveryAddress, billingAddress, paymentMethod, orderItems,
 							deliveryDate, user);
@@ -1495,12 +1495,12 @@ public class DatabaseConnection {
 				while (result.next()) {
 					int id = result.getInt("id");
 					Date entryDate = result.getDate("entryDate");
-					Address deliveryAddress = getAddress(result.getInt("deliveryAddress"));
-					Address billingAddress = getAddress(result.getInt("billingAddress"));
+					Address deliveryAddress = new DatabaseConnection().getAddress(result.getInt("deliveryAddress"));
+					Address billingAddress = new DatabaseConnection().getAddress(result.getInt("billingAddress"));
 					Date deliveryDate = result.getDate("deliveryDate");
 					String paymentMethod = result.getString("paymentMethod");
 					User user = getUser(result.getInt("user"));
-					List<OrderItem> orderItems = getOrderItems(id);
+					List<OrderItem> orderItems = new DatabaseConnection().getOrderItems(id);
 
 					order = new Order(id, entryDate, deliveryAddress, billingAddress, paymentMethod, orderItems,
 							deliveryDate, user);
@@ -1563,17 +1563,7 @@ public class DatabaseConnection {
 				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					if (conn != null) {
-						conn.close();
-						conn = null;
-					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+			} 
 		}
 		return orderItems;
 	}
