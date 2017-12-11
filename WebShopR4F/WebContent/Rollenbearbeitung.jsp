@@ -16,6 +16,8 @@
 
 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
 	</jsp:useBean> 	
+	<jsp:useBean id="success" class="r4f.model.ErrorMessage" scope="request">
+	</jsp:useBean> 
 	<jsp:useBean id="roleList" type="java.util.ArrayList<r4f.model.Role>" class="java.util.ArrayList" scope="request">
 	</jsp:useBean> 	
 	
@@ -26,6 +28,11 @@
 		<form action="./CreateRoleServlet" method="post">
 			<div id="inhalt">
 				<h4>Neue Rolle anlegen</h4>
+				<c:if test ="${not empty success }">
+					<c:if test="${success.errorCode == 604 }">
+						<p class="erfolg"><jsp:getProperty property="errorMessage" name="success"/></p>
+					</c:if>	
+				</c:if>
 				<p><label for="name">Bezeichnung</label>
 				<input id="name" placeholder="Rolle" name="name" value="" type="text" style='width:80%'/><br /></p>
 				<c:if test ="${not empty error }">

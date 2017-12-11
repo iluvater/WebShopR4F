@@ -16,6 +16,11 @@
 		<h2 class="ueberschrift">Artikeldaten&auml;nderung</h2>
 		<h3 class="impressum">Bitte im Folgenden die Artikeldaten anpassen</h3>
 		<form action="./ChangeArticleServlet" method="post" enctype="multipart/form-data">
+		<c:if test ="${not empty success }">
+			<c:if test="${success.errorCode == 602 }">
+				<p class="erfolg"><jsp:getProperty property="errorMessage" name="success"/></p>
+			</c:if>	
+		</c:if>
 		<div id="inhalt">
 			<h4>Artikeldaten &auml;ndern</h4>
 				

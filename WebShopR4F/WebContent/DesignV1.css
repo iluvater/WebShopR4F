@@ -228,9 +228,10 @@ p.fehler {
 }
 
 p.erfolg {
-	font-size:8pt;
+	margin-left: 3%;
+	font-size:12pt;
 	font-family: arial;
-	color: #64FE2E;
+	color: #3C991B;
 }
 
 p.deliveryDate{

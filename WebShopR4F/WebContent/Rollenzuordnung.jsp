@@ -6,8 +6,6 @@
 	</jsp:useBean> 	
 	<jsp:useBean id="error" class="r4f.model.ErrorMessage" scope="request">
 	</jsp:useBean> 
-	
-
 	<div id="container">
 		<c:if test = "${f:checkAuthorization(user, 'Mitarbeiter')}">
 			<h2 class="ueberschrift">Rollenzuordnung</h2>
