@@ -16,14 +16,14 @@ import r4f.model.User;
 /**
  * Servlet implementation class SendForgotPasswordMail
  */
-@WebServlet("/SendForgotPasswordMail")
-public class SendForgotPasswordMail extends HttpServlet {
+@WebServlet("/SendForgotPasswordMailServlet")
+public class SendForgotPasswordMailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SendForgotPasswordMail() {
+    public SendForgotPasswordMailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,7 +40,7 @@ public class SendForgotPasswordMail extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email;
-		String successURL = "TEstSuccess.jsp";
+		String successURL = "NeuesPasswort.jsp";
 		String errorURL = "Testerror.jsp";
 		EmailService emailService = new EmailService();
 		RequestDispatcher dispatcher;
