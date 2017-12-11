@@ -90,6 +90,7 @@ header {
 	height: 9em; 
 	padding-left: 1em; 
 	padding-top: 1em; 
+	float: left;
 }
 
 #search {
@@ -169,7 +170,6 @@ p.erlaeuterung {
 	color: gray;
 }
  
-
 h3.artikelDetails {
 	padding-left: 15px;
 	padding-top: 20px;
@@ -306,7 +306,8 @@ li.inline {
 }
 
 #container {
-	width: 960px;
+	/* width: 960px; */
+	width: 95%;
 	margin: 0 auto;
 	min-height: 100%;
 	width: 70%;
@@ -334,6 +335,7 @@ li.inline {
 	padding-top: 2px;
 	padding-bottom: 5px;
 }
+
 #uebersicht {
 	width: 100%; 
 	margin-left:4%;
@@ -374,13 +376,61 @@ div.warenkorbLeer {
 }
 
 #containerInhalt {
-	float: left;
-	width: 80%;
+/* 	float: left;
+	width: 80%; */
+	margin-left: 20%;
+	
 }
 
+@media screen and (max-width: 500px){
+	#container{
+		min-width: 100%;
+		width: 100%;
+		margin: 0;
+		padding: 0;		
+	}
+
+	#containerFilter {
+		float: none;
+		width: 100%;
+		max-widht: 20%;
+		background-color: #ebea3;
+		font-size: 0.8em;
+		margin:0;
+		padding: 0;
+		display: block;
+	}
+	
+	#containerInhalt{
+		margin-left: 0;
+		max-width: 100%;
+		height: auto;
+	}
+	
+	#containerArtikel {
+ 		max-width: 100%;
+ 		min-width: 380px;
+	}
+	
+/*  	img {
+		max-width: 100%;
+		height: auto;
+	}  */
+	
+	#ImgArtikelUebersicht {
+		max-width: 100%;
+		height: auto;
+/* 		display: block;  */
+/* 		margin-left: auto;
+		margin-right: auto;  */
+/* 		outline:none; */
+	}
+}
+ 
 #containerArtikel {
  	width: 27%; 
 	float: left;  
+	min-width:240px;
 	border-color: black;
 	border-width: 1px;
 	border-style: solid;
@@ -465,6 +515,13 @@ p.artikelUebersicht{
 	text-align: center; 
 	line-height: 3em;
 }
+
+/* #fuss.ul {
+	list-style-type: none;
+	margin-left: auto;
+	margin-right: auto;
+	display: inline;
+} */
 
 .paddingLeft1{
 	margin-left: 15px;

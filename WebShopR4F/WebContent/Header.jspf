@@ -26,7 +26,7 @@
         </button>
 	</form>
    
-    <a href="Merkliste.jsp" class="btn btn-default btn-sm">
+	<a href="Merkliste.jsp" class="btn btn-default btn-sm">
       <span class="glyphicon glyphicon-heart-empty"></span> Merkliste
     </a>
         
@@ -38,15 +38,14 @@
     	<a href="Login.jsp" class="btn btn-default btn-sm">
         	<span class="glyphicon glyphicon-off"></span> Anmelden 
         </a>
-	</c:if> 
+	</c:if>
 	
 	<c:if test = "${not empty user.email }">  
-    	<a href="./LogoutServlet" class="btn btn-default btn-sm">
+    	<li><a href="./LogoutServlet" class="btn btn-default btn-sm">
         	<span class="glyphicon glyphicon-off"></span> Abmelden 
-        </a>
-    </c:if> 
+        </a></li>
+    </c:if>
     <hr />
-    
     
     <form action="./NavigationOverviewCategoryServlet" method="post">
 		<input type="hidden" name="category" value="Herren" />
