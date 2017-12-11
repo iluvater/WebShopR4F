@@ -39,14 +39,6 @@
 				</c:if>	
 			</c:if>
 			
-<%--		<p><label for="size">Gr&ouml;&szlige</label>
-			<input id="size" name="size" min="20" value="<jsp:getProperty property="size" name="article"/>" type="number" /></p>
-			<c:if test ="${not empty error }">
-				<c:if test="${error.errorCode == 116 }">
-					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
-				</c:if>	
-			</c:if> --%>
-			
 			<p><label for="size" class="artikeldaten">Gr&ouml;&szlig;e:</label></p>
 			<fieldset>
 				<input type="checkbox" id="size" name="size" value="1" ${filter.size1}> 36<br />
@@ -66,14 +58,6 @@
 				</c:if>	
 			</c:if>
 			
-<%-- 			<p><label for="color">Farbe</label>
-			<input id="color" name="color" value="<jsp:getProperty property="color" name="article"/>" type="text" /></p>
-			<c:if test ="${not empty error }">
-				<c:if test="${error.errorCode == 120 }">
-					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
-				</c:if>	
-			</c:if>		 --%>
-			
 			<p><label for="color" class="artikeldaten">Farbe:</label> </p>
 			<fieldset>
           		<input type="checkbox" id="color" name="color" value="1" ${filter.color1}> Gelb<br />
@@ -90,58 +74,6 @@
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 				</c:if>	
 			</c:if>	
-			
-<%--  			<p><label for="manufacturer">Hersteller</label> 
- 			<select id="manufacturer" name="manufacturer"><option><jsp:getProperty property="manufacturer" name="article"/></option>
- 			<c:if test="${article.manufacturer == 'Nike'}">
- 			 	<option value="Asics">Asics</option>
- 				<option value="Kempa">Kempa</option>
- 				<option value="Hummel">Hummel</option>
-				<option value="Adidas">Adidas</option>
-				<option value="Puma">Puma</option>
- 			</c:if>
-  			<c:if test="${article.manufacturer == 'Asics'}">
- 			 	<option value="Nike">Nike</option>
- 				<option value="Kempa">Kempa</option>
- 				<option value="Hummel">Hummel</option>
-				<option value="Adidas">Adidas</option>
-				<option value="Puma">Puma</option>
- 			</c:if>			
-   			<c:if test="${article.manufacturer == 'Kempa'}">
- 			 	<option value="Nike">Nike</option>
- 				<option value="Asics">Asics</option>
- 				<option value="Hummel">Hummel</option>
-				<option value="Adidas">Adidas</option>
-				<option value="Puma">Puma</option>
- 			</c:if>				
-    		<c:if test="${article.manufacturer == 'Hummel'}">
- 			 	<option value="Nike">Nike</option>
- 				<option value="Asics">Asics</option>
- 				<option value="Kempa">Kempa</option>
-				<option value="Adidas">Adidas</option>
-				<option value="Puma">Puma</option>
- 			</c:if>		
-    		<c:if test="${article.manufacturer == 'Adidas'}">
- 			 	<option value="Nike">Nike</option>
- 				<option value="Asics">Asics</option>
- 				<option value="Kempa">Kempa</option>
-				<option value="Hummel">Hummel</option>
-				<option value="Puma">Puma</option>
- 			</c:if>	 			
-     		<c:if test="${article.manufacturer == 'Puma'}">
- 			 	<option value="Nike">Nike</option>
- 				<option value="Asics">Asics</option>
- 				<option value="Kempa">Kempa</option>
-				<option value="Hummel">Hummel</option>
-				<option value="Adidas">Adidas</option>
- 			</c:if>	 
- 			</select>				
-			</p>
-			<c:if test ="${not empty error }">
-				<c:if test="${error.errorCode == 119 }">
-					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
-				</c:if>	
-			</c:if> --%>
 			
 			<p><label for="manufacturer">Hersteller:</label>
 			<select id="manufacturer" name="manufacturer">
@@ -201,28 +133,7 @@
 				</c:if>	
 			</c:if>
 		
-<%-- 		<p><label for="category">Kategorie</label> 
-			<select id="category" name="category"><option><jsp:getProperty property="category" name="article"/></option>
-			<c:if test="${article.category == 'Herren'}">
- 			 	<option value="Damen">Damen</option>
- 				<option value="Kinder">Kinder</option>
- 			</c:if>	
- 			<c:if test="${article.category == 'Damen'}">
- 			 	<option value="Herren">Herren</option>
- 				<option value="Kinder">Kinder</option>
- 			</c:if>	
- 			 <c:if test="${article.category == 'Kinder'}">
- 			 	<option value="Herren">Herren</option>
- 				<option value="Damen">Damen</option>
- 			</c:if>	
-			</select>
-			</p>
-			<c:if test ="${not empty error }">
-				<c:if test="${error.errorCode == 121 }">
-					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
-				</c:if>	
-			</c:if> --%>
-			
+	
 			<p><label for="category">Kategorie:</label>
 			<select id="categorie" name="category">
 				<c:if test="${article.category == 'Herren'}">
@@ -247,58 +158,6 @@
 					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
 				</c:if>	
 			</c:if>
-			
-<%-- 			<p><label for="sport">Sportart</label> 
- 			<select id="sport" name="sport"><option><jsp:getProperty property="sport" name="article"/></option>
- 			 <c:if test="${article.sport == 'Laufen'}">
- 			 	<option value="Fussball">Fu&szligball</option>
- 				<option value="Basketball">Basketball</option>
- 				<option value="Golf">Golf</option>
-				<option value="Schwimmen">Schwimmen</option>
-				<option value="Fahrrad">Fahrrad</option>
- 			</c:if>
- 			<c:if test="${article.sport == 'Fussball'}">
- 			 	<option value="Laufen">Laufen</option>
- 				<option value="Basketball">Basketball</option>
- 				<option value="Golf">Golf</option>
-				<option value="Schwimmen">Schwimmen</option>
-				<option value="Fahrrad">Fahrrad</option>
- 			</c:if>
- 			 <c:if test="${article.sport == 'Basketball'}">
- 			 	<option value="Laufen">Laufen</option>
- 				<option value="Fussball">Fu&szligball</option>
- 				<option value="Golf">Golf</option>
-				<option value="Schwimmen">Schwimmen</option>
-				<option value="Fahrrad">Fahrrad</option>
- 			</c:if>
- 			<c:if test="${article.sport == 'Golf'}">
- 			 	<option value="Laufen">Laufen</option>
- 				<option value="Fussball">Fu&szligball</option>
- 				<option value="Basketball">Basketball</option>
-				<option value="Schwimmen">Schwimmen</option>
-				<option value="Fahrrad">Fahrrad</option>
- 			</c:if>
- 			<c:if test="${article.sport == 'Schwimmen'}">
- 			 	<option value="Laufen">Laufen</option>
- 				<option value="Fussball">Fu&szligball</option>
- 				<option value="Basketball">Basketball</option>
-				<option value="Golf">Golf</option>
-				<option value="Fahrrad">Fahrrad</option>
- 			</c:if>
- 			 <c:if test="${article.sport == 'Fahrrad'}">
- 			 	<option value="Laufen">Laufen</option>
- 				<option value="Fussball">Fu&szligball</option>
- 				<option value="Basketball">Basketball</option>
-				<option value="Golf">Golf</option>
-				<option value="Schwimmen">Schwimmen</option>
- 			</c:if>
-			</select>
-			</p>	
- 			<c:if test ="${not empty error }">
-				<c:if test="${error.errorCode == 123 }">
-					<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>
-				</c:if>	
-			</c:if>	 --%>
 				 			
 			<p><label for="sport">Sportart:</label> 
 			<select id="sport" name="sport">
@@ -384,21 +243,15 @@
 				<p class="erfolg"><jsp:getProperty property="errorMessage" name="success"/></p>
 			</c:if>	
 		</c:if>
-		
-
-		</form>
 		<div id="weiterEinkaufen">
 			<div class="linkerButtonMerkliste">
-			<form action="./ChangeArticleServlet" method="post">
 				<input type="submit" id="button" value="Speichern" />
-			</form>
 			</div>
 			<div class="rechterButtonMerkliste">
-			<form action="Artikelsuche.jsp" method="post"> 
-				<input type="submit" id="button" value="Abbrechen" />
-			</form>
+				<a href="Artikelsuche.jsp"><input type="button" id="button" value="Abbrechen" /></a>
 			</div>
 		</div>
+</form>
 		<!-- <center> 
 			<input type="submit" id="button" value="Speichern" />
 		</center> 

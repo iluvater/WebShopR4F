@@ -198,22 +198,22 @@ public class ChangeArticleServlet extends HttpServlet {
 											size.set(i, 39);
 											break;
 										case 5:
-											size.set(i, 41);
+											size.set(i, 40);
 											break;
 										case 6:
-											size.set(i, 42);
+											size.set(i, 41);
 											break;
 										case 7:
-											size.set(i, 43);
+											size.set(i, 42);
 											break;
 										case 8:
-											size.set(i, 44);
+											size.set(i, 43);
 											break;
 										case 9:
-											size.set(i, 45);
+											size.set(i, 44);
 											break;
 										case 10:
-											size.set(i, 46);
+											size.set(i, 45);
 											break;
 										}
 									}
