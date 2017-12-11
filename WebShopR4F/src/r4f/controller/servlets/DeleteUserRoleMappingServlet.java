@@ -1,6 +1,7 @@
 package r4f.controller.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import r4f.controller.services.AuthorizationService;
+import r4f.controller.services.UserService;
 import r4f.model.ErrorMessage;
+import r4f.model.User;
 
 /**
  * Servlet implementation class DeleteUserRoleMappingServlet
@@ -18,46 +21,55 @@ import r4f.model.ErrorMessage;
 @WebServlet("/DeleteUserRoleMappingServlet")
 public class DeleteUserRoleMappingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DeleteUserRoleMappingServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public DeleteUserRoleMappingServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		int roleId;
 		int userId;
 		RequestDispatcher dispatcher;
-		String errorURL = "Test.jsp";
-		String successURL = "TEst.jsp";
+		String errorURL = "Rollenzuordnung.jsp";
+		String successURL = "Rollenzuordnung.jsp";
 		AuthorizationService authorizationService = new AuthorizationService();
-		
+		UserService userService = new UserService();
+
 		try {
 			roleId = Integer.parseInt(request.getParameter("roleId"));
 			userId = Integer.parseInt(request.getParameter("userId"));
 			authorizationService.deleteUserRoleMapping(userId, roleId);
-			//success
+			// success
 			ErrorMessage successMessage = new ErrorMessage(605);
+			List<User> userList = userService.getUserList();
+			request.setAttribute("userList", userList);
 			request.setAttribute("success", successMessage);
 			dispatcher = request.getRequestDispatcher(successURL);
 			dispatcher.forward(request, response);
 			return;
 		} catch (NumberFormatException e) {
-			//Error missing roleId
+			// Error missing roleId
 			ErrorMessage errorMessage = new ErrorMessage();
+			List<User> userList = userService.getUserList();
+			request.setAttribute("userList", userList);
 			request.setAttribute("error", errorMessage);
 			dispatcher = request.getRequestDispatcher(errorURL);
 			dispatcher.forward(request, response);

@@ -19,7 +19,7 @@ Um Ihre Bestellungen anzusehen, besuchen Sie <a href="http://localhost:8080/WebS
 	!orderItems!	
 </table>
 <hr />
-Der gesamte Rechnungsbetrage betr&aumlgt !orderPrice!&euro inkl. Umsatzsteuer. Bitte lassen Sie uns den genannten Betrag laut der von Ihnen gew&aumllten Zahlungsmethode, !paymentMethod!, zukommen.<br>
+Der gesamte Rechnungsbetrage betr&aumlgt !orderPrice!&euro; inkl. Umsatzsteuer. Bitte lassen Sie uns den genannten Betrag laut der von Ihnen gew&aumllten Zahlungsmethode, !paymentMethod!, zukommen.<br>
 <br />
 Wir freuen uns auf Ihre n&aumlchste Bestellung!
 <h4>Run4Fun</h4>
