@@ -46,13 +46,13 @@ public class DatabaseConnection {
 	public DatabaseConnection() {
 		try {
 
-			// Datenbanktreiber f¸r ODBC Schnittstellen laden.
-			// F¸r verschiedene ODBC-Datenbanken muss dieser Treiber
+			// Datenbanktreiber f√ºr ODBC Schnittstellen laden.
+			// F√ºr verschiedene ODBC-Datenbanken muss dieser Treiber
 			// nur einmal geladen werden.
 			Class.forName("com.mysql.jdbc.Driver");
 
 			// Verbindung zur ODBC-Datenbank 'sakila' herstellen.
-			// Es wird die JDBC-ODBC-Br¸cke verwendet.
+			// Es wird die JDBC-ODBC-Br√ºcke verwendet.
 			conn = DriverManager.getConnection("jdbc:mysql://" + dbHost + ":" + dbPort + "/" + database + "?" + "user="
 					+ dbUser + "&password=" + dbPassword);
 		} catch (ClassNotFoundException e) {
@@ -67,13 +67,13 @@ public class DatabaseConnection {
 	private  Connection getInstance() {
 		if (conn == null)
 			try {
-				// Datenbanktreiber f¸r ODBC Schnittstellen laden.
-				// F¸r verschiedene ODBC-Datenbanken muss dieser Treiber
+				// Datenbanktreiber f√ºr ODBC Schnittstellen laden.
+				// F√ºr verschiedene ODBC-Datenbanken muss dieser Treiber
 				// nur einmal geladen werden.
 				Class.forName("com.mysql.jdbc.Driver");
 
 				// Verbindung zur ODBC-Datenbank 'sakila' herstellen.
-				// Es wird die JDBC-ODBC-Br¸cke verwendet.
+				// Es wird die JDBC-ODBC-Br√ºcke verwendet.
 				conn = DriverManager.getConnection("jdbc:mysql://" + dbHost + ":" + dbPort + "/" + database + "?" + "user="
 						+ dbUser + "&password=" + dbPassword);
 			} catch (ClassNotFoundException e) {
@@ -169,7 +169,7 @@ public class DatabaseConnection {
 				preparedStatement.setString(1, email);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					int id = result.getInt("id");
 					String firstName = result.getString("firstName");
@@ -231,7 +231,7 @@ public class DatabaseConnection {
 				preparedStatement.setInt(1, id);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					id = result.getInt("id");
 					String firstName = result.getString("firstName");
@@ -389,7 +389,7 @@ public class DatabaseConnection {
 				preparedStatement.setInt(1, id);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					id = result.getInt("id");
 					String name = result.getString("name");
@@ -443,7 +443,7 @@ public class DatabaseConnection {
 				preparedStatement = conn.prepareStatement(sql);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					Article article;
 					int id = result.getInt("id");
@@ -508,7 +508,7 @@ public class DatabaseConnection {
 
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					Article article;
 					int id = result.getInt("id");
@@ -603,7 +603,7 @@ public class DatabaseConnection {
 				preparedStatement.setString(1, role);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					id = result.getInt("id");
 				}
@@ -638,7 +638,7 @@ public class DatabaseConnection {
 				preparedStatement.setString(1, category);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					id = result.getInt("id");
 				}
@@ -673,7 +673,7 @@ public class DatabaseConnection {
 				preparedStatement.setString(1, manufacturer);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					id = result.getInt("id");
 				}
@@ -708,7 +708,7 @@ public class DatabaseConnection {
 				preparedStatement.setString(1, sport);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					id = result.getInt("id");
 				}
@@ -725,7 +725,7 @@ public class DatabaseConnection {
 	 * This method selects the id of a color
 	 * 
 	 * @param color
-	 *            the color which¥s id should be selected
+	 *            the color which¬¥s id should be selected
 	 * @return returns the id of the color
 	 */
 	public int getColorId(String color) {
@@ -743,7 +743,7 @@ public class DatabaseConnection {
 				preparedStatement.setString(1, color);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					id = result.getInt("id");
 				}
@@ -835,7 +835,7 @@ public class DatabaseConnection {
 				preparedStatement.setInt(1, id);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					ShoppingBasketItem item = new ShoppingBasketItem();
 					item.setAmount(result.getInt("amount"));
@@ -1055,7 +1055,7 @@ public class DatabaseConnection {
 				preparedStatement.setInt(1, id);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					blob = result.getBlob("image");
 					image = new Image(id, blob, result.getString("type"), result.getBoolean("mainImage"));
@@ -1097,7 +1097,9 @@ public class DatabaseConnection {
 		if (conn != null) {
 
 			PreparedStatement preparedStatement = conn.prepareStatement(
-					"UPDATE `image` SET `image` = ?, `type` = ? " + " WHERE `image`.`id` = ?, `mainImage`= ?",
+
+					"UPDATE `image` SET `image` = ?, `type` = ? "
+							+ " WHERE `image`.`id` = ? AND `mainImage`= ?",
 					Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setBlob(1, imageStream);
 			preparedStatement.setString(2, imageType);
@@ -1241,7 +1243,7 @@ public class DatabaseConnection {
 
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					String salutation = result.getString("salutation");
 					String firstName = result.getString("firstName");
@@ -1332,7 +1334,7 @@ public class DatabaseConnection {
 	 * This method selects the id of an paymentMethod
 	 * 
 	 * @param paymentMethod
-	 *            the payment methods who¥s id should be selected
+	 *            the payment methods who¬¥s id should be selected
 	 * @return the id of the payment method if no id was found it will return -1
 	 */
 	public int getPaymentMethodId(String paymentMethod) {
@@ -1350,7 +1352,7 @@ public class DatabaseConnection {
 				preparedStatement.setString(1, paymentMethod);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					id = result.getInt("id");
 				}
@@ -1431,7 +1433,7 @@ public class DatabaseConnection {
 
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					Order order;
 					int id = result.getInt("id");
@@ -1489,7 +1491,7 @@ public class DatabaseConnection {
 
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					int id = result.getInt("id");
 					Date entryDate = result.getDate("entryDate");
@@ -1545,7 +1547,7 @@ public class DatabaseConnection {
 
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					OrderItem orderItem;
 					int position = result.getInt("position");
@@ -1597,7 +1599,7 @@ public class DatabaseConnection {
 
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					String salutation = result.getString("salutation");
 					String firstName = result.getString("firstName");
@@ -1680,7 +1682,7 @@ public class DatabaseConnection {
 	 * This method creates a wishlist for a user
 	 * 
 	 * @param userId
-	 *            the id of the user who¥s wishlsit should be created
+	 *            the id of the user who¬¥s wishlsit should be created
 	 * @return the id of the created wishlist
 	 */
 	public int createWishlistInDB(int userId) {
@@ -1754,7 +1756,7 @@ public class DatabaseConnection {
 				statement.setInt(1, wishlistId);
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					int id = result.getInt("id");
 					Article article = getArticle(result.getInt("article"));
@@ -1789,7 +1791,7 @@ public class DatabaseConnection {
 	 * This method deletes all items of a wishlist in the database
 	 * 
 	 * @param wishlistId
-	 *            the id of the wishlist which¥s items should be deleted
+	 *            the id of the wishlist which¬¥s items should be deleted
 	 */
 	public void deleteAllItemsOfWishlistInDB(int wishlistId) {
 		conn = getInstance();
@@ -1842,7 +1844,7 @@ public class DatabaseConnection {
 				statement = conn.prepareStatement(sql);
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					int id = result.getInt("id");
 					String name = result.getString("name");
@@ -1888,7 +1890,7 @@ public class DatabaseConnection {
 				statement.setInt(1, userId);
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					int id = result.getInt("id");
 					String name = result.getString("name");
@@ -1965,7 +1967,7 @@ public class DatabaseConnection {
 	 * This method selects all sizes for an article
 	 * 
 	 * @param articleId
-	 *            the id of the article which¥s sizes should be selected
+	 *            the id of the article which¬¥s sizes should be selected
 	 * @return the list of sizes for that article
 	 */
 	public List<Integer> getSizeList(int articleId) {
@@ -1985,7 +1987,7 @@ public class DatabaseConnection {
 				statement.setInt(1, articleId);
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					int size = result.getInt("size");
 
@@ -2004,7 +2006,7 @@ public class DatabaseConnection {
 	 * This method selects all colors of an article
 	 * 
 	 * @param articleId
-	 *            the id of the article which¥s color should be selected
+	 *            the id of the article which¬¥s color should be selected
 	 * @return the list of colors
 	 */
 	public List<String> getColorList(int articleId) {
@@ -2024,7 +2026,7 @@ public class DatabaseConnection {
 				statement.setInt(1, articleId);
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					String size = result.getString("color");
 
@@ -2043,7 +2045,7 @@ public class DatabaseConnection {
 	 * This method selects the id for a size from the database
 	 * 
 	 * @param size
-	 *            the size which¥s database should be selected
+	 *            the size which¬¥s database should be selected
 	 * @return returns the id of the size or -1 if no size was selected
 	 */
 	public int getSizeId(int size) {
@@ -2061,7 +2063,7 @@ public class DatabaseConnection {
 				preparedStatement.setInt(1, size);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					id = result.getInt("id");
 				}
@@ -2193,7 +2195,7 @@ public class DatabaseConnection {
 	 * article
 	 * 
 	 * @param article
-	 *            the article which¥s mappings should be deleted
+	 *            the article which¬¥s mappings should be deleted
 	 */
 	public void deleteSizeMapping(Article article) {
 		conn = getInstance();
@@ -2229,7 +2231,7 @@ public class DatabaseConnection {
 	 * article
 	 * 
 	 * @param article
-	 *            the article which¥s mappings should be deleted
+	 *            the article which¬¥s mappings should be deleted
 	 */
 	public void deleteColorMapping(Article article) {
 		conn = getInstance();
@@ -2264,7 +2266,7 @@ public class DatabaseConnection {
 	 * This method selects a list of all images from the database
 	 * 
 	 * @param articleId
-	 *            the id of the article which¥s images should be created
+	 *            the id of the article which¬¥s images should be created
 	 * @return the list of the image ids
 	 */
 	public List<Integer> getImageIdList(int articleId) {
@@ -2285,7 +2287,7 @@ public class DatabaseConnection {
 				statement.setBoolean(2, false);
 				ResultSet result = statement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					int size = result.getInt("id");
 
@@ -2304,7 +2306,7 @@ public class DatabaseConnection {
 	 * This method selects the id of an images from the database
 	 * 
 	 * @param articleId
-	 *            the id of the article which¥s image id should be selected
+	 *            the id of the article which¬¥s image id should be selected
 	 * @param mainImage
 	 *            boolean that specified whether the main image or not should be
 	 *            created
@@ -2327,7 +2329,7 @@ public class DatabaseConnection {
 				preparedStatement.setBoolean(2, mainImage);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					id = result.getInt("id");
 				}
@@ -2401,7 +2403,7 @@ public class DatabaseConnection {
 	 * This method deletes all mappings of a user and his roles
 	 * 
 	 * @param user
-	 *            the user who¥s roles should be deleted
+	 *            the user who¬¥s roles should be deleted
 	 */
 	public void deleteRoleMappings(User user) {
 		conn = getInstance();
@@ -2455,7 +2457,7 @@ public class DatabaseConnection {
 				preparedStatement.setInt(1, roleId);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				if (result.next()) {
 					int id = result.getInt("id");
 					String name = result.getString("name");
@@ -2522,7 +2524,7 @@ public class DatabaseConnection {
 				preparedStatement = conn.prepareStatement(sql);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					User user;
 					int id = result.getInt("id");
@@ -2627,7 +2629,7 @@ public class DatabaseConnection {
 				preparedStatement = conn.prepareStatement(sql);
 				ResultSet result = preparedStatement.executeQuery();
 
-				// Ergebniss‰tze durchfahren.
+				// Ergebniss√§tze durchfahren.
 				while (result.next()) {
 					User user;
 					int id = result.getInt("id");
