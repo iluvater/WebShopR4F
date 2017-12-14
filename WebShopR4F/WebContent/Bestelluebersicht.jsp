@@ -54,7 +54,7 @@
 						</p>
 					<h4>Versandadresse</h4>
 						<p>
-						${order.user.salutation}
+						${order.deliveryAddress.salutation}
 						<br/>
 						${order.deliveryAddress.firstName} ${order.deliveryAddress.lastName}
 						<br/>

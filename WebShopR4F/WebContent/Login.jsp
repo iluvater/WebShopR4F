@@ -31,7 +31,7 @@
 				</c:if>	
 				<p><label for="password">Passwort</label>
 				<input id="password" placeholder="Passwort" name="password" value="" type="password" />
-				<br/><a href="passwortVergessen.jsp">Passwort vergessen</a></p>
+				<br/><a href="passwortVergessen.jsp">Passwort vergessen?</a></p>
 				<c:if test ="${not empty error }">
 					<c:if test="${error.errorCode == 114 }">
 						<p class="fehler"><jsp:getProperty property="errorMessage" name="error"/></p>

@@ -68,8 +68,9 @@ public class EmailService {
 			emailBody = emailBody.replaceAll("!orderId!", Integer.toString(order.getId()));
 			emailBody = emailBody.replaceAll("!entryDate!", order.getEntryDate().toString());
 			emailBody = emailBody.replaceAll("!deliveryDate!", order.getDeliveryDate().toString());
-			emailBody = emailBody.replaceAll("!firstName!", order.getUser().getFirstName());
-			emailBody = emailBody.replaceAll("!lastName!", order.getUser().getLastName());
+			emailBody = emailBody.replaceAll("!salutation!", order.getDeliveryAddress().getSalutation());
+			emailBody = emailBody.replaceAll("!firstName!", order.getDeliveryAddress().getFirstName());
+			emailBody = emailBody.replaceAll("!lastName!", order.getDeliveryAddress().getLastName());
 			emailBody = emailBody.replaceAll("!street!", order.getDeliveryAddress().getStreet());
 			emailBody = emailBody.replaceAll("!houseNumber!", order.getDeliveryAddress().getHouseNumber());
 			emailBody = emailBody.replaceAll("!postCode!", order.getDeliveryAddress().getPostCode());

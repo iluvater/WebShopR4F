@@ -1499,7 +1499,7 @@ public class DatabaseConnection {
 					Address billingAddress = new DatabaseConnection().getAddress(result.getInt("billingAddress"));
 					Date deliveryDate = result.getDate("deliveryDate");
 					String paymentMethod = result.getString("paymentMethod");
-					User user = getUser(result.getInt("user"));
+					User user = new DatabaseConnection().getUser(result.getInt("user"));
 					List<OrderItem> orderItems = new DatabaseConnection().getOrderItems(id);
 
 					order = new Order(id, entryDate, deliveryAddress, billingAddress, paymentMethod, orderItems,
