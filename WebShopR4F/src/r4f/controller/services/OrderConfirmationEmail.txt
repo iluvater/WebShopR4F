@@ -9,7 +9,7 @@ Um Ihre Bestellungen anzusehen, besuchen Sie <a href="http://localhost:8080/WebS
 <table border="0" align = "center">
 	<tr valign="top">
 		<td width="35%">Zustellung: <br /> !deliveryDate!</td>
-		<td width="35%">Lieferadresse: <br /> !firstName! !lastName! <br /> !street! !houseNumber! <br /> !postCode! !city!</td>
+		<td width="35%">Lieferadresse:<br />!salutation! <br /> !firstName! !lastName! <br /> !street! !houseNumber! <br /> !postCode! !city!</td>
 	</tr>
 </table>
 <hr />
