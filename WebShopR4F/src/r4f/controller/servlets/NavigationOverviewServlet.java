@@ -14,6 +14,7 @@ import r4f.controller.services.ArticleService;
 
 /**
  * Servlet implementation class NavigationOverviewServlet
+ * @author Ture
  */
 @WebServlet("/NavigationOverviewServlet")
 public class NavigationOverviewServlet extends HttpServlet {

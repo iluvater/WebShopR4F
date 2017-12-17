@@ -21,7 +21,7 @@ public class OrderItem {
 	 * @param position the position to set
 	 * @param amount the amount to set
 	 * @param price the price to set
-	 * @param the article to set
+	 * @param article the article to set
 	 * @param size the size to set
 	 * @param color color to set
 	 */

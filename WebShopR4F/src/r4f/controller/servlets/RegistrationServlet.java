@@ -18,6 +18,7 @@ import r4f.model.User;
 
 /**
  * Servlet implementation class RegistrationServlet
+ * @author Ture
  */
 @WebServlet("/RegistrationServlet")
 public class RegistrationServlet extends HttpServlet {

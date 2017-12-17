@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebFilter;
 
 /**
  * Servlet Filter implementation class UTF8Filter
+ * @author Ture
  */
 @WebFilter("/*")
 public class UTF8Filter implements Filter {

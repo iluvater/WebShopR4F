@@ -16,6 +16,7 @@ import r4f.model.Role;
 
 /**
  * Servlet implementation class CreateRoleServlet
+ * @author Ture
  */
 @WebServlet("/CreateRoleServlet")
 public class CreateRoleServlet extends HttpServlet {

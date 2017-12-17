@@ -15,6 +15,7 @@ import r4f.model.User;
 
 /**
  * Servlet implementation class NavigationUserOverviewServlet
+ * @author Ture
  */
 @WebServlet("/NavigationUserOverviewServlet")
 public class NavigationUserOverviewServlet extends HttpServlet {

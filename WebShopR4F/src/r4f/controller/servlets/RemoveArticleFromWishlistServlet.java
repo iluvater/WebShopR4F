@@ -13,6 +13,7 @@ import r4f.model.Wishlist;
 
 /**
  * Servlet implementation class RemoveArticleFromWishlistServlet
+ * @author Ture
  */
 @WebServlet("/RemoveArticleFromWishlistServlet")
 public class RemoveArticleFromWishlistServlet extends HttpServlet {

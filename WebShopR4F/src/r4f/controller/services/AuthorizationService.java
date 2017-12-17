@@ -39,6 +39,7 @@ public class AuthorizationService extends Service{
 	/**
 	 * @param email the userId
 	 * @param name the name of the role
+	 * @return return the id of the new Mapping or -1 if no mapping was created
 	 */
 	public int createUserRoleMapping(String email, String name) {
 		User user = super.getDbConnection().getUser(email);

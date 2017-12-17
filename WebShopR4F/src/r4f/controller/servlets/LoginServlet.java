@@ -21,6 +21,7 @@ import r4f.model.Wishlist;
 
 /**
  * Servlet implementation class LoginServlet
+ * @author Ture
  */
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {

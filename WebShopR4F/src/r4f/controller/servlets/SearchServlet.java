@@ -16,6 +16,7 @@ import r4f.model.Article;
 
 /**
  * Servlet implementation class SearchServlet
+ * @author Ture
  */
 @WebServlet("/SearchServlet")
 public class SearchServlet extends HttpServlet {

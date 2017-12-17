@@ -26,6 +26,7 @@ public class ShoppingBasket {
 
 	/**
 	 * Constructor for a new shopping basket that has a id
+	 * @param id the id to set
 	 */
 	public ShoppingBasket(int id) {
 		this.id = id;
@@ -35,8 +36,8 @@ public class ShoppingBasket {
 	/**
 	 * Constructor for a shopping basket that is already stored in the database
 	 * 
-	 * @param id
-	 * @param items
+	 * @param id the id to set
+	 * @param items the items to set
 	 */
 	public ShoppingBasket(int id, List<ShoppingBasketItem> items) {
 		this.id = id;
@@ -80,6 +81,10 @@ public class ShoppingBasket {
 	 * 
 	 * @param article
 	 *            The article that should be added to the shopping basket
+	 * @param size
+	 *            the size of the article
+	 * @param color
+	 *            the color of the article
 	 */
 	public void addItem(Article article, int size, String color) {
 		boolean notFound = true;
@@ -140,6 +145,11 @@ public class ShoppingBasket {
 	 *            the id of the article which amount should be changed
 	 * @param amount
 	 *            the new amount
+	 * @param size
+	 *            the size of the article
+	 * @param color
+	 *            the color of the article
+	 * 
 	 */
 	public void setAmountOfArticle(int articleId, int amount, int size, String color) {
 		if (amount <= 0) {
@@ -159,6 +169,10 @@ public class ShoppingBasket {
 	 * 
 	 * @param articleId
 	 *            the id of the article that should be removed
+	 * @param size
+	 *            the size of the article
+	 * @param color
+	 *            the color of the article
 	 */
 	public void removeItem(int articleId, int size, String color) {
 		List<ShoppingBasketItem> deleteItems = new ArrayList<ShoppingBasketItem>();
@@ -183,7 +197,7 @@ public class ShoppingBasket {
 	/**
 	 * This method adds a wishlist to the shopping basket
 	 * 
-	 * @param wishlist
+	 * @param wishlist the wishlist that should be added
 	 */
 	public void addWishlist(Wishlist wishlist) {
 		for (WishlistItem item : wishlist.getList()) {
@@ -206,7 +220,7 @@ public class ShoppingBasket {
 	 *            the new color
 	 */
 	public void setSizeColorOfArticle(int articleId, int size, String color, int sizeNew, String colorNew) {
-		for (int i= 0; i<items.size(); i++) {
+		for (int i = 0; i < items.size(); i++) {
 			ShoppingBasketItem shoppingBasketItem = items.get(i);
 			if (shoppingBasketItem.getArticle().getId() == articleId && shoppingBasketItem.getSize() == size
 					&& shoppingBasketItem.getColor().equals(color)) {
@@ -218,26 +232,27 @@ public class ShoppingBasket {
 	}
 
 	/**
-	 * This method removes duplicates from the shopping basket and adds the amounts of the duplicates 
+	 * This method removes duplicates from the shopping basket and adds the
+	 * amounts of the duplicates
 	 */
 	private void removeDublicates() {
 		List<ShoppingBasketItem> duplicates = new ArrayList<ShoppingBasketItem>();
-		for(int i = 0; i< items.size(); i++){
+		for (int i = 0; i < items.size(); i++) {
 			ShoppingBasketItem item = items.get(i);
 			boolean found = false;
-			for(int j = 0; j < duplicates.size();j++){
-				
+			for (int j = 0; j < duplicates.size(); j++) {
+
 				ShoppingBasketItem duplicate = duplicates.get(j);
-				if(duplicate.getArticle().getId() == item.getId() && duplicate.getSize() == item.getSize()
-						&& duplicate.getColor().equals(item.getColor())){
+				if (duplicate.getArticle().getId() == item.getId() && duplicate.getSize() == item.getSize()
+						&& duplicate.getColor().equals(item.getColor())) {
 					found = true;
 				}
 			}
-			if(!found){
-				for(int k = i+1; k < items.size(); k++){
+			if (!found) {
+				for (int k = i + 1; k < items.size(); k++) {
 					ShoppingBasketItem posDuplicate = items.get(k);
-					if(posDuplicate.getArticle().getId() == item.getId() && posDuplicate.getSize() == item.getSize()
-							&& posDuplicate.getColor().equals(item.getColor())){
+					if (posDuplicate.getArticle().getId() == item.getId() && posDuplicate.getSize() == item.getSize()
+							&& posDuplicate.getColor().equals(item.getColor())) {
 						duplicates.add(posDuplicate);
 						item.setAmount(item.getAmount() + posDuplicate.getAmount());
 					}
@@ -246,6 +261,6 @@ public class ShoppingBasket {
 		}
 		for (ShoppingBasketItem shoppingBasketItem : duplicates) {
 			items.remove(shoppingBasketItem);
-		}		
+		}
 	}
 }

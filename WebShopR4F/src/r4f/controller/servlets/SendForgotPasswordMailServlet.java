@@ -15,6 +15,7 @@ import r4f.model.User;
 
 /**
  * Servlet implementation class SendForgotPasswordMail
+ * @author Ture
  */
 @WebServlet("/SendForgotPasswordMailServlet")
 public class SendForgotPasswordMailServlet extends HttpServlet {

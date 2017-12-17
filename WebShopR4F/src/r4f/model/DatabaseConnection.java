@@ -29,19 +29,19 @@ public class DatabaseConnection {
 	int i;
 
 	// Hostname
-	private  String dbHost = "localhost";
+	private String dbHost = "localhost";
 
 	// Port -- Standard: 3306
-	private  String dbPort = "3306";
+	private String dbPort = "3306";
 
 	// Datenbankname
-	private  String database = "webshop_db";
+	private String database = "webshop_db";
 
 	// Datenbankuser
-	private  String dbUser = "techuser";
+	private String dbUser = "techuser";
 
 	// Datenbankpasswort
-	private  String dbPassword = "Winter2017!";
+	private String dbPassword = "Winter2017!";
 
 	public DatabaseConnection() {
 		try {
@@ -64,7 +64,7 @@ public class DatabaseConnection {
 		}
 	}
 
-	private  Connection getInstance() {
+	private Connection getInstance() {
 		if (conn == null)
 			try {
 				// Datenbanktreiber f체r ODBC Schnittstellen laden.
@@ -74,8 +74,8 @@ public class DatabaseConnection {
 
 				// Verbindung zur ODBC-Datenbank 'sakila' herstellen.
 				// Es wird die JDBC-ODBC-Br체cke verwendet.
-				conn = DriverManager.getConnection("jdbc:mysql://" + dbHost + ":" + dbPort + "/" + database + "?" + "user="
-						+ dbUser + "&password=" + dbPassword);
+				conn = DriverManager.getConnection("jdbc:mysql://" + dbHost + ":" + dbPort + "/" + database + "?"
+						+ "user=" + dbUser + "&password=" + dbPassword);
 			} catch (ClassNotFoundException e) {
 				System.out.println("Treiber nicht gefunden");
 				e.printStackTrace();
@@ -91,8 +91,6 @@ public class DatabaseConnection {
 	 * 
 	 * @param user
 	 *            User that should be created in DB
-	 * @param addressId
-	 *            Id of the address of the user
 	 * @return returns the id of the created user returns -1 if there was no
 	 *         user created
 	 */
@@ -276,6 +274,8 @@ public class DatabaseConnection {
 	 * 
 	 * @param user
 	 *            user that should be updated
+	 * @throws SQLException
+	 *             throws exception if there is any error during the update
 	 */
 	public void updateUserInDB(User user) throws SQLException {
 		conn = getInstance();
@@ -418,6 +418,8 @@ public class DatabaseConnection {
 	/**
 	 * This method selects all article in the Database
 	 * 
+	 * @param filter
+	 *            the Filter for restricting the select statement
 	 * @return returns all articles in the database
 	 */
 	public List<Article> getArticleList(FilterList filter) {
@@ -552,6 +554,8 @@ public class DatabaseConnection {
 	 * @param article
 	 *            the article that should be updated it should contain all new
 	 *            values
+	 * @throws SQLException
+	 *             if there is any error during the update
 	 */
 	public void updateArticleInDB(Article article) throws SQLException {
 		conn = getInstance();
@@ -976,6 +980,11 @@ public class DatabaseConnection {
 	 *            the inputstream containing the image
 	 * @param contentType
 	 *            the contenttype of the image e.g. image/jpeg
+	 * @param articleId
+	 *            the id of the article who큦 image should be created
+	 * @param mainImage
+	 *            boolean that indicates whether the image is the mainImage of a
+	 *            article or not
 	 * @return returns true if the image was created in the database and false
 	 *         if not
 	 */
@@ -1087,6 +1096,9 @@ public class DatabaseConnection {
 	 *            the new content
 	 * @param imageType
 	 *            the new content type of the image
+	 * @param mainImage
+	 *            boolean that indicates whether the image is the mainImage of
+	 *            an article or not
 	 * @throws SQLException
 	 *             an SQLException will be thrown if any error occurred
 	 */
@@ -1098,8 +1110,7 @@ public class DatabaseConnection {
 
 			PreparedStatement preparedStatement = conn.prepareStatement(
 
-					"UPDATE `image` SET `image` = ?, `type` = ? "
-							+ " WHERE `image`.`id` = ? AND `mainImage`= ?",
+					"UPDATE `image` SET `image` = ?, `type` = ? " + " WHERE `image`.`id` = ? AND `mainImage`= ?",
 					Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setBlob(1, imageStream);
 			preparedStatement.setString(2, imageType);
@@ -1118,6 +1129,14 @@ public class DatabaseConnection {
 	/**
 	 * This method create a new address in the database
 	 * 
+	 * @param userId
+	 *            the id of the user who큦 address should be selected
+	 * @param firstName
+	 *            the first name of the new address
+	 * @param lastName
+	 *            the last name of the new address
+	 * @param salutation
+	 *            the salutation of the new address
 	 * @param street
 	 *            street of the new address
 	 * @param houseNumber
@@ -1126,6 +1145,9 @@ public class DatabaseConnection {
 	 *            post code of the new address
 	 * @param city
 	 *            city of the new address
+	 * @param masterData
+	 *            boolean that indicates whether an address is the master data
+	 *            address of an user or not
 	 * @return return the id of the created entry in the data base. returns -1
 	 *         if no entry was created
 	 */
@@ -1188,6 +1210,12 @@ public class DatabaseConnection {
 	 * 
 	 * @param userId
 	 *            the id of user who's address should be updated
+	 * @param firstName
+	 *            the first name of the new address
+	 * @param lastName
+	 *            the last name of the new address
+	 * @param salutation
+	 *            the salutation of the new address
 	 * @param street
 	 *            the new street
 	 * @param houseNumber
@@ -1197,6 +1225,7 @@ public class DatabaseConnection {
 	 * @param city
 	 *            the new City
 	 * @throws SQLException
+	 *             throws exception if an error occurred during the update
 	 */
 	public void updateAddressInDB(int userId, String firstName, String lastName, String street, String houseNumber,
 			String postCode, String city, String salutation) throws SQLException {
@@ -1563,7 +1592,7 @@ public class DatabaseConnection {
 				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} 
+			}
 		}
 		return orderItems;
 	}
@@ -2335,10 +2364,10 @@ public class DatabaseConnection {
 	/**
 	 * This method creates a mapping of a role and a user
 	 * 
-	 * @param user
-	 *            the user
-	 * @param role
-	 *            the role
+	 * @param userId
+	 *            the userId
+	 * @param roleId
+	 *            the roleId
 	 * @return returns the id of the new entry in the database, returns -1 if no
 	 *         entry was created
 	 */

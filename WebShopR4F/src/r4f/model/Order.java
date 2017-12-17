@@ -21,8 +21,7 @@ public class Order {
 	private List<OrderItem> items;
 	private final double shippingPrice = 4.95;
 	private Date deliveryDate;
-	
-	
+
 	/**
 	 * Constructor that can be used if the order is already stored in the
 	 * database
@@ -39,6 +38,10 @@ public class Order {
 	 *            the paymentMethod to set
 	 * @param items
 	 *            the order items to set
+	 * @param user
+	 *            the user who´s order this is
+	 * @param deliveryDate
+	 *            the deliveryDate of the order
 	 */
 	public Order(int id, Date entryDate, Address deliveryAddress, Address billingAddress, String paymentMethod,
 			List<OrderItem> items, Date deliveryDate, User user) {
@@ -164,6 +167,10 @@ public class Order {
 	 *            the article to set
 	 * @param amount
 	 *            the amount of the article
+	 * @param color
+	 *            the color of the article
+	 * @param size
+	 *            the size of the article
 	 */
 	public void addOrderItem(Article article, int amount, int size, String color) {
 		OrderItem item = new OrderItem(getLastPosition() + 1, amount, article.getPrice(), article, size, color);
@@ -239,7 +246,7 @@ public class Order {
 	public void resetPositions() {
 		for (int i = 0; i < items.size(); i++) {
 			OrderItem item = items.get(i);
-			item.setPosition(i+1);
+			item.setPosition(i + 1);
 		}
 	}
 
@@ -249,26 +256,28 @@ public class Order {
 	public double getShippingPrice() {
 		return shippingPrice;
 	}
-	
+
 	/**
 	 * This method return the total price of the order incl. the shipping Price
+	 * 
 	 * @return the total price
 	 */
-	public double getTotalPrice(){
-		double sum= 0;
+	public double getTotalPrice() {
+		double sum = 0;
 		for (OrderItem orderItem : items) {
 			sum += orderItem.getPrice() * orderItem.getAmount();
 		}
 		sum += shippingPrice;
 		return ((double) Math.round(sum * 100)) / 100.0;
 	}
-	
+
 	/**
 	 * This method returns the price of all items of the order
+	 * 
 	 * @return the total price of the order The price is rounded at two digits.
 	 */
-	public double getOrderPrice(){
-		double sum= 0;
+	public double getOrderPrice() {
+		double sum = 0;
 		for (OrderItem orderItem : items) {
 			sum += orderItem.getPrice() * orderItem.getAmount();
 		}
@@ -283,10 +292,11 @@ public class Order {
 	}
 
 	/**
-	 * @param deliveryDate the deliveryDate to set
+	 * @param deliveryDate
+	 *            the deliveryDate to set
 	 */
 	public void setDeliveryDate(Date deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
-	
+
 }

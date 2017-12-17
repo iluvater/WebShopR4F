@@ -13,6 +13,7 @@ import r4f.model.ShoppingBasket;
 
 /**
  * Servlet implementation class ChangeAmountShoppingBasketServlet
+ * @author Ture
  */
 @WebServlet("/ChangeAmountShoppingBasketServlet")
 public class ChangeAmountShoppingBasketServlet extends HttpServlet {

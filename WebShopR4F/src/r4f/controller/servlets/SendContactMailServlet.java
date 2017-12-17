@@ -15,6 +15,7 @@ import r4f.model.User;
 
 /**
  * Servlet implementation class SendContactMailServlet
+ * @author Ture
  */
 @WebServlet("/SendContactMailServlet")
 public class SendContactMailServlet extends HttpServlet {

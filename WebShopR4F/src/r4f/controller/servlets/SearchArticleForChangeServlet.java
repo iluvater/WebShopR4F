@@ -16,6 +16,7 @@ import r4f.model.ErrorMessage;
 
 /**
  * Servlet implementation class SearchArticleForChangeServlet
+ * @author Ture
  */
 @WebServlet("/SearchArticleForChangeServlet")
 public class SearchArticleForChangeServlet extends HttpServlet {
