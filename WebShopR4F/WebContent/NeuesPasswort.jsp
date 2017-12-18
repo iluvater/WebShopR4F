@@ -1,3 +1,8 @@
+<!-- * 
+ * @author Maike
+ *
+ * -->
+
 <%@ include file="Head.jspf" %>
 <title>Passwort zur&uuml;cksetzten</title>
 <%@ include file="Header.jspf" %>

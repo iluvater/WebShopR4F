@@ -1,3 +1,8 @@
+<!-- * 
+ * @author Laura
+ *
+ * -->
+
 <%@ include file="Head.jspf" %>
 <title>Artikeldatenerfassung</title>
 <%@ include file="Header.jspf" %>
