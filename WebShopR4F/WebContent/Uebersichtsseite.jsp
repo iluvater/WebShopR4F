@@ -1,20 +1,10 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="f" uri="http://run4fun.de/functions" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Übersichtsseite</title>
-<link href="DesignV1.css" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body> --%>
+<!-- * 
+ * @author Laura
+ *
+ * -->
+ 
 <%@ include file="Head.jspf" %>
-<title>Übersichtsseite</title>
+<title>�bersichtsseite</title>
 <%@ include file="Header.jspf" %>
 
 	<jsp:useBean id="articleList" type="java.util.ArrayList<r4f.model.Article>" class="java.util.ArrayList" scope="request">
@@ -103,14 +93,7 @@
 					<input type="hidden" name="articleId" value="${article.id }" />
 					<button type="submit" class="linkButton"><h4 class="center">${article.price} &euro;</h4></button>
 				</form>
-<%-- 				<form action="./NavigationArticleDetailsServlet" method="post">
-					<input type="hidden" name="articleId" value="${article.id }" />
-					<button type="submit" class="linkButton"><strong>Hersteller: </strong>${article.manufacturer}</button>
-				</form>
-				<form action="./NavigationArticleDetailsServlet" method="post">
-					<input type="hidden" name="articleId" value="${article.id }" />
-					<button type="submit" class="linkButton"><strong>Sportart: </strong>${article.sport}</button>
-				</form> --%>
+
 				<div id="containerButtonUebersicht" >       			
 <!--        				<a href="Merkliste.jsp" class="btn btn-default btn-sm">
       					<span class="glyphicon glyphicon-heart-empty"></span>

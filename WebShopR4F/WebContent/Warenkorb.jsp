@@ -1,3 +1,9 @@
+<!-- * 
+ * @author Maike
+ * @edited by Laura, Ture
+ *
+ * -->
+
 <%@ include file="Head.jspf" %>
 <title>Warenkorb</title>
 <%@ include file="Header.jspf" %>

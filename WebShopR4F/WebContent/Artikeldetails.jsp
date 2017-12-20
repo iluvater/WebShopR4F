@@ -1,13 +1,15 @@
+<!-- * 
+ * @author Ture
+ * @edited by Laura, Maike
+ *
+ * -->
+
 <%@ include file="Head.jspf" %>
 <title>Artikeldetails</title>
 <%@ include file="Header.jspf" %>
 
 	<jsp:useBean id="article" class="r4f.model.Article" scope="request">
 	</jsp:useBean> 
-<%-- 	<jsp:useBean id="size" class="java.lang.Integer" scope="session">
-	</jsp:useBean>
-	<jsp:useBean id="color" class="java.lang.String" scope="session">
-	</jsp:useBean> --%>
 	<div id="container">
 			<c:if test ="${not empty article.name}">
 				<div>

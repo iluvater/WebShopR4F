@@ -1,3 +1,8 @@
+<!-- * 
+ * @author Maike
+ *
+ * -->
+
 <%@ include file="Head.jspf" %>
 <title>Anmeldung abschlie&szlig;en</title>
 <%@ include file="Header.jspf" %>

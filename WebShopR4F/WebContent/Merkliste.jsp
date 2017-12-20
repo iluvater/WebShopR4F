@@ -1,3 +1,8 @@
+<!-- * 
+ * @author Laura
+ *
+ * -->
+
 <%@ include file="Head.jspf" %>
 <title>Merkliste</title>
 <%@ include file="Header.jspf" %>

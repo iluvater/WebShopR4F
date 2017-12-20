@@ -1,3 +1,8 @@
+/* 
+ * @author Laura, Maike, Ture
+ *
+ */
+
 @CHARSET "UTF-8";
 
 h2 {
@@ -276,7 +281,7 @@ form.header {
 	float: left;
 }
 
-/* Formatierung der placeholder fÃ¼r die Browser Firefox und Chrome (Rest ist ausgenommen) */
+/* Formatierung der placeholder für die Browser Firefox und Chrome (Rest ist ausgenommen) */
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   font-style:italic;
@@ -1066,7 +1071,7 @@ p {
 		margin-left: 10%;
 	}
 	
-	/*Ãœbersichtsseite Formatierungen*/
+	/*Übersichtsseite Formatierungen*/
 	.floatLeft {
 		float: left;
 	}
