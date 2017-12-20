@@ -36,6 +36,7 @@ public class ArticleService extends Service{
 	
 	/**
 	 * this method selects all article that are stored in the database
+	 * @param filter the filter
 	 * @return returns a list with all article
 	 */
 	public List<Article> getArticleList(FilterList filter){

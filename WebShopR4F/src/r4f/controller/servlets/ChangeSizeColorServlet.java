@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class ChangeSizeColorServlet
+ * @author Ture
  */
 @WebServlet("/ChangeSizeColorServlet")
 public class ChangeSizeColorServlet extends HttpServlet {

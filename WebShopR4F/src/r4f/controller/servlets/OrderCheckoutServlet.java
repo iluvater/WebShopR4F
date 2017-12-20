@@ -15,6 +15,7 @@ import r4f.model.User;
 
 /**
  * Servlet implementation class OrderCheckoutServlet
+ * @author Ture
  */
 @WebServlet("/OrderCheckoutServlet")
 public class OrderCheckoutServlet extends HttpServlet {

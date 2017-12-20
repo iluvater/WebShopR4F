@@ -19,6 +19,7 @@ import r4f.model.Wishlist;
 
 /**
  * Servlet implementation class ConfirmationCodeSerlvet
+ * @author Ture
  */
 @WebServlet("/ConfirmationCodeSerlvet")
 public class ConfirmationCodeSerlvet extends HttpServlet {

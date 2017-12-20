@@ -47,9 +47,15 @@ public class Article {
 	 *            entryDate to set
 	 * @param category
 	 *            category to set
+	 * @param sport
+	 *            sport to set
+	 * @param mainImage
+	 *            mainImage to set
+	 * @param images
+	 *            images to set
 	 */
-	public Article(int id, String name, String description, List<Integer> size, double price, String manufacturer, List<String> color,
-			Date entryDate, String category, String sport, int mainImage, List<Integer> images) {
+	public Article(int id, String name, String description, List<Integer> size, double price, String manufacturer,
+			List<String> color, Date entryDate, String category, String sport, int mainImage, List<Integer> images) {
 		this.id = id;
 		this.name = name;
 		setDescription(description);
@@ -84,9 +90,11 @@ public class Article {
 	 *            color to set
 	 * @param category
 	 *            category to set
+	 * @param sport
+	 *            sport to set
 	 */
-	public Article(String name, String description, List<Integer> size, double price, String manufacturer, List<String> color,
-			String category, String sport) {
+	public Article(String name, String description, List<Integer> size, double price, String manufacturer,
+			List<String> color, String category, String sport) {
 		this.name = name;
 		setDescription(description);
 		this.size = size;
@@ -336,8 +344,8 @@ public class Article {
 	 * @param mainImage
 	 *            the mainImage to set
 	 */
-	public void setMainImage(int image) {
-		this.mainImage = image;
+	public void setMainImage(int mainImage) {
+		this.mainImage = mainImage;
 	}
 
 	/**
@@ -348,7 +356,8 @@ public class Article {
 	}
 
 	/**
-	 * @param images the images to set
+	 * @param images
+	 *            the images to set
 	 */
 	public void setImages(List<Integer> images) {
 		this.images = images;
@@ -362,7 +371,8 @@ public class Article {
 	}
 
 	/**
-	 * @param deliveryDate the deliveryDate to set
+	 * @param deliveryDate
+	 *            the deliveryDate to set
 	 */
 	public void setDeliveryDate(Date deliveryDate) {
 		this.deliveryDate = deliveryDate;

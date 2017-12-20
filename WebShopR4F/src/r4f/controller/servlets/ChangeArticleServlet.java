@@ -27,6 +27,7 @@ import r4f.model.InputStreamStringHelpClass;
 
 /**
  * Servlet implementation class ChangeArticleServlet
+ * @author Ture
  */
 @WebServlet("/ChangeArticleServlet")
 public class ChangeArticleServlet extends HttpServlet {

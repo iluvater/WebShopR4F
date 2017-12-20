@@ -19,7 +19,7 @@ public class FilterPrice implements FilterInterface {
 	}
 
 	/** 
-	 * @see r4f.controller.filter.FilterInterface#getSQLFilter(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 * @see r4f.controller.filter.FilterInterface#getSQLFilter(String, String, String, String, String, String)
 	 */
 	@Override
 	public String getSQLFilter(String tableArticle, String tableCategory, String tableManufacturer, String tableSport,

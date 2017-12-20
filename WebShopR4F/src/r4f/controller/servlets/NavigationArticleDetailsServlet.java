@@ -14,6 +14,7 @@ import r4f.model.Article;
 
 /**
  * Servlet implementation class NavigationArticleDetailsServlet
+ * @author Ture
  */
 @WebServlet("/NavigationArticleDetailsServlet")
 public class NavigationArticleDetailsServlet extends HttpServlet {

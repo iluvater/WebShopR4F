@@ -38,6 +38,7 @@ public class FilterList {
 	 * @param tableManufacturer the name of the table manufacturer
 	 * @param tableSport the name of the table sport
 	 * @param tableColor the name of the table color
+	 * @param tableSize the name of the table size
 	 * @return the where clause specified by this filter
 	 */
 	public String getSQLFilter(String tableArticle, String tableCategory, String tableManufacturer, String tableSport, String tableColor, String tableSize){

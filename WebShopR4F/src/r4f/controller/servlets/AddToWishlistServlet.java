@@ -15,6 +15,7 @@ import r4f.model.Wishlist;
 
 /**
  * Servlet implementation class AddToWishlistServlet
+ * @author Ture
  */
 @WebServlet("/AddToWishlistServlet")
 public class AddToWishlistServlet extends HttpServlet {

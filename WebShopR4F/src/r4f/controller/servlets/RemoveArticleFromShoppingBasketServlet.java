@@ -13,6 +13,7 @@ import r4f.model.ShoppingBasket;
 
 /**
  * Servlet implementation class RemoveArticleFromShoppingBasketServlet
+ * @author Ture
  */
 @WebServlet("/RemoveArticleFromShoppingBasketServlet")
 public class RemoveArticleFromShoppingBasketServlet extends HttpServlet {

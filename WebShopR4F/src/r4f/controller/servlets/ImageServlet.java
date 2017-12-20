@@ -16,6 +16,7 @@ import r4f.model.Image;
 
 /**
  * Servlet implementation class ImageServlet
+ * @author Ture
  */
 @WebServlet("/ImageServlet/*")
 public class ImageServlet extends HttpServlet {

@@ -15,7 +15,7 @@ public class FilterCategory implements FilterInterface {
 	}
 
 	/**
-	 * @see r4f.controller.filter.FilterInterface#getSQLFilter()
+	 * @see r4f.controller.filter.FilterInterface#getSQLFilter(String, String, String, String, String, String)
 	 */
 	@Override
 	public String getSQLFilter(String tableArticle, String tableCategory, String tableManufacturer, String tableSport, String tableColor, String tableSize) {

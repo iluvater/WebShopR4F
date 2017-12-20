@@ -17,6 +17,7 @@ import r4f.model.ShoppingBasket;
 
 /**
  * Servlet implementation class OrderOverViewToDBServlet
+ * @author Ture
  */
 @WebServlet("/OrderOverViewToDBServlet")
 public class OrderOverViewToDBServlet extends HttpServlet {

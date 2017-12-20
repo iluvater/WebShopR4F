@@ -16,6 +16,7 @@ import r4f.model.User;
 
 /**
  * Servlet implementation class ChangeUserDataServlet
+ * @author Ture
  */
 @WebServlet("/ChangeUserDataServlet")
 public class ChangeUserDataServlet extends HttpServlet {

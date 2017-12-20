@@ -17,6 +17,7 @@ import r4f.model.User;
 
 /**
  * Servlet implementation class CreateUserRoleMappingServlet
+ * @author Ture
  */
 @WebServlet("/CreateUserRoleMappingServlet")
 public class CreateUserRoleMappingServlet extends HttpServlet {

@@ -20,6 +20,7 @@ import r4f.controller.services.ArticleService;
 
 /**
  * Servlet implementation class NavigationOverviewFilterServlet
+ * @author Ture
  */
 @WebServlet("/NavigationOverviewFilterServlet")
 public class NavigationOverviewFilterServlet extends HttpServlet {

@@ -15,6 +15,7 @@ import r4f.model.User;
 
 /**
  * Servlet implementation class SearchUserServlet
+ * @author Ture
  */
 @WebServlet("/SearchUserServlet")
 public class SearchUserServlet extends HttpServlet {

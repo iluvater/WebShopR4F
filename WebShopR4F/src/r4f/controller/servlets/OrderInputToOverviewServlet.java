@@ -17,6 +17,7 @@ import r4f.model.User;
 
 /**
  * Servlet implementation class OrderInputToOverviewServlet
+ * @author Ture
  */
 @WebServlet("/OrderInputToOverviewServlet")
 public class OrderInputToOverviewServlet extends HttpServlet {

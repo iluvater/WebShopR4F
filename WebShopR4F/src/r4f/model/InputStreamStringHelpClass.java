@@ -42,7 +42,7 @@ public class InputStreamStringHelpClass {
 		return imageType;
 	}
 	/**
-	 * @param imageType the imageType to set
+	 * @param contentType the imageType to set
 	 */
 	public void setImageType(String contentType) {
 		this.imageType = contentType;

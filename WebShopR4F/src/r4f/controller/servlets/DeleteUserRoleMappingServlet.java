@@ -17,6 +17,7 @@ import r4f.model.User;
 
 /**
  * Servlet implementation class DeleteUserRoleMappingServlet
+ * @author Ture
  */
 @WebServlet("/DeleteUserRoleMappingServlet")
 public class DeleteUserRoleMappingServlet extends HttpServlet {
@@ -47,24 +48,39 @@ public class DeleteUserRoleMappingServlet extends HttpServlet {
 			throws ServletException, IOException {
 		int roleId;
 		int userId;
+		User user;
 		RequestDispatcher dispatcher;
 		String errorURL = "Rollenzuordnung.jsp";
 		String successURL = "Rollenzuordnung.jsp";
 		AuthorizationService authorizationService = new AuthorizationService();
 		UserService userService = new UserService();
 
+		user = (User) request.getSession().getAttribute("user");
+		
 		try {
 			roleId = Integer.parseInt(request.getParameter("roleId"));
 			userId = Integer.parseInt(request.getParameter("userId"));
-			authorizationService.deleteUserRoleMapping(userId, roleId);
-			// success
-			ErrorMessage successMessage = new ErrorMessage(605);
-			List<User> userList = userService.getUserList();
-			request.setAttribute("userList", userList);
-			request.setAttribute("success", successMessage);
-			dispatcher = request.getRequestDispatcher(successURL);
-			dispatcher.forward(request, response);
-			return;
+			if(userId != user.getId()){
+				authorizationService.deleteUserRoleMapping(userId, roleId);
+				
+				// success
+				ErrorMessage successMessage = new ErrorMessage(605);
+				List<User> userList = userService.getUserList();
+				request.setAttribute("userList", userList);
+				request.setAttribute("success", successMessage);
+				dispatcher = request.getRequestDispatcher(successURL);
+				dispatcher.forward(request, response);
+				return;
+			}else{
+				ErrorMessage errorMessage = new ErrorMessage();
+				List<User> userList = userService.getUserList();
+				request.setAttribute("userList", userList);
+				request.setAttribute("error", errorMessage);
+				dispatcher = request.getRequestDispatcher(errorURL);
+				dispatcher.forward(request, response);
+				return;
+			}			
+			
 		} catch (NumberFormatException e) {
 			// Error missing roleId
 			ErrorMessage errorMessage = new ErrorMessage();

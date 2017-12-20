@@ -1,0 +1,837 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" automaticImage="GIF" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="r4f.model.Order" project="WebShopR4F" file="/WebShopR4F/src/r4f/model/Order.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2032" y="354"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="r4f.model.User" project="WebShopR4F" file="/WebShopR4F/src/r4f/model/User.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2041" y="1622"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="r4f.model.InputStreamStringHelpClass" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/model/InputStreamStringHelpClass.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1253" y="497"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="r4f.model.ErrorMessage" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/model/ErrorMessage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1209" y="733"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="r4f.model.ShoppingBasket" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/model/ShoppingBasket.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2909" y="246"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="r4f.model.DatabaseConnection" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/model/DatabaseConnection.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5945" y="646"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="r4f.model.Role" project="WebShopR4F" file="/WebShopR4F/src/r4f/model/Role.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2470" y="1936"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="r4f.model.Wishlist" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/model/Wishlist.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3235" y="201"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="r4f.model.Article" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/model/Article.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2907" y="1475"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="r4f.model.Address" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/model/Address.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2565" y="318"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="r4f.model.OrderItem" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/model/OrderItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2382" y="851"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="r4f.model.WishlistItem" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/model/WishlistItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3305" y="692"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="r4f.model.Image" project="WebShopR4F" file="/WebShopR4F/src/r4f/model/Image.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1213" y="1044"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="r4f.model.ShoppingBasketItem" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/model/ShoppingBasketItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2945" y="727"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="r4f.controller.servlets.filter.UTF8Filter" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/filter/UTF8Filter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1268" y="271"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="r4f.controller.servlets.OrderOverViewToDBServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/OrderOverViewToDBServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="179" y="1532"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="r4f.controller.servlets.RegistrationServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/RegistrationServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="817" y="420"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="r4f.controller.servlets.SendForgotPasswordMailServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/SendForgotPasswordMailServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="177" y="1863"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="r4f.controller.servlets.SearchArticleForChangeServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/SearchArticleForChangeServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="818" y="584"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="r4f.controller.servlets.ArticleCreationServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/ArticleCreationServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="177" y="1210"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="r4f.controller.servlets.DeleteUserRoleMappingServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/DeleteUserRoleMappingServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="182" y="259"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="r4f.controller.servlets.AddToShoppingBasketServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/AddToShoppingBasketServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="496" y="1542"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="r4f.controller.servlets.NavigationArticleDetailsServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/NavigationArticleDetailsServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="180" y="416"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="r4f.controller.servlets.RemoveAllArticlesFromWishlistServlet" 
+    project="WebShopR4F" file="/WebShopR4F/src/r4f/controller/servlets/RemoveAllArticlesFromWishlistServlet.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="500" y="419"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="r4f.controller.servlets.ChangePasswordServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/ChangePasswordServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="503" y="744"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="r4f.controller.servlets.ChangeAmountShoppingBasketServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/ChangeAmountShoppingBasketServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="497" y="1868"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="r4f.controller.servlets.CreateUserRoleMappingServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/CreateUserRoleMappingServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="820" y="259"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="r4f.controller.servlets.NavigationOverviewCategoryServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/NavigationOverviewCategoryServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="179" y="1698"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="r4f.controller.servlets.SearchServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/SearchServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="817" y="1371"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="r4f.controller.servlets.LogoutServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/LogoutServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="502" y="1051"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="r4f.controller.servlets.NavigationRoleOverviewServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/NavigationRoleOverviewServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="500" y="580"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="r4f.controller.servlets.AddToWishlistServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/AddToWishlistServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="288" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="r4f.controller.servlets.NavigationUserOverviewServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/NavigationUserOverviewServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="821" y="1537"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="r4f.controller.servlets.ChangeUserDataServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/ChangeUserDataServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="178" y="1369"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="r4f.controller.servlets.SearchUserServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/SearchUserServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="495" y="106"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="r4f.controller.servlets.NavigationOrderListServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/NavigationOrderListServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="495" y="258"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="r4f.controller.servlets.RemoveArticleFromWishlistServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/RemoveArticleFromWishlistServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="819" y="895"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="r4f.controller.servlets.ChangeRoleServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/ChangeRoleServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="818" y="108"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="r4f.controller.servlets.OrderCheckoutServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/OrderCheckoutServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="818" y="1207"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="r4f.controller.servlets.NavigationOverviewServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/NavigationOverviewServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="497" y="1701"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="r4f.controller.servlets.ChangeSizeColorWishlistServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/ChangeSizeColorWishlistServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="504" y="1373"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="r4f.controller.servlets.OrderInputToOverviewServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/OrderInputToOverviewServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="496" y="2025"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="r4f.controller.servlets.SendContactMailServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/SendContactMailServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="172" y="2022"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="r4f.controller.servlets.ChangeArticleServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/ChangeArticleServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="177" y="573"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="r4f.controller.servlets.RemoveArticleFromShoppingBasketServlet" 
+    project="WebShopR4F" file="/WebShopR4F/src/r4f/controller/servlets/RemoveArticleFromShoppingBasketServlet.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="501" y="899"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="r4f.controller.servlets.CreateRoleServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/CreateRoleServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="501" y="1210"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="r4f.controller.servlets.ConfirmationCodeSerlvet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/ConfirmationCodeSerlvet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="827" y="1700"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="48" language="java" name="r4f.controller.servlets.ImageServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/ImageServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1259" y="111"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="49" language="java" name="r4f.controller.servlets.ChangeSizeColorServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/ChangeSizeColorServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="818" y="748"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="r4f.controller.servlets.NavigationOverviewFilterServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/NavigationOverviewFilterServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="176" y="734"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="51" language="java" name="r4f.controller.servlets.RemoveAllArticleFromShoppingBasketServlet" 
+    project="WebShopR4F" file="/WebShopR4F/src/r4f/controller/servlets/RemoveAllArticleFromShoppingBasketServlet.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="175" y="898"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="52" language="java" name="r4f.controller.servlets.LoginServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/LoginServlet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="818" y="1051"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="53" language="java" name="r4f.controller.servlets.WishlistToShoppingBasketServlet" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/servlets/WishlistToShoppingBasketServlet.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="177" y="1051"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="54" language="java" name="r4f.controller.services.EmailService" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/services/EmailService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7361" y="182"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="55" language="java" name="r4f.controller.services.AuthorizationService" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/services/AuthorizationService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6743" y="584"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="56" language="java" name="r4f.controller.services.AddressService" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/services/AddressService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7138" y="530"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="57" language="java" name="r4f.controller.services.ImageService" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/services/ImageService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7062" y="111"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="58" language="java" name="r4f.controller.services.ArticleService" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/services/ArticleService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6507" y="586"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="59" language="java" name="r4f.controller.services.Service" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/services/Service.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6536" y="108"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="60" language="java" name="r4f.controller.services.OrderService" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/services/OrderService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6959" y="556"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="61" language="java" name="r4f.controller.services.UserService" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/services/UserService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6275" y="602"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="62" language="java" name="r4f.controller.services.WishlistService" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/services/WishlistService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7124" y="257"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="63" language="java" name="r4f.controller.services.ShoppingBasketService" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/services/ShoppingBasketService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7083" y="396"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="64" language="java" name="r4f.controller.services.HashService" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/services/HashService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7377" y="424"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="65" language="java" name="r4f.controller.filter.FilterInterface" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/filter/FilterInterface.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4803" y="431"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="66" language="java" name="r4f.controller.filter.CheckboxStatus" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/filter/CheckboxStatus.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1588" y="1000"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="67" language="java" name="r4f.controller.filter.FilterList" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/filter/FilterList.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4804" y="698"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="68" language="java" name="r4f.controller.filter.FilterManufacturer" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/filter/FilterManufacturer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4421" y="132"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="69" language="java" name="r4f.controller.filter.FilterSport" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/filter/FilterSport.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5115" y="132"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="70" language="java" name="r4f.controller.filter.FilterCategory" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/filter/FilterCategory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4074" y="132"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="71" language="java" name="r4f.controller.filter.FilterSize" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/filter/FilterSize.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5460" y="131"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="72" language="java" name="r4f.controller.filter.FilterPrice" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/filter/FilterPrice.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4768" y="132"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="73" language="java" name="r4f.controller.filter.FilterColor" project="WebShopR4F" 
+    file="/WebShopR4F/src/r4f/controller/filter/FilterColor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3727" y="132"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="74">    
+    <end type="SOURCE" refId="55"/>    
+    <end type="TARGET" refId="59"/>  
+  </generalization>  
+  <generalization id="75">    
+    <end type="SOURCE" refId="63"/>    
+    <end type="TARGET" refId="59"/>  
+  </generalization>  
+  <generalization id="76">    
+    <end type="SOURCE" refId="58"/>    
+    <end type="TARGET" refId="59"/>  
+  </generalization>  
+  <association id="77">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="78" name="article"/>      
+      <multiplicity id="79" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="80">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="81" name="items"/>      
+      <multiplicity id="82" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="83">    
+    <end type="SOURCE" refId="68"/>    
+    <end type="TARGET" refId="65"/>  
+  </realization>  
+  <association id="84">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="85" name="list"/>      
+      <multiplicity id="86" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="87">    
+    <end type="SOURCE" refId="56"/>    
+    <end type="TARGET" refId="59"/>  
+  </generalization>  
+  <association id="88">    
+    <bendpoint x="2308" y="296"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="89" name="deliveryAddress"/>      
+      <multiplicity id="90" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="91">    
+    <end type="SOURCE" refId="57"/>    
+    <end type="TARGET" refId="59"/>  
+  </generalization>  
+  <association id="92">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="93" name="items"/>      
+      <multiplicity id="94" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="95">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="96" name="role"/>      
+      <multiplicity id="97" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="98">    
+    <end type="SOURCE" refId="62"/>    
+    <end type="TARGET" refId="59"/>  
+  </generalization>  
+  <realization id="99">    
+    <end type="SOURCE" refId="72"/>    
+    <end type="TARGET" refId="65"/>  
+  </realization>  
+  <association id="100">    
+    <end type="SOURCE" refId="59" navigable="false">      
+      <attribute id="101" name="dbConnection"/>      
+      <multiplicity id="102" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="103">    
+    <bendpoint x="2318" y="377"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="104" name="billingAddress"/>      
+      <multiplicity id="105" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="106">    
+    <end type="SOURCE" refId="71"/>    
+    <end type="TARGET" refId="65"/>  
+  </realization>  
+  <association id="107">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="108" name="article"/>      
+      <multiplicity id="109" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="110">    
+    <end type="SOURCE" refId="61"/>    
+    <end type="TARGET" refId="59"/>  
+  </generalization>  
+  <association id="111">    
+    <end type="SOURCE" refId="67" navigable="false">      
+      <attribute id="112" name="filters"/>      
+      <multiplicity id="113" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="65" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="114">    
+    <end type="SOURCE" refId="73"/>    
+    <end type="TARGET" refId="65"/>  
+  </realization>  
+  <generalization id="115">    
+    <end type="SOURCE" refId="60"/>    
+    <end type="TARGET" refId="59"/>  
+  </generalization>  
+  <association id="116">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="117" name="article"/>      
+      <multiplicity id="118" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="119">    
+    <end type="SOURCE" refId="70"/>    
+    <end type="TARGET" refId="65"/>  
+  </realization>  
+  <association id="120">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="121" name="user"/>      
+      <multiplicity id="122" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="123">    
+    <end type="SOURCE" refId="69"/>    
+    <end type="TARGET" refId="65"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

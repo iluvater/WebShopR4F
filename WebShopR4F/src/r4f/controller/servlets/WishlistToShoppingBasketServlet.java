@@ -15,6 +15,7 @@ import r4f.model.Wishlist;
 
 /**
  * Servlet implementation class WishlistToShoppingBasketServlet
+ * @author Ture
  */
 @WebServlet("/WishlistToShoppingBasketServlet")
 public class WishlistToShoppingBasketServlet extends HttpServlet {

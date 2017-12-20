@@ -16,6 +16,7 @@ import r4f.model.User;
 
 /**
  * Servlet implementation class ChangePasswordServlet
+ * @author Ture
  */
 @WebServlet("/ChangePasswordServlet")
 public class ChangePasswordServlet extends HttpServlet {

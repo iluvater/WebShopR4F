@@ -49,7 +49,7 @@ public class UserService extends Service {
 	 * 
 	 * @param user
 	 *            the user that should be created
-	 * @return
+	 * @return returns the created user incl. his ids
 	 */
 	public User createBenutzerInDB(User user) {
 		int userId = super.getDbConnection().createUserInDB(user);

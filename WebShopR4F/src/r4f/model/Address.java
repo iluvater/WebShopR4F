@@ -19,11 +19,14 @@ public class Address {
 	
 	/**
 	 * This Constructor can be used if the address is already stored in the database
-	 * @param id
-	 * @param street
-	 * @param houseNumber
-	 * @param postCode
-	 * @param city
+	 * @param id id to set
+	 * @param street street to set
+	 * @param houseNumber houseNumber to set
+	 * @param postCode post code to set
+	 * @param city city to set
+	 * @param firstName first name to set
+	 * @param lastName last name to set
+	 * @param salutation salutation to set
 	 */
 	public Address(int id, String firstName, String lastName, String street, String houseNumber, String postCode, String city, String salutation){
 		this.id = id;
@@ -38,10 +41,13 @@ public class Address {
 	
 	/**
 	 * This Constructor can be used if the address is not stored in the database yet
-	 * @param street
-	 * @param houseNumber
-	 * @param postCode
-	 * @param city
+	 * @param street street to set
+	 * @param houseNumber houseNumber to set
+	 * @param postCode postCode to set
+	 * @param city city to set
+	 * @param firstName first name to set
+	 * @param lastName last name to set
+	 * @param salutation salutation to set
 	 */
 	public Address(String firstName, String lastName, String street, String houseNumber, String postCode, String city, String salutation){
 		this.firstName = firstName;

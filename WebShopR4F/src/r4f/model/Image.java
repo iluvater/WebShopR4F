@@ -22,6 +22,7 @@ public class Image {
 	 * @param id id to set
 	 * @param imageBlob imageBlob to set
 	 * @param type type to set
+	 * @param mainImage indicates whether an image is the main image of an article or not
 	 */
 	public Image(int id, Blob imageBlob, String type, boolean mainImage) {
 		this.setId(id);

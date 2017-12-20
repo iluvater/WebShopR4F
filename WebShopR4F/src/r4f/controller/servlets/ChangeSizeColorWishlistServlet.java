@@ -13,6 +13,7 @@ import r4f.model.Wishlist;
 
 /**
  * Servlet implementation class ChangeSizeColorWishlistServlet
+ * @author Ture
  */
 @WebServlet("/ChangeSizeColorWishlistServlet")
 public class ChangeSizeColorWishlistServlet extends HttpServlet {

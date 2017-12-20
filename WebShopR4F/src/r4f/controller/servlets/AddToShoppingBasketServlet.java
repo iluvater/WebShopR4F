@@ -15,6 +15,7 @@ import r4f.model.ShoppingBasket;
 
 /**
  * Servlet implementation class AddToShoppingBasketServlet
+ * @author Ture
  */
 @WebServlet("/AddToShoppingBasketServlet")
 public class AddToShoppingBasketServlet extends HttpServlet {

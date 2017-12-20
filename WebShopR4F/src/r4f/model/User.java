@@ -56,6 +56,8 @@ public class User {
 	 *            the salutation to set
 	 * @param shoppingBasket
 	 *            the shoppingBasket to set
+	 * @param wishlist
+	 *            the wish list to set
 	 * @param role
 	 *            the role to set
 	 */
@@ -312,8 +314,8 @@ public class User {
 	 * @param lastName
 	 *            the lastName to set
 	 */
-	public void setLastName(String LastName) {
-		this.lastName = LastName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public boolean checkPassword(String password) {
@@ -440,16 +442,18 @@ public class User {
 	public String getConfirmationCode() {
 		return confirmationCode;
 	}
-	
+
 	/**
-	 * This method generates a new confirmation string 
-	 * @param length the length of the confirmation code
+	 * This method generates a new confirmation string
+	 * 
+	 * @param length
+	 *            the length of the confirmation code
 	 * @return the code
 	 */
 	public static String getConfirmationCode(int length) {
 		String sb = "";
 		for (int i = 0; i < length; i++) {
-			sb = sb + (Integer.toString( ((int) (Math.random() * 10 - 1))));
+			sb = sb + (Integer.toString(((int) (Math.random() * 10 - 1))));
 		}
 		return sb.toString();
 	}

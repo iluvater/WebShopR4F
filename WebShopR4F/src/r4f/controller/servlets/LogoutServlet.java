@@ -16,6 +16,7 @@ import r4f.model.Wishlist;
 
 /**
  * Servlet implementation class LogoutServlet
+ * @author Ture
  */
 @WebServlet("/LogoutServlet")
 public class LogoutServlet extends HttpServlet {
